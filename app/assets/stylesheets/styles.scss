@@ -1,0 +1,11 @@
+@import 'global';
+
+#footer {
+  background: $hokie-grey;
+  border-top: 5px solid $hokie-orange;
+  clear: both;
+  color: white;
+  margin-top: 2em;
+  padding: 1em;
+  min-height: 4em;
+}

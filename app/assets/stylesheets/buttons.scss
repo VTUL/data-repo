@@ -1,0 +1,28 @@
+@import 'global';
+
+#search-form-header {
+  .btn-primary:hover, .btn-primary:focus {
+    background-color: $hokie-orange !important;
+    color: white;
+  }
+}
+
+#home_header{
+	.add, .btn-primary {
+	  background-color: $hokie-orange;
+	  border-color: $hokie-orange;
+	  color: white;
+	  -ms-transition: all .2s ease-in-out;
+	  -webkit-transition: all .2s ease-in-out;
+	  transition: all .2s ease-in-out;
+	}
+	.add:hover, .add:focus,
+	.btn-primary:hover, .btn-primary:focus {
+	  background-color: $hokie-orange;
+	  border-color: $hokie-orange;
+	  color: white;
+	  -ms-transform: scale(1.05); /* IE 9 */
+	  -webkit-transform: scale(1.05); /* Safari */
+	  transform: scale(1.05);
+	}
+}
