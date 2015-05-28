@@ -21,13 +21,13 @@
 #masthead_controls .navbar-default .navbar-nav > .active > a:hover,
 #masthead_controls .navbar-default .navbar-nav > .active > a:focus {
   border-radius: 5px 5px 0px 0px;
-  border-bottom: 1px solid $hokie-orange;
+  border-bottom: none;
   background-color: $hokie-orange;
   color: white;
 }
 
 #masthead_controls {
-  border-top: 1px solid $hokie-maroon;
+  border-top: none;
   border-bottom: 5px solid $hokie-orange;
   background-color: $hokie-maroon;
 
@@ -59,11 +59,12 @@
     }
     a:hover {
       border-radius: 5px 5px 0px 0px;
-      border-bottom: 1px solid $hokie-orange;
+      border-bottom: none;
       background-color: $hokie-orange;
     }
   }
   .navbar-default {
     border: none;
+    padding-top: 1px;
   }
 }

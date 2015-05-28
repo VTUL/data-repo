@@ -10,7 +10,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   border-top: none;
-  border-bottom: 2px solid $hokie-orange;
+  border-bottom: 20px solid $background;
 }
 
 .home_marketing_text {
@@ -30,8 +30,70 @@
 }
 
 .home_share_work p {
-  width: 40%;
-  margin: .25em auto;
   text-decoration: underline;
   background-color: transparent;
+}
+
+#home_content {
+
+	padding: 0px 0px 10px 0px;
+	background-color: $background;
+
+  .nav-tabs {
+  	background-color: $hokie-grey;
+  	border-bottom: 2px solid $hokie-orange;
+  	padding: 5px 0 0 5px;
+
+  	li {
+  		margin-bottom: -2px;
+  	}
+
+  	li a:link {
+  		color: white;
+  	}
+
+  	li a:hover {
+  		background-color: $hokie-orange;
+  		border-color: $hokie-orange;
+  	}
+
+  	li.active a {
+  		color: black;
+  		border-bottom: 2px solid white;
+  	}
+
+  	li.active a:hover {
+  		background-color: white;
+  		border-color: white;
+  	}
+  }
+
+  .home-column-left {
+  	background-color: white;
+  	padding-right: 0px;
+  	@media only screen and (min-width: 768px) {border-right: 15px solid $background;};
+  }
+
+  .home-column-right {
+  	background-color: white;
+  	  .home-panel {
+  		h2 {
+    		padding: 0.19em;
+    		margin-top: 0px;
+    		background-color: $hokie-grey;
+    		border-bottom: 2px solid $hokie-orange;
+    		color: white;
+  		}
+
+  		.tag-toggle-list {
+  			float: right;
+  			margin: -3.6em 0.5em 0 0;
+  		}
+ 	 }
+  }
+
+  #homeTabs {
+  	margin-left: -15px;
+  }
+
 }
