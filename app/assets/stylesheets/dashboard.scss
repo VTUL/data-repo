@@ -1,0 +1,45 @@
+@import 'global';
+
+div.heading-tile .glyphicon {
+  background: $hokie-orange;
+  color: white;
+  display: block;
+  width: 2em;
+  height: 2em;
+  line-height: 1.75em;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 2px solid $hokie-orange;
+  overflow: hidden;
+  transition-property: background-color, color;
+  transition-duration: .35s;
+  transition-timing-function: ease-out;
+}
+
+div.heading-tile:hover .glyphicon {
+  background-color: $hokie-orange;
+  border-color: $hokie-orange;
+  color: white;
+  transition-property: background-color, color;
+  transition-duration: .35s;
+  transition-timing-function: ease-out;
+}
+
+.dashboard {
+  .panel-default > .panel-heading {
+    background-color: $hokie-grey;
+    color: white;
+  }
+
+  .badge {
+    background-color: $hokie-orange;
+    color: white;
+  }
+  .badge-optional {
+    background-color: $hokie-maroon;
+    border-radius: 2px;
+    color: white;
+    padding: 0 .25em;
+  }
+
+}
