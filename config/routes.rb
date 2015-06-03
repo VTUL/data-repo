@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-
   blacklight_for :catalog
-  devise_for :users, controllers: { omniauth_callbacks: 'devise/multi_auth/omniauth_callbacks' }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   mount Hydra::RoleManagement::Engine => '/'
   resources :doi_requests, :only => [:index, :show, :create] do
     member do
