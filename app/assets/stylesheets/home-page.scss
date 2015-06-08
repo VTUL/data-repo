@@ -72,6 +72,11 @@
   	background-color: white;
   	padding-right: 0px;
   	@media only screen and (min-width: 768px) {border-right: 15px solid $background;};
+
+    .tab-content {
+      margin-left: -15px;
+      padding-right: 0px;
+    }
   }
 
   .home-column-right {

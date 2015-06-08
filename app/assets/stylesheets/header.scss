@@ -15,6 +15,19 @@
   	padding-top: 25px;
   }
 
+  .navbar-default {
+    background-color: transparent;
+    border: none;
+  }
+
+  .navbar-toggle {
+    margin-top: 0px;
+    margin-right: 0px;
+    background-color: $hokie-orange;
+    border-color: $hokie-orange;
+    .icon-bar {background-color: white;}
+  }
+
 }
 
 #masthead_controls .navbar-default .navbar-nav > .active > a,
@@ -67,4 +80,8 @@
     border: none;
     padding-top: 1px;
   }
+}
+
+.login_button {
+  margin: 2.25em 0 0 0;
 }
