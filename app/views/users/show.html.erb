@@ -1,0 +1,22 @@
+<%= javascript_tag do %>
+<% end %>
+
+<div class="col-xs-12 profile">
+  <div class="row">
+    <div class="col-xs-12 margin-bottom">
+      <%= render 'profile_actions' %>
+      <a class="btn pull-right subtab" href="<%= sufia.profiles_path %>"><i class="glyphicon glyphicon-globe"></i> View All Users</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-3 margin-bottom">
+        <div class="well">
+         <%= render 'left_sidebar' %>
+        </div>
+    </div>
+    <!-- right col -->
+    <div class="col-xs-12 col-sm-9">
+      <%= render 'profile_tabs' %>
+    </div>
+  </div>
+</div>
