@@ -1,0 +1,87 @@
+@import 'global';
+
+#masthead {
+  background: $hokie-maroon;
+  min-height: 100px;
+
+  .institution_name {
+    font-family: 'Lato', Verdana, Arial, Helvetica;
+    font-size: 3em;
+    font-weight: 300;
+    padding-top: 18px;
+  }
+
+  #logo {
+  	padding-top: 25px;
+  }
+
+  .navbar-default {
+    background-color: transparent;
+    border: none;
+  }
+
+  .navbar-toggle {
+    margin-top: 0px;
+    margin-right: 0px;
+    background-color: $hokie-orange;
+    border-color: $hokie-orange;
+    .icon-bar {background-color: white;}
+  }
+
+}
+
+#masthead_controls .navbar-default .navbar-nav > .active > a,
+#masthead_controls .navbar-default .navbar-nav > .active > a:hover,
+#masthead_controls .navbar-default .navbar-nav > .active > a:focus {
+  border-radius: 5px 5px 0px 0px;
+  border-bottom: none;
+  background-color: $hokie-orange;
+  color: white;
+}
+
+#masthead_controls {
+  border-top: none;
+  border-bottom: 5px solid $hokie-orange;
+  background-color: $hokie-maroon;
+
+   #search-submit-header {
+    background-color: $hokie-orange;
+    border-top: 1px solid $hokie-orange;
+    border-bottom: 1px solid $hokie-orange;
+
+    .btn-primary:hover {
+    	background-color: $hokie-orange;
+    }
+  }
+
+  .navbar {
+    background-color: $hokie-maroon;
+    margin-bottom: 0;
+    li {
+      border-right: 2px solid $hokie-maroon;
+      margin: 0 10px 0 10px;
+    }
+    li:first-child {
+      border-left: 2px solid $hokie-maroon;
+    }
+    a:link, a:visited {
+      background-color: $hokie-maroon;
+      padding-left: 20px;
+      padding-right: 20px;
+      color: white;
+    }
+    a:hover {
+      border-radius: 5px 5px 0px 0px;
+      border-bottom: none;
+      background-color: $hokie-orange;
+    }
+  }
+  .navbar-default {
+    border: none;
+    padding-top: 1px;
+  }
+}
+
+.login_button {
+  margin: 2.25em 0 0 0;
+}
