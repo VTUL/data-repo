@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   
+  mount Orcid::Engine => "/orcid"
   blacklight_for :catalog
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'devise/multi_auth/omniauth_callbacks' }
+
   Hydra::BatchEdit.add_routes(self)
   # This must be the very last route in the file because it has a catch-all route for 404 errors.
     # This behavior seems to show up only in production mode.

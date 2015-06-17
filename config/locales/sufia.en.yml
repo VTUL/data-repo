@@ -138,7 +138,7 @@ en:
       no_following_other: "This user is not following anyone."
       orcid:
         alt: "ORCID icon"
-        label: "ORCID Profile"
+        label: "ORCID "
       zotero:
         alt: "Zotero icon"
         label: "Zotero Profile"

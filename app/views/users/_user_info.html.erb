@@ -1,0 +1,61 @@
+<dl id="user_info" class="row">
+
+  <dt class="col-xs-5"><%= orcid_label %></dt>
+  <dd class="col-xs-7"><% defined?(status_processor) || status_processor = Orcid::ProfileStatus.method(:for)
+                                status_processor.call(current_user) do |on|
+                                on.authenticated_connection do |profile| %>
+	<%= profile.orcid_profile_id %>
+	<% end %>
+	<% end %>
+  </dd>
+</dl>
+<dl id="user_info" class="row">
+  <dt class="col-xs-5"><i class="fa fa-envelope"></i> Email</dt>
+  <dd class="col-xs-7"><%= mail_to user.email %></dd>
+
+  <% if user.chat_id %>
+    <dt class="col-xs-5"><i class="glyphicon glyphicon-bullhorn"></i> Chat ID</dt>
+    <dd class="col-xs-7"><%= user.chat_id %></dd>
+  <% end %>
+
+  <% if user.website %>
+    <dt class="col-xs-5"><i class="glyphicon glyphicon-globe"></i> Website(s)</dt>
+    <dd class="col-xs-7"><%= iconify_auto_link(user.website) %></dd>
+  <% end %>
+
+  <% if user.title %>
+    <dt class="col-xs-5">Title</dt>
+    <dd class="col-xs-7"><%= user.title.titleize %></dd>
+  <% end %>
+
+  <% if user.admin_area %>
+    <dt class="col-xs-5">Administrative Area</dt>
+    <dd class="col-xs-7"><%= user.admin_area.titleize %></dd>
+  <% end %>
+
+  <% if user.department %>
+    <dt class="col-xs-5">Department</dt>
+    <dd class="col-xs-7"><%= user.department.titleize %></dd>
+  <% end %>
+
+  <% if user.office %>
+    <dt class="col-xs-5">Office</dt>
+    <dd class="col-xs-7"><%= user.office.titleize %></dd>
+  <% end %>
+
+  <% if user.address %>
+    <dt class="col-xs-5"><i class="glyphicon glyphicon-map-marker"></i> Address</dt>
+    <dd class="col-xs-7"><%= user.address.titleize %></dd>
+  <% end %>
+
+  <% if user.affiliation %>
+    <dt class="col-xs-5">Affiliation</dt>
+    <dd class="col-xs-7"><%= user.affiliation.titleize %></dd>
+  <% end %>
+
+  <% if user.telephone %>
+    <dt class="col-xs-5"><i class="glyphicon glyphicon-earphone"></i> Telephone</dt>
+    <dd class="col-xs-7"><%= link_to_telephone(user) %></dd>
+  <% end %>
+
+</dl>
