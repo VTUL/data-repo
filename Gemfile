@@ -55,3 +55,4 @@ group :development, :test do
 end
 
 gem 'orcid'
+gem 'ezid-client'

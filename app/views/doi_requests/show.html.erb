@@ -1,0 +1,37 @@
+<% @page_title = "DOI Requests" %>
+<%= link_to("<<Back to List", {:action => 'index'}, :class => 'back-link') %>
+
+<div class="doi_requests show">
+  <h2> Show DOI</h2>
+
+  <table summary="DoiRequest detail show">
+    <tr>
+      <th>Asset Type </th>
+      <td><%= @doi_request.asset_type %></td>
+    </tr>
+    <tr>
+      <th>Asset Title </th>
+      <td><%= doi_link_for(@doi_request) %></td>
+    </tr>
+    <tr>
+      <th>DOI</th>
+      <td><%= link_to @ezid_doi.id,  @ezid_doi.target %></td>
+    </tr>
+    <tr>
+      <th>Target</th>
+      <td><%= @ezid_doi.target %></td>
+    </tr>
+    <tr>
+      <th>Status</th>
+      <td><%= @ezid_doi.status %></td>
+    </tr>
+    <tr>
+      <th>Profile</th>
+      <td><%= @ezid_doi.profile %></td>
+    </tr>
+      <th>Created</th>
+      <td><%= @ezid_doi.created %></td>
+    </tr>
+  </table>
+</div>
+

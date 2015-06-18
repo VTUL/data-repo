@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  get 'doi_requests/index'
+
+  get 'doi_requests/show'
+
   mount Orcid::Engine => "/orcid"
   blacklight_for :catalog
   devise_for :users, controllers: { omniauth_callbacks: 'devise/multi_auth/omniauth_callbacks' }
@@ -64,4 +68,6 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+  get 'admin', :to => 'doi_requests#index'
+  match ':controller(/:action(/:id))', :via => [:get, :post]
 end

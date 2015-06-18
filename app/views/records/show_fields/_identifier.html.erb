@@ -1,0 +1,8 @@
+<% record.identifier.each do |id| %>
+  <% if id.match(/^doi/) %>
+    <%= link_to id, "http://ezid.cdlib.org/id/#{id}" %>
+  <% else %>
+    <%= id %>
+  <% end %><br />
+<% end %>
+

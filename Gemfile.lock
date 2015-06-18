@@ -172,6 +172,7 @@ GEM
     erubis (2.7.0)
     execjs (2.5.2)
     extlib (0.9.16)
+    ezid-client (1.1.1)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.8)
@@ -646,6 +647,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   devise
   devise-guests (~> 0.3)
+  ezid-client
   jbuilder (~> 2.0)
   jettywrapper
   jquery-rails

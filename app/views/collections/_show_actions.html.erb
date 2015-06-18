@@ -1,0 +1,21 @@
+<h2 class="sr-only">Actions</h2>
+<div class="actions-controls-collections">
+  <% if can? :edit, @collection %>
+    <span class="label label-default"><%= link_to "Edit", collections.edit_collection_path, title: "Edit this Collection" %></span> &nbsp;&nbsp;
+    <span class="label label-default"><%= link_to "Add files",  sufia.dashboard_files_path, title: "Add files to this Collection" %></span> &nbsp;&nbsp;<br /><br />
+    <% found_doi = false %>
+    <% @collection[:identifier].each do |id| %>
+      <% if id.match(/^doi/) %>
+        <% if id == "doi:pending" %>
+          <h3>DOI request is pending...</h3>
+        <% end %>
+        <% found_doi = true %>
+        <% break %>
+      <% end %>
+    <% end %>
+    <% unless found_doi %> 
+      <span class="label label-default">
+        <%= link_to("Request DOI", {:controller => 'doi_requests', :action => 'create', :collection_id => @collection.id }, :class => 'action create', :title => "Make a request to obtain a DOI for this Collection") %></span>
+    <% end %>
+  <% end %>
+</div>
