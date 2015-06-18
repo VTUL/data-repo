@@ -56,3 +56,4 @@ end
 
 gem 'orcid'
 gem 'ezid-client'
+gem "hydra-role-management"
