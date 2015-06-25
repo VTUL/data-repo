@@ -14,8 +14,9 @@
       <% end %>
     <% end %>
     <% unless found_doi %> 
-      <span class="label label-default">
-        <%= link_to("Request DOI", {:controller => 'doi_requests', :action => 'create', :collection_id => @collection.id }, :class => 'action create', :title => "Make a request to obtain a DOI for this Collection") %></span>
+      <%= form_tag url_for(:controller => 'doi_requests', :action => 'create', :collection_id => @collection.id) do %>
+        <%= submit_tag "Request DOI", :class => 'action create', :title => "Make a request to obtain a DOI for this Collection" %>  
+      <% end %>
     <% end %>
   <% end %>
 </div>

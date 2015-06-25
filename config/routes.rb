@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
   
-  get 'doi_requests/index'
-
-  get 'doi_requests/show'
-
   mount Orcid::Engine => "/orcid"
   blacklight_for :catalog
   devise_for :users, controllers: { omniauth_callbacks: 'devise/multi_auth/omniauth_callbacks' }
@@ -30,18 +26,18 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
+  resources :doi_requests, :only => [:index, :show, :create] do
+    member do
+      patch 'mint_doi'
+      patch 'modify_metadata'
+      get 'view_doi'
+      #get :delete
+    end
 
+    collection do
+      patch 'mint_all'
+    end
+  end
   # Example resource route with sub-resources:
   #   resources :products do
   #     resources :comments, :sales
@@ -69,6 +65,4 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-  get 'admin', :to => 'doi_requests#index'
-  match ':controller(/:action(/:id))', :via => [:get, :post]
 end

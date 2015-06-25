@@ -14,9 +14,7 @@ module DoiRequestsHelper
   def doi_link_for(doi_request)
     if doi_request.asset_type == "Collection"
       collection = Collection.find(doi_request.collection_id)
-      link_to collection.title, 
-        {:controller => 'collections', :action => 'show', :id => collection.id},
-        title: "Show this Collection"
+      link_to collection.title, collections.collection_path(collection), title: "Show this Collection"
     else
       link_to 'Unknown asset', '#'
     end

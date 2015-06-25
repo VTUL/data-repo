@@ -3,6 +3,8 @@ class DoiRequestsController < ApplicationController
   layout 'admin'
 
   load_and_authorize_resource
+
+  before_action :find_ezid_doi, :only => [:view_doi, :modify_metadata]
   
   def index
     @doi_requests = DoiRequest.sorted
@@ -18,11 +20,6 @@ class DoiRequestsController < ApplicationController
     render('index')
   end
 
-  def show
-    @doi_request = DoiRequest.find(params[:id])
-    @ezid_doi = Ezid::Identifier.find(@doi_request.ezid_doi)
-  end
-
   def create
     if params[:collection_id].present?
       @collection = Collection.find(params[:collection_id])
@@ -34,9 +31,9 @@ class DoiRequestsController < ApplicationController
       else
         flash[:error] = "DOI Request error!"
       end
-      redirect_to(:controller => 'collections', :action => 'show', :id => params[:collection_id])
+      redirect_to collections.collection_path(@collection)
     else
-      redirect_to(:action => 'index')
+      redirect_to doi_requsts_path
     end  
   end
 
@@ -55,49 +52,53 @@ class DoiRequestsController < ApplicationController
       @collection[:identifier].each_with_index {
         |id, idx| id == "doi:pending" ? @collection[:identifier][idx] = minted_doi.id : id
       }
-      if @doi_request.update_attributes({:ezid_doi => minted_doi.id, :completed => true}) && @collection.update_attributes({:identifier => @collection[:identifier]})
+      if @doi_request.update_attributes({:ezid_doi => minted_doi.id, :completed => true}) && 
+        @collection.update_attributes({:identifier => @collection[:identifier]})
         flash[:notice] = "DOI has been minted successfully!"
-        redirect_to(:controller => 'collections', :action => 'show', :id => @doi_request.collection_id)
+        redirect_to collections.collection_path(@doi_request.collection_id)
       else
         flash[:error] = "DOI Request error!"
-        redirect_to(:action => 'index')
+        redirect_to doi_requsts_path
       end
     else
-      redirect_to(:action => 'index')    
+      redirect_to doi_requsts_path    
     end
   end
 
+  def mint_all
+  end
+
+  def view_doi
+  end
+
   def modify_metadata
-    ezid_doi = Ezid::Identifier.find(params[:ezid_doi])
-    @doi_request = DoiRequest.find(params[:id])
     if @doi_request.asset_type == 'Collection'
       @collection = Collection.find(@doi_request.collection_id)
-      ezid_doi = Ezid::Identifier.update_metadata(
+      @ezid_doi.update_metadata(
         datacite_creator: @collection.creator.first, 
         datacite_title: @collection.title,
         datacite_publisher: @collection.publisher.first,
         datacite_publicationyear: @collection.date_created.first
          )
-      if ezid_doi
+      if @ezid_doi.save
         flash[:notice] = "DOI metadata has been modified successfully!"
-        redirect_to(:controller => 'collections', :action => 'show', :id => @doi_request.collection_id)
+        redirect_to collections.collection_path(@collection)
       else
         flash[:error] = "DOI modification error!" 
-        redirect_to(:action => 'index')
+        redirect_to doi_requsts_path
       end
     else
-      redirect_to(:action => 'index')
+      redirect_to doi_requsts_path
     end
   end
 
-  def delete
-    @doi_request = DoiRequest.find(params[:id])
-  end
+  private
 
-  def destroy
-    doi_request = DoiRequest.find(params[:id]).destroy
-    flash[:notice] = "DOI Request '#{doi_request.doi_id}' destroyed successfully!"
-    redirect_to(:action => 'index')
+  def find_ezid_doi
+    if params[:id]
+      @doi_request = DoiRequest.find(params[:id])
+      @ezid_doi = Ezid::Identifier.find(@doi_request.ezid_doi)
+    end
   end
 
 end
