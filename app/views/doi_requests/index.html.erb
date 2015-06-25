@@ -21,11 +21,14 @@
         <td class="center"><%= doi_request.ezid_doi %></td>
         <td class="actions">
           <% if doi_request.completed %>
-            <%= link_to("Show DOI", {:action => 'show', :id => doi_request.id}, :class => 'action show') %>
-            <%= link_to("Modify Metadata", {:action => 'modify_metadata', :id => doi_request.id, :ezid_doi => doi_request.ezid_doi}, :class => 'action modify_metadata') %>
-            <%#= link_to("Delete", {:action => 'delete', :id => doi_request.id}, :class => 'action delete') %>
+            <%= link_to "View DOI", view_doi_doi_request_path(doi_request) %>
+            <%= form_tag modify_metadata_doi_request_path(doi_request), :method => :patch do %>
+              <%= submit_tag "Modify Metadata" %>
+            <% end %>
           <% else %>
-            <%= link_to("Mint DOI", {:action => 'mint_doi', :id => doi_request.id}, :class => 'action mint_doi') %>
+            <%= form_tag mint_doi_doi_request_path(doi_request), :method => :patch do %>
+              <%= submit_tag "Mint DOI" %>
+            <% end %>
           <% end %>
         </td> 
       </tr>
