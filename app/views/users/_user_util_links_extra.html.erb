@@ -6,6 +6,6 @@
 <% if can? :index, DoiRequest %>
   <li><%= link_to("Manage DOI Requests", doi_requests_path) %></li>
 <% end %>
-<% if can? :index, User %>
-  <li><%= link_to("Manage Users", sufia.profiles_path) %></li>
+<% if can? :index, Role %>
+  <li><%= link_to("Manage User Roles", role_management.roles_path) %></li>
 <% end %>
