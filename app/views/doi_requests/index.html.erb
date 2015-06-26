@@ -1,37 +1,40 @@
-<% @page_title = "DOI Requests" %>
-<div class="doi_requests index">
-  <h2>DOI Requests</h2>
-  <div><%= pluralize(@doi_requests.size, 'request') %> found</div>
+<% @page_title = "DOI Requests  - #{application_name}" %>
 
-  <table class="listing" summary="DoiRequest list">
-    <tr class="header">
-      <th>Requested Time</th>
-      <th>Asset Type</th>
-      <th>Asset Title</th>
-      <th>Completed</th>
-      <th>DOI</th>
-      <th>Actions</th>
-    </tr>
-    <% @doi_requests.each do |doi_request| %>
-      <tr class="<%= cycle('odd', 'even') %>">
-        <td><%= doi_request.created_at %></td>
-        <td><%= doi_request.asset_type %> </td>
-        <td><%= doi_link_for(doi_request) %></td>
-        <td class="center"><%= status_tag(doi_request.completed) %></td>
-        <td class="center"><%= doi_request.ezid_doi %></td>
-        <td class="actions">
-          <% if doi_request.completed %>
-            <%= link_to "View DOI", view_doi_doi_request_path(doi_request) %>
-            <%= form_tag modify_metadata_doi_request_path(doi_request), :method => :patch do %>
-              <%= submit_tag "Modify Metadata" %>
-            <% end %>
-          <% else %>
-            <%= form_tag mint_doi_doi_request_path(doi_request), :method => :patch do %>
-              <%= submit_tag "Mint DOI" %>
-            <% end %>
+<%= render_breadcrumbs builder: Sufia::BootstrapBreadcrumbsBuilder %>
+
+<table class="table table-zebra-striped">
+  <caption><%= pluralize(@doi_requests.size, 'DOI Request') %> found</caption>
+  <thead>
+  <tr>
+    <th>Requested Time</th>
+    <th>Asset Type</th>
+    <th>Asset Title</th>
+    <th>Completed</th>
+    <th>DOI</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @doi_requests.each do |doi_request| %>
+    <tr class="<%= cycle("","zebra") %>">
+      <td><%= doi_request.created_at %></td>
+      <td><%= doi_request.asset_type %> </td>
+      <td><%= doi_link_for(doi_request) %></td>
+      <td><%= status_tag(doi_request.completed) %></td>
+      <td><%= doi_request.ezid_doi %></td>
+      <td>
+        <% if doi_request.completed %>
+          <%= link_to t('doi.view'), view_doi_doi_request_path(doi_request), class: "btn btn-default" %>
+          <%= form_tag modify_metadata_doi_request_path(doi_request), :method => :patch do %>
+            <%= button_tag t('doi.modify'), type: 'submit', class: 'btn btn-primary', onclick: "confirmation_needed = true;", id: "modify_doi_submit", name: "modify_doi" %>
           <% end %>
-        </td> 
-      </tr>
-    <% end %>
-  </table>
-</div>
+        <% else %>
+          <%= form_tag mint_doi_doi_request_path(doi_request), :method => :patch do %>
+            <%= button_tag t('doi.mint'), type: 'submit', class: 'btn btn-primary', onclick: "confirmation_needed = false;", id: "mint_doi_submit", name: "mint_doi" %>
+          <% end %>
+        <% end %>
+      </td> 
+    </tr>
+  <% end %>
+  </tbody>
+</table>

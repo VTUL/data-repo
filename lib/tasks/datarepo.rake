@@ -1,9 +1,11 @@
 namespace :datarepo do 
 
-  desc 'Setup Admin Role'
-  task setup_admin: :environment do
-    if Role.where(name: 'admin').first.nil?
-      Role.create(name: 'admin')
+  desc 'Setup Roles'
+  task setup_roles: :environment do
+    %w(admin collection_admin collection_user).each do |role|
+      if Role.where(name: role).first.nil?
+        Role.create(name: role)
+      end
     end
 
     desc 'Create an initial admin user for DataRepo'
