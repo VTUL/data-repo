@@ -1,0 +1,11 @@
+<% # Overwrite this view in your application to insert app specific links to %>
+<% # render on the user utility button using the sample HTML shown below %>
+<% # %>
+<% # <li><%= link_to 'text', 'path', id: 'extra_nav_link' </li> %>
+<li><%= link_to raw('<i class="glyphicon glyphicon-transfer"></i> transfer requests'), sufia.transfers_path, id: 'transfer_nav_link'  %></li>
+<% if can? :index, DoiRequest %>
+  <li><%= link_to("Manage DOI Requests", doi_requests_path) %></li>
+<% end %>
+<% if can? :index, Role %>
+  <li><%= link_to("Manage User Roles", role_management.roles_path) %></li>
+<% end %>

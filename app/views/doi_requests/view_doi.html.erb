@@ -1,0 +1,30 @@
+<% @page_title = "DOI Requests  - #{application_name}" %>
+<%= link_to("Back to DOI List", doi_requests_path, class: 'btn btn-default') %>
+
+<div class="col-sm-10 pull-right">
+  <h2>Show DOI</h2>
+
+  <dl class="dl-horizontal metadata-collections">
+    <dt>Asset Type </dt>
+    <dd><%= @doi_request.asset_type %></dd>
+    <dt>Asset Title </dt>
+    <dd><%= doi_link_for(@doi_request) %></dd>
+
+    <dt>DOI</dt>
+    <dd><%= link_to @ezid_doi.id,  @ezid_doi.target %></dd>
+
+    <dt>Target</dt>
+    <dd><%= @ezid_doi.target %></dd>
+
+    <dt>Status</dt>
+    <dd><%= @ezid_doi.status %></dd>
+
+
+    <dt>Profile</dt>
+    <dd><%= @ezid_doi.profile %></dd>
+
+    <dt>Created</dt>
+    <dd><%= @ezid_doi.created %></dd>
+  </dl>
+</div>
+

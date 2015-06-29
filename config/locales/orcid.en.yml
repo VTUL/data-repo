@@ -1,0 +1,60 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  orcid:
+    requests:
+      messages:
+        existing_request_not_found: "Unable to find an existing orcid Profile request. Go ahead and create one."
+        existing_request: "You have already submitted an ORCID Profile request."
+        previously_connected_profile: "You have already connected to an ORCID Profile (%{orcid_profile_id})."
+        profile_request_created: "Your ORCID profile request has been submitted. Check your email for more information from ORCID."
+        profile_request_created: "Your ORCID profile request has been submitted. Check your email for more information from ORCID."
+        profile_request_destroyed: "Your ORCID profile request has been cancelled."
+    connections:
+      messages:
+        profile_connection_not_found: "Unable to find an existing ORCID Profile connection."
+        verified_profile_connection_exists: "You have already connected and verified your ORCID Profile (%{orcid_profile_id})."
+    verbose_name: Open Researcher and Contributor ID (ORCID)
+    views:
+      profile_connections:
+        fieldsets:
+          search_orcid_profiles: "Search ORCID Profiles"
+          select_an_orcid_profile: "Select an ORCID Profile"
+        buttons:
+          search: 'Search'
+      authenticated_connection: "<p>Your ORCID (<a class='orcid-profile-id' href='%{orcid_profile_url}'>%{orcid_profile_id}</a>) has been authenticated for this application.</p>"
+      profile_request_pending: "<p>We are processing your ORCID Profile Request. It was submitted <time datetime='%{datetime}'>%{time_ago_in_words}</time> ago.</p>"
+      pending_connection: >
+        <p>You have an ORCID (<a class="orcid-profile-id" href="%{orcid_profile_url}">%{orcid_profile_id}</a>).</p>
+        <p>However, your ORCID has not been verified by this system. There are a few possibilities:</p>
+        <ul>
+          <li>You may not have claimed your ORCID. <a class="find-out-more" href="http://support.orcid.org/knowledgebase/articles/164480-creating-claiming-new-records">Find out more about claiming your ORCID.</a></li>
+          <li>You have claimed your ORCID, but have not used it to <a class="signin-via-orcid" href="%{application_orcid_authorization_href}">%{application_orcid_authorization_text}</a>.</li>
+        </ul>
+  helpers:
+    label:
+      orcid/profile_connection:
+        orcid_profile_id: "Enter your existing ORCID (####-####-####-####)"
+        create_an_orcid: Create an ORCID
+        look_up_your_existing_orcid: Look up your existing ORCID
+        connect_button_text: Connect
+        profile_request_destroy: Cancel your ORCID request

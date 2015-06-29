@@ -38,3 +38,6 @@ bower.json
 /jetty
 /db
 /bin
+
+#ORCID secret
+config/application.yml

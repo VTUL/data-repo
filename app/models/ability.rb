@@ -16,5 +16,9 @@ class Ability
     # if user_groups.include? 'special_group'
     #   can [:create], ActiveFedora::Base
     # end
+    if current_user.admin?
+      can [:create, :show, :add_user, :remove_user, :index], Role
+      can [:index, :create, :mint_doi, :view_doi, :modify_metadata, :mint_all], DoiRequest
+    end
   end
 end

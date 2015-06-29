@@ -53,3 +53,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'jettywrapper'
 end
+
+gem 'orcid'
+gem 'ezid-client'
+gem "hydra-role-management"

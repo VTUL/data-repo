@@ -1,0 +1,20 @@
+@import 'global';
+
+#search-form-header {
+  .btn-primary:hover, .btn-primary:focus {
+    background-color: $hokie-orange !important;
+    color: white;
+  }
+}
+
+.add, .btn-primary {
+	  background-color: $hokie-orange;
+	  border-color: $hokie-orange;
+	  color: white;
+}
+.add:hover, .add:focus,
+.btn-primary:hover, .btn-primary:focus {
+	  background-color: $hokie-orange;
+	  border-color: $hokie-orange;
+	  color: white;
+}
