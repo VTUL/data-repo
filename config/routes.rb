@@ -1,9 +1,21 @@
 Rails.application.routes.draw do
   
+  mount Orcid::Engine => "/orcid"
   blacklight_for :catalog
   devise_for :users, controllers: { omniauth_callbacks: 'devise/multi_auth/omniauth_callbacks' }
   mount Hydra::RoleManagement::Engine => '/'
+  resources :doi_requests, :only => [:index, :show, :create] do
+    member do
+      patch 'mint_doi'
+      patch 'modify_metadata'
+      get 'view_doi'
+    end
 
+    collection do
+      patch 'mint_all'
+    end
+  end
+ 
   Hydra::BatchEdit.add_routes(self)
   # This must be the very last route in the file because it has a catch-all route for 404 errors.
     # This behavior seems to show up only in production mode.
@@ -25,19 +37,7 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
-  resources :doi_requests, :only => [:index, :show, :create] do
-    member do
-      patch 'mint_doi'
-      patch 'modify_metadata'
-      get 'view_doi'
-      #get :delete
-    end
-
-    collection do
-      patch 'mint_all'
-    end
-  end
-  # Example resource route with sub-resources:
+ # Example resource route with sub-resources:
   #   resources :products do
   #     resources :comments, :sales
   #     resource :seller
