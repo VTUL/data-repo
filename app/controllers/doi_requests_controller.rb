@@ -1,9 +1,9 @@
 class DoiRequestsController < ApplicationController
 
-#  load_and_authorize_resource
+  load_and_authorize_resource except: [:create]
 
   before_action :find_ezid_doi, :only => [:view_doi, :modify_metadata]
-  
+
   def index
     @doi_requests = DoiRequest.sorted
   end
@@ -32,16 +32,16 @@ class DoiRequestsController < ApplicationController
       redirect_to collections.collection_path(@collection)
     else
       redirect_to doi_requsts_path
-    end  
+    end
   end
 
   def mint_doi
     @doi_request = DoiRequest.find(params[:id])
-    
+
     if @doi_request.asset_type == 'Collection'
       @collection = Collection.find(@doi_request.collection_id)
       minted_doi = Ezid::Identifier.create(
-        datacite_creator: @collection.creator.first, 
+        datacite_creator: @collection.creator.first,
         datacite_resourcetype: "Collection",
         datacite_title: @collection.title,
         datacite_publisher: @collection.publisher.first,
@@ -59,7 +59,7 @@ class DoiRequestsController < ApplicationController
         redirect_to doi_requsts_path
       end
     else
-      redirect_to doi_requsts_path    
+      redirect_to doi_requsts_path
     end
   end
 
@@ -73,7 +73,7 @@ class DoiRequestsController < ApplicationController
     if @doi_request.asset_type == 'Collection'
       @collection = Collection.find(@doi_request.collection_id)
       @ezid_doi.update_metadata(
-        datacite_creator: @collection.creator.first, 
+        datacite_creator: @collection.creator.first,
         datacite_title: @collection.title,
         datacite_publisher: @collection.publisher.first,
         datacite_publicationyear: @collection.date_created.first
@@ -82,7 +82,7 @@ class DoiRequestsController < ApplicationController
         flash[:notice] = "DOI metadata has been modified successfully!"
         redirect_to collections.collection_path(@collection)
       else
-        flash[:error] = "DOI modification error!" 
+        flash[:error] = "DOI modification error!"
         redirect_to doi_requsts_path
       end
     else
