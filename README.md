@@ -5,3 +5,4 @@ DOI Requests need some extra setup:
 3. Generate Role model: `rails generate roles`
 1. Migrate: `rake db:migrate`
 5. Create an admin user: `rake datarepo:setup_roles`
+6. Install Orcid: `rails generate orcid:install`
