@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   
-  mount Orcid::Engine => "/orcid"
   blacklight_for :catalog
   devise_for :users, controllers: { omniauth_callbacks: 'devise/multi_auth/omniauth_callbacks' }
   mount Hydra::RoleManagement::Engine => '/'
