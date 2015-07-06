@@ -1,5 +1,5 @@
 <% record.identifier.each do |id| %>
-  <% if id.match(/^doi/) %>
+  <% if id.match(/^doi/) && id != t('doi.pending_doi') %>
     <%= link_to id, "http://ezid.cdlib.org/id/#{id}" %>
   <% else %>
     <%= id %>

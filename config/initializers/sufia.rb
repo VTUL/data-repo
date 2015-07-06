@@ -25,27 +25,29 @@ Sufia.config do |config|
   config.cc_licenses_reverse = Hash[*config.cc_licenses.to_a.flatten.reverse]
 
   config.resource_types = {
-    "Article" => "Article",
+    # "Article" => "Article",
     "Audio" => "Audio",
-    "Book" => "Book",
-    "Capstone Project" => "Capstone Project",
-    "Conference Proceeding" => "Conference Proceeding",
+    # "Book" => "Book",
+    # "Capstone Project" => "Capstone Project",
+    # "Conference Proceeding" => "Conference Proceeding",
     "Dataset" => "Dataset",
-    "Dissertation" => "Dissertation",
+    # "Dissertation" => "Dissertation",
     "Image" => "Image",
-    "Journal" => "Journal",
+    # "Journal" => "Journal",
     "Map or Cartographic Material" => "Map or Cartographic Material",
-    "Masters Thesis" => "Masters Thesis",
-    "Part of Book" => "Part of Book",
-    "Poster" => "Poster",
-    "Presentation" => "Presentation",
-    "Project" => "Project",
-    "Report" => "Report",
-    "Research Paper" => "Research Paper",
-    "Software or Program Code" => "Software or Program Code",
-    "Video" => "Video",
-    "Other" => "Other",
+    "Written Work" => "Written Work"
+    # "Masters Thesis" => "Masters Thesis",
+    # "Part of Book" => "Part of Book",
+    # "Poster" => "Poster",
+    # "Presentation" => "Presentation",
+    # "Project" => "Project",
+    # "Report" => "Report",
+    # "Research Paper" => "Research Paper",
+    "Code/algorithm" => "Software or Program Code",
+    "Video" => "Video"
+    #"Other" => "Other",
   }
+
 
   config.resource_types_to_schema = {
     "Article" => "http://schema.org/Article",
@@ -68,6 +70,8 @@ Sufia.config do |config|
     "Software or Program Code" => "http://schema.org/Code",
     "Video" => "http://schema.org/VideoObject",
     "Other" => "http://schema.org/CreativeWork",
+    "Written Work" => "http://schema.org/CreativeWork"
+  }
   }
 
   config.permission_levels = {
