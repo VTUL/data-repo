@@ -12,9 +12,17 @@
 	  border-color: $hokie-orange;
 	  color: white;
 }
+
 .add:hover, .add:focus,
 .btn-primary:hover, .btn-primary:focus {
 	  background-color: $hokie-orange;
 	  border-color: $hokie-orange;
 	  color: white;
 }
+
+.btn-primary:disabled {
+	 background-color: $hokie-orange;
+	 border-color: $hokie-orange;
+	 color: white;
+}
+
