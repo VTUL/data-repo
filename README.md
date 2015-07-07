@@ -7,3 +7,6 @@ DOI Requests need some extra setup:
 1. Migrate: `rake db:migrate`
 1. Create an admin user: `rake datarepo:setup_roles`
 1. Install Orcid: `rails generate orcid:install --skip-application-yml`
+1. Run the CAS installation script: https://github.com/VTUL/InstallScripts/blob/master/Vagrant/CAS_extras.sh
+  - The script takes two parameters, the name of the repository, and the name of the server
+  - Example: `bash ./CAS_extras.sh data-repo myserver.com`
