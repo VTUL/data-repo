@@ -1,13 +1,21 @@
 <h2 class="sr-only">Actions</h2>
-<div class="actions-controls-collections">
+<div class="collection-controls">
   <% if can? :edit, @collection %>
-    <span class="label label-default"><%= link_to "Edit", collections.edit_collection_path, title: "Edit this Collection" %></span> &nbsp;&nbsp;
-    <span class="label label-default"><%= link_to "Add files",  sufia.dashboard_files_path, title: "Add files to this Collection" %></span> &nbsp;&nbsp;<br /><br />
+    <div class="btn-group collection-control-row" role="group" aria-label="...">
+      <%= link_to collections.edit_collection_path, class: "btn btn-default", title: "Edit this Collection" do %>
+        <span class="glyphicon glyphicon-edit"></span> Edit
+      <% end %>
+      <%= link_to sufia.dashboard_files_path, class: "btn btn-default", title: "Add files to this Collection" do %>
+        <span class="glyphicon glyphicon-open-file"></span> Files
+      <% end %>
+    </div>
     <% found_doi = false %>
     <% @collection[:identifier].each do |id| %>
       <% if id.match(/^doi/) %>
         <% if id == "doi:pending" %>
-          <h3>DOI request is pending...</h3>
+          <%= button_tag(type: 'submit', class: "btn btn-primary collection-control-row", disabled: 'disabled') do %>
+            <span class="glyphicon glyphicon-tags"></span> DOI Request Pending
+          <% end %>
         <% end %>
         <% found_doi = true %>
         <% break %>
@@ -15,7 +23,9 @@
     <% end %>
     <% unless found_doi %> 
       <%= form_tag url_for(:controller => 'doi_requests', :action => 'create', :collection_id => @collection.id) do %>
-        <%= submit_tag "Request DOI", :class => 'action create', :title => "Make a request to obtain a DOI for this Collection" %>  
+        <%= button_tag(type: 'submit', class: "btn btn-primary collection-control-row") do %>
+          <span class="glyphicon glyphicon-tags"></span> Request DOI
+        <% end %>
       <% end %>
     <% end %>
   <% end %>
