@@ -7,7 +7,7 @@ class CollectionsController < ApplicationController
     if @collection.save
       if params[:request_doi]
         @collection[:identifier] << t('doi.pending_doi')
-        doi_request = DoiRequest.new(asset_type: 'Collection', collection_id: @collection.id)
+        doi_request = DoiRequest.new(collection_id: @collection.id)
         if doi_request.save && @collection.update_attributes({:identifier => @collection[:identifier]})
           flash[:notice] = t('doi.messages.submit.success')
         else

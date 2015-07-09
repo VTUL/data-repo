@@ -12,7 +12,7 @@ module DoiRequestsHelper
   end
 
   def doi_link_for(doi_request)
-    if doi_request.asset_type == "Collection"
+    if doi_request.collection?
       if Collection.exists?(id: doi_request.collection_id)
         collection = Collection.find(doi_request.collection_id)
         link_to collection.title, collections.collection_path(collection), title: "Show this Collection"

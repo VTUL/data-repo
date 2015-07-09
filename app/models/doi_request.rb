@@ -20,5 +20,9 @@ class DoiRequest < ActiveRecord::Base
     where(["doi_id LIKE ?", "%#{query}%"])
   }
 
+  def collection?
+    return self.asset_type == "Collection"
+  end
+
 end
 
