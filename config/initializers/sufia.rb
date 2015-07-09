@@ -58,7 +58,6 @@ Sufia.config do |config|
     "Other" => "http://schema.org/CreativeWork",
     "Written Work" => "http://schema.org/CreativeWork"
   }
-  }
 
   config.permission_levels = {
     "Choose Access"=>"none",
