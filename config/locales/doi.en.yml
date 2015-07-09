@@ -1,6 +1,18 @@
 en:
   doi:
-    view: "View DOI"
-    modify: "Modify Metadata" 
-    mint: "Mint DOI"
-
+    labels:
+      request: "Request a DOI for this Dataset"
+    view:     "View DOI"
+    modify:   "Modify Metadata" 
+    mint:     "Mint DOI"
+    pending_doi: "doi:pending"
+    messages:
+      submit:
+        success: "DOI request has been submitted successfully!"
+        failure: "DOI request error!"
+      mint:
+        success: "DOI has been minted successfully!"
+        failure: "DOI mint error!"
+      modify:
+        success: "DOI has been modified successfully!"
+        failure: "DOI modification error!"

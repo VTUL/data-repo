@@ -12,7 +12,7 @@
     <% found_doi = false %>
     <% @collection[:identifier].each do |id| %>
       <% if id.match(/^doi/) %>
-        <% if id == "doi:pending" %>
+        <% if id == t('doi.pending_doi') %>
           <%= button_tag(type: 'submit', class: "btn btn-primary collection-control-row", disabled: 'disabled') do %>
             <span class="glyphicon glyphicon-tags"></span> DOI Request Pending
           <% end %>

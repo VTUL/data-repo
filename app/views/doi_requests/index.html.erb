@@ -25,12 +25,12 @@
       <td>
         <% if doi_request.completed %>
           <%= link_to t('doi.view'), view_doi_doi_request_path(doi_request), class: "btn btn-default" %>
-          <%= form_tag modify_metadata_doi_request_path(doi_request), :method => :patch do %>
-            <%= button_tag t('doi.modify'), type: 'submit', class: 'btn btn-primary', onclick: "confirmation_needed = true;", id: "modify_doi_submit", name: "modify_doi" %>
+          <%= form_tag(modify_metadata_doi_request_path(doi_request), method: :patch) do %>
+            <%= button_tag t('doi.modify'), type: 'submit', class: 'btn btn-primary'%>
           <% end %>
         <% else %>
-          <%= form_tag mint_doi_doi_request_path(doi_request), :method => :patch do %>
-            <%= button_tag t('doi.mint'), type: 'submit', class: 'btn btn-primary', onclick: "confirmation_needed = false;", id: "mint_doi_submit", name: "mint_doi" %>
+          <%= form_tag(mint_doi_doi_request_path(doi_request), method: :patch) do %>
+            <%= button_tag t('doi.mint'), type: 'submit', class: 'btn btn-primary' %>
           <% end %>
         <% end %>
       </td> 
