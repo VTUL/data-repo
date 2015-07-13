@@ -30,7 +30,7 @@ Sufia.config do |config|
     "Image" => "Image",
     "Map or Cartographic Material" => "Map or Cartographic Material",
     "Written Work" => "Written Work",
-    "Code/algorithm" => "Software or Program Code",
+    "Code or Algorithm" => "Code or Algorithm",
     "Video" => "Video"
   }
 
@@ -53,7 +53,7 @@ Sufia.config do |config|
     "Project" => "http://schema.org/CreativeWork",
     "Report" => "http://schema.org/CreativeWork",
     "Research Paper" => "http://schema.org/ScholarlyArticle",
-    "Software or Program Code" => "http://schema.org/Code",
+    "Code or Algorithm" => "http://schema.org/Code",
     "Video" => "http://schema.org/VideoObject",
     "Other" => "http://schema.org/CreativeWork",
     "Written Work" => "http://schema.org/CreativeWork"

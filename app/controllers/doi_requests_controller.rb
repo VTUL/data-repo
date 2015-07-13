@@ -22,7 +22,7 @@ class DoiRequestsController < ApplicationController
     if params[:collection_id].present?
       @collection = Collection.find(params[:collection_id])
       @collection[:identifier] << t('doi.pending_doi') 
-      doi_request = DoiRequest.new(asset_type: 'Collection', collection_id: params[:collection_id])
+      doi_request = DoiRequest.new(collection_id: params[:collection_id])
       if doi_request.save && @collection.update_attributes({:identifier => @collection[:identifier]})
         flash[:notice] = t('doi.messages.submit.success')
       else
@@ -37,7 +37,7 @@ class DoiRequestsController < ApplicationController
   def mint_doi
     @doi_request = DoiRequest.find(params[:id])
 
-    if @doi_request.asset_type == 'Collection'
+    if @doi_request.collection?
       @collection = Collection.find(@doi_request.collection_id)
       minted_doi = Ezid::Identifier.create(
       	datacite_creator: (@collection.creator.empty? ? "" : @collection.creator.first), 
@@ -69,7 +69,7 @@ class DoiRequestsController < ApplicationController
   end
 
   def modify_metadata
-    if @doi_request.asset_type == 'Collection'
+    if @doi_request.collection?
       @collection = Collection.find(@doi_request.collection_id)
       @ezid_doi.update_metadata(
         datacite_creator: @collection.creator.first,
