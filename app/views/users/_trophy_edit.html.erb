@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-xs-12">
+    <i class="glyphicon glyphicon-star trophy-on" ></i> Remove Highlight Designation
+    <a href="#" id="remove_trophy_help" rel="popover" data-content="If you would like to remove a highlight designation, check the box and save your profile." data-original-title="Remove Highlight Designation"><i class="glyphicon glyphicon-question-sign"></i></a>
+  </div>
+</div>
+<% trophies.each do |t| %>
+<div class="row">
+    <div class="col-xs-10">
+      <%= link_to t, sufia.generic_file_path(t) %>
+    </div>
+    <div class="col-xs-2">
+      <label class="checkbox">
+        <%= check_box_tag "remove_trophy_#{t.id}" %> Yes &nbsp;
+      </label>
+    </div>
+</div>
+<% end %>
