@@ -2,39 +2,41 @@
 
 <%= render_breadcrumbs builder: Sufia::BootstrapBreadcrumbsBuilder %>
 
-<table class="table doi-table table-striped table-hover">
-  <caption><%= pluralize(@doi_requests.size, 'DOI Request') %> found</caption>
-  <thead>
-    <tr>
-      <th>Requested Time</th>
-      <th>Asset Type</th>
-      <th>Asset Title</th>
-      <th>Completed</th>
-      <th>DOI</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% @doi_requests.each do |doi_request| %>
-    <tr>
-      <td><%= doi_request.created_at %></td>
-      <td><%= doi_request.asset_type %> </td>
-      <td><%= doi_link_for(doi_request) %></td>
-      <td><%= status_tag(doi_request.completed) %></td>
-      <td><%= doi_request.ezid_doi %></td>
-      <td>
-        <% if doi_request.completed %>
-          <%= link_to t('doi.view'), view_doi_doi_request_path(doi_request), class: "btn btn-default" %>
-          <%= form_tag(modify_metadata_doi_request_path(doi_request), method: :patch) do %>
-            <%= button_tag t('doi.modify'), type: 'submit', class: 'btn btn-primary'%>
+<div class="table-responsive">
+  <table class="table doi-table table-striped table-hover">
+    <caption><%= pluralize(@doi_requests.size, 'DOI Request') %> found</caption>
+    <thead>
+      <tr>
+        <th>Requested Time</th>
+        <th>Asset Type</th>
+        <th>Asset Title</th>
+        <th>Completed</th>
+        <th>DOI</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @doi_requests.each do |doi_request| %>
+      <tr>
+        <td><%= doi_request.created_at %></td>
+        <td><%= doi_request.asset_type %> </td>
+        <td><%= doi_link_for(doi_request) %></td>
+        <td><%= status_tag(doi_request.completed) %></td>
+        <td><%= doi_request.ezid_doi %></td>
+        <td>
+          <% if doi_request.completed %>
+            <%= link_to t('doi.view'), view_doi_doi_request_path(doi_request), class: "btn btn-default pull-left margin-right-sm" %>
+            <%= form_tag(modify_metadata_doi_request_path(doi_request), method: :patch) do %>
+              <%= button_tag t('doi.modify'), type: 'submit', class: 'btn btn-primary'%>
+            <% end %>
+          <% else %>
+            <%= form_tag(mint_doi_doi_request_path(doi_request), method: :patch) do %>
+              <%= button_tag t('doi.mint'), type: 'submit', class: 'btn btn-primary' %>
+            <% end %>
           <% end %>
-        <% else %>
-          <%= form_tag(mint_doi_doi_request_path(doi_request), method: :patch) do %>
-            <%= button_tag t('doi.mint'), type: 'submit', class: 'btn btn-primary' %>
-          <% end %>
-        <% end %>
-      </td> 
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+        </td> 
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
