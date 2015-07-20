@@ -1,26 +1,27 @@
+task :with_defaults, [:email, :password] do |t, defaults|
+  defaults.with_defaults(:email => :default_email, :password => :default_password)
+end
+
 namespace :datarepo do 
 
-  desc 'Setup Roles'
-  task setup_roles: :environment do
+  desc 'Setup default roles and admin'
+  task setup_defaults: :environment do
+    desc 'Setup Roles'
     %w(admin collection_admin collection_user).each do |role|
-      if Role.where(name: role).first.nil?
-        Role.create(name: role)
-      end
+      Role.find_or_create_by(name: role)
     end
 
-    desc 'Create an initial admin user for DataRepo'
-    STDOUT.puts 'Please provide your email address:'
-    email = STDIN.gets.strip
-
-    STDOUT.puts 'Please Type in your password:'
-    password = STDIN.gets.strip
-
-    if User.find_by_email(email).nil?
-      User.create(email: email, password: password, role_ids: [Role.where(name: 'admin').first.id])
-      STDOUT.puts "#{email} has been set up as admin user."
+    desc 'Set up a default Admin email and password'
+    default_email = "admin@lib.vt.edu"
+    default_password = "datarepo_password" 
+    Rake::Task[:with_defaults].invoke(default_email, default_password)
+    if User.find_by_email(default_email).nil?
+      User.create(email: default_email, password: default_password, role_ids: [Role.where(name: 'admin').first.id])
+      puts "Default admin email is: #{default_email}; password is: #{default_password}. Please change the password."
     else
-      STDOUT.puts 'You already have an account in our system.'
+      puts "Default admin email is: #{default_email}"
     end
   end
   
 end
+
