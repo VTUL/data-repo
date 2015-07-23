@@ -1,5 +1,3 @@
-The CAS/Production environment requires some extra setup:
+Installation provided for vagrant through [this](https://github.com/VTUL/InstallScripts) repository.
 
-1. Run the CAS installation script: https://github.com/VTUL/InstallScripts/blob/master/Vagrant/CAS_extras.sh
-  - The script takes two parameters, the name of the repository, and the name of the server
-  - Example: `bash ./CAS_extras.sh data-repo myserver.com`
+The CAS/Production environment does not require any extra setup at this time.
