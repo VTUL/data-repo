@@ -59,3 +59,4 @@ gem 'ezid-client'
 gem "hydra-role-management"
 gem 'omniauth-cas'
 gem 'net-ldap'
+gem 'jquery-ui-rails'
