@@ -1,6 +1,7 @@
 en:
   sufia:
     account_name:       "My Institution Account Id"
+    institution_name:   "Virginia Tech"
     product_name:       "Hydra/Sufia"
     account_label:      "User"
     deposit_agreement:  "Sufia's Deposit Agreement"
