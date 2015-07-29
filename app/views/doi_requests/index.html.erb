@@ -26,9 +26,6 @@
         <td>
           <% if doi_request.completed %>
             <%= link_to t('doi.view'), view_doi_doi_request_path(doi_request), class: "btn btn-default pull-left margin-right-sm" %>
-            <!--<%= form_tag(modify_metadata_doi_request_path(doi_request), method: :patch) do %>
-              <%= button_tag t('doi.modify'), type: 'submit', class: 'btn btn-primary'%>
-            <% end %>-->
           <% else %>
             <%= form_tag(mint_doi_doi_request_path(doi_request), method: :patch) do %>
               <%= button_tag t('doi.mint'), type: 'submit', class: 'btn btn-primary' %>
