@@ -27,6 +27,7 @@ namespace :datarepo do
   desc 'Add initial users.'
   task  populate_users: :environment do
     ldap = Net::LDAP.new(host: 'directory.vt.edu')
+    ldap.bind
     treebase = 'ou=People,dc=vt,dc=edu'
     ldap_attributes = {'uid': :authid, 'display_name': :displayname, 'department': :department, 'address': :postaladdress}
 
@@ -44,12 +45,21 @@ namespace :datarepo do
         ldap_attributes.each do |user_attr, ldap_attr|
           user_attr = user_attr.to_sym
           if result.respond_to?(ldap_attr)
-            user[user_attr] = result[ldap_attr][0]
+            user[user_attr] = result[ldap_attr][0].force_encoding('UTF-8')
           end
         end
 
+        if !user.address.nil?
+          user.address = user.address.gsub(/\$/, "\n")
+        end
+
+        new_user = user.id.nil?
         user.save!
-        puts "Created '#{email}'"
+        if new_user
+          puts "Created '#{email}'"
+        else
+          puts "Updated '#{email}'"
+        end
       elsif results.count > 1
         puts "Searching for '#{email}' did not return a unique result."
       else
