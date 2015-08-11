@@ -1,0 +1,17 @@
+<div class="btn-group">
+  <button class="btn btn-sm dropdown-toggle" data-toggle="dropdown" type="button" id="dropdownMenu_<%= id %>" aria-haspopup="true">
+    <span class="sr-only">Press to </span>
+    Select an action <span class="caret" aria-hidden="true"></span>
+  </button>
+  <ul role="menu" class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu_<%= id %>">
+   <li role="menuitem" tabindex="-1">
+   <%= link_to raw('<i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> Edit Package'), collections.edit_collection_path(id),
+     class: 'itemicon itemedit', title: 'Edit Package' %>
+   </li>
+   <li role="menuitem" tabindex="-1">
+   <%= link_to raw('<i class="glyphicon glyphicon-trash" aria-hidden="true"></i> Delete Package'), collections.collection_path(id),
+     class: 'itemicon itemtrash', title: 'Delete Package', method: :delete, data: {
+     confirm: "Deleting a package from #{t('sufia.product_name')} is permanent. Click OK to delete this package from #{t('sufia.product_name')}, or Cancel to cancel this operation" } %>
+   </li>
+  </ul>
+</div>

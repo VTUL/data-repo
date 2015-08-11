@@ -15,9 +15,9 @@ module DoiRequestsHelper
     if doi_request.collection?
       if Collection.exists?(id: doi_request.collection_id)
         collection = Collection.find(doi_request.collection_id)
-        link_to collection.title, collections.collection_path(collection), title: "Show this Collection"
+        link_to collection.title, collections.collection_path(collection), title: "Show this Package"
       else
-        "Deleted Collection!"
+        "Deleted Package"
       end
     else
       link_to 'Unknown asset', '#'
