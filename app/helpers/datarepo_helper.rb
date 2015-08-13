@@ -18,4 +18,9 @@ module DatarepoHelper
       link_to_field(fieldname, user_string)
     end
   end
+
+  def parse_funder(funder_xml)
+    doc = Nokogiri::XML(funder_xml)
+    doc.css('fundername').first.content + ': ' doc.css('awardnumber').first.content
+  end
 end
