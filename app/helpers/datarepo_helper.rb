@@ -21,6 +21,6 @@ module DatarepoHelper
 
   def parse_funder(funder_xml)
     doc = Nokogiri::XML(funder_xml)
-    doc.css('fundername').first.content + ': ' doc.css('awardnumber').first.content
+    doc.css('fundername').first.content + ': ' + doc.css('awardnumber').first.content
   end
 end
