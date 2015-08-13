@@ -187,6 +187,7 @@ en:
         tag:              "Keyword"
         date_created:     "Date Created"
         related_url:      "Related URL"
+        funder:           "Funding Info"
         total_items:      "Total Items"
         size:             "Size"
 

@@ -1,9 +1,27 @@
 class CollectionsController < ApplicationController
   include Sufia::CollectionsControllerBehavior
 
+  def presenter_class
+    MyCollectionPresenter
+  end
+
+  def form_class
+    MyCollectionEditForm
+  end
+
   def create
     @collection.apply_depositor_metadata(current_user.user_key)
     add_members_to_collection unless batch.empty?
+
+    if !params[:collection][:funder].empty?
+      params[:collection][:funder].each do |funder|
+        if funder.length > 0
+          values = funder.split(":")
+          @collection[:funder] << "<funder><fundername>#{values[0]}</fundername><awardnumber>#{values[1]}</awardnumber></funder>"
+        end
+      end
+    end
+
     if @collection.save
       if params[:request_doi]
         @collection[:identifier] << t('doi.pending_doi')
@@ -14,9 +32,28 @@ class CollectionsController < ApplicationController
           flash[:error] = t('doi.messages.submit.failure')
         end
       end
+      
       after_create
     else
       after_create_error
     end
-  end 
+  end
+
+  def update
+    process_member_changes
+    if @collection.update(collection_params.except(:members))
+      newfunder = []
+      params[:collection][:funder].each do |funder|
+        if funder.length > 0
+          values = funder.split(":")
+          newfunder << "<funder><fundername>#{values[0]}</fundername><awardnumber>#{values[1]}</awardnumber></funder>"
+        end
+      end
+      @collection.update_attributes({:funder => newfunder})
+      after_update
+    else
+      after_update_error
+    end
+  end
+ 
 end
