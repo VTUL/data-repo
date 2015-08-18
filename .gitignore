@@ -36,8 +36,11 @@ bower.json
 
 # Sufia additions
 /jetty
-/db
+/db/*
 /bin
+
+# Don't ignore migrations
+!/db/migrate
 
 #ORCID secret
 config/application.yml
