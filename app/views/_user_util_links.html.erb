@@ -32,7 +32,7 @@
   <nav class="navbar navbar-default" role="navigation">
     <div class="navbar-header pull-right">
       <div class="btn-toolbar login_button pull-right">
-        <%= link_to raw('<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login'), new_user_session_path, class: "btn-group btn btn-default", title: "Login" %>
+        <%= link_to raw('<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login'), user_omniauth_authorize_path(:cas), class: "btn-group btn btn-default", title: "Login" %>
         <button type="button" class="btn-group btn btn-default navbar-toggle collapsed pull-right" data-toggle="collapse" data-target="#main-navbar">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
