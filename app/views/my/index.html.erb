@@ -10,7 +10,7 @@
 
 <% @page_title = "#{current_tab.capitalize} listing" %>
 
-<h1 class="sr-only">My Files, Packages, Highlights, and Files Shared with Me</h1>
+<h1 class="sr-only">My Files, Datasets, Highlights, and Files Shared with Me</h1>
 <ul class="nav nav-tabs" id="my_nav" role="navigation">
   <span class="sr-only">You are currently listing your <%= current_tab.pluralize %> .  You have <%= @response.docs.count %> <%= current_tab.pluralize(@response.docs.count)%> </span>
   <li class="<%= "active" if @selected_tab == :files %>">
@@ -33,7 +33,7 @@
 <%= render partial: 'document_list' %>
 
 <% content_for :sidebar do %>
-  <span class="sr-only">Upload Files or Create Package</span>
+  <span class="sr-only">Upload Files or Create Dataset</span>
   <div class="row">
     <div class="col-sm-12">
       <center>

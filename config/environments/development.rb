@@ -1,3 +1,8 @@
+Sufia::Engine.configure do
+ config.contact_email = 'root@localhost'
+ config.from_email = "no-reply@localhost"
+end
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -13,6 +18,14 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
+  # E-mail settings
+  config.action_mailer.delivery_method = :sendmail
+  # Defaults to:
+  # config.action_mailer.sendmail_settings = {
+  #   location: '/usr/sbin/sendmail',
+  #   arguments: '-i -t'
+  # }
+  config.action_mailer.perform_deliveries = false
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
