@@ -42,7 +42,7 @@ en:
       updated: "Your account has been updated successfully."
     sessions:
       signed_in: "Signed in successfully."
-      signed_out: "Signed out successfully."
+      signed_out: "You have been logged out of Hydra/Sufia. To log out of all applications, <a href='https://auth.vt.edu/logout'>log out of Virginia Tech CAS.</a>"
       already_signed_out: "Signed out successfully."
     unlocks:
       send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."
