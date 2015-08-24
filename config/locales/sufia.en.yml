@@ -2,9 +2,9 @@ en:
   sufia:
     account_name:       "My Institution Account Id"
     institution_name:   "Virginia Tech"
-    product_name:       "Hydra/Sufia"
+    product_name:       "VTechData"
     account_label:      "User"
-    deposit_agreement:  "Sufia's Deposit Agreement"
+    deposit_agreement:  "VTechData's Deposit Agreement"
     document_language:  "en"
     upload_tooltip:     "Please accept Deposit Agreement before you can upload."
     share_button:       "Share Your Work"
@@ -15,12 +15,12 @@ en:
     search:
       form:
         q:
-          label:          "Search Sufia"
-          placeholder:    "Search the Hydra/Sufia Repository..."
+          label:          "Search VTechData"
+          placeholder:    "Search the VTechData Repository..."
         option:
           all:
             label_short:  "All"
-            label_long:   "All of Sufia"
+            label_long:   "All of VTechData"
           my_files:
             label_short:  "My Files"
             label_long:   "My Files"
