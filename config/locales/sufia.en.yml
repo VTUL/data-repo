@@ -25,8 +25,8 @@ en:
             label_short:  "My Files"
             label_long:   "My Files"
           my_collections:
-            label_short:  "My Packages"
-            label_long:   "My Packages"
+            label_short:  "My Datasets"
+            label_long:   "My Datasets"
           my_highlights:
             label_short:  "My Highlights"
             label_long:   "My Highlights"
@@ -69,9 +69,9 @@ en:
       title:                    "My Dashboard"
       greeting:                 "Hello, "
       upload_html:                   '<span class="glyphicon glyphicon-upload"></span> Upload'
-      create_collection_html:        '<span class="glyphicon glyphicon-plus"></span> Create Package'
-      create_collection:        "Create Package"
-      view_collections:         "View Packages"
+      create_collection_html:        '<span class="glyphicon glyphicon-plus"></span> Create Dataset'
+      create_collection:        "Create Dataset"
+      view_collections:         "View Datasets"
       view_files:               "View Files"
       user_activity:            "User Activity"
       no_activity:              "User has no recent activity"
@@ -88,28 +88,28 @@ en:
         files:              "Files you've deposited"
         file_views:         "View"
         file_downloads:     "Download"
-        collections:        "Packages you've created"
+        collections:        "Datasets you've created"
         following:          "People you follow"
         followers:          "People who are following you"
       my:
         files:        "My Files"
-        collections:  "My Packages"
+        collections:  "My Datasets"
         highlights:   "My Highlights"
         shares:       "Files Shared with Me"
         facet_label:
           files:        "Filter your files"
-          collections:  "Filter your packages"
+          collections:  "Filter your datasets"
           highlighted: "Filter your highlights"
           shared:      "Filter your shares"
         sr:
           show_label:     "Display all details of"
           detail_label:   "Display summary details of"
-          batch_checkbox: "Check to add to a package or edit list"
-          check_all_label: "Select all files to be added to a package or edited"
+          batch_checkbox: "Check to add to a dataset or edit list"
+          check_all_label: "Select all files to be added to a dataset or edited"
     file:
       collections_list:
-        heading:   "This file is in the following packages:"
-        empty:     "This file is not currently in any packages."
+        heading:   "This file is in the following datasets:"
+        empty:     "This file is not currently in any datasets."
     messages:
       success:
         single: "has been saved."
@@ -152,13 +152,13 @@ en:
         resource_type: "You may select multiple types to apply to all files"
     collection:
       select_form:
-        title: "Add to package"
-        no_collections: "You do not have access to any existing packages. You may create a new package."
-        select_heading: "Select the package to add your files to:"
+        title: "Add to dataset"
+        no_collections: "You do not have access to any existing datasets. You may create a new dataset."
+        select_heading: "Select the dataset to add your files to:"
         close: "Close"
-        create: "Create Package"
-        update: "Update Package"
-        create_new: "Add to new Package"
+        create: "Create Dataset"
+        update: "Update Dataset"
+        create_new: "Add to new Dataset"
       metadata:
         add_another_keyword: "add another Keyword"
         add_another_creator: "add another Creator"
@@ -202,7 +202,7 @@ en:
         based_near_html: "A place name related to the file, such as its site of publication, or the city, state, or country the file's contents are about. Calls upon the GeoNames web service (&lt;a href=&quot;http://www.geonames.org&quot;&gt;http://www.geonames.org&lt;/a&gt;)."
         contributor_html: "A person or group you want to recognize for playing a role in the creation of the file, but not the primary role. If there is a specific role you would like noted, include it in parentheses, e.g. &quot;Jones, Mary (advisor).&quot;"
         date_created: "The date on which the file was generated. Dates are accepted in the form YYYY-MM-DD, e.g. 1776-07-04."
-        description: "Free-text notes about the file itself. Examples include abstracts of a paper, citation information for a journal article, or a tag indicating a larger package to which the file belongs."
+        description: "Free-text notes about the file itself. Examples include abstracts of a paper, citation information for a journal article, or a tag indicating a larger dataset to which the file belongs."
         identifier: "A unique handle describing the file. An example would be a DOI for a journal article, or an ISBN or OCLC number for a book."
         language: "The language of the file content."
         publisher: "The person or group making the file available. Generally this is the institution."
@@ -219,7 +219,7 @@ en:
         based_near_html: "A place name related to the file, such as its site of publication, or the city, state, or country the file's contents are about. Calls upon the GeoNames web service (&lt;a href=&quot;http://www.geonames.org&quot;&gt;http://www.geonames.org&lt;/a&gt;)."
         contributor_html: "A person or group you want to recognize for playing a role in the creation of the file, but not the primary role. If there is a specific role you would like noted, include it in parentheses, e.g. &quot;Jones, Mary (advisor).&quot;"
         date_created: "The date on which the file was generated. Dates are accepted in the form YYYY-MM-DD, e.g. 1776-07-04."
-        description: "Free-text notes about the file itself. Examples include abstracts of a paper, citation information for a journal article, or a tag indicating a larger package to which the file belongs."
+        description: "Free-text notes about the file itself. Examples include abstracts of a paper, citation information for a journal article, or a tag indicating a larger dataset to which the file belongs."
         identifier: "A unique handle describing the file. An example would be a DOI for a journal article, or an ISBN or OCLC number for a book."
         language: "The language of the file content."
         publisher: "The person or group making the file available. Generally this is the institution."
@@ -232,3 +232,4 @@ en:
         description: "Usage information for abstract or summary"
         tag: "Usage information for keyword"
         rights: "Usage information for rights"
+
