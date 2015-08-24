@@ -16,9 +16,9 @@
 
   <div class="primary-actions">
     <% if params[:action] == "new" %>
-      <%= f.submit 'Create Package', class: 'btn btn-primary', onclick: "confirmation_needed = false;", id: "create_submit", name: "create_collection" %>
+      <%= f.submit 'Create Dataset', class: 'btn btn-primary', onclick: "confirmation_needed = false;", id: "create_submit", name: "create_collection" %>
     <% else %>
-      <%= f.submit 'Update Package', class: 'btn btn-primary', onclick: "confirmation_needed = false;", id: "update_submit", name: "update_collection" %>
+      <%= f.submit 'Update Dataset', class: 'btn btn-primary', onclick: "confirmation_needed = false;", id: "update_submit", name: "update_collection" %>
     <% end %>
     <%= link_to t(:'helpers.action.cancel'), main_app.root_path, class: 'btn btn-link' %>
   </div>
