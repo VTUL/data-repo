@@ -1,6 +1,7 @@
 <% @page_title = "DOI Requests  - #{application_name}" %>
 
 <%= render_breadcrumbs builder: Sufia::BootstrapBreadcrumbsBuilder %>
+<%= button_to_requests(params[:action]) %>
 
 <div class="table-responsive">
   <table class="table doi-table table-striped table-hover">
@@ -21,10 +22,10 @@
         <td><%= doi_request.created_at %></td>
         <td><%= doi_request.asset_type %> </td>
         <td><%= doi_link_for(doi_request) %></td>
-        <td><%= status_tag(doi_request.completed) %></td>
+        <td><%= status_tag(doi_request.completed?) %></td>
         <td><%= doi_request.ezid_doi %></td>
         <td>
-          <% if doi_request.completed %>
+          <% if doi_request.completed? %>
             <%= link_to t('doi.view'), view_doi_doi_request_path(doi_request), class: "btn btn-default pull-left margin-right-sm" %>
           <% else %>
             <%= form_tag(mint_doi_doi_request_path(doi_request), method: :patch) do %>

@@ -1,0 +1,15 @@
+<h1>Create New Dataset</h1>
+
+<%= radio_button_tag :doi_status, "assigned", checked = false %>
+<%= label_tag(:doi_assigned, "This data set already has a DOI") %>
+<%= radio_button_tag :doi_status, "unassigned", checked = false %>
+<%= label_tag(:doi_not_assigned, "This dataset does not already have a DOI") %>
+<div id="datacite_search_form" style="display:none;">
+  <%= render 'datacite_search' %>
+</div>
+<div id="datacite_search_result" style="display:none;">
+  <%= render 'datacite_search_result' %>  
+</div>
+<div id="new_form_area" style="display:none;">
+  <%= render 'form' %>
+</div>
