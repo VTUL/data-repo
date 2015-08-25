@@ -1,22 +1,22 @@
 en:
   sufia:
-    account_name:       "My Institution Account Id"
+    account_name:       "PID"
     institution_name:   "Virginia Tech"
     product_name:       "VTechData"
     account_label:      "User"
-    deposit_agreement:  "VTechData's Deposit Agreement"
+    deposit_agreement:  "the VTechData Deposit Agreement"
     document_language:  "en"
-    upload_tooltip:     "Please accept Deposit Agreement before you can upload."
-    share_button:       "Share Your Work"
+    upload_tooltip:     "Please accept the Deposit Agreement before you can upload."
+    share_button:       "Share Your Dataset"
     view_profile:       "View Profile"
     edit_profile:       "Edit Profile"
     directory:
-      suffix:           "@example.org"
+      suffix:           "@vt.edu"
     search:
       form:
         q:
           label:          "Search VTechData"
-          placeholder:    "Search the VTechData Repository..."
+          placeholder:    "Search VTechData..."
         option:
           all:
             label_short:  "All"
@@ -58,13 +58,13 @@ en:
       cloud_timeout_message: "Please note that if you upload a large number of files within a short period of time, the cloud provider may not be able to accommodate your request. If you experience any errors uploading from the cloud, let us know via the %{contact_href}."
     homepage:
       featured_works:
-        tab_label:          'Featured Works'
-        title:              'Featured Works'
-        no_works:           'No works have been featured'
+        tab_label:          'Featured Datasets'
+        title:              'Featured Datasets'
+        no_works:           'No datasets have been featured'
       recently_uploaded:    'Recently Uploaded'
       explore:              'Explore'
       sr_explore:           'Popular Keywords'
-      no_public:            'No public work has been contributed.'
+      no_public:            'No public datasets has been contributed.'
     dashboard:
       title:                    "My Dashboard"
       greeting:                 "Hello, "
@@ -193,16 +193,16 @@ en:
 
     metadata_help:
       generic_file:
-        resource_type_html: "Pre-defined categories to describe the type of file content being uploaded, such as &quot;article&quot; or &quot;dataset.&quot;  More than one type may be selected."
+        resource_type_html: "Pre-defined categories to describe the type of file content being uploaded, such as &quot;tabular data&quot; or &quot;image.&quot;  More than one type may be selected."
         title: "A name for the file to aid in identifying it. Defaults to the file name, though a more descriptive title is encouraged."
         tag: "Words or phrases you select to describe what the file is about. These are used to search for content."
         subject: "Headings or index terms describing what the file is about; these need to conform to an existing vocabulary. Currently supports Library of Congress Subject Headings."
-        creator_html: "The person or group responsible for the file being uploaded. Usually this is the author of the content. Personal names should be entered with the last name first, e.g. &quot;Smith, John.&quot; &lt;em&gt;This is a required field&lt;/em&gt;."
+        creator_html: "The person or group responsible for the file being uploaded. Usually this is the author of the content. Unless selected from the auto-completed names, personal names should be entered with the last name first, e.g. &quot;Smith, John.&quot; &lt;em&gt;This is a required field&lt;/em&gt;."
         related_url: "A link to a website or other specific content (audio, video, PDF document) related to the file. An example is the URL of a research project from which the file was derived."
         based_near_html: "A place name related to the file, such as its site of publication, or the city, state, or country the file's contents are about. Calls upon the GeoNames web service (&lt;a href=&quot;http://www.geonames.org&quot;&gt;http://www.geonames.org&lt;/a&gt;)."
         contributor_html: "A person or group you want to recognize for playing a role in the creation of the file, but not the primary role. If there is a specific role you would like noted, include it in parentheses, e.g. &quot;Jones, Mary (advisor).&quot;"
         date_created: "The date on which the file was generated. Dates are accepted in the form YYYY-MM-DD, e.g. 1776-07-04."
-        description: "Free-text notes about the file itself. Examples include abstracts of a paper, citation information for a journal article, or a tag indicating a larger dataset to which the file belongs."
+        description: "Free-text notes about the file itself. Examples include abstracts, or a README."
         identifier: "A unique handle describing the file. An example would be a DOI for a journal article, or an ISBN or OCLC number for a book."
         language: "The language of the file content."
         publisher: "The person or group making the file available. Generally this is the institution."
@@ -210,20 +210,20 @@ en:
 
     metadata_help:
       collection:
-        resource_type_html: "Pre-defined categories to describe the type of file content being uploaded, such as &quot;article&quot; or &quot;dataset.&quot;  More than one type may be selected."
-        title: "A name for the file to aid in identifying it. Defaults to the file name, though a more descriptive title is encouraged."
-        tag: "Words or phrases you select to describe what the file is about. These are used to search for content."
-        subject: "Headings or index terms describing what the file is about; these need to conform to an existing vocabulary. Currently supports Library of Congress Subject Headings."
-        creator_html: "The person or group responsible for the file being uploaded. Usually this is the author of the content. Personal names should be entered with the last name first, e.g. &quot;Smith, John.&quot; &lt;em&gt;This is a required field&lt;/em&gt;."
-        related_url: "A link to a website or other specific content (audio, video, PDF document) related to the file. An example is the URL of a research project from which the file was derived."
-        based_near_html: "A place name related to the file, such as its site of publication, or the city, state, or country the file's contents are about. Calls upon the GeoNames web service (&lt;a href=&quot;http://www.geonames.org&quot;&gt;http://www.geonames.org&lt;/a&gt;)."
-        contributor_html: "A person or group you want to recognize for playing a role in the creation of the file, but not the primary role. If there is a specific role you would like noted, include it in parentheses, e.g. &quot;Jones, Mary (advisor).&quot;"
-        date_created: "The date on which the file was generated. Dates are accepted in the form YYYY-MM-DD, e.g. 1776-07-04."
-        description: "Free-text notes about the file itself. Examples include abstracts of a paper, citation information for a journal article, or a tag indicating a larger dataset to which the file belongs."
-        identifier: "A unique handle describing the file. An example would be a DOI for a journal article, or an ISBN or OCLC number for a book."
-        language: "The language of the file content."
-        publisher: "The person or group making the file available. Generally this is the institution."
-        rights: "Licensing and distribution information governing access to the file. Select from the provided drop-down list."
+        resource_type_html: "Pre-defined categories to describe the type of file content being uploaded, such as &quot;dataset.&quot"
+        title: "A name for the dataset to aid in identifying it."
+        tag: "Words or phrases you select to describe what the dataset is about. These are used to search for content."
+        subject: "Headings or index terms describing what the dataset is about; these need to conform to an existing vocabulary. Currently supports Library of Congress Subject Headings."
+        creator_html: "The person or group responsible for the dataset being uploaded. Usually this is the author of the content. Unless selected from the auto-completed names, personal names should be entered with the last name first, e.g. &quot;Smith, John.&quot; &lt;em&gt;This is a required field&lt;/em&gt;."
+        related_url: "A link to a publication or other specific content (website, audio, video, PDF document) related to the dataset. An example is the DOI of a related paper or the URL of a research project from which the dataset was derived."
+        based_near_html: "A place name related to the dataset, such as its site of publication, or the city, state, or country the dataset's contents are about. Calls upon the GeoNames web service (&lt;a href=&quot;http://www.geonames.org&quot;&gt;http://www.geonames.org&lt;/a&gt;)."
+        contributor_html: "A person or group you want to recognize for playing a role in the creation of the dataset, but not the primary role. If there is a specific role you would like noted, include it in parentheses, e.g. &quot;Jones, Mary (advisor).&quot;"
+        date_created: "The date on which the dataset was generated. Dates are accepted in the form YYYY-MM-DD, e.g. 1776-07-04."
+        description: "Free-text notes about the dataset itself. Examples include abstracts or a README."
+        identifier: "A unique handle describing the dataset. An example would be a DOI and/or a PubMed ID."
+        language: "The language of the dataset content, if applicable."
+        publisher: "The person or group making the dataset available. Generally this is University Libraries, Virginia Tech unless previously published elsewhere."
+        rights: "Licensing and distribution information governing access to the dataset. Select from the provided drop-down list."
 
     aria_label:
       generic_file:
@@ -232,4 +232,3 @@ en:
         description: "Usage information for abstract or summary"
         tag: "Usage information for keyword"
         rights: "Usage information for rights"
-
