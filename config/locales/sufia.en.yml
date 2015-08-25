@@ -1,22 +1,22 @@
 en:
   sufia:
-    account_name:       "My Institution Account Id"
+    account_name:       "PID"
     institution_name:   "Virginia Tech"
     product_name:       "VTechData"
     account_label:      "User"
-    deposit_agreement:  "VTechData's Deposit Agreement"
+    deposit_agreement:  "VTechData Deposit Agreement"
     document_language:  "en"
     upload_tooltip:     "Please accept Deposit Agreement before you can upload."
-    share_button:       "Share Your Work"
+    share_button:       "Share Your Dataset"
     view_profile:       "View Profile"
     edit_profile:       "Edit Profile"
     directory:
-      suffix:           "@example.org"
+      suffix:           "@vt.edu"
     search:
       form:
         q:
           label:          "Search VTechData"
-          placeholder:    "Search the VTechData Repository..."
+          placeholder:    "Search VTechData..."
         option:
           all:
             label_short:  "All"
@@ -58,9 +58,9 @@ en:
       cloud_timeout_message: "Please note that if you upload a large number of files within a short period of time, the cloud provider may not be able to accommodate your request. If you experience any errors uploading from the cloud, let us know via the %{contact_href}."
     homepage:
       featured_works:
-        tab_label:          'Featured Works'
-        title:              'Featured Works'
-        no_works:           'No works have been featured'
+        tab_label:          'Featured Datasets'
+        title:              'Featured Datasets'
+        no_works:           'No Datasets have been featured'
       recently_uploaded:    'Recently Uploaded'
       explore:              'Explore'
       sr_explore:           'Popular Keywords'
