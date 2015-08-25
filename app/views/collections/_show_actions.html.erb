@@ -9,24 +9,6 @@
         <span class="glyphicon glyphicon-open-file"></span> Files
       <% end %>
     </div>
-    <% found_doi = false %>
-    <% @collection[:identifier].each do |id| %>
-      <% if id.match(/^doi/) %>
-        <% if id == t('doi.pending_doi') %>
-          <%= button_tag(type: 'submit', class: "btn btn-primary collection-control-row", disabled: 'disabled') do %>
-            <span class="glyphicon glyphicon-tags"></span> DOI Request Pending
-          <% end %>
-        <% end %>
-        <% found_doi = true %>
-        <% break %>
-      <% end %>
-    <% end %>
-    <% unless found_doi %> 
-      <%= form_tag url_for(:controller => 'doi_requests', :action => 'create', :collection_id => @collection.id) do %>
-        <%= button_tag(type: 'submit', class: "btn btn-primary collection-control-row") do %>
-          <span class="glyphicon glyphicon-tags"></span> Request DOI
-        <% end %>
-      <% end %>
-    <% end %>
+    <%= request_doi_link(@collection) %>
   <% end %>
 </div>
