@@ -18,7 +18,7 @@ class Ability
     # end
     if current_user.admin?
       can [:create, :show, :add_user, :remove_user, :index], Role
-      can [:index, :mint_doi, :view_doi, :modify_metadata, :mint_all], DoiRequest
+      can [:index, :pending, :mint_doi, :view_doi, :mint_all], DoiRequest
     end
   end
 end
