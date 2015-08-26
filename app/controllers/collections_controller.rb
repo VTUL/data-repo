@@ -13,7 +13,7 @@ class CollectionsController < ApplicationController
     @collection.apply_depositor_metadata(current_user.user_key)
     add_members_to_collection unless batch.empty?
 
-    if !params[:collection][:funder].empty?
+    if !params[:collection][:funder].nil? && !params[:collection][:funder].empty?
       params[:collection][:funder].each do |funder|
         if funder.length > 0
           values = funder.split(":")
@@ -43,10 +43,12 @@ class CollectionsController < ApplicationController
     process_member_changes
     if @collection.update(collection_params.except(:members))
       newfunder = []
-      params[:collection][:funder].each do |funder|
-        if funder.length > 0
-          values = funder.split(":")
-          newfunder << "<funder><fundername>#{values[0]}</fundername><awardnumber>#{values[1]}</awardnumber></funder>"
+      if !params[:collection][:funder].nil? && !params[:collection][:funder].empty?
+        params[:collection][:funder].each do |funder|
+          if funder.length > 0
+            values = funder.split(":")
+            newfunder << "<funder><fundername>#{values[0]}</fundername><awardnumber>#{values[1]}</awardnumber></funder>"
+          end
         end
       end
       @collection.update_attributes({:funder => newfunder})
