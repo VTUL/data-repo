@@ -3,5 +3,7 @@
 <% else %>
   <%= f.input key, required: f.object.required?(key) %>
 <% end %>
-<%= check_box_tag 'request_doi'%>
-<%= label_tag(:request_doi, t('doi.labels.request')) %>
+<% if f.object[:identifier] == [''] %>
+	<%= check_box_tag 'request_doi'%>
+	<%= label_tag(:request_doi, t('doi.labels.request')) %>
+<% end %>
