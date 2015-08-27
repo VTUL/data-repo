@@ -1,5 +1,5 @@
 var datepickerClass = '.datarepo-datepicker';
-var datepickerId = 'collection_date_created-';
+var datepickerId = 'datarepo-datepicker-';
 var datepickerNumber = 0;
 var datepickerOpts = {
     changeMonth: true,
@@ -9,10 +9,10 @@ var datepickerOpts = {
 
 function addDatepicker(mutation) {
     for (var i = 0; i < mutation.addedNodes.length; ++i) {
-	var node = $(mutation.addedNodes[i]).find('.hasDatepicker');
+	var node = $(mutation.addedNodes[i]).find(datepickerClass);
 	node.removeClass('hasDatepicker');
+	++datepickerNumber;
 	node.attr('id', datepickerId + datepickerNumber);
-	datepickerNumber++;
 	node.datepicker();
     }
 }
@@ -21,8 +21,7 @@ Blacklight.onLoad(function() {
     if ($(datepickerClass).length) {
         $.datepicker.setDefaults(datepickerOpts);
         $(datepickerClass).each(function() {
-            $(this).attr('id', datepickerId + datepickerNumber); // where is the id set originally?
-	    datepickerNumber++;
+            $(this).attr('id', datepickerId + 0);
 	    $(this).datepicker();
             var datepickerObserver = new MutationObserver(function(mutations) {
                 mutations.forEach(addDatepicker);
