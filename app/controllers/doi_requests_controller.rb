@@ -8,29 +8,26 @@ class DoiRequestsController < ApplicationController
     @doi_requests = DoiRequest.sorted
   end
 
-  def pending_requests
+  def pending
     @doi_requests = DoiRequest.pending
     render('index')
   end
 
-  def completed_requests
-    @doi_requests = DoiRequest.completed
-    render('index')
-  end
-
   def create
-    if params[:collection_id].present?
-      @collection = Collection.find(params[:collection_id])
-      @collection[:identifier] << t('doi.pending_doi') 
-      doi_request = DoiRequest.new(collection_id: params[:collection_id])
-      if doi_request.save && @collection.update_attributes({:identifier => @collection[:identifier]})
-        flash[:notice] = t('doi.messages.submit.success')
-      else
-        flash[:error] = t('doi.messages.submit.failure')
+    klass = Object.const_get params[:asset_type]
+    @asset = klass.find(params[:asset_id])
+    @asset[:identifier] << t('doi.pending_doi')
+    doi_request = DoiRequest.new(asset_id: params[:asset_id], asset_type: params[:asset_type])
+    if doi_request.save && @asset.update_attributes({:identifier => @asset[:identifier]})
+      flash[:notice] = t('doi.messages.submit.success')
+      if klass == Collection
+        redirect_to collections.collection_path(@asset)
+      else # TODO: redirect to the other asset type show page
+        redirect_to doi_requests_path
       end
-      redirect_to collections.collection_path(@collection)
     else
-      redirect_to doi_requsts_path
+      flash[:error] = t('doi.messages.submit.failure')
+      redirect_to doi_requests_path
     end
   end
 
@@ -38,7 +35,7 @@ class DoiRequestsController < ApplicationController
     @doi_request = DoiRequest.find(params[:id])
 
     if @doi_request.collection?
-      @collection = Collection.find(@doi_request.collection_id)
+      @collection = Collection.find(@doi_request.asset_id)
       minted_doi = Ezid::Identifier.create(
       	datacite_creator: (@collection.creator.empty? ? "" : @collection.creator.first), 
         datacite_resourcetype: "Collection",
@@ -49,16 +46,16 @@ class DoiRequestsController < ApplicationController
       @collection[:identifier].each_with_index {
         |id, idx| id == t('doi.pending_doi') ? @collection[:identifier][idx] = minted_doi.id : id
       }
-      if @doi_request.update_attributes({:ezid_doi => minted_doi.id, :completed => true}) && 
+      if @doi_request.update_attributes({:ezid_doi => minted_doi.id}) && 
         @collection.update_attributes({:identifier => @collection[:identifier]})
         flash[:notice] = t('doi.messages.mint.success')
-        redirect_to collections.collection_path(@doi_request.collection_id)
+        redirect_to collections.collection_path(@doi_request.asset_id)
       else
         flash[:error] = t('doi.messages.mint.failure')
-        redirect_to doi_requsts_path
+        redirect_to doi_requests_path
       end
     else
-      redirect_to doi_requsts_path
+      redirect_to doi_requests_path
     end
   end
 
@@ -66,27 +63,6 @@ class DoiRequestsController < ApplicationController
   end
 
   def view_doi
-  end
-
-  def modify_metadata
-    if @doi_request.collection?
-      @collection = Collection.find(@doi_request.collection_id)
-      @ezid_doi.update_metadata(
-        datacite_creator: @collection.creator.first,
-        datacite_title: @collection.title,
-        datacite_publisher: @collection.publisher.first,
-        datacite_publicationyear: @collection.date_created.first
-         )
-      if @ezid_doi.save
-        flash[:notice] = t('doi.messages.modify.success')
-        redirect_to collections.collection_path(@collection)
-      else
-        flash[:error] = t('doi.messages.modify.failure')
-        redirect_to doi_requsts_path
-      end
-    else
-      redirect_to doi_requsts_path
-    end
   end
 
   private

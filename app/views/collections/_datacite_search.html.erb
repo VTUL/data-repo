@@ -1,0 +1,10 @@
+<%= form_tag('datacite_search', method: :get, remote: true) do %>
+  <%= label_tag(:q, "Datacite Metadata Search: ") %>
+  <%= text_field_tag :q %>
+  <%= hidden_field_tag :fl, "doi, creator, publisher, publicationYear, title" %>
+  <%= hidden_field_tag :rows, "20" %>
+  <%= hidden_field_tag :wt, "json" %>
+  <%= submit_tag("Search") %>
+<% end %>
+<br/>
+Or <button id="direct_fill_form">Directly Fill Form</button>

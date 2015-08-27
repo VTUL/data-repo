@@ -1,0 +1,9 @@
+$('#datacite_search_result').html("<h2><%= j @datacite_error %></h2>");
+$('#datacite_search_result').slideDown("fast");
+$('#new_form_area').show();
+$("#new_collection").trigger('reset');
+$(".collection_creator ul li:gt(0)").remove();
+$('input[type=text][readonly]').removeAttr('readonly');
+$("#new_collection span").show();
+$('input[type="checkbox"][name="request_doi"]').hide();
+$('label[for="request_doi"]').hide();

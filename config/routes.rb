@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
+  get 'collections/datacite_search', to: 'collections#datacite_search'
+  get "collections/import_metadata", to: 'collections#import_metadata', as: 'import_collection'
+
   blacklight_for :catalog
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   mount Orcid::Engine => "/orcid"
   mount Hydra::RoleManagement::Engine => '/'
-  resources :doi_requests, :only => [:index, :show, :create] do
+  resources :doi_requests, :only => [:index, :create] do
     member do
       patch 'mint_doi'
       patch 'modify_metadata'
@@ -11,6 +14,7 @@ Rails.application.routes.draw do
     end
 
     collection do
+      get 'pending'
       patch 'mint_all'
     end
   end
