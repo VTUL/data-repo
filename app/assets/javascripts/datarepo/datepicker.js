@@ -9,11 +9,13 @@ var datepickerOpts = {
 
 function addDatepicker(mutation) {
     for (var i = 0; i < mutation.addedNodes.length; ++i) {
-	var node = $(mutation.addedNodes[i]).find(datepickerClass);
-	node.removeClass('hasDatepicker');
-	++datepickerNumber;
-	node.attr('id', datepickerId + datepickerNumber);
-	node.datepicker();
+	var node = $(mutation.addedNodes[i]).find('input.hasDatepicker');
+	if (node.length) {
+		node.removeClass('hasDatepicker');
+		++datepickerNumber;
+		node.attr('id', datepickerId + datepickerNumber);
+		node.datepicker();
+	}
     }
 }
 
