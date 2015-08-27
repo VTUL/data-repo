@@ -56,4 +56,8 @@ Rails.application.configure do
   config.to_prepare { Devise::SessionsController.force_ssl }
   config.to_prepare { Devise::RegistrationsController.force_ssl }
   config.to_prepare { Devise::PasswordsController.force_ssl }
+
+  # Logging
+  config.logger = Logger.new(Rails.root.join('log', "#{Rails.env}.log"), "daily")
+  config.log_level = :debug
 end
