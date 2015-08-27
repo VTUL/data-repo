@@ -11,8 +11,8 @@ function addDatepicker(mutation) {
     for (var i = 0; i < mutation.addedNodes.length; ++i) {
 	var node = $(mutation.addedNodes[i]).find('.hasDatepicker');
 	node.removeClass('hasDatepicker');
-	++datepickerNumber;
 	node.attr('id', datepickerId + datepickerNumber);
+	datepickerNumber++;
 	node.datepicker();
     }
 }
@@ -22,6 +22,7 @@ Blacklight.onLoad(function() {
         $.datepicker.setDefaults(datepickerOpts);
         $(datepickerClass).each(function() {
             $(this).attr('id', datepickerId + datepickerNumber); // where is the id set originally?
+	    datepickerNumber++;
 	    $(this).datepicker();
             var datepickerObserver = new MutationObserver(function(mutations) {
                 mutations.forEach(addDatepicker);
