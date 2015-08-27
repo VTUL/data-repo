@@ -26,12 +26,13 @@ Sufia.config do |config|
 
   config.resource_types = {
     "Audio" => "Audio",
-    "Dataset" => "Dataset",
     "Image" => "Image",
     "Map or Cartographic Material" => "Map or Cartographic Material",
     "Written Work" => "Written Work",
     "Code or Algorithm" => "Code or Algorithm",
-    "Video" => "Video"
+    "Video" => "Video",
+    "Tabular Data" => "Tabular Data",
+    "Other Data" => "Other Data"
   }
 
 
@@ -56,7 +57,9 @@ Sufia.config do |config|
     "Code or Algorithm" => "http://schema.org/Code",
     "Video" => "http://schema.org/VideoObject",
     "Other" => "http://schema.org/CreativeWork",
-    "Written Work" => "http://schema.org/CreativeWork"
+    "Written Work" => "http://schema.org/CreativeWork",
+    "Tabular Data" => "http://schema.org/CreativeWork",
+    "Other Data" => "http://schema.org/CreativeWork"
   }
 
   config.permission_levels = {
