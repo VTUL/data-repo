@@ -53,6 +53,26 @@ class CollectionsController < ApplicationController
         end
       end
       @collection.update_attributes({:funder => newfunder})
+      @collection[:identifier].each do |id|
+        # Matches DOIs minted by VT Libraries 
+        if /\A#{Ezid::Client.config.default_shoulder}/ =~ id
+          ezid_doi = Ezid::Identifier.find(id)
+          if ezid_doi
+            ezid_doi.update_metadata(
+              datacite_creator: (@collection.creator.empty? ? "" : @collection.creator.first), 
+              datacite_title: @collection.title,
+              datacite_publisher: (@collection.publisher.empty? ? "" : @collection.publisher.first), 
+              datacite_publicationyear: (@collection.date_created.empty? ? "" : @collection.date_created.first)
+            )
+          end
+          if ezid_doi.save
+            flash[:notice] = t('doi.messages.modify.success')
+          else
+            flash[:error] = t('doi.messages.modify.failure')
+          end
+          break
+        end
+      end
       after_update
     else
       after_update_error
