@@ -2,8 +2,6 @@ class DoiRequestsController < ApplicationController
 
   load_and_authorize_resource except: [:create]
 
-  before_action :find_ezid_doi, :only => [:view_doi, :modify_metadata]
-
   def index
     @doi_requests = DoiRequest.sorted
   end
@@ -38,7 +36,7 @@ class DoiRequestsController < ApplicationController
       @collection = Collection.find(@doi_request.asset_id)
       minted_doi = Ezid::Identifier.create(
       	datacite_creator: (@collection.creator.empty? ? "" : @collection.creator.first), 
-        datacite_resourcetype: "Collection",
+        datacite_resourcetype: "Dataset",
         datacite_title: @collection.title,
         datacite_publisher: (@collection.publisher.empty? ? "" : @collection.publisher.first), 
         datacite_publicationyear: (@collection.date_created.empty? ? "" : @collection.date_created.first)
@@ -63,15 +61,8 @@ class DoiRequestsController < ApplicationController
   end
 
   def view_doi
-  end
-
-  private
-
-  def find_ezid_doi
-    if params[:id]
-      @doi_request = DoiRequest.find(params[:id])
-      @ezid_doi = Ezid::Identifier.find(@doi_request.ezid_doi)
-    end
+    @doi_request = DoiRequest.find(params[:id])
+    @ezid_doi = Ezid::Identifier.find(@doi_request.ezid_doi)
   end
 
 end

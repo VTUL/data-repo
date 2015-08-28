@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   resources :doi_requests, :only => [:index, :create] do
     member do
       patch 'mint_doi'
-      patch 'modify_metadata'
       get 'view_doi'
     end
 
