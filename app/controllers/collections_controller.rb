@@ -107,7 +107,7 @@ class CollectionsController < ApplicationController
     ldap = Net::LDAP.new(host: 'directory.vt.edu')
     ldap.bind
     treebase = 'ou=People,dc=vt,dc=edu'
-    ldap_attributes = {'uid': :authid, 'display_name': :displayname, 'department': :department, 'address': :postaladdress}
+    ldap_attributes = {uid: :authid, display_name: :displayname, department: :department, address: :postaladdress}
     name = params[:name].gsub(/\s/,'*')
     filter = Net::LDAP::Filter.eq("cn", "*#{name}*")
     @results = ldap.search(base: treebase, filter: filter)
