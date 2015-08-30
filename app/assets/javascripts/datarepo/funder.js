@@ -12,25 +12,23 @@ Blacklight.onLoad(function() {
         $(funderClass)[index].value = newstring;
       }
   });
+$.validator.addMethod(
+	"datarepoFunder",
+	function(value, element, regexp) {
+	    var re = new RegExp(regexp);
+	    return this.optional(element) || re.test(value);
+	},
+	"Please enter correct funding Information format. (funder name: award number)"
+);
 
-  $('#create_submit, #update_submit').click(function( event ) {
-    $check = false;
-    $(funderClass).each( function(index, value) {
-      if ((value.value.indexOf(":") == -1) && value.value.length > 0) {
-        $check = true;
-      }
-    });
-
-    if ( $check && ( $( "p.fundermessage" ).text().length <=0 )  ) {
-      $( "<p style='color:red' class='fundermessage'>Please enter correct funding Information format. (funder name:award number)</p>" ).insertBefore( ".form-group.collection_funder" );
-      event.preventDefault();
-    } else if ($check) {
-      $( "p.fundermessage" ).show();
-      event.preventDefault();
-    } else {
-      $( "p.fundermessage" ).hide();
-      return;
-    }
-  });
+$(".simple_form").validate({
+	errorPlacement: function(error, element){		
+		if (element.parent().hasClass("input-group") )		
+			error.insertAfter( element.parent() );
+		else
+			error.insertAfter( element );
+	}
+});
+$(funderClass).rules("add", {datarepoFunder: ".*:.*"});
 
 });
