@@ -1,4 +1,5 @@
 Blacklight.onLoad(function () {
+  $('input:radio[name=doi_status]:checked').attr('checked', false);
   $('#doi_status_assigned').click(function() {
     $('#datacite_search_form').show();
     $("#q").val('');
