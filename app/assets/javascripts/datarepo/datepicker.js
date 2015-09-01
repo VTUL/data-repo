@@ -23,8 +23,6 @@ Blacklight.onLoad(function() {
     if ($(datepickerClass).length) {
         $.datepicker.setDefaults(datepickerOpts);
         $(datepickerClass).each(function() {
-            $(this).attr('id', datepickerId + datepickerNumber);
-	    datepickerNumber++;
 	    $(this).datepicker();
             var datepickerObserver = new MutationObserver(function(mutations) {
                 mutations.forEach(addDatepicker);
