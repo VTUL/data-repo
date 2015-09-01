@@ -3,7 +3,7 @@ Blacklight.onLoad(function () {
   $('#doi_status_assigned').click(function() {
     $('#datacite_search_form').show();
     $("#q").val('');
-    $('#q').focus(); 
+    $('#q').focus();
     $('#datacite_search_result').hide();
     $('#new_form_area').hide();
     $('.collection_publisher').show();
@@ -19,8 +19,8 @@ Blacklight.onLoad(function () {
     $('input[type="checkbox"][name="request_doi"]').show();
     $('label[for="request_doi"]').show();
     $('.collection_publisher').hide();
-    $('input[id=collection_publisher]').val("University Libraries, Virginia Tech"); 
-  }); 
+    $('input[id=collection_publisher]').val("University Libraries, Virginia Tech");
+  });
   $('#direct_fill_form').on('click', function (e) {
     e.preventDefault();
     $('#datacite_search_form').hide();
@@ -32,24 +32,24 @@ Blacklight.onLoad(function () {
     $("#new_collection span").show();
     $('input[type="checkbox"][name="request_doi"]').hide();
     $('label[for="request_doi"]').hide();
-    $('.collection_publisher').show(); 
+    $('.collection_publisher').show();
   });
   $("#crossref_button").on('click', function(e) {
-    e.preventDefault();    
+    e.preventDefault();
     var reqURL = "https://api.crossref.org/works";
-    $.getJSON(reqURL, { 
+    $.getJSON(reqURL, {
         query : $('#crossref_search_form').find('input[name="query"]').val(),
         rows : $('#crossref_search_form').find('input[name="rows"]').val(),
         offset : $('#crossref_search_form').find('input[name="offset"]').val()
       }, function(data) {
         if (data["status"] == "ok") {
-	
+
           $.ajax({
             type: "POST",
             url: 'crossref_search',
             data: {results: JSON.stringify(data["message"]["items"])}
-          }); 
-	
+          });
+
         } else {
           $('#crossref_search_result').html('<p>No DOI found. Try again.</p>');
           $('#crossref_search_result').slideDown("fast");
@@ -67,5 +67,32 @@ Blacklight.onLoad(function () {
 
   });
 
+  $('#ldap_button_creator').on('click', function () {
+    $( ".ldap_results_creator" ).load( 'ldap_search?name=' + $( '#ldap_text_creator' ).val() );
+    $('.ldap_results_creator').show();
+    $('#add_ldap_creator').show();
+  });
+
+  $('#add_ldap_creator').on('click', function() {
+    var the_value = $('.ldap_results_creator').find("input[type='radio'][name='result']:checked").val();
+    var count = $(".collection_creator ul li").length;
+    $(".collection_creator ul li:nth-child(" + count + ") input").val(the_value)
+    $('.ldap_results_creator').hide();
+    $('#add_ldap_creator').hide();
+  });
+
+  $('#ldap_button_contributor').on('click', function () {
+    $( ".ldap_results_contributor" ).load( 'ldap_search?name=' + $( '#ldap_text_contributor' ).val() );
+    $('.ldap_results_contributor').show();
+    $('#add_ldap_contributor').show();
+  });
+
+  $('#add_ldap_contributor').on('click', function() {
+    var the_value = $('.ldap_results_contributor').find("input[type='radio'][name='result']:checked").val();
+    var count = $(".collection_contributor ul li").length;
+    $(".collection_contributor ul li:nth-child(" + count + ") input").val(the_value)
+    $('.ldap_results_contributor').hide();
+    $('#add_ldap_contributor').hide();
+  });
 
 });

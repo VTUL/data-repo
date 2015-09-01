@@ -1,6 +1,6 @@
 class CollectionsController < ApplicationController
   include Sufia::CollectionsControllerBehavior
-  skip_load_and_authorize_resource :only => [:datacite_search, :crossref_search, :import_metadata]
+  skip_load_and_authorize_resource :only => [:datacite_search, :crossref_search, :import_metadata, :ldap_search]
 
   def presenter_class
     MyCollectionPresenter
@@ -33,7 +33,7 @@ class CollectionsController < ApplicationController
           flash[:error] = t('doi.messages.submit.failure')
         end
       end
-      
+
       after_create
     else
       after_create_error
@@ -54,14 +54,14 @@ class CollectionsController < ApplicationController
       end
       @collection.update_attributes({:funder => newfunder})
       @collection[:identifier].each do |id|
-        # Matches DOIs minted by VT Libraries 
+        # Matches DOIs minted by VT Libraries
         if /\A#{Ezid::Client.config.default_shoulder}/ =~ id
           ezid_doi = Ezid::Identifier.find(id)
           if ezid_doi
             ezid_doi.update_metadata(
-              datacite_creator: (@collection.creator.empty? ? "" : @collection.creator.first), 
+              datacite_creator: (@collection.creator.empty? ? "" : @collection.creator.first),
               datacite_title: @collection.title,
-              datacite_publisher: (@collection.publisher.empty? ? "" : @collection.publisher.first), 
+              datacite_publisher: (@collection.publisher.empty? ? "" : @collection.publisher.first),
               datacite_publicationyear: (@collection.date_created.empty? ? "" : @collection.date_created.first)
             )
           end
@@ -90,7 +90,7 @@ class CollectionsController < ApplicationController
     elsif parsed["response"]["numFound"] == 0
       @datacite_error = "No metadata found! You can fill in on your own."
       render :action => 'datacite_search_error'
-    else      
+    else
       @results = parsed["response"]["docs"]
     end
   end
@@ -102,5 +102,16 @@ class CollectionsController < ApplicationController
   def import_metadata
     @result = params[:result].gsub('=>', ':')
   end
- 
+
+  def ldap_search
+    ldap = Net::LDAP.new(host: 'directory.vt.edu')
+    ldap.bind
+    treebase = 'ou=People,dc=vt,dc=edu'
+    ldap_attributes = {'uid': :authid, 'display_name': :displayname, 'department': :department, 'address': :postaladdress}
+    name = params[:name].gsub(/\s/,'*')
+    filter = Net::LDAP::Filter.eq("cn", "*#{name}*")
+    @results = ldap.search(base: treebase, filter: filter)
+    render :layout => false
+  end
+
 end

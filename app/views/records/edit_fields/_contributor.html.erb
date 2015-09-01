@@ -1,1 +1,6 @@
 <%= f.input key, as: :multi_value, input_html: { class: 'form-control datarepo-autocomplete' }, required: f.object.required?(key) %>
+<input id="ldap_text_contributor">
+<input type="button" id="ldap_button_contributor" value="search people">
+<div class="ldap_results_contributor"></div>
+<input id="add_ldap_contributor" type="button" value="Add Creator" style="display:none">
+
