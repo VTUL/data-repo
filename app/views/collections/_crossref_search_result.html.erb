@@ -1,0 +1,34 @@
+<% if @results.nil? || @results.empty? %>
+  <h2>No metadata found!</h2>
+<% else %>
+  <div class="table-responsive" id="related_url_form">
+    <table class="table table-striped table-hover">
+      <caption><%= pluralize(@results.size, 'Record') %> found</caption>
+      <thead>
+      <tr>
+        <th>&nbsp;</th>
+        <th>DOI</th>
+        <th>Title</th>
+        <th>Authors</th>
+        <th>Year</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @results.each_with_index do |result, idx| %>
+        <tr>
+          <% if idx == 0 %>
+            <td><%= radio_button_tag 'result', result["DOI"], true %></td>
+          <% else %>
+            <td><%= radio_button_tag 'result', result["DOI"] %></td>
+          <% end %>
+          <td><%= result["DOI"] %></td>
+          <td><%= result["title"].first %> </td>
+          <td><%= result["author"] %> </td>
+          <td><%= result["deposited"]["date-parts"].first.first %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+
