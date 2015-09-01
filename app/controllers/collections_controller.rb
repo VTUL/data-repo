@@ -96,7 +96,7 @@ class CollectionsController < ApplicationController
   end
 
   def crossref_search
-    @results = JSON.parse(params[:result])
+    @results = JSON.parse(params[:results])
   end
 
   def import_metadata
