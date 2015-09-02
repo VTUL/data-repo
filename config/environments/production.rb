@@ -1,5 +1,5 @@
 Sufia::Engine.configure do
- config.contact_email = 'root@localhost'
+ config.contact_email = 'vtechdata@vt.edu'
  config.from_email = "no-reply@#{`cat /etc/mailname`}".chomp
 end
 
