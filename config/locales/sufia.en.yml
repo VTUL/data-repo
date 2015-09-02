@@ -10,6 +10,7 @@ en:
     share_button:       "Share Your Dataset"
     view_profile:       "View Profile"
     edit_profile:       "Edit Profile"
+    close_button:       "Close"
     directory:
       suffix:           "@vt.edu"
     search:
@@ -37,6 +38,10 @@ en:
         html: '<span class="glyphicon glyphicon-search"></span> Go'
         text: "Search"
     upload:
+      select_folder:  "Select folder..."
+      select_files: "Select files..."
+      start_upload: "Start upload"
+      cancel_upload:  "Cancel upload"
       my_computer:
         sr_tab_label: "Access Files from"
         tab_label: "My Computer"
@@ -61,6 +66,7 @@ en:
         tab_label:          'Featured Datasets'
         title:              'Featured Datasets'
         no_works:           'No datasets have been featured'
+      list_button:          'List'
       recently_uploaded:    'Recently Uploaded'
       explore:              'Explore'
       sr_explore:           'Popular Keywords'
@@ -106,6 +112,8 @@ en:
           detail_label:   "Display summary details of"
           batch_checkbox: "Check to add to a dataset or edit list"
           check_all_label: "Select all files to be added to a dataset or edited"
+        press:  "Press to"
+        select_action:  "Select an action"
     file:
       collections_list:
         heading:   "This file is in the following datasets:"
@@ -138,6 +146,7 @@ en:
       no_following: "You are not following anyone."
       no_followers_other: "No one is following this user."
       no_following_other: "This user is not following anyone."
+      close_button: 'Close'
       orcid:
         alt: "ORCID icon"
         label: "ORCID "
@@ -159,6 +168,7 @@ en:
         create: "Create Dataset"
         update: "Update Dataset"
         create_new: "Add to new Dataset"
+        close_button: "&times;"
       metadata:
         add_another_keyword: "add another Keyword"
         add_another_creator: "add another Creator"
@@ -170,6 +180,7 @@ en:
       delete:   'Delete Message'
     generic_file:
       browse_view: "Browse View"
+      close_button: 'Close'
     footer:
       copyright_html: "<strong>Copyright &copy; 2015 Virginia Polytechnic Institute and State University</strong>"
 
