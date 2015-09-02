@@ -1,5 +1,6 @@
 <% if f.object.class.multiple? key %>
-  <%= f.input :funder, as: :multi_value_with_help, input_html: { class: 'form-control datarepo-funder', placeholder: 'funder name: award number'}, required: false %>
+  <%= f.input :funder, as: :multi_value_with_help, input_html: { class: 'form-control datarepo-funder', placeholder: 'funder name: award number'}, required: false, pattern: '.*:.*' %>
 <% else %>
-  <%= f.input :funder, input_html: { class: 'form-control datarepo-funder', placeholder: 'funder name: award number'} %>
+  <%= f.input :funder, input_html: { class: 'form-control datarepo-funder', placeholder: 'funder name: award number', pattern: '.*:.*' } %>
+<div class="errorTxt"></div>
 <% end %>
