@@ -1,0 +1,32 @@
+<% if @results.nil? || @results.empty? %>
+  <h2>No person found with that name</h2>
+<% else %>
+  <div class="table-responsive" id="related_url_form">
+    <table class="table table-striped table-hover">
+      <caption><%= pluralize(@results.size, 'Record') %> found</caption>
+			<caption><%= "Displaying the top 5 relevant results" if @results.size > 5 %></caption>
+			<thead>
+      <tr>
+        <th>&nbsp;</th>
+        <th>Name</th>
+        <th>Department</th>
+        <th>mail</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @results[0...5].each_with_index do |result, idx| %>
+        <tr>
+          <% if idx == 0 %>
+            <td><%= radio_button_tag 'result', "#{result[:displayname][0]}", true %></td>
+          <% else %>
+            <td><%= radio_button_tag 'result', "#{result[:displayname][0]}" %></td>
+          <% end %>
+          <td><%= result[:displayname].join(" or ") %></td>
+          <td><%= result[:department].join(" or ") %> </td>
+          <td><%= result[:mail].join(" or ") %> </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>

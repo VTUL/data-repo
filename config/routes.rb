@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   get 'collections/datacite_search', to: 'collections#datacite_search'
   post 'collections/crossref_search', to: 'collections#crossref_search'
   get "collections/import_metadata", to: 'collections#import_metadata', as: 'import_collection'
+  get 'collections/ldap_search', to: 'collections#ldap_search'
 
   blacklight_for :catalog
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
