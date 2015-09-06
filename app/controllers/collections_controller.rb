@@ -111,6 +111,7 @@ class CollectionsController < ApplicationController
     name = params[:name].gsub(/\s/,'*')
     filter = Net::LDAP::Filter.eq("cn", "*#{name}*")
     @results = ldap.search(base: treebase, filter: filter)
+    @radio_name = params[:label]
     render :layout => false
   end
 
