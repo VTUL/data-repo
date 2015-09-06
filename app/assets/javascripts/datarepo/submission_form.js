@@ -67,32 +67,54 @@ Blacklight.onLoad(function () {
 
   });
 
-  $('#ldap_button_creator').on('click', function () {
-    $( ".ldap_results_creator" ).load( 'ldap_search?name=' + $( '#ldap_text_creator' ).val() );
-    $('.ldap_results_creator').show();
-    $('#add_ldap_creator').show();
-  });
+	$('#ldap_button_creator').on('click', function () {
+		$('#ldap_button_creator').hide();
+		$('.ldap_results_creator').hide();
+		$('#add_ldap_creator').hide();
+		$('#ldap_creator_loading').show();
+    	var ldap_url = 'ldap_search?name=' + encodeURI($( '#ldap_text_creator' ).val());
+		$( ".ldap_results_creator" ).load(ldap_url, function() {
+			$('#ldap_creator_loading').hide();
+			$('#ldap_button_creator').show();
+			$('.ldap_results_creator').slideDown("fast");
+			if ($('.ldap_results_creator').find("[type='radio']").length) {
+				$('#add_ldap_creator').show();
+			}
+		} );
+		
+	});
 
   $('#add_ldap_creator').on('click', function() {
-    var the_value = $('.ldap_results_creator').find("input[type='radio'][name='result']:checked").val();
-    var count = $(".collection_creator ul li").length;
-    $(".collection_creator ul li:nth-child(" + count + ") input").val(the_value)
-    $('.ldap_results_creator').hide();
-    $('#add_ldap_creator').hide();
-  });
+		var the_value = $('.ldap_results_creator').find("input[type='radio'][name='result']:checked").val();
+		var count = $(".collection_creator ul li").length;
+		$(".collection_creator ul li:nth-child(" + count + ") input").val(the_value)
+		$('.ldap_results_creator').hide();
+		$('#add_ldap_creator').hide();
+	});
 
-  $('#ldap_button_contributor').on('click', function () {
-    $( ".ldap_results_contributor" ).load( 'ldap_search?name=' + $( '#ldap_text_contributor' ).val() );
-    $('.ldap_results_contributor').show();
-    $('#add_ldap_contributor').show();
-  });
+
+	$('#ldap_button_contributor').on('click', function () {
+		$('#ldap_button_contributor').hide();
+		$('.ldap_results_contributor').hide();
+		$('#add_ldap_contributor').hide();
+		$('#ldap_contributor_loading').show();
+    	var ldap_url = 'ldap_search?name=' + encodeURI($( '#ldap_text_contributor' ).val());
+		$( ".ldap_results_contributor" ).load(ldap_url, function() {
+			$('#ldap_contributor_loading').hide();
+			$('#ldap_button_contributor').show();
+			$('.ldap_results_contributor').slideDown("fast");
+			if ($('.ldap_results_contributor').find("[type='radio']").length) {
+				$('#add_ldap_contributor').show();
+			}
+		} );
+	});
 
   $('#add_ldap_contributor').on('click', function() {
-    var the_value = $('.ldap_results_contributor').find("input[type='radio'][name='result']:checked").val();
-    var count = $(".collection_contributor ul li").length;
-    $(".collection_contributor ul li:nth-child(" + count + ") input").val(the_value)
-    $('.ldap_results_contributor').hide();
-    $('#add_ldap_contributor').hide();
-  });
+		var the_value = $('.ldap_results_contributor').find("input[type='radio'][name='result']:checked").val();
+		var count = $(".collection_contributor ul li").length;
+		$(".collection_contributor ul li:nth-child(" + count + ") input").val(the_value)
+		$('.ldap_results_contributor').hide();
+		$('#add_ldap_contributor').hide();
+	});
 
 });
