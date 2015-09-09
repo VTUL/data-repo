@@ -10,6 +10,7 @@
         <th>&nbsp;</th>
         <th>Name</th>
         <th>Department</th>
+        <th>Major</th>
         <th>mail</th>
       </tr>
       </thead>
@@ -23,6 +24,7 @@
           <% end %>
           <td><%= result[:displayname].join(" or ") %></td>
           <td><%= result[:department].join(" or ") %> </td>
+          <td><%= result[:major].join(" or ") %> </td>
           <td><%= result[:mail].join(" or ") %> </td>
         </tr>
       <% end %>
