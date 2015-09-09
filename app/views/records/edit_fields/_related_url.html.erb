@@ -1,9 +1,12 @@
 <%= f.input key, as: :multi_value_with_help, input_html: { class: 'form-control', placeholder: "Search DOI from CrossRef below or Add url on your own" }, required: f.object.required?(key) %>
 
+<% if controller_name == 'collections' %>
 <div id="crossref_search_form">
   <%= render 'crossref_search' %>
 </div>
 <div id="crossref_search_result" style="display:none;">
   <%= render 'crossref_search_result' %>
 </div>
+<% end %>
+
 <button id="add_related_url"  style="display:none;">Add DOI as related url</button>
