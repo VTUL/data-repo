@@ -18,9 +18,9 @@
       <% @results[0...5].each_with_index do |result, idx| %>
         <tr>
           <% if idx == 0 %>
-            <td><%= radio_button_tag 'result', "#{result[:displayname][0]}", true %></td>
+            <td><%= radio_button_tag @radio_name+'_result', "#{result[:displayname][0]}", true %></td>
           <% else %>
-            <td><%= radio_button_tag 'result', "#{result[:displayname][0]}" %></td>
+            <td><%= radio_button_tag @radio_name+'_result', "#{result[:displayname][0]}" %></td>
           <% end %>
           <td><%= result[:displayname].join(" or ") %></td>
           <td><%= result[:department].join(" or ") %> </td>

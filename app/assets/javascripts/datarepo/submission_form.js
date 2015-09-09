@@ -67,32 +67,51 @@ Blacklight.onLoad(function () {
 
   });
 
-  $('#ldap_button_creator').on('click', function () {
-    $( ".ldap_results_creator" ).load( 'ldap_search?name=' + $( '#ldap_text_creator' ).val() );
-    $('.ldap_results_creator').show();
-    $('#add_ldap_creator').show();
+  function getLdapResults(tag) {
+    var searchText = $(".ldap-txt." + tag);
+    var searchButton = $(".ldap-search." + tag);
+    var resultDiv = $(".ldap-results." + tag);
+    var addButton = $(".ldap-add." + tag);
+    var loadingDiv = $(".ldap-loading." + tag);
+    $(searchButton).hide();
+    $(resultDiv).hide();
+    $(addButton).hide();
+    $(loadingDiv).show();
+    var urlName = encodeURI($(searchText).val());
+    var ldapURL = 'ldap_search?label='+ tag +'&name=' + urlName;
+    $(resultDiv).load(ldapURL, function() {
+      $(loadingDiv).hide();
+      $(searchButton).show();
+      $(resultDiv).slideDown("fast");
+      if ($(resultDiv).find("[type='radio']").length) {
+        $(addButton).show();
+      }
+    } );
+  }
+
+  function addLdapResult(tag) {
+    var the_value = $(".ldap-results." + tag).find("input[type='radio'][name='" + tag + "_result']:checked").val();
+    var count = $(".collection_" + tag + " ul li").length;
+    $(".collection_" + tag + " ul li:nth-child(" + count + ") input").val(the_value);
+    $(".ldap-results." + tag).hide();
+    $(".ldap-add." + tag).hide();
+  }
+
+  $('#ldap-search-creator').on('click', function () {
+    getLdapResults('creator');
   });
 
-  $('#add_ldap_creator').on('click', function() {
-    var the_value = $('.ldap_results_creator').find("input[type='radio'][name='result']:checked").val();
-    var count = $(".collection_creator ul li").length;
-    $(".collection_creator ul li:nth-child(" + count + ") input").val(the_value)
-    $('.ldap_results_creator').hide();
-    $('#add_ldap_creator').hide();
+  $('#ldap-add-creator').on('click', function() {
+    addLdapResult('creator');
   });
 
-  $('#ldap_button_contributor').on('click', function () {
-    $( ".ldap_results_contributor" ).load( 'ldap_search?name=' + $( '#ldap_text_contributor' ).val() );
-    $('.ldap_results_contributor').show();
-    $('#add_ldap_contributor').show();
+
+  $('#ldap-search-contributor').on('click', function () {
+    getLdapResults('contributor');
   });
 
-  $('#add_ldap_contributor').on('click', function() {
-    var the_value = $('.ldap_results_contributor').find("input[type='radio'][name='result']:checked").val();
-    var count = $(".collection_contributor ul li").length;
-    $(".collection_contributor ul li:nth-child(" + count + ") input").val(the_value)
-    $('.ldap_results_contributor').hide();
-    $('#add_ldap_contributor').hide();
+  $('#ldap-add-contributor').on('click', function() {
+    addLdapResult('contributor');
   });
 
 });
