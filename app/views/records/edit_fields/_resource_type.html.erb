@@ -1,2 +1,5 @@
-<%= f.input :resource_type, as: :hidden, input_html: { value: ["Dataset"],class: 'form-control', multiple: true} %>
-
+<% if controller_name == 'collections' %>  
+  <%= f.input :resource_type, as: :hidden, input_html: { value: ["Dataset"],class: 'form-control', multiple: true} %>
+<% else %>
+  <%= f.input :resource_type, as: :select_with_help, collection: Sufia.config.resource_types, input_html: { class: 'form-control', multiple: true } %>
+<% end %>
