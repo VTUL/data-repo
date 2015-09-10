@@ -9,3 +9,7 @@
 # From http://support.orcid.org/knowledgebase/articles/162412-tutorial-create-a-new-profile-using-curl
 ORCID_APP_ID: 0000-0000-0000-0000
 ORCID_APP_SECRET: XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+ORCID_SITE_URL: http://api.orcid.org
+ORCID_TOKEN_URL: https://api.orcid.org/oauth/token
+ORCID_REMOTE_SIGNIN_URL: https://orcid.org/signin/auth.json
+ORCID_AUTHORIZE_URL: https://orcid.org/oauth/authorize
