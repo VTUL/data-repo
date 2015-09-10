@@ -8,10 +8,12 @@
    <%= link_to raw('<i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> Edit Dataset'), collections.edit_collection_path(id),
      class: 'itemicon itemedit', title: 'Edit Dataset' %>
    </li>
+   <% if deletable_dataset(id) %>
    <li role="menuitem" tabindex="-1">
    <%= link_to raw('<i class="glyphicon glyphicon-trash" aria-hidden="true"></i> Delete Dataset'), collections.collection_path(id),
      class: 'itemicon itemtrash', title: 'Delete Dataset', method: :delete, data: {
      confirm: "Deleting a dataset from #{t('sufia.product_name')} is permanent. Click OK to delete this dataset from #{t('sufia.product_name')}, or Cancel to cancel this operation" } %>
    </li>
+   <% end %>
   </ul>
 </div>
