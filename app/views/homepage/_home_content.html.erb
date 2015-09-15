@@ -1,6 +1,8 @@
-<div class="col-xs-12 col-sm-6 home-column-left">
+<div id="grad1"></div>
+<div class="container home-tab-container">
+<div class="col-xs-6 col-sm-6 home-column-left">
   <ul id="homeTabs" class="nav nav-tabs">
-    <li><a href="#featured_container" data-toggle="tab" role="tab" id="featureTab" aria-controls="featured_container"><%= t('sufia.homepage.featured_works.tab_label') %></a></li>
+    <li class="active"><a href="#featured_container" data-toggle="tab" role="tab" id="featureTab" aria-controls="featured_container"><%= t('sufia.homepage.featured_works.tab_label') %></a></li>
     <li><a href="#recently_uploaded" data-toggle="tab" role="tab" id="recentTab" aria-controls="recently_uploaded"><%= t('sufia.homepage.recently_uploaded') %></a></li>
   </ul>
   <div class="row">
@@ -14,19 +16,51 @@
     </div>
   </div>
 </div><!-- /.col-xs-6 -->
-<div class="col-xs-12 col-sm-6 home-column-right">
-  <div class="home-panel">
-    <div class="row">
-      <%= render partial: 'featured_researcher' %>
-    </div>
-  </div>
-  <div class="home-panel">
+<div class="col-xs-6 col-sm-6 home-column-right">
+  <ul id="homeTabs" class="nav nav-tabs">
+    <li class="active"><a href="#featured_researcher" data-toggle="tab" role="tab" id="researcherTab" aria-controls="featured_researcher"><%= t('sufia.homepage.featured_researcher') %></a></li>
+    <li><a href="#explore_tags" data-toggle="tab" role="tab" id="exploreTagTab" aria-controls="explore_tags"><%= t('sufia.homepage.explore_tags') %></a></li>
+  </ul>
+  <div class="row">
+    <div class="col-xs-12 tab-content">
+  <div class="tab-pane fade in active" id="featured_researcher" role="tabpanel" aria-labelledby="recentTab">
+        <%= render partial: 'featured_researcher' %>
+        </div>
+    <div class="tab-pane fade in" id="explore_tags" role="tabpanel" aria-labelledby="recentTab">
+          <div>
     <%- if blacklight_config.respond_to?(:tag_cloud_field_name) && blacklight_config.tag_cloud_field_name %>
-        <div class="row">
           <h2><%= t('sufia.homepage.explore') %></h2>
           <span class="sr-only"><%= t('sufia.homepage.sr_explore') %></span>
           <%= render partial: 'tagcloud', locals: { tag_cloud_field_name: blacklight_config.tag_cloud_field_name } %>
-        </div>
+        
     <%- end %>
   </div>
+      </div> 
+</div>
+</div>
+</div>
+</div>
+<div class="container">
+<hr>
+<div class="col-xs-4 home-info">
+<%= image_tag "purpose.png" %>
+<h1>
+PURPOSE
+</h1>
+The purpose of VTechData is to highlight, preserve, and provide access to the work of faculty, staff and students, as well as the intellectual output of the world's community through the discover and dissemination of new knowledge.
+</div>
+<div class="col-xs-4 home-info">
+<%= image_tag "access.png" %>
+<h1>
+ACCESS POLICY
+</h1>
+The general intent of VTechData is to make data and other research products openly available to the general public; however we recognize that certain research situations necessitate restricting access to content for a period of time.
+</div>
+<div class="col-xs-4 home-info">
+<%= image_tag "deposit.png" %>
+<h1>
+DEPOSIT POLICY
+</h1>
+By depositing data or other research materials into VT's Data Repository, you affirm tha tthe deposit represents your own work or the work of your collaborators; any work that is not your own must be properly cited.
+</div>
 </div>
