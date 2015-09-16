@@ -43,7 +43,7 @@ group :development, :test do
   gem 'spring'
 end
 
-gem 'sufia', '6.2.0'
+gem 'sufia', '6.3.0'
 gem 'kaminari', github: 'jcoyne/kaminari', branch: 'sufia'
 
 gem 'rsolr', '~> 1.0.6'
