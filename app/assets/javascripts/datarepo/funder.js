@@ -29,6 +29,7 @@ $(".simple_form").validate({
 			error.insertAfter( element );
 	}
 });
-$(funderClass).rules("add", {datarepoFunder: ".*:.*"});
-
+if $(funderClass).length {
+	$(funderClass).rules("add", {datarepoFunder: ".*:.*"});
+}
 });
