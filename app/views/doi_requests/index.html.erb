@@ -1,40 +1,47 @@
+<%= javascript_tag do %>
+  <%= render partial: 'script', formats: [:js] %>
+<% end %>
 <% @page_title = "DOI Requests  - #{application_name}" %>
 
 <%= render_breadcrumbs builder: Sufia::BootstrapBreadcrumbsBuilder %>
 <%= button_to_requests(params[:action]) %>
-
+<%= form_tag('/doi_requests/mint_all', method: :patch) do %>
 <div class="table-responsive">
   <table class="table doi-table table-striped table-hover">
     <caption><%= pluralize(@doi_requests.size, 'DOI Request') %> found</caption>
     <thead>
       <tr>
-        <th>Requested Time</th>
-        <th>Asset Type</th>
+        <th>
+          <label for="check_all" class="sr-only">Select all requests to mint DOIs</label>
+          <%= check_box_tag 'check_all_requests', 'yes', @all_checked, disabled: @disable_select_all %>
+        </th>
         <th>Asset Title</th>
+        <th>Asset Type</th>
+        <th>Requested Time</th>        
         <th>Completed</th>
         <th>DOI</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-    <% @doi_requests.each do |doi_request| %>
-      <tr>
-        <td><%= doi_request.created_at %></td>
-        <td><%= doi_request.asset_type %> </td>
-        <td><%= doi_link_for(doi_request) %></td>
-        <td><%= status_tag(doi_request.completed?) %></td>
-        <td><%= doi_request.ezid_doi %></td>
-        <td>
-          <% if doi_request.completed? %>
-            <%= link_to t('doi.view'), view_doi_doi_request_path(doi_request), class: "btn btn-default pull-left margin-right-sm" %>
-          <% else %>
-            <%= form_tag(mint_doi_doi_request_path(doi_request), method: :patch) do %>
-              <%= button_tag t('doi.mint'), type: 'submit', class: 'btn btn-primary' %>
-            <% end %>
-          <% end %>
-        </td> 
-      </tr>
-    <% end %>
+      <% @doi_requests.each do |doi_request| %>
+        <tr>
+          <td>
+            <label for="doi_request_<%= doi_request.id %>" class="sr-only">Check to mint a DOI</label>
+            <%= request_box_tag(doi_request) %>&nbsp;
+          </td>
+          <td><%= doi_link_for(doi_request) %></td>
+          <td><%= doi_request.asset_type %> </td>
+          <td><%= doi_request.created_at %></td>          
+          <td><%= status_tag(doi_request) %></td>
+          <td><%= doi_request.ezid_doi %></td>
+          <td><%= mint_or_view_doi_button(doi_request) %></td>
+        </tr>
+      <% end %>
+      
+    
     </tbody>
   </table>
 </div>
+<%= submit_tag "Mint selected requests", class: "doi_request_select_all hidden", "data-behavior" => 'doi_request_select_all' %>
+<% end %>
