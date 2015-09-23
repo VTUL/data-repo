@@ -13,7 +13,7 @@
       <%= render partial: '/flash_msg' %>
       <div id="content-wrapper"> 
         <div id="content">
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
       <!-- Indicators -->
       <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class=""></li>
@@ -60,6 +60,12 @@
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
+
+      <div class="home_share_work">
+        <a class="btn btn-primary btn-lg btn-block" id="contribute_link" href="/files/new"><i class="glyphicon glyphicon-upload"></i> Share Your Dataset</a>
+        <p class="text-center"><a href="/terms/">Terms of Use</a></p>
+      </div>
+
     </div><!-- /.carousel -->
             <%= yield %>
         </div><!-- /#content -->
