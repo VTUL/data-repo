@@ -13,9 +13,61 @@
       <%= render partial: '/flash_msg' %>
       <div id="content-wrapper"> 
         <div id="content">
-          <div class="col-xs-12">
-            <%= yield %>
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="2" class="active"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="item">
+          <img class="first-slide" src="assets/home-featured-1.jpg" alt="First slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Example Marketing Message</h1>
+              <p>This marketing message can be edited directly in the homepage html file</p>
+              <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
+            </div>
           </div>
+        </div>
+        <div class="item">
+          <img class="second-slide" src="assets/home-featured-1.jpg" alt="Second slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Another Marketing Message</h1>
+              <p>All these messages are html paragraphs. But you can use any html tags. Tags like <strong>strong</strong>, <em>emphsis</em> and <code>code</code> are more than welcome</p>
+              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item active">
+          <img class="third-slide" src="assets/home-featured-1.jpg" alt="Third slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>The Final Marketing Message</h1>
+              <p>Again, any type of html is welcome here. For looks, you will need to edit the homepagecarousel css file.</p>
+              <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+
+      <div class="home_share_work">
+        <a class="btn btn-primary btn-lg btn-block" id="contribute_link" href="/files/new"><i class="glyphicon glyphicon-upload"></i> Share Your Dataset</a>
+        <p class="text-center"><a href="/terms/">Terms of Use</a></p>
+      </div>
+
+    </div><!-- /.carousel -->
+            <%= yield %>
         </div><!-- /#content -->
       </div><!-- /#content-wrapper -->
       <%= render partial: '/footer' %>

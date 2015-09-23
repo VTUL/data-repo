@@ -14,6 +14,7 @@
 //= require jquery_ujs
 // Required by Blacklight
 //= require blacklight/blacklight
+//= require bootstrap/carousel
 
 //= require sufia
 //= require datarepo

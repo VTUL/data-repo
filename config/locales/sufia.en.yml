@@ -68,6 +68,8 @@ en:
         no_works:           'No datasets have been featured'
       list_button:          'List'
       recently_uploaded:    'Recently Uploaded'
+      featured_researcher:  'Featured Researcher'
+      explore_tag:          'Explore Tags'
       explore:              'Explore'
       sr_explore:           'Popular Keywords'
       no_public:            'No public datasets has been contributed.'
