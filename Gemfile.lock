@@ -395,6 +395,7 @@ GEM
     orm_adapter (0.5.0)
     parslet (1.7.1)
       blankslate (>= 2.0, <= 4.0)
+    pg (0.18.3)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
@@ -673,6 +674,7 @@ DEPENDENCIES
   net-ldap
   omniauth-cas
   orcid
+  pg
   rails (~> 4.2.1)
   rsolr (~> 1.0.6)
   rspec-rails
