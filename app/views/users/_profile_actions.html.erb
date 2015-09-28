@@ -7,4 +7,6 @@
         <% else %>
           <%= link_to raw('<i class="glyphicon glyphicon-eye-open"></i> Follow'), sufia.follow_profile_path(@user), method: :post, class: "btn pull-left subtab" %>
         <% end %>
+        <%= link_to raw('<i class="glyphicon glyphicon-edit"></i> Change Your Display Name'), sufia.contact_path, class: "btn subtab" %>
+        <%= link_to raw('<i class="glyphicon glyphicon-globe"></i> View All Users'), sufia.profiles_path, class: "btn pull-right subtab" %>
       <% end %>
