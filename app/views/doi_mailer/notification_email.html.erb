@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h3>Hi <%= @user.name %>,</h3>
+    <p>
+      Your dataset has been successfully assigned a DOI and registered through <%= link_to "EZID", "http://ezid.cdlib.org/"%>. <br>
+    </p>
+    <p>
+      For detailed information, just follow this link: <%= link_to @doi, "http://ezid.cdlib.org/id/#{@doi}" %> or visit our site: <%= link_to @url, collections.collection_path(@asset_id) %>.
+    </p>
+    <p>Thanks and have a great day!</p>
+  </body>
+</html>
