@@ -61,3 +61,4 @@ gem 'omniauth-cas'
 gem 'net-ldap'
 gem 'jquery-ui-rails'
 gem "pg"
+gem "clamav"
