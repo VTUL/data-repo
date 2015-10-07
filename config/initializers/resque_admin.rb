@@ -5,6 +5,7 @@ module Sufia
       return false if current_user.blank?
       # TODO code a group here that makes sense
       #current_user.groups.include? 'umg/up.dlt.scholarsphere-admin'
+      current_user.admin?
     end
   end
 end
