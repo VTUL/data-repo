@@ -34,16 +34,12 @@ Blacklight.onLoad(function() {
   // toggle button on or off based on boxes being clicked  
   $(".doi_request_selector").bind('click', function(e) {
     toggleMintButton();
-  });
-
-  // toggle the state of the select boxes in the cog menu if all buttons are 
-  $(".doi_request_selector").bind('click', function(e) {
     
     // count the check boxes currently checked
     var selectedCount = $(".doi_request_selector:checked").length;
 
     // toggle the check all check box
-    $("#check_all_requests").attr('checked', (selectedCount == window.doi_requests_count));
+    $("#check_all_requests").prop('checked', (selectedCount == $("#doi_requests_count").val()));
     
   });
   
