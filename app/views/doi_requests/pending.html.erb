@@ -2,14 +2,19 @@
 
 <%= render_breadcrumbs builder: Sufia::BootstrapBreadcrumbsBuilder %>
 <%= button_to_requests(params[:action]) %>
+<%= form_tag('/doi_requests/mint_all', method: :patch) do %>
 <div class="table-responsive">
   <table class="table doi-table table-striped table-hover">
     <thead>
+      <%= hidden_field_tag :doi_requests_count, "#{@doi_requests.count}" %>
       <tr>
+        <th>
+          <label for="check_all" class="sr-only">Select all requests to mint DOIs</label>
+          <%= check_box_tag 'check_all_requests', 'yes' %>
+        </th>
         <th>Asset Title</th>
         <th>Asset Type</th>
         <th>Requested Time</th>        
-        <th>Completed</th>
         <th>DOI</th>
         <th>Actions</th>
       </tr>
@@ -17,10 +22,13 @@
     <tbody>
       <% @doi_requests.each do |doi_request| %>
         <tr>
+          <td>
+            <label for="doi_request_<%= doi_request.id %>" class="sr-only">Check to mint a DOI</label>
+            <%= request_box_tag(doi_request) %>&nbsp;
+          </td>
           <td><%= doi_link_for(doi_request) %></td>
           <td><%= doi_request.asset_type %> </td>
           <td><%= doi_request.created_at %></td>          
-          <td><%= status_tag(doi_request) %></td>
           <td><%= doi_request.ezid_doi %></td>
           <td><%= mint_or_view_doi_button(doi_request) %></td>
         </tr>
@@ -31,3 +39,5 @@
 <%= paginate @doi_requests %>
 <%= page_entries_info @doi_requests %>
 </div>
+<%= submit_tag "Mint selected requests", class: "doi_request_select_all hidden", 'data-behavior':  'doi_request_select_all' %>
+<% end %>
