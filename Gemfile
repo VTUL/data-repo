@@ -49,11 +49,16 @@ gem 'kaminari', github: 'jcoyne/kaminari', branch: 'sufia'
 gem 'rsolr', '~> 1.0.6'
 gem 'devise'
 gem 'devise-guests', '~> 0.3'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'jettywrapper'
+  gem 'rails-helper'
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'poltergeist'
 end
-
 gem 'orcid'
 gem 'ezid-client'
 gem "hydra-role-management"

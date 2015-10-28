@@ -6,7 +6,7 @@ development:
 test:
   user: fedoraAdmin
   password: fedoraAdmin
-  url: http://localhost:8080/fedora/rest
+  url: http://localhost:<%= ENV['TRAVIS'] ? 8983 : 8080 %>/fedora/rest
   base_path: /test
 production:
   user: fedoraAdmin
