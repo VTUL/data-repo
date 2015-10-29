@@ -116,6 +116,3 @@ RSpec.describe DoiRequestsController, type: :controller do
   end
 end
 
-describe "#mint_collection_doi" do
-  pending "need examples for this!"
-end
