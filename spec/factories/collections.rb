@@ -4,7 +4,7 @@ FactoryGirl.define do
 
     trait :with_default_user do
       after(:build) do |collection|
-        collection.apply_depositor_metadata("test@example.com")
+        collection.apply_depositor_metadata FactoryGirl.create(:default_user)
       end
     end
 

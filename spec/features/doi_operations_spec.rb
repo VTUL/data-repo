@@ -47,7 +47,7 @@ describe "DOI Operations", type: :feature, js: true do
       click_button "Pending Requests"
       expect(page).to have_content "1 doi request found"
       click_link "Mint DOI"
-      expect(page).to have_content "DOI has been minted successfully!"
+      expect(page).to have_button "Pending Requests"
 
       visit "/doi_requests/pending"
       expect(page).to have_content "No doi requests found"

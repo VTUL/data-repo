@@ -3,6 +3,10 @@ FactoryGirl.define do
     sequence(:email) { |n| "test-user#{n}@example.com" }
     password 'password'
 
+    factory :default_user do
+      email 'test@example.com'
+    end
+
     trait :with_admin_role do
       after(:create) do |admin|
         # bad code! need to refactor!!!
