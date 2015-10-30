@@ -17,6 +17,11 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
+# https://github.com/projecthydra/sufia/blob/fa0190067b76f825d2e017ceb1dca7fb95cbe250/spec/spec_helper.rb
+# https://coveralls.zendesk.com/hc/en-us/articles/201769485-Ruby-Rails
+require 'coveralls'
+Coveralls.wear! 'rails'
+
 # second answer of:
 # http://stackoverflow.com/questions/4429068/getting-an-unitialized-constant-error-with-rspec-have-no-idea-whats-causing-it
 require File.expand_path("../../config/environment", __FILE__)

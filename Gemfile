@@ -58,6 +58,8 @@ group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'poltergeist'
+  gem "simplecov", require: false
+  gem 'coveralls', require: false
 end
 gem 'orcid'
 gem 'ezid-client'
