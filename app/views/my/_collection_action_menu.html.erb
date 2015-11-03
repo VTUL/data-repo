@@ -14,6 +14,8 @@
      class: 'itemicon itemtrash', title: 'Delete Dataset', method: :delete, data: {
      confirm: "Deleting a dataset from #{t('sufia.product_name')} is permanent. Click OK to delete this dataset from #{t('sufia.product_name')}, or Cancel to cancel this operation" } %>
    </li>
+   <li role="menutiem" tabindex="-1">
+   <%= link_to raw('<i class="glyphicon glyphicon-file" aria-hidden="true"></i> Add Files'), collections_add_files_path(id), class: 'itemicon', title: 'Add Files' %> 
    <% end %>
   </ul>
 </div>

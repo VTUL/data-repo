@@ -21,6 +21,7 @@ RSpec.describe 'collection view page', :type => :feature do
   end
 
   it 'allows user to request doi for the collection' do
+    pending "this feature has been removed!"
     visit '/collections/' + collection.id
     click_button "Request DOI"
     expect(page).to have_content "DOI request is pending..."

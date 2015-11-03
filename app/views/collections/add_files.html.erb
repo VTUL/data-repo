@@ -1,0 +1,32 @@
+<%= render partial: 'dashboard/_index_partials/heading_actions.html.erb' %>
+<h1>Files in <%= @collection.title %></h1>
+<% if @files.empty? %>
+  <span>Please upload some files first</span>
+<% else %>
+  <%= form_for @collection, url: collections.collection_path(@collection) do |f| %>
+  <%= hidden_field_tag "collection[members][]" %>
+  <div class="table-responsive">
+    <table class="table table-actionable table-striped table-hover">
+      <thead>
+        <tr>
+          <th class="text-left">Filename</th>
+          <th>Date Uploaded</th>
+          <th>In Collection</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @files.each do |file| %>
+          <tr>
+            <td><%= render_thumbnail_tag file, { class: "hidden-xs file_listing_thumbnail pull-left media-left" }, { suppress_link: true } %>
+            <%= file.title_or_label %></td>
+            <td class="text-center"><%= file.date_uploaded %></td>
+            <td class="text-center"><%= check_box_tag 'batch_document_ids[]', file.id, @collection.member_ids.include?(file.id) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <hr />
+  </div>
+  <%= f.button('Add Files to Collection', class: 'btn btn-primary') %>
+  <% end %>
+<% end %>

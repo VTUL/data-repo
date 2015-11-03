@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   post 'collections/crossref_search', to: 'collections#crossref_search'
   get "collections/import_metadata", to: 'collections#import_metadata', as: 'import_collection'
   get 'collections/ldap_search', to: 'collections#ldap_search'
+  get 'dashboard/publishables', to: 'publishables#index', as: 'dashboard_publishables'
   get 'help', to: 'pages#show', id: 'help_page'
+  get 'collections/:id/add-files', to: 'collections#add_files', as: 'collections_add_files'
 
   blacklight_for :catalog
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }

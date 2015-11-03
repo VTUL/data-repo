@@ -10,22 +10,21 @@
 
 <% @page_title = "#{current_tab.capitalize} listing" %>
 
-<h1 class="sr-only">My Files, Datasets, Highlights, and Files Shared with Me</h1>
-<ul class="nav nav-tabs" id="my_nav" role="navigation">
-  <span class="sr-only">You are currently listing your <%= current_tab.pluralize %> .  You have <%= @response.docs.count %> <%= current_tab.pluralize(@response.docs.count)%> </span>
-  <li class="<%= "active" if @selected_tab == :files %>">
-    <%= link_to t('sufia.dashboard.my.files'), sufia.dashboard_files_path %>
-  </li>
-  <li class="<%= "active" if @selected_tab == :collections %>">
-    <%= link_to t('sufia.dashboard.my.collections'), sufia.dashboard_collections_path %>
-  </li>
-  <li class="<%= "active" if @selected_tab == :highlighted %>">
-    <%= link_to t('sufia.dashboard.my.highlights'), sufia.dashboard_highlights_path %>
-  </li>
-  <li class="<%= "active" if @selected_tab == :shared %>">
-    <%= link_to t('sufia.dashboard.my.shares'), sufia.dashboard_shares_path %>
-  </li>
-</ul>
+<% unless @selected_tab == :collections %>
+  <h1 class="sr-only">My Files, Datasets, Highlights, and Files Shared with Me</h1>
+  <ul class="nav nav-tabs" id="my_nav" role="navigation">
+    <span class="sr-only">You are currently listing your <%= current_tab.pluralize %> .  You have <%= @response.docs.count %> <%= current_tab.pluralize(@response.docs.count)%> </span>
+    <li class="<%= "active" if @selected_tab == :files %>">
+      <%= link_to t('sufia.dashboard.my.files'), sufia.dashboard_files_path %>
+    </li>
+    <li class="<%= "active" if @selected_tab == :highlighted %>">
+      <%= link_to t('sufia.dashboard.my.highlights'), sufia.dashboard_highlights_path %>
+    </li>
+    <li class="<%= "active" if @selected_tab == :shared %>">
+      <%= link_to t('sufia.dashboard.my.shares'), sufia.dashboard_shares_path %>
+    </li>
+  </ul>
+<% end %>
 
 <%= render 'search_header' %>
 
@@ -37,8 +36,11 @@
   <div class="row">
     <div class="col-sm-12">
       <center>
-        <%= link_to t('sufia.dashboard.upload_html'), sufia.new_generic_file_path, class: "btn btn-primary" %>
+      <% if @selected_tab == :collections %>
         <%= link_to t('sufia.dashboard.create_collection_html'), collections.new_collection_path, id: "hydra-collection-add", class: "btn btn-primary" %>
+      <% elsif @selected_tab == :files || @selected_tab == :highlighted || @selected_tab == :shared  %>
+        <%= link_to t('sufia.dashboard.upload_html'), sufia.new_generic_file_path, class: "btn btn-primary" %>
+      <% end %>
       </center>
     </div>
   </div><br/><br/>

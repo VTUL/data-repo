@@ -1,7 +1,7 @@
 <% @page_title = "#{@collection.title} - #{application_name}" %>
 
 <%= render_breadcrumbs builder: Sufia::BootstrapBreadcrumbsBuilder %>
-
+<%= render partial: 'dashboard/_index_partials/heading_actions.html.erb' %>
   <div itemscope itemtype="http://schema.org/CollectionPage" class="row">
     <div class="col-sm-2">
       <%= render partial: 'collections/media_display', locals: { generic_file: @collection } %>

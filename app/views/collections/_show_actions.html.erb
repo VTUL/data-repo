@@ -5,10 +5,9 @@
       <%= link_to collections.edit_collection_path, class: "btn btn-default", title: "Edit this Dataset" do %>
         <span class="glyphicon glyphicon-edit"></span> Edit
       <% end %>
-      <%= link_to sufia.dashboard_files_path, class: "btn btn-default", title: "Add files to this Dataset" do %>
-        <span class="glyphicon glyphicon-open-file"></span> Files
+      <%= link_to  collections_add_files_path(@collection), class: "btn btn-default", title: "Edit this Dataset" do %>
+        <span class="glyphicon glyphicon-file">Files</span>
       <% end %>
     </div>
-    <%= request_doi_link(@collection) %>
   <% end %>
 </div>

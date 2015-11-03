@@ -7,6 +7,7 @@ RSpec.describe CollectionsController, type: :controller do
   # but need to do this for now as controller view tests are not working
 
   let(:user) { FactoryGirl.create(:user) }
+  let(:admin) { FactoryGirl.create(:user, :with_admin_role) }
 
   describe '#create' do
     routes { Hydra::Collections::Engine.routes }
@@ -91,7 +92,7 @@ RSpec.describe CollectionsController, type: :controller do
     end
   end
 
-  describe "ldap_search" do
+  describe "#ldap_search" do
     before do
       sign_in user
     end
@@ -109,4 +110,58 @@ RSpec.describe CollectionsController, type: :controller do
 
   end
 
+  describe "#add_files" do
+    let(:file1) do
+      f = FactoryGirl.build(:public_file)
+      f.apply_depositor_metadata user.user_key
+      f.save
+      f
+    end
+
+    let(:file2) do
+      f = FactoryGirl.build(:public_file)
+      f.apply_depositor_metadata admin.user_key
+      f.save
+      f
+    end
+
+    context "for normal users" do
+      before {sign_in user}
+
+      let(:collection) do
+        c = FactoryGirl.build(:collection)
+        c.apply_depositor_metadata user.user_key
+        c.save
+        c
+      end
+
+      it "shows all files of the user" do
+        files = [file1]
+        get :add_files, id: collection
+        expect(assigns[:collection]).to eq collection
+        expect(assigns[:files].length).to eq files.length
+        expect(assigns[:files][0].id).to eq files[0].id
+      end
+    end
+
+    context "for admin users" do
+      before {sign_in admin}
+
+      let(:collection) do
+        c = FactoryGirl.build(:collection)
+        c.apply_depositor_metadata admin.user_key
+        c.save
+        c
+      end
+
+      it "shows all files of the user" do
+        files = [file1, file2]
+        get :add_files, id: collection
+        expect(assigns[:collection]).to eq collection
+        expect(assigns[:files].length).to eq files.length
+        expect(assigns[:files].map{|f| f.id}).to include files[0].id
+        expect(assigns[:files].map{|f| f.id}).to include files[1].id
+      end
+    end
+  end
 end
