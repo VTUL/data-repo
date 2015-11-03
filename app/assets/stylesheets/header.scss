@@ -1,18 +1,23 @@
 @import 'global';
 
 #masthead {
-  background: $hokie-maroon;
+  background: $hokie-grey;
   min-height: 100px;
 
   .institution_name {
     font-family: 'Lato', Verdana, Arial, Helvetica;
     font-size: 3em;
-    font-weight: 300;
+    font-weight: 500;
+    font-style: italic;
     padding-top: 18px;
   }
 
   #logo {
-  	padding-top: 25px;
+  	margin-top: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    border-right: solid #ffffff;
   }
 
   .navbar-default {
@@ -33,16 +38,18 @@
 #masthead_controls .navbar-default .navbar-nav > .active > a,
 #masthead_controls .navbar-default .navbar-nav > .active > a:hover,
 #masthead_controls .navbar-default .navbar-nav > .active > a:focus {
-  border-radius: 5px 5px 0px 0px;
   border-bottom: none;
-  background-color: $hokie-orange;
-  color: white;
+  background-color: $hokie-grey;
+  color: $hokie-orange;
+  font-size: 16px;
+  font-weight: bold;
 }
 
 #masthead_controls {
   border-top: none;
-  border-bottom: 5px solid $hokie-orange;
-  background-color: $hokie-maroon;
+  border-bottom: none;
+  padding-bottom: 16px;
+  background-color: $hokie-grey;
 
    #search-submit-header {
     background-color: $hokie-orange;
@@ -55,25 +62,25 @@
   }
 
   .navbar {
-    background-color: $hokie-maroon;
+    background-color: $hokie-grey;
     margin-bottom: 0;
     li {
-      border-right: 2px solid $hokie-maroon;
+      border-right: 2px solid $hokie-grey;
       margin: 0 10px 0 10px;
     }
     li:first-child {
-      border-left: 2px solid $hokie-maroon;
+      border-left: 2px solid $hokie-grey;
     }
     a:link, a:visited {
-      background-color: $hokie-maroon;
+      background-color: $hokie-grey;
       padding-left: 20px;
       padding-right: 20px;
       color: white;
+      font-size: 16px;
+      font-weight: bold;
     }
     a:hover {
-      border-radius: 5px 5px 0px 0px;
-      border-bottom: none;
-      background-color: $hokie-orange;
+      color: $hokie-off-orange
     }
   }
   .navbar-default {
@@ -84,4 +91,9 @@
 
 .login_button {
   margin: 2.25em 0 0 0;
+}
+
+
+#search-form-header {
+  margin-top: 1.75em;
 }

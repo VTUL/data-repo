@@ -35,7 +35,7 @@ en:
             label_short:  "My Shares"
             label_long:   "My Shares"
       button:
-        html: '<span class="glyphicon glyphicon-search"></span> Go'
+        html: '<span class="glyphicon glyphicon-search"></span>'
         text: "Search"
     upload:
       select_folder:  "Select folder..."
