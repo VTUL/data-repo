@@ -34,6 +34,22 @@ require 'capybara/poltergeist'
 # note: require 'devise' after require 'rspec/rails'
 require 'devise'
 
+# taken from sufia
+if defined?(ClamAV)
+  ClamAV.instance.loaddb
+else
+  class ClamAV
+    include Singleton
+    def scanfile(_f)
+      0
+    end
+
+    def loaddb
+      nil
+    end
+  end
+end
+
 RSpec.configure do |config|
   config.include Devise::TestHelpers, :type => :controller
   config.include Devise::TestHelpers, :type => :view
