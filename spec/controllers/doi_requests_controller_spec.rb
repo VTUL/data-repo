@@ -81,12 +81,11 @@ RSpec.describe DoiRequestsController, type: :controller do
 
     context "for admin users" do
       before {sign_in admin}
-      it "should mint the doi_request" do
+      let (:doi_job) {double("assign doi job")}
+      it "crate a sufia job queue for doi_request" do
+        allow(AssignDoiJob).to receive(:new).and_return(:doi_job)
+        expect(Sufia.queue).to receive(:push).once
         patch :mint_doi, id: doi_request
-        ezid_doi = DoiRequest.find(doi_request.id).ezid_doi
-        # can't checks assigns[~something~] cause nothing is assigned in this action
-        expect(ezid_doi).to match /doi\:.*\/.*/
-        expect(ezid_doi).not_to match /pending/
       end
     end
   end
@@ -112,6 +111,25 @@ RSpec.describe DoiRequestsController, type: :controller do
         expect(response).to be_successful
         expect(assigns[:doi_request]).to eq minted_doi
       end
+    end
+  end
+
+  describe '#mint_all' do
+    before {sign_in admin}    
+
+    let(:pending_doi) do
+      c = FactoryGirl.create(:collection, :with_default_user, :with_pending_doi)
+      DoiRequest.find_by_asset_id(c.id)
+    end
+
+    let(:pending_dois) {[pending_doi]}
+
+    let(:doi_job) { double('assign doi job') }
+
+    it "should assign jobs for minting dois" do
+      allow(AssignDoiJob).to receive(:new).with(pending_doi.id).and_return(doi_job)
+      expect(Sufia.queue).to receive(:push).with(doi_job).once
+      get :mint_all, doi_requests_checkbox: pending_dois
     end
   end
 end
