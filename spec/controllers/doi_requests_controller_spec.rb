@@ -82,7 +82,7 @@ RSpec.describe DoiRequestsController, type: :controller do
     context "for admin users" do
       before {sign_in admin}
       let (:doi_job) {double("assign doi job")}
-      it "crate a sufia job queue for doi_request" do
+      it "should crate a sufia job queue for doi_request" do
         allow(AssignDoiJob).to receive(:new).and_return(:doi_job)
         expect(Sufia.queue).to receive(:push).once
         patch :mint_doi, id: doi_request
