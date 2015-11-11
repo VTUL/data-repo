@@ -7,7 +7,7 @@ class Users::OmniauthCallbacksController < Devise::MultiAuth::OmniauthCallbacksC
       set_flash_message(:notice, :success, kind: "CAS") if is_navigational_format?
     else
       session['devise.cas_data']  = request.env['omniauth.auth']
-      redirect_to new_user_registration_url
+      redirect_to root_url
     end
   end
 end
