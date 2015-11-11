@@ -1,6 +1,7 @@
 language: ruby
+install: bundle install --retry=3 --deployment --without development production
 cache: bundler
-sudo: true
+sudo: false
 rvm:
   - 2.2
 env:
@@ -10,10 +11,6 @@ env:
     - "RAILS_VERSION=4.2.3"
 services:
   - redis-server
-before_install:
-  - sudo apt-get update
-  - sudo apt-get install -y clamav libclamav-dev
-  - sudo freshclam --update-db=bytecode
 before_script:
   - echo "test:"$'\n'"  secret_key_base:" $(rake secret) > config/secrets.yml
   - jdk_switcher use oraclejdk8
