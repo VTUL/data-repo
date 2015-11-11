@@ -5,7 +5,7 @@
 }
 
 #home_header  {
-  background-image: image-url('home-featured.jpg');
+  background-image: none;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -17,7 +17,7 @@
   background: rgba(255,255,255,0.85);
   border-radius: 5px 5px 5px 5px;
   color: black;
-  margin: 1em 0;
+  margin: 40px 0;
   padding-bottom: 1em;
   text-shadow: none;
 }
@@ -34,11 +34,15 @@
   background-color: transparent;
 }
 
+#grad1 {
+    height: 40px;
+    background: linear-gradient(#f3f3f3, #ffffff);
+}
+
 #home_content {
 
 	padding: 0px 0px 10px 0px;
-	background-color: $background;
-
+	background: $background;
   .nav-tabs {
   	background-color: $hokie-grey;
   	border-bottom: 2px solid $hokie-orange;
@@ -71,7 +75,7 @@
   .home-column-left {
   	background-color: white;
   	padding-right: 0px;
-  	@media only screen and (min-width: 768px) {border-right: 15px solid $background;};
+  	@media only screen and (min-width: 768px) {border-right: 50px solid $background;};
 
     .tab-content {
       margin-left: -15px;
@@ -101,4 +105,27 @@
   	margin-left: -15px;
   }
 
+  .home-column-left {
+    min-height: 250px;
+  }
+
+  .home-column-right {
+    min-height: 250px;
+  }
+  
+
+}
+
+
+.home-info {
+  text-align: center;
+  color: #777777;
+  h1 {
+    font-size: 18px;
+    padding: 15px;
+    color: #444444;
+  }
+  img {
+    height: 85px;
+  }
 }
