@@ -1,29 +1,44 @@
 @import 'global';
 
-div.heading-tile .glyphicon {
-  background: $hokie-orange;
+div.dashboard-breadcrumb {
+  margin-bottom: 20px;
+  margin-top: 20px;
+  border-bottom: solid $hokie-orange; 
+}
+
+div.heading-tile {
   color: white;
   display: block;
-  width: 2em;
-  height: 2em;
+  border-radius: 5px 5px 0 0;
   line-height: 1.75em;
   margin: 0 auto;
-  border-radius: 50%;
-  border: 2px solid $hokie-orange;
+  padding-top: 10px;
   overflow: hidden;
   transition-property: background-color, color;
   transition-duration: .35s;
   transition-timing-function: ease-out;
 }
 
-div.heading-tile:hover .glyphicon {
-  background-color: $hokie-orange;
-  border-color: $hokie-orange;
+div.heading-tile.active {
+  background-color: orange;
   color: white;
   transition-property: background-color, color;
   transition-duration: .35s;
   transition-timing-function: ease-out;
 }
+
+div.heading-tile:hover {
+  background-color: $hokie-orange;
+  color: white;
+  transition-property: background-color, color;
+  transition-duration: .35s;
+  transition-timing-function: ease-out;
+}
+
+div.heading-tile a:hover {
+  text-decoration: none;
+}
+
 
 .dashboard {
   .panel-default > .panel-heading {
@@ -42,4 +57,10 @@ div.heading-tile:hover .glyphicon {
     padding: 0 .25em;
   }
 
+}
+
+.heading-tile {
+  img {
+    height: 64px;
+  }
 }

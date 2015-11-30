@@ -1,5 +1,8 @@
 <% @page_title = "Edit Dataset #{display_title(@collection)} - #{application_name}" %>
 <%= render_breadcrumbs builder: Sufia::BootstrapBreadcrumbsBuilder %>
+
+<%= render partial: 'dashboard/_index_partials/heading_actions.html.erb' %> 
+
 <h1>Edit Dataset: <%= display_title(@collection) %></h1>
 
 <% unless has_collection_search_parameters? %>

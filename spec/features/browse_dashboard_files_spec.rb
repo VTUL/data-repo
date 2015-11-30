@@ -30,7 +30,7 @@ describe "Browse Dashboard", type: :feature do
 
       it "links to my other tabs" do
         # TODO: this would make a good view test.
-        ["My Datasets", "My Highlights", "Files Shared with Me"].each do |tab|
+        ["My Highlights", "Files Shared with Me"].each do |tab|
           within("#my_nav") do
             click_link(tab)
           end
@@ -53,7 +53,6 @@ describe "Browse Dashboard", type: :feature do
         first(".label-success") do
           expect(page).to have_content("Open Access")
         end
-        expect(page).to have_link("Create Dataset")
         expect(page).to have_link("Upload")
       end
     end

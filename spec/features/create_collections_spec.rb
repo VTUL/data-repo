@@ -11,6 +11,7 @@ describe "Browse Dashboard", type: :feature, js: true do
 
     it "allows user to create a new collection without a DOI without identifier" do
       visit "/dashboard"
+      click_link "Organize"
       click_link "Create Dataset"
       choose "doi_status_unassigned"
       fill_in "Title", with: "Test Title"
@@ -23,11 +24,11 @@ describe "Browse Dashboard", type: :feature, js: true do
       #expect(page).to have_content("john.doe@example.com")
       #expect(page).to have_content("jane.doe@example.com")
       expect(page).to have_content("abc: def")
-      expect(page).to have_button "Request DOI"
     end
 
     it "allows user to create a new collection with direct DOI and identifier" do
       visit "/dashboard"
+      click_link "Organize"
       click_link "Create Dataset"
       choose "doi_status_assigned"
       click_button "Directly Fill Form"
@@ -40,11 +41,11 @@ describe "Browse Dashboard", type: :feature, js: true do
       expect(page).to have_content("Test Title")
       #expect(page).to have_content("john.doe@example.com")
       #expect(page).to have_content("jane.doe@example.com")
-      expect(page).not_to have_button "Request DOI"
     end
 
     it "allows user to create a new collection with datacite search" do
       visit "/dashboard"
+      click_link "Organize"
       click_link "Create Dataset"
       choose "doi_status_assigned"
       fill_in "Datacite Metadata Search:", with: "test"
@@ -55,11 +56,11 @@ describe "Browse Dashboard", type: :feature, js: true do
       click_button "Import Metadata"
       click_button "Create Dataset"
       expect(page).to have_content "Collection was successfully created."
-      expect(page).not_to have_content "DOI request is pending..."
     end
 
     it "allows user to create a new collection with crossref search" do
       visit "/dashboard"
+      click_link "Organize"
       click_link "Create Dataset"
       choose "doi_status_unassigned"
       fill_in "Title", with: "Test Title"
@@ -76,6 +77,7 @@ describe "Browse Dashboard", type: :feature, js: true do
 
     it "does not allow a user to create new collection without a title" do
       visit "/dashboard"
+      click_link "Organize"
       click_link "Create Dataset"
       choose "doi_status_unassigned"
       click_button "Create Dataset"
@@ -86,6 +88,7 @@ describe "Browse Dashboard", type: :feature, js: true do
 
     it "does not allow user to enter wrongly formatted funder information" do
       visit "/dashboard"
+      click_link "Organize"
       click_link "Create Dataset"
       choose "doi_status_unassigned"
       click_button "Create Dataset"
