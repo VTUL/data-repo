@@ -1,27 +1,11 @@
 require 'net/ldap'
 
-task :with_defaults, [:email, :password] do |t, defaults|
-  defaults.with_defaults(:email => :default_email, :password => :default_password)
-end
-
 namespace :datarepo do
-  desc 'Setup default roles and admin'
-  task setup_defaults: :environment do
-
-    desc 'Setup Roles'
-    %w(admin collection_admin collection_user).each do |role|
-      Role.find_or_create_by(name: role)
-    end
-
-    desc 'Set up a default Admin email and password'
-    default_email = "admin@lib.vt.edu"
-    default_password = "datarepo_password"
-    Rake::Task[:with_defaults].invoke(default_email, default_password)
-    if User.find_by_email(default_email).nil?
-      User.create(email: default_email, password: default_password, role_ids: [Role.where(name: 'admin').first.id])
-      puts "Default admin email is: #{default_email}; password is: #{default_password}. Please change the password."
-    else
-      puts "Default admin email is: #{default_email}"
+  desc 'Create default roles.'
+  task add_roles: :environment do
+    ['admin', 'collection_admin', 'collection_user'].each do |role_name|
+      Role.find_or_create_by({name: role_name})
+      puts "Created role '#{role_name}'."
     end
   end
 
@@ -32,7 +16,7 @@ namespace :datarepo do
     treebase = 'ou=People,dc=vt,dc=edu'
     ldap_attributes = {uid: :authid, display_name: :displayname, department: :department, address: :postaladdress}
 
-    IO.foreach('emails.txt') do |email|
+    IO.foreach('user_list.txt') do |email|
       email = email.strip
       filter = Net::LDAP::Filter.eq('mail', email)
       results = ldap.search(base: treebase, filter: filter)
@@ -50,21 +34,39 @@ namespace :datarepo do
           end
         end
 
-        if !user.address.nil?
-          user.address = user.address.gsub(/\$/, "\n")
-        end
+        user.address = user.address.gsub(/\$/, "\n") unless user.address.nil?
 
         new_user = user.id.nil?
         user.save!
         if new_user
-          puts "Created '#{email}'"
+          puts "Created '#{email}'."
         else
-          puts "Updated '#{email}'"
+          puts "Updated '#{email}'."
         end
       elsif results.count > 1
         puts "Searching for '#{email}' did not return a unique result."
       else
         puts "Searching for '#{email}' did not return any results."
+      end
+    end
+  end
+
+  desc 'Upgrade users to admins.'
+  task upgrade_users: :environment do
+    admin_role = Role.find_by({name: 'admin'})
+
+    IO.foreach('admin_list.txt') do |email|
+      email = email.strip
+      user = User.find_by({email: email})
+
+      if !user.nil?
+        user.roles << admin_role
+        user.roles = user.roles.uniq
+        user.group_list = 'admin'
+        user.save!
+        puts "#{email} upgraded."
+      else
+        puts "Could not find a user with email address '#{email}'."
       end
     end
   end
