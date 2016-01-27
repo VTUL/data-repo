@@ -8,11 +8,11 @@ env:
   global:
     - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
   matrix:
-    - "RAILS_VERSION=4.2.3"
+    - "RAILS_VERSION=4.2.5.1"
 services:
   - redis-server
 before_script:
-  - echo "test:"$'\n'"  secret_key_base:" $(rake secret) > config/secrets.yml
+  - echo "test:"$'\n'"  secret_key_base:" $(bundle exec rake secret) > config/secrets.yml
   - jdk_switcher use oraclejdk8
   - bundle exec rake db:migrate RAILS_ENV=test
   - bundle exec rake jetty:clean
