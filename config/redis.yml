@@ -1,9 +1,10 @@
+default: &default
+  host: <%= Rails.application.secrets['redis']['host'] %>
+  port: <%= Rails.application.secrets['redis']['port'] %>
+
 development:
-  host: localhost
-  port: 6379
+  <<: *default
 test:
-  host: localhost
-  port: 6379
+  <<: *default
 production:
-  host: localhost
-  port: 6379
+  <<: *default

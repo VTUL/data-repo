@@ -7,5 +7,5 @@
 # makes 'Your_Gmail_Username' available as ENV["GMAIL_USERNAME"]
 
 # From http://support.orcid.org/knowledgebase/articles/162412-tutorial-create-a-new-profile-using-curl
-ORCID_APP_ID: 0000-0000-0000-0000
-ORCID_APP_SECRET: XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+ORCID_APP_ID: <%= Rails.application.secrets['orcid']['app_id'] %>
+ORCID_APP_SECRET: <%= Rails.application.secrets['orcid']['app_secret'] %>
