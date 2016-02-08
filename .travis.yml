@@ -7,14 +7,17 @@ rvm:
 env:
   global:
     - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
+    - TRAVIS=1
   matrix:
     - "RAILS_VERSION=4.2.5.1"
 services:
   - redis-server
 before_script:
-  - echo "test:"$'\n'"  secret_key_base:" $(bundle exec rake secret) > config/secrets.yml
+  - cp ./config/secrets.yml.sample ./config/secrets.yml
   - jdk_switcher use oraclejdk8
-  - bundle exec rake db:migrate RAILS_ENV=test
-  - bundle exec rake jetty:clean
-  - bundle exec rake sufia:jetty:config
-  - bundle exec rake jetty:start
+  - RAILS_ENV=test bundle exec rake db:schema:load
+  - RAILS_ENV=test bundle exec rake db:seed
+  - RAILS_ENV=test bundle exec rake datarepo:add_roles
+  - RAILS_ENV=test bundle exec rake jetty:clean
+  - RAILS_ENV=test bundle exec rake sufia:jetty:config
+  - RAILS_ENV=test bundle exec rake jetty:start
