@@ -1,7 +1,7 @@
 class CollectionsController < ApplicationController
   include Hydra::Catalog
-
   include Sufia::CollectionsControllerBehavior
+
   skip_load_and_authorize_resource :only => [:datacite_search, :crossref_search, :import_metadata, :ldap_search, :add_files]
 
   def presenter_class
@@ -119,11 +119,11 @@ class CollectionsController < ApplicationController
 
   def add_files
     if current_user.admin?
-      search_params_logic = [:show_only_generic_files, :add_access_controls_to_solr_params]
+      self.search_params_logic += [:show_only_generic_files, :add_access_controls_to_solr_params]
     else
-      search_params_logic = [:show_only_generic_files, :show_only_resources_deposited_by_current_user]
+      self.search_params_logic += [:show_only_generic_files, :show_only_resources_deposited_by_current_user]
     end
-    (_, @files) = search_results({ q: '' }, search_params_logic)
+    (@response, @files) = search_results({ q: '', rows: 10000 }, search_params_logic)
     @collection = Collection.find(params[:id])
     authorize! :edit, @collection
   end
