@@ -25,7 +25,6 @@ namespace :datarepo do
         user = User.find_or_initialize_by({email: email})
         user.provider = 'cas'
         user.uid = email.split('@')[0]
-        user.password = Devise.friendly_token
 
         result = results[0]
         ldap_attributes.each do |user_attr, ldap_attr|

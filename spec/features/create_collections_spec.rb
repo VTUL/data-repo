@@ -1,12 +1,12 @@
-require 'rails_helper'
+require 'spec_helper'
 
-
-describe "Browse Dashboard", type: :feature, js: true do
+RSpec.describe "Browse Dashboard", type: :feature, js: true do
   let(:user) { FactoryGirl.create(:user) }
 
   describe "Create collection without DOI" do
     before :each do
-      sign_in user
+      OmniAuth.config.add_mock(:cas, { uid: user.uid })
+      visit new_user_session_path
     end
 
     it "allows user to create a new collection without a DOI without identifier" do
@@ -18,11 +18,15 @@ describe "Browse Dashboard", type: :feature, js: true do
       fill_in "Creator", with: "john.doe@example.com"
       fill_in "Contributor", with: "jane.doe@example.com"
       fill_in "Funding Info", with: "abc:def"
-      click_button "Create Dataset"
+      begin
+        click_button "Create Dataset"
+      rescue Capybara::Poltergeist::JavascriptError => error
+        puts "\nCaught JS error:"
+        puts error.message
+        #puts error.backtrace.inspect
+      end
       expect(page).to have_content("Collection was successfully created.")
       expect(page).to have_content("Test Title")
-      #expect(page).to have_content("john.doe@example.com")
-      #expect(page).to have_content("jane.doe@example.com")
       expect(page).to have_content("abc: def")
     end
 
@@ -36,11 +40,15 @@ describe "Browse Dashboard", type: :feature, js: true do
       fill_in "Creator", with: "john.doe@example.com"
       fill_in "Contributor", with: "jane.doe@example.com"
       fill_in "Identifier", with: "123456"
-      click_button "Create Dataset"
+      begin
+        click_button "Create Dataset"
+      rescue Capybara::Poltergeist::JavascriptError => error
+        puts "\nCaught JS error:"
+        puts error.message
+        #puts error.backtrace.inspect
+      end
       expect(page).to have_content("Collection was successfully created.")
       expect(page).to have_content("Test Title")
-      #expect(page).to have_content("john.doe@example.com")
-      #expect(page).to have_content("jane.doe@example.com")
     end
 
     it "allows user to create a new collection with datacite search" do
@@ -52,9 +60,15 @@ describe "Browse Dashboard", type: :feature, js: true do
       click_button "Search"
       # need to sleep BEFORE clicking Import Metadata
       # otherwise click succeeds but effect does not take place
-      sleep 30
+      sleep 10
       click_button "Import Metadata"
-      click_button "Create Dataset"
+      begin
+        click_button "Create Dataset"
+      rescue Capybara::Poltergeist::JavascriptError => error
+        puts "\nCaught JS error:"
+        puts error.message
+        #puts error.backtrace.inspect
+      end
       expect(page).to have_content "Collection was successfully created."
     end
 
@@ -68,6 +82,7 @@ describe "Browse Dashboard", type: :feature, js: true do
         fill_in "query", with: "Test"
         click_button "Search CrossRef"
       end
+      sleep 10
       click_button "Add DOI as related url"
       doi_link = find("#collection_related_url").value
       click_button "Create Dataset"

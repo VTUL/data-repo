@@ -1,8 +1,7 @@
-require "rails_helper"
+require "spec_helper"
 
-describe "DOI Operations", type: :feature, js: true do
-
-  let(:admin) {FactoryGirl.create(:user, :with_admin_role)}
+RSpec.describe "DOI Operations", type: :feature, js: true do
+  let(:admin) { FactoryGirl.create(:admin) }
   let(:user) { FactoryGirl.create(:user) }
   let(:create_collection) do
     FactoryGirl.create(:collection, :with_default_user, :with_pending_doi)
@@ -10,7 +9,8 @@ describe "DOI Operations", type: :feature, js: true do
 
   describe "when the signed in user is not admin" do
     before do
-      sign_in user
+      OmniAuth.config.add_mock(:cas, { uid: user.uid })
+      visit new_user_session_path
     end
 
     it "does not let non-admin users see doi request management links" do
@@ -22,7 +22,8 @@ describe "DOI Operations", type: :feature, js: true do
 
   describe "when these is no DOI requests present" do
     before do
-      sign_in admin
+      OmniAuth.config.add_mock(:cas, { uid: admin.uid })
+      visit new_user_session_path
     end
 
     it "let's an admin user see no doi requests" do
@@ -35,7 +36,8 @@ describe "DOI Operations", type: :feature, js: true do
 
   describe "When there is pending doi requests" do
     before do
-      sign_in admin
+      OmniAuth.config.add_mock(:cas, { uid: admin.uid })
+      visit new_user_session_path
     end
 
     it "let's an admin user operate on doi requests" do

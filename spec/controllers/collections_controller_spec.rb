@@ -1,13 +1,12 @@
-
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe CollectionsController, type: :controller do
   render_views
   # https://github.com/rspec/rspec-rails recommends not using render_views
   # but need to do this for now as controller view tests are not working
 
+  let(:admin) { FactoryGirl.create(:admin) }
   let(:user) { FactoryGirl.create(:user) }
-  let(:admin) { FactoryGirl.create(:user, :with_admin_role) }
 
   describe '#create' do
     routes { Hydra::Collections::Engine.routes }
@@ -29,7 +28,6 @@ RSpec.describe CollectionsController, type: :controller do
         "<funder><fundername>abcd</fundername><awardnumber>1234</awardnumber></funder>",
         "<funder><fundername>zyx</fundername><awardnumber> 987</awardnumber></funder>",
       ])
-      # TODO: we are saveing <space>987, should it be just 987?
     end
 
     it "creates the corresponding doi request" do
@@ -39,16 +37,16 @@ RSpec.describe CollectionsController, type: :controller do
       expect(assigns[:collection][:identifier]).to eq ['doi:pending']
       expect(DoiRequest.find_by_asset_id(assigns[:collection].id)).not_to be_nil
     end
-
   end
 
   describe "#update" do
     routes { Hydra::Collections::Engine.routes }
-    before { sign_in user }
+    before do
+      sign_in user
+    end
 
-
+    # TODO?
   end
-
 
   describe "#datacite_search" do
     before do
@@ -64,7 +62,7 @@ RSpec.describe CollectionsController, type: :controller do
     end
 
     it "gives valid radio button when search does not return any match" do
-
+      # TODO?
     end
   end
 
@@ -107,7 +105,6 @@ RSpec.describe CollectionsController, type: :controller do
       get :ldap_search, label: "creator", name: "@#thiswillnevermatch$%"
       expect(assigns[:results]).to be_empty
     end
-
   end
 
   describe "#add_files" do
@@ -126,7 +123,9 @@ RSpec.describe CollectionsController, type: :controller do
     end
 
     context "for normal users" do
-      before {sign_in user}
+      before do
+        sign_in user
+      end
 
       let(:collection) do
         c = FactoryGirl.build(:collection)
@@ -145,7 +144,9 @@ RSpec.describe CollectionsController, type: :controller do
     end
 
     context "for admin users" do
-      before {sign_in admin}
+      before do
+        sign_in admin
+      end
 
       let(:collection) do
         c = FactoryGirl.build(:collection)

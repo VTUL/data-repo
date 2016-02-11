@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe 'users/index' do
   let(:user1) {FactoryGirl.create(:user)}

@@ -1,4 +1,4 @@
-require "rails_helper"
+require "spec_helper"
 
 describe DatarepoHelper do
   describe "#status_tag" do

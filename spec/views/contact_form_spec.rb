@@ -1,4 +1,4 @@
-require "rails_helper"
+require "spec_helper"
 
 RSpec.describe "contact_form/new" do
   it "renders the contact form" do

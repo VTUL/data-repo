@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe CatalogController, type: :controller do
   pending "write some examples for CatalogController"
