@@ -14,7 +14,8 @@ namespace :datarepo do
     ldap = Net::LDAP.new(host: 'directory.vt.edu')
     ldap.bind
     treebase = 'ou=People,dc=vt,dc=edu'
-    ldap_attributes = {uid: :authid, display_name: :displayname, department: :department, address: :postaladdress}
+    ldap_attributes = {uid: :authid, display_name: :displayname, department: :department}
+    #Address is available as :postaladdress as well.
 
     IO.foreach('user_list.txt') do |email|
       email = email.strip
@@ -33,8 +34,6 @@ namespace :datarepo do
             user[user_attr] = result[ldap_attr][0].force_encoding('UTF-8')
           end
         end
-
-        user.address = user.address.gsub(/\$/, "\n") unless user.address.nil?
 
         new_user = user.id.nil?
         user.save!
