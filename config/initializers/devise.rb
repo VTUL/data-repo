@@ -1,14 +1,14 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
-        config.omniauth(:orcid, Orcid.provider.id, Orcid.provider.secret,
-                        scope: Orcid.provider.authentication_scope,
-                        client_options: {
-                          site: Orcid.provider.site_url,
-                          authorize_url: Orcid.provider.authorize_url,
-                          token_url: Orcid.provider.token_url
-                        }
-                        )
+  config.omniauth(:orcid, Orcid.provider.id, Orcid.provider.secret,
+    scope: Orcid.provider.authentication_scope,
+    client_options: {
+      site: Orcid.provider.site_url,
+      authorize_url: Orcid.provider.authorize_url,
+      token_url: Orcid.provider.token_url
+    }
+  )
 
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
