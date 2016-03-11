@@ -1,56 +1,66 @@
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="4000">
+<div id="homepage-carousel" class="carousel slide" data-ride="carousel" data-interval="4000">
   <!-- Indicators -->
   <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1" class=""></li>
-    <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+    <li data-target="#homepage-carousel" data-slide-to="0" class="active"></li>
+    <li data-target="#homepage-carousel" data-slide-to="1"></li>
+    <li data-target="#homepage-carousel" data-slide-to="2"></li>
+    <li data-target="#homepage-carousel" data-slide-to="3"></li>
   </ol>
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      <div class="item1-img img-holder"></div>
+      <div class="img-holder" style="background-image: url(<%= asset_path(@images[0]) %>);"></div>
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-offset-3 col-md-6">
             <div class="carousel-caption home_marketing_text">
-              <h1>Example Marketing Message</h1>
-              <p>This marketing message can be edited directly in the homepage html file</p>
+              <h2>Virginia Tech’s Data Repository is a platform for openly publishing datasets or other research products created by Virginia Tech faculty, staff, and students.</h2>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="item">
-      <div class="item2-img img-holder"></div>
+      <div class="img-holder" style="background-image: url(<%= asset_path(@images[1]) %>);"></div>
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-offset-3 col-md-6">
             <div class="carousel-caption home_marketing_text">
-              <h1>Example Marketing Message</h1>
-              <p>This marketing message can be edited directly in the homepage html file</p>
+              <h2>Deposit your data in VTechData to ensure that it is accessible and safe for the future!</h2>
             </div>
           </div>
         </div>
-      </div>    
+      </div>
     </div>
     <div class="item">
-      <div class="item3-img img-holder"></div>
+      <div class="img-holder" style="background-image: url(<%= asset_path(@images[2]) %>);"></div>
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-offset-3 col-md-6">
             <div class="carousel-caption home_marketing_text">
-              <h1>Example Marketing Message</h1>
-              <p>This marketing message can be edited directly in the homepage html file</p>
+              <h2>Got grants? VTechData can help you satisfy data management and preservation requirements!</h2>
             </div>
           </div>
         </div>
-      </div>  
+      </div>
+    </div>
+    <div class="item">
+      <div class="img-holder" style="background-image: url(<%= asset_path(@images[3]) %>);"></div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-offset-3 col-md-6">
+            <div class="carousel-caption home_marketing_text">
+              <h2>Interested in publishing your data? VTechData can give your data a DOI and help you increase your scholarly impact!</h2>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+  <a class="left carousel-control" href="#homepage-carousel" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
-  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+  <a class="right carousel-control" href="#homepage-carousel" role="button" data-slide="next">
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
