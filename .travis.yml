@@ -9,7 +9,7 @@ env:
     - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
     - TRAVIS=1
   matrix:
-    - "RAILS_VERSION=4.2.5.1"
+    - "RAILS_VERSION=4.2.5.2"
 services:
   - redis-server
 before_script:
