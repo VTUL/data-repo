@@ -1,7 +1,7 @@
 <%= render partial: 'dashboard/_index_partials/heading_actions.html.erb' %>
-<h1>Files in <%= @collection.title %></h1>
+<h1><%= t('datarepo.gf_metaname').capitalize %>s in <%= @collection.title %></h1>
 <% if @files.empty? %>
-  <span>Please upload some files first</span>
+  <span>Please upload some <%= t('datarepo.gf_metaname') %>s first.</span>
 <% else %>
   <%= form_for @collection, url: collections.collection_path(@collection) do |f| %>
   <%= hidden_field_tag "collection[members][]" %>
@@ -9,9 +9,9 @@
     <table class="table table-actionable table-striped table-hover">
       <thead>
         <tr>
-          <th class="text-left">Filename</th>
+          <th class="text-left"><%= t('datarepo.gf_metaname') %></th>
           <th>Date Uploaded</th>
-          <th>Add to Collection?</th>
+          <th>Add to <%= t('datarepo.col_metaname') %>?</th>
         </tr>
       </thead>
       <tbody>
@@ -27,6 +27,6 @@
     </table>
   <hr />
   </div>
-  <%= f.button('Add Files to Collection', class: 'btn btn-primary') %>
+  <%= f.button("Add #{t('datarepo.gf_metaname').capitalize} to #{t('datarepo.col_metaname').capitalize}", class: 'btn btn-primary') %>
   <% end %>
 <% end %>
