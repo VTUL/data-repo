@@ -9,7 +9,7 @@
               <li <%= 'class=active' if request.url.include? 'dashboard' %>><a href="/dashboard/" >DASHBOARD</a></li>
               <% end %>
               <li <%= 'class=active' if current_page?(sufia.about_path) %>><a href="/about/" >ABOUT</a></li>
-              <li <%= 'class=active' if current_page?(help_path) %>><a href="/help/" >HELP</a></li>
+              <li><a href="http://guides.lib.vt.edu/vtechdata/help" >HELP</a></li>
               <li <%= 'class=active' if current_page?(sufia.contact_path) %>><a href="<%= sufia.contact_form_index_path %>" >CONTACT</a></li>
           </ul><!-- /.nav -->
         </nav><!-- /.navbar -->
