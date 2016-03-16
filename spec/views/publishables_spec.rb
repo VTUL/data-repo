@@ -1,4 +1,4 @@
-require "rails_helper"
+require "spec_helper"
 
 RSpec.describe "publishables/index" do
   let(:collection) {FactoryGirl.create(:collection, :with_default_user)}

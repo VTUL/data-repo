@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'spec_helper'
 require 'cancan/matchers'
 # idea taken from: hydra-head/hydra-access-controls/spec/unit/ability_spec.rb
 # we just need to check the custom_permissions
@@ -23,7 +23,7 @@ describe Ability, type: :model do
 
 
   context "An admin user" do
-    let (:admin) {FactoryGirl.create(:user, :with_admin_role)}
+    let (:admin) {FactoryGirl.create(:admin)}
     subject {Ability.new(admin)}
 
     it { should be_able_to(:create, Role) }

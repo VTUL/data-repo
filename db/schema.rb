@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150827213953) do
+ActiveRecord::Schema.define(version: 20160218201736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -307,19 +307,14 @@ ActiveRecord::Schema.define(version: 20150827213953) do
   add_index "user_stats", ["user_id"], name: "index_user_stats_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: "",    null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.string   "email",               default: "", null: false
+    t.integer  "sign_in_count",       default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.boolean  "guest",                  default: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.string   "facebook_handle"
     t.string   "twitter_handle"
     t.string   "googleplus_handle"
@@ -341,12 +336,12 @@ ActiveRecord::Schema.define(version: 20150827213953) do
     t.datetime "groups_last_update"
     t.string   "linkedin_handle"
     t.string   "orcid"
-    t.string   "provider"
-    t.string   "uid"
+    t.string   "provider",                         null: false
+    t.string   "uid",                              null: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["provider"], name: "index_users_on_provider", using: :btree
+  add_index "users", ["uid"], name: "index_users_on_uid", using: :btree
 
   create_table "version_committers", force: :cascade do |t|
     t.string   "obj_id"

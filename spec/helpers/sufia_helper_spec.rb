@@ -1,4 +1,4 @@
-require "rails_helper"
+require "spec_helper"
 
 describe SufiaHelper do
   describe "#request_doi_link" do

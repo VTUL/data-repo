@@ -1,4 +1,4 @@
-require "rails_helper"
+require "spec_helper"
 
 RSpec.describe DoiMailer, type: :mailer do
   describe 'notification_email' do

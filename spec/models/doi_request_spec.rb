@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe DoiRequest, type: :model do
   let(:doi_request) {FactoryGirl.build(:doi_request)}

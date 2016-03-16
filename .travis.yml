@@ -1,22 +1,19 @@
 language: ruby
-install: bundle install --retry=3 --deployment --without development production
+bundler_args: --without development production
 cache: bundler
 sudo: false
 rvm:
   - 2.2
+jdk:
+  - oraclejdk8
 env:
   global:
     - NOKOGIRI_USE_SYSTEM_LIBRARIES=true
-    - TRAVIS=1
-  matrix:
-    - "RAILS_VERSION=4.2.5.2"
 services:
   - redis-server
 before_script:
   - cp ./config/secrets.yml.sample ./config/secrets.yml
-  - jdk_switcher use oraclejdk8
-  - RAILS_ENV=test bundle exec rake db:schema:load
-  - RAILS_ENV=test bundle exec rake db:seed
+  - RAILS_ENV=test bundle exec rake db:setup
   - RAILS_ENV=test bundle exec rake datarepo:add_roles
   - RAILS_ENV=test bundle exec rake jetty:clean
   - RAILS_ENV=test bundle exec rake sufia:jetty:config

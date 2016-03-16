@@ -1,6 +1,7 @@
-RSpec.describe 'collection view page', :type => :feature do
+require "spec_helper"
 
-  let(:user) {FactoryGirl.create(:user)}
+RSpec.describe 'collection view page', type: :feature do
+  let(:user) { FactoryGirl.create(:user) }
   let(:collection) do
     c = FactoryGirl.build(:collection)
     c.apply_depositor_metadata(user.user_key)
@@ -9,7 +10,8 @@ RSpec.describe 'collection view page', :type => :feature do
   end
 
   before do
-    sign_in user
+    OmniAuth.config.add_mock(:cas, { uid: user.uid })
+    visit new_user_session_path
   end
 
   it 'allows user to edit a collection from the collection view' do

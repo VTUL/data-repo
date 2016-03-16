@@ -1,8 +1,8 @@
-require 'rails_helper'
+require 'spec_helper'
 
 describe UsersController, type: :controller  do
   routes { Sufia::Engine.routes }
-  let(:admin) { FactoryGirl.create(:user, :with_admin_role) }
+  let(:admin) { FactoryGirl.create(:admin) }
   let(:user) { FactoryGirl.create(:user) }
 
   describe '#index' do

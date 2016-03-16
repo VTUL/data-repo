@@ -8,9 +8,18 @@ Rails.application.routes.draw do
   get 'collections/:id/add-files', to: 'collections#add_files', as: 'collections_add_files'
 
   blacklight_for :catalog
+
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  get 'users/auth/cas', to: 'users/omniauth_callbacks#passthru', as: 'new_user_session'
+  devise_scope :user do
+    get 'sign_in', to: redirect('/users/auth/cas')
+    get 'sign_out', to: 'devise/sessions#destroy', as: 'destroy_user_session'
+  end
+
   mount Orcid::Engine => "/orcid"
+
   mount Hydra::RoleManagement::Engine => '/'
+
   resources :doi_requests, :only => [:index, :create] do
     member do
       patch 'mint_doi'
@@ -24,9 +33,10 @@ Rails.application.routes.draw do
   end
 
   Hydra::BatchEdit.add_routes(self)
+
   # This must be the very last route in the file because it has a catch-all route for 404 errors.
-    # This behavior seems to show up only in production mode.
-    mount Sufia::Engine => '/'
+  # This behavior seems to show up only in production mode.
+  mount Sufia::Engine => '/'
   root to: 'homepage#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -1,4 +1,4 @@
-require "rails_helper"
+require "spec_helper"
 
 RSpec.describe "static/agreement" do
   it "renders the agreement page" do

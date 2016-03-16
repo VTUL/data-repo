@@ -1,9 +1,11 @@
-RSpec.describe 'home page', :type => :feature do
+require "spec_helper"
 
-  let(:user) {FactoryGirl.create(:user)}
+RSpec.describe 'home page', type: :feature do
+  let(:user) { FactoryGirl.create(:user) }
 
   before do
-    sign_in user
+    OmniAuth.config.add_mock(:cas, { uid: user.uid })
+    visit new_user_session_path
   end
 
   it 'shows the users name on the Dashboard' do

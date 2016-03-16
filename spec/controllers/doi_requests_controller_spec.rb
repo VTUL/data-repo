@@ -1,13 +1,8 @@
-require 'rails_helper'
+require 'spec_helper'
 
-#doi_requests_controller_spec
 RSpec.describe DoiRequestsController, type: :controller do
-  # render_views
-  # https://github.com/rspec/rspec-rails recommends not using render_views
-
-  let(:user) {FactoryGirl.create(:user) }
-  let(:admin) {FactoryGirl.create(:user, :with_admin_role) }
-
+  let(:admin) { FactoryGirl.create(:admin) }
+  let(:user) { FactoryGirl.create(:user) }
 
   describe '#index' do
     let(:doi_request) {FactoryGirl.create(:doi_request)}
@@ -31,7 +26,6 @@ RSpec.describe DoiRequestsController, type: :controller do
 
   end
 
-
   describe '#pending' do
     let(:doi_request) {FactoryGirl.create(:doi_request)}
 
@@ -51,7 +45,6 @@ RSpec.describe DoiRequestsController, type: :controller do
       end
     end
   end
-
 
   describe '#create' do
     let(:collection) {FactoryGirl.create(:collection, :with_default_user)}
@@ -115,7 +108,7 @@ RSpec.describe DoiRequestsController, type: :controller do
   end
 
   describe '#mint_all' do
-    before {sign_in admin}    
+    before {sign_in admin}
 
     let(:pending_doi) do
       c = FactoryGirl.create(:collection, :with_default_user, :with_pending_doi)
@@ -133,4 +126,3 @@ RSpec.describe DoiRequestsController, type: :controller do
     end
   end
 end
-

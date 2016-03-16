@@ -1,12 +1,12 @@
-require 'rails_helper'
+require 'spec_helper'
 
-# Do we need this? If sufia runs their integration tests, do we need to test again?
-describe "Browse Dashboard", type: :feature do
+RSpec.describe "Browse Dashboard", type: :feature do
   let(:user) { FactoryGirl.create(:user) }
-  let!(:fixtures) { handles.map{|handle| FactoryGirl.create(handle, depositor: user.user_key)} }
+  let!(:fixtures) { handles.map{ |handle| FactoryGirl.create(handle, depositor: user.user_key) } }
 
   before do
-    sign_in user
+    OmniAuth.config.add_mock(:cas, { uid: user.uid })
+    visit new_user_session_path
   end
 
   context "within dashboard" do

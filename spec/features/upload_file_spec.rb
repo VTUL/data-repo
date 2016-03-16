@@ -1,10 +1,11 @@
-require "rails_helper"
+require "spec_helper"
 
-describe "Browse Dashboard", type: :feature, js: true do
+RSpec.describe "Browse Dashboard", type: :feature, js: true do
   let(:user) { FactoryGirl.create(:user) }
 
   before do
-    sign_in user
+    OmniAuth.config.add_mock(:cas, { uid: user.uid })
+    visit new_user_session_path
   end
 
   it "allows me to upload file and apply metadata from the Dashboard link", unless: ENV['TRAVIS'] do

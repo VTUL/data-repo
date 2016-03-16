@@ -1,4 +1,4 @@
-require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe Users::OmniauthCallbacksController, type: :controller do
   describe '#cas' do
@@ -21,7 +21,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
         user.delete
         allow(User).to receive(:from_cas).and_return(user)
         get :cas
-        expect(response).to redirect_to('/')
+        expect(response).to redirect_to(root_path)
       end
     end
   end
