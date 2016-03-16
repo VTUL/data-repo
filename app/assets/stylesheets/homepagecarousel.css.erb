@@ -1,5 +1,3 @@
-
-/* Carousel base class */
 .carousel {
   height: 400px;
 }
@@ -11,44 +9,29 @@
 /* Declare heights because of positioning of img element */
 .carousel .item {
   height: 400px;
- } 
- 
+ }
+
 .img-holder {
   min-height: 400px;
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: cover;
 }
-
-.item1-img {
-  background-image: url(<%= asset_path 'carousel-image-1.jpg' %>);
-}
-
-.item2-img {
-  background-image: url(<%= asset_path 'carousel-image-2.png' %>);
-}
-
-.item3-img {
-  background-image: url(<%= asset_path 'carousel-image-3.jpg' %>);
-}
-
 .carousel-inner > .item > img {
   position: absolute;
   top: 0;
   left: 0;
   min-width: 100%;
   height: 400px;
-
-
 }
 
-#myCarousel .home_share_work {
+#homepage-carousel .home_share_work {
   position: absolute;
   right: 15px;
   top: 0;
 }
 
-#myCarousel h1{
+#homepage-carousel h2{
   margin-top: 0;
   margin-bottom: 20px;
 }
