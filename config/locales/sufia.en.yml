@@ -171,7 +171,7 @@ en:
         create: "Create Dataset"
         update: "Update Dataset"
         create_new: "Add to new Dataset"
-        close_button: "&times;"
+        close_button: "X"
       metadata:
         add_another_keyword: "add another Keyword"
         add_another_creator: "add another Creator"
