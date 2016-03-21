@@ -25,7 +25,7 @@ RSpec.describe "Browse Dashboard", type: :feature, js: true do
         puts error.message
         #puts error.backtrace.inspect
       end
-      expect(page).to have_content("Collection was successfully created.")
+      expect(page).to have_content("Dataset was successfully created.")
       expect(page).to have_content("Test Title")
       expect(page).to have_content("abc: def")
     end
@@ -47,7 +47,7 @@ RSpec.describe "Browse Dashboard", type: :feature, js: true do
         puts error.message
         #puts error.backtrace.inspect
       end
-      expect(page).to have_content("Collection was successfully created.")
+      expect(page).to have_content("Dataset was successfully created.")
       expect(page).to have_content("Test Title")
     end
 
@@ -69,7 +69,7 @@ RSpec.describe "Browse Dashboard", type: :feature, js: true do
         puts error.message
         #puts error.backtrace.inspect
       end
-      expect(page).to have_content "Collection was successfully created."
+      expect(page).to have_content "Dataset was successfully created."
     end
 
     it "allows user to create a new collection with crossref search" do
@@ -86,7 +86,7 @@ RSpec.describe "Browse Dashboard", type: :feature, js: true do
       click_button "Add DOI as related url"
       doi_link = find("#collection_related_url").value
       click_button "Create Dataset"
-      expect(page).to have_content("Collection was successfully created.")
+      expect(page).to have_content("Dataset was successfully created.")
       expect(page).to have_content(doi_link)
     end
 

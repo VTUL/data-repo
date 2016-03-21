@@ -12,6 +12,14 @@ class CollectionsController < ApplicationController
     MyCollectionEditForm
   end
 
+  def after_create
+      respond_to do |format|
+        ActiveFedora::SolrService.instance.conn.commit
+        format.html { redirect_to collections.collection_path(@collection), notice: 'Dataset was successfully created.' }
+        format.json { render json: @collection, status: :created, location: @collection }
+      end
+  end
+
   def create
     @collection.apply_depositor_metadata(current_user.user_key)
     add_members_to_collection unless batch.empty?
