@@ -3,7 +3,7 @@
 <% else %>
   <%= f.input key, required: f.object.required?(key) %>
 <% end %>
-<% if f.object[:identifier] == [''] %>
+<% if controller_name == 'collections' && f.object[:identifier] == [''] %>
 	<%= check_box_tag 'request_doi'%>
 	<%= label_tag(:request_doi, t('doi.labels.request')) %>
 <% end %>
