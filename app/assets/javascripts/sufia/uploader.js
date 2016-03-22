@@ -8,8 +8,8 @@
 /*global $ */
 
 
-//1.2 GB  max file size
-var max_file_size = 1200000000;
+//5 GB  max file size
+var max_file_size = 5120000000;
 // String does not match the size so the actual limit is not publicized
 var max_file_size_str = "200 MB";
 //10.5 GB max total upload size
