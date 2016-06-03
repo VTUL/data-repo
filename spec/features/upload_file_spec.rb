@@ -1,18 +1,22 @@
 require "spec_helper"
 
-RSpec.describe "Browse Dashboard", type: :feature, js: true do
+RSpec.describe "Uploading files from the web form", type: :feature, js: true do
   let(:user) { FactoryGirl.create(:user) }
 
   before do
     OmniAuth.config.add_mock(:cas, { uid: user.uid })
     visit new_user_session_path
+    click_link "Upload"
   end
 
-  it "allows me to upload file and apply metadata from the Dashboard link", unless: ENV['TRAVIS'] do
-    visit "/dashboard"
-    click_link "Upload"
+  xit "has an ingest screen" do
+    expect(page).to have_content 'Upload limits:'
+    expect(page).to have_xpath '//input[@type="file"]'
+  end
+
+  it "allows me to upload a file and apply metadata", unless: ENV['TRAVIS'] do
     check "terms_of_service"
-    page.attach_file "files[]", "spec/fixtures/vt-logo.png"
+    attach_file "files[]", "spec/fixtures/vt-logo.png", visible: false
     click_button "main_upload_start"
     expect(page).to have_content "Apply Metadata"
     fill_in "Keyword", with: "test"
