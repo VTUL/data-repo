@@ -32,7 +32,7 @@
 
       <%= f.input :tag, as: :multi_value_with_help %>
 
-      <%= f.input :creator, as: :multi_value_with_help, input_html: { class: 'datarepo-autocomplete' } %>
+      <%= f.input :creator, as: :multi_value_with_help  %>
 
       <%= f.input :rights, as: :select_with_modal_help, collection: Sufia.config.cc_licenses,
           input_html: { class: 'form-control', multiple: true } %>
