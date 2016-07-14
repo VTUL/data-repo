@@ -1,14 +1,12 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.5.2'
+gem 'rails', '4.2.6'
 # Hold the sprockets gems at their older versions because the current versions selected by Bundler
 # when updating the Rails gem to 4.2.5 cause Sufia to break.  Hopefully, we will be able to remove
 # the following two lines at some point in the future.  For now we need them.
 gem 'sprockets-rails', '~> 2.3.3'
 gem 'sprockets', '~> 3.3.4'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -35,6 +33,9 @@ group :development, :test do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
+  # Use sqlite3 as the database for testing
+  gem 'sqlite3'
+
   # Our dev/test gems
   gem 'rspec-rails'
   gem 'jettywrapper'
@@ -43,7 +44,7 @@ group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'poltergeist'
-  gem 'phantomjs', require: 'phantomjs/poltergeist'
+  gem 'phantomjs', '2.1.1', require: 'phantomjs/poltergeist'
   gem "simplecov", require: false
   gem 'coveralls', require: false
 end
@@ -51,6 +52,7 @@ end
 # Our dev/prod gems
 group :development, :production do
   gem "clamav"
+  gem "pg"
 end
 
 #Sufia's gems
@@ -68,4 +70,3 @@ gem "hydra-role-management"
 gem 'omniauth-cas'
 gem 'net-ldap'
 gem 'jquery-ui-rails'
-gem "pg"
