@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   include Hydra::RoleManagement::UserRoles
   # Connects this user object to Sufia behaviors.
   include Sufia::User
+  include Datarepo::User
   include Sufia::UserUsageStats
 
   if Blacklight::Utils.needs_attr_accessible?
