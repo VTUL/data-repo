@@ -1,0 +1,63 @@
+require 'spec_helper'
+
+describe BatchEditsController, type: :controller do
+  before do
+    sign_in FactoryGirl.create(:default_user)
+    allow_any_instance_of(User).to receive(:groups).and_return([])
+    request.env["HTTP_REFERER"] = 'test.host/original_page'
+  end
+
+  describe "edit" do
+    before do
+      @one = GenericFile.new(creator: ["Fred"], provenance: ['foo'])
+      @one.apply_depositor_metadata('mjg36')
+      @two = GenericFile.new(creator: ["Wilma"], publisher: ['Rand McNally'], provenance: ['foo'], language: ['en'])
+      @two.apply_depositor_metadata('mjg36')
+      @one.save!
+      @two.save!
+      controller.batch = [@one.id, @two.id]
+      expect(controller).to receive(:can?).with(:edit, @one.id).and_return(true)
+      expect(controller).to receive(:can?).with(:edit, @two.id).and_return(true)
+    end
+
+    it "is successful" do
+      get :edit
+      expect(response).to be_successful
+      expect(assigns[:terms]).to eq [:creator, :contributor, :description, :tag, :rights, :publisher, :date_created, 
+                                     :subject, :language, :identifier, :based_near, :related_url, :provenance]
+      expect(assigns[:generic_file].creator).to eq ["Fred", "Wilma"]
+      expect(assigns[:generic_file].provenance).to eq ["foo"]
+      expect(assigns[:generic_file].language).to eq ["en"]
+    end
+  end
+
+  describe "update" do
+    let!(:one) do
+      GenericFile.create(creator: ["Fred"], provenance: ['foo']) do |file|
+        file.apply_depositor_metadata('mjg36')
+      end
+    end
+
+    let!(:two) do
+      GenericFile.create(creator: ["Fred"], provenance: ['foo']) do |file|
+        file.apply_depositor_metadata('mjg36')
+      end
+    end
+
+    before do
+      controller.batch = [one.id, two.id]
+      expect(controller).to receive(:can?).with(:edit, one.id).and_return(true)
+      expect(controller).to receive(:can?).with(:edit, two.id).and_return(true)
+    end
+
+    let(:mycontroller) { "my/files" }
+
+    it "updates the records" do
+      put :update, update_type: "update", generic_file: { provenance: ["zzz"] }
+      expect(response).to be_redirect
+      expect(GenericFile.find(one.id).provenance).to eq ["zzz"]
+      expect(GenericFile.find(two.id).provenance).to eq ["zzz"]
+    end
+  end
+end
+

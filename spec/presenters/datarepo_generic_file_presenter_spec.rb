@@ -1,0 +1,22 @@
+require 'spec_helper'
+
+describe DatarepoGenericFilePresenter do
+  describe ".terms" do
+    it "returns a list" do
+      expect(described_class.terms).to eq([:resource_type, :title,
+                                           :creator, :contributor, :description, :tag, :rights, :publisher,
+                                           :date_created, :subject, :language, :identifier, :based_near,
+                                           :related_url, :provenance])
+    end
+  end
+
+  let(:presenter) { described_class.new(file) }
+
+  describe '#provenance' do
+    let(:file) { build(:generic_file, provenance: ["processing history"]) }
+
+    it "displays provenance metadata" do 
+      expect(presenter.provenance). to eq ["processing history"]
+    end
+  end
+end

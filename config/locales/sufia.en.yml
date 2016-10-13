@@ -195,6 +195,7 @@ en:
         tag:              "Keyword"
         date_created:     "Date Created"
         related_url:      "Related URL"
+        provenance:       "Provenance"
       collection:
         based_near:       "Location"
         description:      "Abstract or Summary"
@@ -221,6 +222,7 @@ en:
         language: "The language of the file content."
         publisher: "The person or group making the file available. Generally this is the institution."
         rights: "Licensing and distribution information governing access to the file. Select from the provided drop-down list."
+        provenance: "The processing history of a file object."
 
     metadata_help:
       collection:
