@@ -13,11 +13,16 @@ describe UsersController, type: :controller  do
       expect(response).to_not redirect_to(root_path)
     end
 
-    it 'does not allow non-admins access' do
+    it 'allows non-admins access' do
       sign_in user
       get :index
-      expect(response).to redirect_to(root_path)
-      expect(flash[:alert]).to include('Permission denied: cannot access this page.')
+      expect(response).to be_success
+      expect(response).to_not redirect_to(root_path)
+    end
+
+    it 'does not allow non-authenticated users access' do
+      get :index
+      expect(response).to redirect_to('/users/auth/cas')
     end
   end
 
@@ -44,6 +49,14 @@ describe UsersController, type: :controller  do
       get :show, id: admin.user_key
       expect(response).to redirect_to(@routes.url_helpers.profile_path(user.to_param))
       expect(flash[:alert]).to include('Permission denied: cannot access this page.')
+    end
+
+    it 'does not allow non-authenticated users any access' do
+      get :show, id: user.user_key
+      expect(response).to redirect_to('/users/auth/cas')
+
+      get :show, id: admin.user_key
+      expect(response).to redirect_to('/users/auth/cas')
     end
   end
 end
