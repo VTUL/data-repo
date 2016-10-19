@@ -9,3 +9,7 @@
 # From http://support.orcid.org/knowledgebase/articles/162412-tutorial-create-a-new-profile-using-curl
 ORCID_APP_ID: <%= Rails.application.secrets['orcid']['app_id'] %>
 ORCID_APP_SECRET: <%= Rails.application.secrets['orcid']['app_secret'] %>
+ORCID_SITE_URL: <%= Rails.application.secrets['orcid']['site_url'] %>
+ORCID_TOKEN_URL: <%= Rails.application.secrets['orcid']['token_url'] %>
+ORCID_REMOTE_SIGNIN_URL: <%= Rails.application.secrets['orcid']['remote_signin_url'] %>
+ORCID_AUTHORIZE_URL: <%= Rails.application.secrets['orcid']['authorize_url'] %>
