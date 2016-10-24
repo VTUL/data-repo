@@ -49,12 +49,20 @@ RSpec.describe DoiRequestsController, type: :controller do
   describe '#create' do
     let(:collection) {FactoryGirl.create(:collection, :with_default_user)}
 
-    before {sign_in user}
+    before(:example) do
+      sign_in user
+    end
 
     it "creates a Doi Request" do
       expect do
         post :create, asset_id: collection.id, asset_type: "Collection"
       end.to change { DoiRequest.count }.by(1)
+    end
+
+    it "successfully redirects to the collection show page" do
+      post :create, asset_id: collection.id, asset_type: "Collection"
+      expect(assigns(:asset).identifier).to include('doi:pending')
+      expect(response).to redirect_to('/collections/' + collection.id)
     end
   end
 

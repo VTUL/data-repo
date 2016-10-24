@@ -14,14 +14,13 @@ class DoiRequestsController < ApplicationController
     # For now, assume the asset_type is Collection only
     # if params[:asset_type] == "Collection"
     @asset = Collection.find(params[:asset_id])
-    @asset[:identifier] << t('doi.pending_doi')
     doi_request = DoiRequest.new(asset_id: params[:asset_id], asset_type: params[:asset_type])
-    if doi_request.save && @asset.update_attributes({:identifier => @asset[:identifier]})
+    if doi_request.save && @asset.update_attributes({:identifier => @asset.identifier.to_a.push(t('doi.pending_doi'))})
       flash[:notice] = t('doi.messages.submit.success')
       redirect_to collections.collection_path(@asset)
     else
       flash[:error] = t('doi.messages.submit.failure')
-      redirect_to doi_requests_path
+      redirect_to dashboard_publishables_path
     end
   end
 

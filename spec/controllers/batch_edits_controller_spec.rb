@@ -11,7 +11,7 @@ describe BatchEditsController, type: :controller do
     before do
       @one = GenericFile.new(creator: ["Fred"], provenance: ['foo'])
       @one.apply_depositor_metadata('mjg36')
-      @two = GenericFile.new(creator: ["Wilma"], publisher: ['Rand McNally'], provenance: ['foo'], language: ['en'])
+      @two = GenericFile.new(creator: ["Wilma"], provenance: ['foo'])
       @two.apply_depositor_metadata('mjg36')
       @one.save!
       @two.save!
@@ -25,9 +25,7 @@ describe BatchEditsController, type: :controller do
       expect(response).to be_successful
       expect(assigns[:terms]).to eq [:creator, :contributor, :description, :tag, :rights, :publisher, :date_created, 
                                      :subject, :language, :identifier, :based_near, :related_url, :provenance]
-      expect(assigns[:generic_file].creator).to eq ["Fred", "Wilma"]
-      expect(assigns[:generic_file].provenance).to eq ["foo"]
-      expect(assigns[:generic_file].language).to eq ["en"]
+      expect(assigns[:generic_file]).to have_attributes("creator": ["Fred", "Wilma"], "provenance": ["foo"])
     end
   end
 

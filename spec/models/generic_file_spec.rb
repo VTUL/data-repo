@@ -10,7 +10,7 @@ describe GenericFile, :type => :model do
   describe "#dc metadata" do
     it "allows reading and writing for dc provenance" do
       subject.provenance = ['foo', 'bar']
-      expect(subject.provenance).to eq ['foo', 'bar']
+      expect(subject.provenance).to match_array(['foo', 'bar'])
     end
   end
 
