@@ -2,6 +2,7 @@
 
 <%= render_breadcrumbs builder: Sufia::BootstrapBreadcrumbsBuilder %>
 <%= render partial: 'dashboard/_index_partials/heading_actions.html.erb' %> 
+<p>Please review our <%= link_to "Publishing Policy", "http://guides.lib.vt.edu/c.php?g=465788&p=3673547", {class: "publish-policy-link"} %> before requesting a DOI.</p>
 <% if @publishables.empty?  %>
   <span>Nothing to publish</span>
 <% else %>
