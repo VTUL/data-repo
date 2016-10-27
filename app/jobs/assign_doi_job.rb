@@ -19,15 +19,17 @@ class AssignDoiJob
       datacite_publisher: (asset.publisher.empty? ? "" : asset.publisher.first), 
       datacite_publicationyear: (asset.date_created.empty? ? "" : asset.date_created.first)
      )
-    asset[:identifier].each_with_index {
-      |id, idx| id == "doi:pending" ? asset[:identifier][idx] = minted_doi.id : id
+    doi = minted_doi.id
+    id_array = asset.identifier.to_a
+    id_array.each_with_index {
+      |id, idx| id == "doi:pending" ? id_array[idx] = doi : id
     }
-    depositor = asset.depositor
-    user = User.find_by_user_key(depositor)
-    if (doi_request.update_attributes({:ezid_doi => minted_doi.id}) && 
-      asset.update_attributes({:identifier => asset[:identifier]}))
+    asset.identifier = id_array
+    doi_request.ezid_doi = doi
+    if asset.save && doi_request.save
       DoiMailer.notification_email(doi_request).deliver_later
     else
+      user = User.find_by_user_key(asset.depositor)
       User.batchuser.send_message(user, asset.errors.full_messages.join(', '), 'DOI Assign Error')
     end
   end
