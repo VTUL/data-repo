@@ -11,8 +11,7 @@ FactoryGirl.define do
     trait :with_pending_doi do
       after(:create) do |collection|
         DoiRequest.create(asset_id: collection.id, asset_type: "Collection")
-        collection[:identifier] << 'doi:pending'
-        collection.update_attributes({:identifier => collection[:identifier]})
+        collection.update_attributes({:identifier => collection.identifier.to_a.push("doi:pending")})
       end
     end
 
@@ -20,7 +19,7 @@ FactoryGirl.define do
       after(:create) do |collection|
         doi_request = DoiRequest.create(asset_id: collection.id, asset_type: 'Collection')
 
-        minted_doi = Ezid::Identifier.create(
+        minted_doi = Ezid::Identifier.mint(
           datacite_creator: (collection.creator.empty? ? "" : collection.creator.first),
           datacite_resourcetype: "Dataset",
           datacite_title: collection.title,

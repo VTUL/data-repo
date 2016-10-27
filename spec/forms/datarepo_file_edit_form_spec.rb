@@ -5,13 +5,13 @@ describe DatarepoFileEditForm do
 
   describe "#terms" do
     it "returns a list" do
-      expect(subject.terms).to eq([:resource_type, :title, :creator, :contributor, :description, :tag, :rights, :publisher,
+      expect(subject.terms).to match_array([:resource_type, :title, :creator, :contributor, :description, :tag, :rights, :publisher,
                                    :date_created, :subject, :language, :identifier, :based_near, :related_url, :provenance])
     end
   end
 
   it "initializes provenance field" do
-    expect(subject.provenance).to eq ['']
+    expect(subject.provenance).to match_array([""])
   end
 
   describe ".model_attributes" do
@@ -19,7 +19,7 @@ describe DatarepoFileEditForm do
     subject { described_class.model_attributes(params) }
 
     it "only changes provenance" do
-      expect(subject['provenance']).to eq ["foo"]
+      expect(subject['provenance']).to match_array(["foo"])
       expect(subject['description']).to be_empty
       expect(subject['permissions_attributes']).to eq("2" => { "access" => "edit", "id" => "a987551e-b87f-427a-8721-3e5942273125", "_destroy" => "true" })
     end

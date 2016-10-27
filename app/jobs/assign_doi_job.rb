@@ -12,7 +12,7 @@ class AssignDoiJob
   def run
     doi_request = DoiRequest.find(doi_request_id)
     asset = Collection.find(doi_request.asset_id)
-    minted_doi = Ezid::Identifier.create(
+    minted_doi = Ezid::Identifier.mint(
       datacite_creator: (asset.creator.empty? ? "" : asset.creator.first), 
       datacite_resourcetype: "Dataset",
       datacite_title: asset.title,
