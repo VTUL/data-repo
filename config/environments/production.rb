@@ -94,6 +94,30 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
 
   # Logging
-  config.logger = Logger.new(Rails.root.join('log', "#{Rails.env}.log"), "daily")
-  config.log_level = :warn
+  if Rails.application.secrets['graylog']['enabled'] == true
+    graylog_settings = Rails.application.secrets['graylog']
+    graylog_host = graylog_settings['host'] || '127.0.0.1'
+    graylog_port = graylog_settings['port'] || 12201
+    graylog_network_locality = graylog_settings['network_locality'] || :WAN
+    graylog_protocol = graylog_settings['protocol'] || 'udp'
+    graylog_protocol = graylog_protocol.downcase == 'tcp' ? GELF::Protocol::TCP : GELF::Protocol::UDP
+    graylog_facility = graylog_settings['facility']
+    graylog_verbosity = graylog_settings['verbosity'] || 'info'
+
+    config.lograge.enabled = true
+    config.lograge.formatter = Lograge::Formatters::Graylog2.new
+    config.logger = GELF::Logger.new(graylog_host, graylog_port,
+        graylog_network_locality, { :protocol => graylog_protocol,
+                                    :facility => graylog_facility })
+    config.log_level = graylog_verbosity
+    config.colorize_logging = false
+    # Log controller params, too
+    config.lograge.custom_options = lambda do |event|
+      params = event.payload[:params].reject { |k| %w(controller action).include?(k) }
+      { "params" => params }
+    end
+  else
+    config.logger = Logger.new(Rails.root.join('log', "#{Rails.env}.log"), "daily")
+    config.log_level = :warn
+  end
 end
