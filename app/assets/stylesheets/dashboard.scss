@@ -1,5 +1,7 @@
 @import 'global';
 
+$arrow-width: 80px;
+
 div.dashboard-breadcrumb {
   margin-bottom: 20px;
   margin-top: 20px;
@@ -39,6 +41,31 @@ div.heading-tile a:hover {
   text-decoration: none;
 }
 
+div.arrow-wrapper {
+  width: $arrow-width;
+  height: 116px;
+  svg {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .arrow {
+    fill: $hokie-orange;
+  }
+}
+@media screen and (max-width: 767px) {
+  div.arrow-wrapper {
+    display: none;
+  }
+}
+@media screen and (min-width: 768px) {
+  div.heading-tile {
+    width: calc(25% - (#{$arrow-width} * .75));
+  }
+}
 
 .dashboard {
   .panel-default > .panel-heading {
