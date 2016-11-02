@@ -57,15 +57,15 @@ namespace :datarepo do
       email = email.strip
       user = User.find_by({email: email})
 
-      if !user.nil?
-        user.roles << admin_role
-        user.roles = user.roles.uniq
-        user.group_list = 'admin'
-        user.save!
-        puts "#{email} upgraded."
-      else
-        puts "Could not find a user with email address '#{email}'."
+      if user.nil?
+        user = User.new(email: email, uid: email, provider: 'cas')
       end
+
+      user.roles << admin_role
+      user.roles = user.roles.uniq
+      user.group_list = 'admin'
+      user.save!
+      puts "#{email} upgraded."
     end
   end
 
