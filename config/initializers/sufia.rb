@@ -17,9 +17,13 @@ Sufia.config do |config|
   # config.analytics = false
 
   # Specify a Google Analytics tracking ID to gather usage statistics
-  # config.google_analytics_id = 'UA-99999999-1'
+  unless Rails.application.secrets['google_analytics_id'].nil?
+    config.google_analytics_id = Rails.application.secrets['google_analytics_id']
+  end
 
   # Specify a date you wish to start collecting Google Analytic statistics for.
+  # Leaving it blank will set the start date to when ever the file was uploaded by
+  # NOTE: if you have always sent analytics to GA for downloads and page views leave this commented out
   # config.analytic_start_date = DateTime.new(2014,9,10)
 
   # Enables a link to the citations page for a generic_file.
@@ -33,7 +37,7 @@ Sufia.config do |config|
   # config.persistent_hostpath = 'http://localhost/files/'
 
   # If you have ffmpeg installed and want to transcode audio and video uncomment this line
-  # config.enable_ffmpeg = true
+  config.enable_ffmpeg = true
 
   # Sufia uses NOIDs for files and collections instead of Fedora UUIDs
   # where NOID = 10-character string and UUID = 32-character string w/ hyphens
@@ -43,13 +47,16 @@ Sufia.config do |config|
   # config.noid_template = ".reeddeeddk"
 
   # Store identifier minter's state in a file for later replayability
-  # config.minter_statefile = '/tmp/minter-state'
+  config.minter_statefile = '/var/sufia/minter-state'
+  unless Rails.application.secrets['fedora']['noid_statefile'].nil?
+    config.minter_statefile = Rails.application.secrets['fedora']['noid_statefile']
+  end
 
   # Specify the prefix for Redis keys:
   # config.redis_namespace = "sufia"
 
   # Specify the path to the file characterization tool:
-  # config.fits_path = "fits.sh"
+  config.fits_path = "/opt/fits/fits.sh"
 
   # Specify the path to the file derivatives creation tool:
   # config.libreoffice_path = "soffice"
@@ -61,14 +68,11 @@ Sufia.config do |config|
   # of Zotero-managed research items.
   # config.arkivo_api = false
 
-  # Specify a date you wish to start collecting Google Analytic statistics for.
-  # Leaving it blank will set the start date to when ever the file was uploaded by
-  # NOTE: if you have always sent analytics to GA for downloads and page views leave this commented out
-  # config.analytic_start_date = DateTime.new(2014,9,10)
-
   # Location autocomplete uses geonames to search for named regions.
   # Specify the user for connecting to geonames:
-  # config.geonames_username = ''
+  unless Rails.application.secrets['geonames_username'].nil?
+    config.geonames_username = Rails.application.secrets['geonames_username'].nil?
+  end
 
   # Should the acceptance of the licence agreement be active (checkbox), or
   # implied when the save button is pressed? Set to true for active.
@@ -88,7 +92,7 @@ Sufia.config do |config|
 
   # The user who runs audit jobs. Update this if you aren't using emails
   # config.audit_user_key = 'audituser@example.com'
-  #
+
   # The banner image. Should be 5000px wide by 1000px tall.
   # config.banner_image = 'https://cloud.githubusercontent.com/assets/92044/18370978/88ecac20-75f6-11e6-8399-6536640ef695.jpg'
 

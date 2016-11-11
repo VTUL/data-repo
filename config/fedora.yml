@@ -1,15 +1,13 @@
+default: &default
+  user: <%= Rails.application.secrets['fedora']['user'] %>
+  password: <%= Rails.application.secrets['fedora']['password'] %>
+  url: <%= Rails.application.secrets['fedora']['url'] %>
+  base_path: <%= Rails.application.secrets['fedora']['base_path'] %>
+
 development:
-  user: fedoraAdmin
-  password: fedoraAdmin
-  url: http://127.0.0.1:<%= ENV['FCREPO_DEVELOPMENT_PORT'] || 8984 %>/rest
-  base_path: /dev
+  <<: *default
 test:
-  user: fedoraAdmin
-  password: fedoraAdmin
-  url: http://127.0.0.1:<%= ENV['FCREPO_TEST_PORT'] || 8986 %>/rest
-  base_path: /test
+  <<: *default
+  <%= 'url: http://localhost:8983/fedora/rest' if ENV['TRAVIS'] %>
 production:
-  user: fedoraAdmin
-  password: fedoraAdmin
-  url: http://127.0.0.1:8983/fedora/rest
-  base_path: /prod
+  <<: *default
