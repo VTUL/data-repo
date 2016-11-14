@@ -58,7 +58,7 @@ namespace :datarepo do
       user = User.find_by({email: email})
 
       if user.nil?
-        user = User.new(email: email, uid: email, provider: 'cas')
+        user = User.new(email: email, uid: email.split('@')[0], provider: 'cas')
       end
 
       user.roles << admin_role
