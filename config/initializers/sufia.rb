@@ -1,4 +1,6 @@
 Sufia.config do |config|
+  # Injected via `rails g sufia:work Item`
+  config.register_curation_concern :item
   # Email recipient of messages sent via the contact form
   # config.contact_email = "repo-admin@example.org"
 
