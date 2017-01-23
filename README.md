@@ -1,3 +1,24 @@
-Installation provided for vagrant through [this](https://github.com/VTUL/InstallScripts) repository.
+# README
 
-The CAS/Production environment does not require any extra setup at this time.
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...

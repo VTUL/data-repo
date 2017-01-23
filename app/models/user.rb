@@ -1,27 +1,24 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   # Connects this user object to Hydra behaviors.
   include Hydra::User
-  # Connects this user object to Role-management behaviors.
-  include Hydra::RoleManagement::UserRoles
+  # Connects this user object to Curation Concerns behaviors.
+  include CurationConcerns::User
   # Connects this user object to Sufia behaviors.
   include Sufia::User
-  include Datarepo::User
   include Sufia::UserUsageStats
 
-  if Blacklight::Utils.needs_attr_accessible?
-    attr_accessible :email
-  end
 
+
+
+  if Blacklight::Utils.needs_attr_accessible?
+    attr_accessible :email, :password, :password_confirmation
+  end
   # Connects this user object to Blacklights Bookmarks.
   include Blacklight::User
-
-  devise :trackable, :omniauthable, :omniauth_providers => [:cas, :orcid]
-
-  def self.from_cas(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.uid + '@vt.edu'
-    end
-  end
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable
 
   # Method added by Blacklight; Blacklight uses #to_s on your
   # user class to get a user-displayable login/identifier for

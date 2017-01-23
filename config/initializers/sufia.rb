@@ -1,83 +1,22 @@
-# Returns an array containing the vhost 'CoSign service' value and URL
 Sufia.config do |config|
+  # Injected via `rails g sufia:work Item`
+  config.register_curation_concern :item
+  # Email recipient of messages sent via the contact form
+  # config.contact_email = "repo-admin@example.org"
 
-  config.fits_to_desc_mapping= {
-    file_title: :title,
-    file_author: :creator
-  }
+  # Text prefacing the subject entered in the contact form
+  # config.subject_prefix = "Contact form:"
 
-  config.max_days_between_audits = 7
+  # How many notifications should be displayed on the dashboard
+  # config.max_notifications_for_dashboard = 5
 
-  config.max_notifications_for_dashboard = 5
-
-  config.cc_licenses = {
-    'Attribution 3.0 United States' => 'http://creativecommons.org/licenses/by/3.0/us/',
-    'Attribution-ShareAlike 3.0 United States' => 'http://creativecommons.org/licenses/by-sa/3.0/us/',
-    'Attribution-NonCommercial 3.0 United States' => 'http://creativecommons.org/licenses/by-nc/3.0/us/',
-    'Attribution-NoDerivs 3.0 United States' => 'http://creativecommons.org/licenses/by-nd/3.0/us/',
-    'Attribution-NonCommercial-NoDerivs 3.0 United States' => 'http://creativecommons.org/licenses/by-nc-nd/3.0/us/',
-    'Attribution-NonCommercial-ShareAlike 3.0 United States' => 'http://creativecommons.org/licenses/by-nc-sa/3.0/us/',
-    'Public Domain Mark 1.0' => 'http://creativecommons.org/publicdomain/mark/1.0/',
-    'CC0 1.0 Universal' => 'http://creativecommons.org/publicdomain/zero/1.0/',
-    'All rights reserved' => 'All rights reserved'
-  }
-
-  config.cc_licenses_reverse = Hash[*config.cc_licenses.to_a.flatten.reverse]
-
-  config.resource_types = {
-    "Audio" => "Audio",
-    "Image" => "Image",
-    "Map or Cartographic Material" => "Map or Cartographic Material",
-    "Written Work" => "Written Work",
-    "Code or Algorithm" => "Code or Algorithm",
-    "Video" => "Video",
-    "Tabular Data" => "Tabular Data",
-    "Other Data" => "Other Data"
-  }
-
-
-  config.resource_types_to_schema = {
-    "Article" => "http://schema.org/Article",
-    "Audio" => "http://schema.org/AudioObject",
-    "Book" => "http://schema.org/Book",
-    "Capstone Project" => "http://schema.org/CreativeWork",
-    "Conference Proceeding" => "http://schema.org/ScholarlyArticle",
-    "Dataset" => "http://schema.org/Dataset",
-    "Dissertation" => "http://schema.org/ScholarlyArticle",
-    "Image" => "http://schema.org/ImageObject",
-    "Journal" => "http://schema.org/CreativeWork",
-    "Map or Cartographic Material" => "http://schema.org/Map",
-    "Masters Thesis" => "http://schema.org/ScholarlyArticle",
-    "Part of Book" => "http://schema.org/Book",
-    "Poster" => "http://schema.org/CreativeWork",
-    "Presentation" => "http://schema.org/CreativeWork",
-    "Project" => "http://schema.org/CreativeWork",
-    "Report" => "http://schema.org/CreativeWork",
-    "Research Paper" => "http://schema.org/ScholarlyArticle",
-    "Code or Algorithm" => "http://schema.org/Code",
-    "Video" => "http://schema.org/VideoObject",
-    "Other" => "http://schema.org/CreativeWork",
-    "Written Work" => "http://schema.org/CreativeWork",
-    "Tabular Data" => "http://schema.org/CreativeWork",
-    "Other Data" => "http://schema.org/CreativeWork"
-  }
-
-  config.permission_levels = {
-    "Choose Access"=>"none",
-    "View/Download" => "read",
-    "Edit" => "edit"
-  }
-
-  config.owner_permission_levels = {
-    "Edit" => "edit"
-  }
-
-  config.queue = Sufia::Resque::Queue
+  # How frequently should a file be audited.
+  # config.max_days_between_audits = 7
 
   # Enable displaying usage statistics in the UI
   # Defaults to FALSE
   # Requires a Google Analytics id and OAuth2 keyfile.  See README for more info
-  config.analytics = false
+  # config.analytics = false
 
   # Specify a Google Analytics tracking ID to gather usage statistics
   unless Rails.application.secrets['google_analytics_id'].nil?
@@ -85,22 +24,22 @@ Sufia.config do |config|
   end
 
   # Specify a date you wish to start collecting Google Analytic statistics for.
+  # Leaving it blank will set the start date to when ever the file was uploaded by
+  # NOTE: if you have always sent analytics to GA for downloads and page views leave this commented out
   # config.analytic_start_date = DateTime.new(2014,9,10)
 
-  config.geonames_username = Rails.application.secrets['geonames_username'].to_s
-  # Add a collection facet to search results.  Possible values are...
-  #   nil (default) - do not include collection facet
-  #   :user - show for logged in users
-  #   :public - show for everyone (e.g. logged in and non-logged in users)
-  # config.collection_facet = nil
-# Where to store tempfiles, leave blank for the system temp directory (e.g. /tmp)
+  # Enables a link to the citations page for a generic_file.
+  # Default is false
+  # config.citations = false
+
+  # Where to store tempfiles, leave blank for the system temp directory (e.g. /tmp)
   # config.temp_file_base = '/home/developer1'
 
   # Specify the form of hostpath to be used in Endnote exports
   # config.persistent_hostpath = 'http://localhost/files/'
 
   # If you have ffmpeg installed and want to transcode audio and video uncomment this line
-  # config.enable_ffmpeg = true
+  config.enable_ffmpeg = true
 
   # Sufia uses NOIDs for files and collections instead of Fedora UUIDs
   # where NOID = 10-character string and UUID = 32-character string w/ hyphens
@@ -109,24 +48,63 @@ Sufia.config do |config|
   # Specify a different template for your repository's NOID IDs
   # config.noid_template = ".reeddeeddk"
 
+  # Store identifier minter's state in a file for later replayability
+  config.minter_statefile = '/var/sufia/minter-state'
+  unless Rails.application.secrets['fedora']['noid_statefile'].nil?
+    config.minter_statefile = Rails.application.secrets['fedora']['noid_statefile']
+  end
+
   # Specify the prefix for Redis keys:
   # config.redis_namespace = "sufia"
 
   # Specify the path to the file characterization tool:
   config.fits_path = "/opt/fits/fits.sh"
 
+  # Specify the path to the file derivatives creation tool:
+  # config.libreoffice_path = "soffice"
+
   # Specify how many seconds back from the current time that we should show by default of the user's activity on the user's dashboard
   # config.activity_to_show_default_seconds_since_now = 24*60*60
 
-  # Specify a date you wish to start collecting Google Analytic statistics for.
-  # Leaving it blank will set the start date to when ever the file was uploaded by
-  # NOTE: if you have always sent analytics to GA for downloads and page views leave this commented out
-  # config.analytic_start_date = DateTime.new(2014,9,10)
-  #
-  # Method of converting ids into URIs for storage in Fedora
-  # config.translate_uri_to_id = lambda { |uri| uri.to_s.split('/')[-1] }
-  # config.translate_id_to_uri = lambda { |id|
-  #      "#{ActiveFedora.fedora.host}#{ActiveFedora.fedora.base_path}/#{Sufia::Noid.treeify(id)}" }
+  # Sufia can integrate with Zotero's Arkivo service for automatic deposit
+  # of Zotero-managed research items.
+  # config.arkivo_api = false
+
+  # Location autocomplete uses geonames to search for named regions.
+  # Specify the user for connecting to geonames:
+  unless Rails.application.secrets['geonames_username'].nil?
+    config.geonames_username = Rails.application.secrets['geonames_username'].nil?
+  end
+
+  # Should the acceptance of the licence agreement be active (checkbox), or
+  # implied when the save button is pressed? Set to true for active.
+  # The default is true.
+  # config.active_deposit_agreement_acceptance = true
+
+  # Should work creation require file upload, or can a work be created first
+  # and a file added at a later time?
+  # The default is true.
+  # config.work_requires_files = true
+
+  # Should a button with "Share my work" show on the front page to all users (even those not logged in)?
+  # config.always_display_share_button = true
+
+  # The user who runs batch jobs. Update this if you aren't using emails
+  # config.batch_user_key = 'batchuser@example.com'
+
+  # The user who runs audit jobs. Update this if you aren't using emails
+  # config.audit_user_key = 'audituser@example.com'
+
+  # The banner image. Should be 5000px wide by 1000px tall.
+  # config.banner_image = 'https://cloud.githubusercontent.com/assets/92044/18370978/88ecac20-75f6-11e6-8399-6536640ef695.jpg'
+
+  # Temporary path to hold uploads before they are ingested into FCrepo.
+  # This must be a lambda that returns a Pathname
+  #  config.upload_path = ->() { Rails.root + 'tmp' + 'uploads' }
+
+  # Location on local file system where derivatives will be stored.
+  # If you use a multi-server architecture, this MUST be a shared volume.
+  # config.derivatives_path = File.join(Rails.root, 'tmp', 'derivatives')
 
   # If browse-everything has been configured, load the configs.  Otherwise, set to nil.
   begin
@@ -138,7 +116,10 @@ Sufia.config do |config|
   rescue Errno::ENOENT
     config.browse_everything = nil
   end
-
 end
 
 Date::DATE_FORMATS[:standard] = "%m/%d/%Y"
+
+Qa::Authorities::Local.register_subauthority('subjects', 'Qa::Authorities::Local::TableBasedAuthority')
+Qa::Authorities::Local.register_subauthority('languages', 'Qa::Authorities::Local::TableBasedAuthority')
+Qa::Authorities::Local.register_subauthority('genres', 'Qa::Authorities::Local::TableBasedAuthority')

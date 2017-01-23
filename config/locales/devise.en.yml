@@ -23,6 +23,8 @@ en:
         subject: "Reset password instructions"
       unlock_instructions:
         subject: "Unlock instructions"
+      password_change:
+        subject: "Password Changed"
     omniauth_callbacks:
       failure: "Could not authenticate you from %{kind} because \"%{reason}\"."
       success: "Successfully authenticated from %{kind} account."
@@ -42,7 +44,7 @@ en:
       updated: "Your account has been updated successfully."
     sessions:
       signed_in: "Signed in successfully."
-      signed_out: "You have been logged out of VTechData. To log out of all applications, <a href='https://login.vt.edu/profile/cas/logout'>log out of Virginia Tech CAS.</a>"
+      signed_out: "Signed out successfully."
       already_signed_out: "Signed out successfully."
     unlocks:
       send_instructions: "You will receive an email with instructions for how to unlock your account in a few minutes."

@@ -1,84 +1,38 @@
 Rails.application.routes.draw do
-  get 'collections/datacite_search', to: 'collections#datacite_search'
-  post 'collections/crossref_search', to: 'collections#crossref_search'
-  get "collections/import_metadata", to: 'collections#import_metadata', as: 'import_collection'
-  get 'collections/ldap_search', to: 'collections#ldap_search'
-  get 'dashboard/publishables', to: 'publishables#index', as: 'dashboard_publishables'
-  get 'help', to: 'pages#show', id: 'help_page'
-  get 'collections/:id/add-files', to: 'collections#add_files', as: 'collections_add_files'
+  Hydra::BatchEdit.add_routes(self)
+  mount Qa::Engine => '/authorities'
 
-  blacklight_for :catalog
+  
+  mount Blacklight::Engine => '/'
+  
+    concern :searchable, Blacklight::Routes::Searchable.new
 
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
-  get 'users/auth/cas', to: 'users/omniauth_callbacks#passthru', as: 'new_user_session'
-  devise_scope :user do
-    get 'sign_in', to: redirect('/users/auth/cas')
-    get 'sign_out', to: 'devise/sessions#destroy', as: 'destroy_user_session'
+  resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
+    concerns :searchable
   end
 
-  mount Orcid::Engine => "/orcid"
+  devise_for :users
+  mount CurationConcerns::Engine, at: '/'
+  resources :welcome, only: 'index'
+  root 'sufia/homepage#index'
+  curation_concerns_collections
+  curation_concerns_basic_routes
+  curation_concerns_embargo_management
+  concern :exportable, Blacklight::Routes::Exportable.new
 
-  mount Hydra::RoleManagement::Engine => '/'
+  resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
+    concerns :exportable
+  end
 
-  resources :doi_requests, :only => [:index, :create] do
-    member do
-      patch 'mint_doi'
-      get 'view_doi'
-    end
+  resources :bookmarks do
+    concerns :exportable
 
     collection do
-      get 'pending'
-      patch 'mint_all'
+      delete 'clear'
     end
   end
 
-  Hydra::BatchEdit.add_routes(self)
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  # This must be the very last route in the file because it has a catch-all route for 404 errors.
-  # This behavior seems to show up only in production mode.
-  mount Sufia::Engine => '/'
-  root to: 'homepage#index'
-
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
- # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+ mount Sufia::Engine => '/'
 end
