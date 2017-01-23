@@ -21,8 +21,12 @@
 # Ignore Byebug command history file.
 .byebug_history
 
+config/initializers/secret_token.rb
 config/application.yml
 config/secrets.yml
 
 /public/assets
 /bin
+
+/app/assets/images/carousel
+/vendor/bundle
