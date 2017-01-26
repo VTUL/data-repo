@@ -29,3 +29,6 @@ config/secrets.yml
 
 /app/assets/images/carousel
 /vendor/bundle
+
+/spec/examples.txt
+*.swp
