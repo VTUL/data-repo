@@ -1,0 +1,12 @@
+require: rubocop-rspec
+
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Max: 7
+  Exclude:
+    - 'spec/features/**/*'
+
+RSpec/VerifiedDoubles:
+  Enabled: false

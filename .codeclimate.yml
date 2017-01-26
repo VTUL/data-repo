@@ -1,0 +1,38 @@
+---
+engines:
+  brakeman:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - ruby
+      - javascript
+  eslint:
+    enabled: true
+    config:
+      extensions:
+        - .es6
+  scss-lint:
+    enabled: true
+  fixme:
+    enabled: false
+  rubocop:
+    enabled: true
+  coffeelint:
+    enabled: true
+ratings:
+  paths:
+  - Gemfile.lock
+  - "**.erb"
+  - "**.rb"
+  - "**.js"
+  - "**.es6"
+  - "**.coffee"
+  - "**.rake"
+  - "**.scss"
+exclude_paths:
+- config/
+- db/
+- spec/
+- vendor/
