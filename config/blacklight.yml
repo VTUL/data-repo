@@ -6,5 +6,6 @@ development:
   <<: *default
 test:
   <<: *default
+  <%= 'url: http://localhost:8985/solr/hydra-test' if ENV['TRAVIS'] %>
 production:
   <<: *default
