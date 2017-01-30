@@ -2,7 +2,7 @@
 #  `rails generate curation_concerns:work Item`
 require 'rails_helper'
 
-describe CurationConcerns::ItemForm do
+RSpec.describe CurationConcerns::ItemForm do
   it "has tests" do
     skip "Add your tests here"
   end
