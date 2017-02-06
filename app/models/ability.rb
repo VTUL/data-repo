@@ -1,6 +1,5 @@
 class Ability
   include Hydra::Ability
-  
   include CurationConcerns::Ability
   include Sufia::Ability
 
