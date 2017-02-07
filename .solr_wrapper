@@ -3,6 +3,6 @@
 # port: 8983
 instance_dir: tmp/solr-development
 collection:
-  persist: true
+  persist: false
   dir: solr/config/
-  name: hydra-development
+  name: test

@@ -8,6 +8,6 @@ development:
   <<: *default
 test:
   <<: *default
-  <%= 'url: http://localhost:8983/fedora/rest' if ENV['TRAVIS'] %>
+  <%= 'url: http://localhost:8986/rest' if ENV['TRAVIS'] %>
 production:
   <<: *default
