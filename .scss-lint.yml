@@ -36,6 +36,10 @@ linters:
   Comment:
     enabled: true
     style: silent
+    exclude:
+      - 'app/assets/stylesheets/application.css'
+      - 'app/assets/stylesheets/sufia.scss'
+      - 'app/assets/stylesheets/openseadragon.css'
 
   DebugStatement:
     enabled: true
