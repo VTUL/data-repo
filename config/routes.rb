@@ -2,16 +2,15 @@ Rails.application.routes.draw do
   Hydra::BatchEdit.add_routes(self)
   mount Qa::Engine => '/authorities'
 
-  
   mount Blacklight::Engine => '/'
-  
-    concern :searchable, Blacklight::Routes::Searchable.new
+  concern :searchable, Blacklight::Routes::Searchable.new
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
     concerns :searchable
   end
 
   devise_for :users
+  mount Sufia::Engine => '/'
   mount CurationConcerns::Engine, at: '/'
   resources :welcome, only: 'index'
   root 'sufia/homepage#index'
@@ -31,8 +30,4 @@ Rails.application.routes.draw do
       delete 'clear'
     end
   end
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
- mount Sufia::Engine => '/'
 end

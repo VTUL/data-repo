@@ -3,7 +3,7 @@
 require 'rails_helper'
 include Warden::Test::Helpers
 
-feature 'Create a Item' do
+RSpec.feature 'Create a Item' do
   context 'a logged in user' do
     let(:user_attributes) do
       { email: 'test@example.com' }

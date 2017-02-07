@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161111183460) do
+ActiveRecord::Schema.define(version: 20170125233027) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -175,6 +175,26 @@ ActiveRecord::Schema.define(version: 20161111183460) do
     t.string   "message_id"
     t.index ["notification_id"], name: "index_mailboxer_receipts_on_notification_id", using: :btree
     t.index ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type", using: :btree
+  end
+
+  create_table "permission_template_accesses", force: :cascade do |t|
+    t.integer  "permission_template_id"
+    t.string   "agent_type"
+    t.string   "agent_id"
+    t.string   "access"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "permission_templates", force: :cascade do |t|
+    t.string   "admin_set_id"
+    t.string   "visibility"
+    t.string   "workflow_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.date     "release_date"
+    t.string   "release_period"
+    t.index ["admin_set_id"], name: "index_permission_templates_on_admin_set_id", using: :btree
   end
 
   create_table "proxy_deposit_requests", force: :cascade do |t|
@@ -348,6 +368,7 @@ ActiveRecord::Schema.define(version: 20161111183460) do
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", column: "conversation_id", name: "mb_opt_outs_on_conversations_id"
   add_foreign_key "mailboxer_notifications", "mailboxer_conversations", column: "conversation_id", name: "notifications_on_conversation_id"
   add_foreign_key "mailboxer_receipts", "mailboxer_notifications", column: "notification_id", name: "receipts_on_notification_id"
+  add_foreign_key "permission_template_accesses", "permission_templates"
   add_foreign_key "qa_local_authority_entries", "local_authorities"
   add_foreign_key "uploaded_files", "users"
 end

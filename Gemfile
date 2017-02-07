@@ -31,8 +31,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Sufia Gems
-gem 'sufia', '7.2.0' #git: 'https://github.com/projecthydra/sufia.git', branch: 'master'
-gem 'curation_concerns', '~> 1.6.0'
+gem 'sufia', git: 'https://github.com/projecthydra/sufia.git', branch: 'master'
 gem 'flipflop', git: 'https://github.com/jcoyne/flipflop.git', branch: 'hydra'
 
 gem 'rsolr', '~> 1.0'
