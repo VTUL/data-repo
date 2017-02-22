@@ -147,6 +147,7 @@ GEM
     bootstrap-sass (3.3.7)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
+    bootstrap_form (2.6.0)
     breadcrumbs_on_rails (3.0.1)
     browse-everything (0.11.1)
       addressable (~> 2.5)
@@ -367,6 +368,10 @@ GEM
     hydra-pcdm (0.9.0)
       active-fedora (>= 10, < 12)
       mime-types (>= 1)
+    hydra-role-management (0.2.2)
+      blacklight
+      bootstrap_form
+      cancancan
     hydra-works (0.15.0)
       hydra-derivatives (~> 3.0)
       hydra-file_characterization (~> 0.3, >= 0.3.3)
@@ -400,10 +405,6 @@ GEM
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    kaminari-actionview (1.0.1)
-      actionview
-      kaminari-core (= 1.0.1)
-    kaminari-core (1.0.1)
     kaminari_route_prefix (0.0.2)
       kaminari (~> 0.16)
     ldp (0.6.3)
@@ -714,6 +715,7 @@ DEPENDENCIES
   factory_girl_rails
   fcrepo_wrapper
   flipflop!
+  hydra-role-management
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
@@ -741,4 +743,4 @@ DEPENDENCIES
   web-console
 
 BUNDLED WITH
-   1.14.3
+   1.14.4

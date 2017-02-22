@@ -77,3 +77,4 @@ end
 gem 'pg'
 gem 'rspec-rails'
 gem 'resque-pool'
+gem "hydra-role-management"

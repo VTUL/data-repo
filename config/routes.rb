@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
+  mount Hydra::RoleManagement::Engine => '/'
+
   mount Sufia::Engine => '/'
   mount CurationConcerns::Engine, at: '/'
   resources :welcome, only: 'index'
