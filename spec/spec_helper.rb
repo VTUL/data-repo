@@ -34,6 +34,7 @@ require 'capybara/rails'
 #require 'equivalent-xml/rspec_matchers'
 require 'database_cleaner'
 require 'support/features'
+require 'active_fedora/noid/rspec'
 #require 'support/backport_test_helpers'
 #require 'support/rake'
 require 'byebug' unless ENV['TRAVIS']
@@ -106,6 +107,8 @@ end
 
 require 'active_fedora/cleaner'
 RSpec.configure do |config|
+  include ActiveFedora::Noid::RSpec
+
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
@@ -116,6 +119,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
 
   config.before :suite do
+    disable_production_minter!
     DatabaseCleaner.clean_with(:truncation)
   end
 
@@ -144,6 +148,8 @@ RSpec.configure do |config|
     visit "/assets/application.css"
     visit "/assets/application.js"
   end
+
+  config.after(:suite)  { enable_production_minter! }
 
   config.after do
     DatabaseCleaner.clean
