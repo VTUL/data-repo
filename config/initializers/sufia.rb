@@ -1,3 +1,4 @@
+
 Sufia.config do |config|
   # Injected via `rails g sufia:work Item`
   config.register_curation_concern :item
@@ -100,7 +101,8 @@ Sufia.config do |config|
 
   # Temporary path to hold uploads before they are ingested into FCrepo.
   # This must be a lambda that returns a Pathname
-  config.upload_path = ->() { Rails.root + 'tmp' + 'uploads' }
+  config.store_path = ->() { Rails.root + 'tmp' + 'uploads' }
+  config.cache_path = ->() { Rails.root + 'tmp' + 'uploads' + 'cache' }
 
   # Location on local file system where derivatives will be stored.
   # If you use a multi-server architecture, this MUST be a shared volume.
