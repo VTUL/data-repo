@@ -5,6 +5,7 @@
 
   <% if on_my_files? %>
     <div class="batch-toggle">
+      <h1>Bulk Actions</h1>
       <% session[:batch_edit_state] = "on" %>
       <div class="button_to-inline">
         <%= batch_edit_continue "Edit Selected" %>
