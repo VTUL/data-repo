@@ -1,0 +1,7 @@
+<% unless @generic_file.blank? || @generic_file.provenance.blank? %>
+  <ul class="listing">
+    <% @generic_file.provenance.each do |provenance| %>
+			<li><%= provenance %></li>
+    <% end %>
+  </ul>
+<% end %> 

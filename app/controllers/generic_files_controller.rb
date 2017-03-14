@@ -7,6 +7,14 @@ class GenericFilesController < ApplicationController
 
   self.edit_form_class = DatarepoFileEditForm
 
+  def edit
+		super
+		unless current_user.admin?                                                                         
+			self.edit_form_class.terms -= [:provenance]                                                  
+			@provenance_display = "records/show_fields/provenance"
+		end 
+  end
+
   # routed to /files/:id (PUT)
   def update
     success =

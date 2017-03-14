@@ -8,7 +8,10 @@
         <% f.object.terms.each do |term| %>
           <%= render_edit_field_partial(term, f: f) %>
         <% end %>
-
+        <% unless @provenance_display.blank? %>
+					<label>Provenance:</label>
+					<%= render(@provenance_display) %>
+				<% end %>
       </div><!-- /well -->
     <div>
       <%= f.submit class: 'btn btn-primary', onclick: "confirmation_needed = false;", id: "upload_submit", name: "update_descriptions" do %>
