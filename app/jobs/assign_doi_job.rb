@@ -1,18 +1,20 @@
 class AssignDoiJob
   attr_accessor :doi_request_id
-
+  attr_accessor :base_url
   def queue_name
     :assign_doi
   end
 
-  def initialize(doi_request_id)
+  def initialize(doi_request_id, base_url)
     self.doi_request_id = doi_request_id
+    self.base_url = base_url
   end
 
   def run
     doi_request = DoiRequest.find(doi_request_id)
     asset = Collection.find(doi_request.asset_id)
     minted_doi = Ezid::Identifier.mint(
+      target: "#{base_url}/collections/#{asset.id}",
       datacite_creator: (asset.creator.empty? ? "" : asset.creator.first), 
       datacite_resourcetype: "Dataset",
       datacite_title: asset.title,

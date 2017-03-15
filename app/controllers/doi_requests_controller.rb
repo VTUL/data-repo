@@ -26,7 +26,7 @@ class DoiRequestsController < ApplicationController
 
   def mint_doi
     doi_request = DoiRequest.find(params[:id])
-    Sufia.queue.push(AssignDoiJob.new(doi_request.id))
+    Sufia.queue.push(AssignDoiJob.new(doi_request.id, request.base_url))
     flash[:notice] = "Your request has been processing in the background. Please come back later for the assigned doi."
     redirect_to doi_requests_path
   end
@@ -34,7 +34,7 @@ class DoiRequestsController < ApplicationController
   def mint_all
     params[:doi_requests_checkbox].each do |id|
       doi_request = DoiRequest.find(id)
-      Sufia.queue.push(AssignDoiJob.new(doi_request.id))
+      Sufia.queue.push(AssignDoiJob.new(doi_request.id, request.base_url))
     end
     flash[:notice] = "Your request have been processing in the background. Please come back later for the assigned dois."
     redirect_to doi_requests_path
