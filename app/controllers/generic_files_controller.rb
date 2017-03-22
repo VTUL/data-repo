@@ -28,4 +28,15 @@ class GenericFilesController < ApplicationController
       render action: 'edit'
     end
   end
+
+  protected
+
+    def update_metadata
+      file_attributes = edit_form_class.model_attributes(params[:generic_file])
+      unless @generic_file.filename == params[:generic_file][:title]
+        file_attributes.merge!(filename: params[:generic_file][:title])
+        file_attributes.merge!(label: params[:generic_file][:title].first)
+      end
+      actor.update_metadata(file_attributes, params[:visibility])
+    end
 end
