@@ -98,3 +98,9 @@ div.arrow-wrapper {
 .upload-limit {
   margin: 10px 0;
 }
+.alert {
+  a {
+    color: $link-blue;
+    font-weight: bold;
+  }
+}

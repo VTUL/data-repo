@@ -4,7 +4,7 @@ en:
     institution_name:   "Virginia Tech"
     product_name:       "VTechData"
     account_label:      "User"
-    deposit_agreement:  "the VTechData Deposit Agreement"
+    deposit_agreement:  "VTechData Deposit Agreement"
     document_language:  "en"
     upload_tooltip:     "Please accept the Deposit Agreement before you can upload."
     share_button:       "Share Your Dataset"
