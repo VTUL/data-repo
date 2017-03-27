@@ -4,7 +4,11 @@ class BatchEditsController < ApplicationController
   include Sufia::BatchEditsControllerBehavior
 
   def terms
-    DatarepoFileEditForm.terms
+		if current_user.admin?
+			DatarepoFileEditForm.terms
+		else
+			DatarepoFileEditForm.terms -= [:provenance]
+    end
   end
 
   def generic_file_params
