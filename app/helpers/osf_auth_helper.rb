@@ -1,0 +1,2 @@
+module OsfAuthHelper
+end
