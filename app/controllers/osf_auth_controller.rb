@@ -34,8 +34,8 @@ before_action :get_client
 
   def get_client
     @client ||=  OAuth2::Client.new(
-      Rails.application.secrets['osf_client_id'],
-      Rails.application.secrets['osf_client_secret'],
+      Rails.application.secrets['osf']['client_id'],
+      Rails.application.secrets['osf']['client_secret'],
       :site => Rails.application.config.osf_auth_site,
       :authorize_url=> Rails.application.config.osf_authorize_url,
       :token_url=> Rails.application.config.osf_token_url
