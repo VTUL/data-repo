@@ -120,4 +120,12 @@ Rails.application.configure do
     config.logger = Logger.new(Rails.root.join('log', "#{Rails.env}.log"), "daily")
     config.log_level = :warn
   end
+
+  # Load OSF auth config from yaml
+  osf_auth_config = Psych.load_file(File.join(Rails.root.to_s, 'config', 'osf_auth_config.yml'))
+  config.osf_auth_site = osf_auth_config["auth_site"]
+  config.osf_authorize_url = osf_auth_config["authorize_url"]
+  config.osf_token_url = osf_auth_config["token_url"]
+  config.osf_api_base_url = osf_auth_config["api_base_url"]
+
 end

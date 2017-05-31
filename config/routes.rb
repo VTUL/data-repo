@@ -11,14 +11,6 @@ Rails.application.routes.draw do
 
   get 'osf_auth/token'
 
-  get 'oauth2/index'
-
-  get 'oauth2/auth'
-
-  get 'oauth2/callback'
-
-  get 'oauth2/token'
-
   get 'collections/datacite_search', to: 'collections#datacite_search'
   post 'collections/crossref_search', to: 'collections#crossref_search'
   get "collections/import_metadata", to: 'collections#import_metadata', as: 'import_collection'
