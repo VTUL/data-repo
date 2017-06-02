@@ -85,7 +85,7 @@ class OsfAPIController < OsfAuthController
   end
 
   def detail_route project_id
-    "/api_requests/detail/#{project_id}"
+    "/osf_api/detail/#{project_id}"
   end
 
   def get_oauth_token
@@ -130,11 +130,11 @@ class OsfAPIController < OsfAuthController
   end
 
   def osf_get url
-    #begin
+    begin
       response = @oauth_token.get(url)
-    #rescue
+    rescue
       puts "it broke"
-    #end
+    end
     response rescue nil
   end
 
