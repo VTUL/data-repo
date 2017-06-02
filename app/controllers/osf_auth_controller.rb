@@ -29,7 +29,7 @@ before_action :get_client
   end
 
   def callback_url
-    "#{request.base_url}/oauth2/callback"
+    "#{request.base_url}/osf_auth/callback/"
   end
 
   def get_client

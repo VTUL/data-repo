@@ -1,2 +1,19 @@
-<h1>OsfAPI#list</h1>
-<p>Find me in app/views/osf_api/list.html.erb</p>
+<h1>My Projects</h1>
+
+<% @projects.each do | project | %>
+  <% if !project.nil? %>
+    <div class="osf-project">
+      <h3><%= link_to project['attributes']['title'].html_safe, detail_route(project['id']) %></h3>
+      <div class="date">Created: <%= DateTime.parse(project['attributes']['date_created']).strftime("%b %d %Y %k:%M:%N") %></div> 
+      <div class="date">Last Modified: <%= DateTime.parse(project['attributes']['date_modified']).strftime("%b %d %Y %k:%M:%N") %></div>
+      <div class="contributors">Contributors:<br />
+        <% project['contributors'].each do | contributor | %>
+          <span class="contributor"><%= contributor['name'] + (contributor['creator'] ? " - Creator" : "") %></span>
+        <% end %>
+      </div>
+      <div class="permissions">My permissions: <%= project['attributes']['current_user_permissions'].join(", ") %></div>
+      <div class="visibility">Visibility: <%= project['attributes']['public'] ? "Public" : "Private" %></div>
+      <div class="links"><%= link_to "Details", detail_route(project['id']) %> | <%= link_to "View in OSF site", project['links']['html'] %></div>
+    </div>
+  <% end %>
+<% end %>

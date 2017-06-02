@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
-  get 'osf_api/detail'
+  get 'osf_api/detail/:project_id', to: 'osf_api#detail'
 
-  get 'osf_api/list'
+  get 'osf_api/list', :as => :api_list
 
   get 'osf_auth/index'
 
-  get 'osf_auth/auth'
+  get 'osf_auth/auth', :as => :oauth_auth
 
   get 'osf_auth/callback'
 
