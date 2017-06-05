@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160218201736) do
+ActiveRecord::Schema.define(version: 20170602201245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -338,6 +338,7 @@ ActiveRecord::Schema.define(version: 20160218201736) do
     t.string   "orcid"
     t.string   "provider",                         null: false
     t.string   "uid",                              null: false
+    t.text     "osf_token"
   end
 
   add_index "users", ["provider"], name: "index_users_on_provider", using: :btree
