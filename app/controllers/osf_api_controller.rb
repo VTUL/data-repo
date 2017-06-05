@@ -1,5 +1,6 @@
 class OsfAPIController < OsfAuthController
   require 'fileutils'
+  require 'zip'
 
   helper_method :detail_route
   before_action :check_logged_in, only: [:list, :detail]
@@ -34,7 +35,6 @@ class OsfAPIController < OsfAuthController
     root_path = File.join(Rails.root.to_s, 'tmp', project_name)
 
     walk_nodes node_obj, project_name, root_path   
- 
     zip_project root_path, project_name
     remove_tmp_files project_name
   end
@@ -80,8 +80,15 @@ class OsfAPIController < OsfAuthController
   end
 
   def zip_project path, name
-    tmp = File.join(Rails.root.to_s, 'tmp')
-    `cd "#{tmp}" &&  zip -r "#{name}.zip" "#{name}"`
+    path.sub!(%r[/$],'')
+    archive = File.join(path,name)+'.zip'
+    FileUtils.rm archive, :force=>true
+
+    Zip::File.open(archive, Zip::File::CREATE) do |zipfile|
+      Dir["#{path}/**/**"].reject{|f|f==archive}.each do |file|
+      zipfile.add(file.sub(path+'/',''),file)
+    end
+  end
   end
 
   def detail_route project_id
