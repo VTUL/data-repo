@@ -31,7 +31,7 @@ class OsfAPIController < OsfAuthController
   def detail
     node_obj = osf_get_object(node_url_from_id(params["project_id"]))
     project_name = node_obj['data']['attributes']['title'].downcase.gsub(" ", "_")
-    root_path = File.join(Rails.root.to_s, 'public', project_name)
+    root_path = File.join(Rails.root.to_s, 'tmp', project_name)
 
     walk_nodes node_obj, project_name, root_path   
  
@@ -68,7 +68,7 @@ class OsfAPIController < OsfAuthController
   end
 
   def remove_tmp_files dir_name
-    upload_dir = File.join(Rails.root.to_s, 'public')
+    upload_dir = File.join(Rails.root.to_s, 'tmp')
     archive_name = File.join(upload_dir, "#{dir_name}.zip")
     while !File.file? archive_name do
       sleep 0.01
@@ -80,8 +80,8 @@ class OsfAPIController < OsfAuthController
   end
 
   def zip_project path, name
-    public = File.join(Rails.root.to_s, 'public')
-    `cd "#{public}" &&  zip -r "#{name}.zip" "#{name}"`
+    tmp = File.join(Rails.root.to_s, 'tmp')
+    `cd "#{tmp}" &&  zip -r "#{name}.zip" "#{name}"`
   end
 
   def detail_route project_id

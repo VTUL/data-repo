@@ -22,7 +22,7 @@ before_action :get_client
     if !code.blank?
       oauth_token = @client.auth_code.get_token(code, :redirect_uri => callback_url)
       if !oauth_token.blank?
-        session['oauth_token'] = oauth_token
+        session['oauth_token'] = oauth_token.to_json
         redirect_to api_list_url 
       end
     end
@@ -43,7 +43,7 @@ before_action :get_client
   end
 
   def oauth_token
-    @oauth_token = OAuth2::AccessToken.from_hash(get_client, session['oauth_token'])
+    @oauth_token = OAuth2::AccessToken.from_hash(get_client, JSON.parse(session['oauth_token']))
   end
 
 end
