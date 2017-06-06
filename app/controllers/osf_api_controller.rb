@@ -1,6 +1,6 @@
 class OsfAPIController < OsfAuthController
   require 'fileutils'
-  require 'zip'
+  require 'vtech_data/zip_file_generator'
 
   helper_method :detail_route
   before_action :check_logged_in, only: [:list, :detail]
@@ -32,10 +32,11 @@ class OsfAPIController < OsfAuthController
   def detail
     node_obj = osf_get_object(node_url_from_id(params["project_id"]))
     project_name = node_obj['data']['attributes']['title'].downcase.gsub(" ", "_")
-    root_path = File.join(Rails.root.to_s, 'tmp', project_name)
+    tmp_path = File.join(Rails.root.to_s, 'tmp')
+    root_path = File.join(tmp_path, project_name)
 
     walk_nodes node_obj, project_name, root_path   
-    zip_project root_path, project_name
+    archive_full_path = zip_project tmp_path, root_path, project_name
     remove_tmp_files project_name
   end
 
@@ -79,16 +80,12 @@ class OsfAPIController < OsfAuthController
     end
   end
 
-  def zip_project path, name
-    path.sub!(%r[/$],'')
-    archive = File.join(path,name)+'.zip'
+  def zip_project tmp, path, name
+    archive = File.join(tmp,name)+'.zip'
     FileUtils.rm archive, :force=>true
-
-    Zip::File.open(archive, Zip::File::CREATE) do |zipfile|
-      Dir["#{path}/**/**"].reject{|f|f==archive}.each do |file|
-      zipfile.add(file.sub(path+'/',''),file)
-    end
-  end
+    zf = ZipFileGenerator.new(path, archive)
+    zf.write
+    return archive
   end
 
   def detail_route project_id
