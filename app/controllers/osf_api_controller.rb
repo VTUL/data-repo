@@ -1,4 +1,5 @@
 class OsfAPIController < OsfAuthController
+  #include Sufia::CollectionsControllerBehavior
   require 'fileutils'
   require 'vtech_data/zip_file_generator'
 
@@ -32,12 +33,49 @@ class OsfAPIController < OsfAuthController
   def detail
     node_obj = osf_get_object(node_url_from_id(params["project_id"]))
     project_name = node_obj['data']['attributes']['title'].downcase.gsub(" ", "_")
+
     tmp_path = File.join(Rails.root.to_s, 'tmp')
     root_path = File.join(tmp_path, project_name)
 
     walk_nodes node_obj, project_name, root_path   
     archive_full_path = zip_project tmp_path, root_path, project_name
     remove_tmp_files project_name
+
+    begin
+      license_link = node_obj['data']['relationships']['license']['links']['related']['href']
+      license_obj = osf_get_object(license_link)
+    rescue
+      logger.error("Error fetching project license details. Is license present on project?")
+    end
+
+    begin
+      external_link = File.join(node_obj['data']['links']['html'], 'addons', 'forward')
+      external = osf_get_object(external_link)
+    rescue
+      logger.error("Error fetching external link. Probably doesn't exist for this project")
+    end
+
+    item = GenericFile.new
+    item.title = node_obj['data']['attributes']['title']
+    item.tag = node_obj['data']['attributes']['tags'].empty? ? ['OSF'] : node_obj['data']['attributes']['tags']
+    item.creator < current_user.user_tag
+    item.rights .rights = [license_obj['data']['attributes']['name']] rescue ['Attribution 3.0 United States']
+    item.resource_type < 'Other data'
+    item.related_url < node_obj['data']['links']['html']
+
+
+    collection = Collection.new
+    collection.title = node_obj['data']['attributes']['title']
+    collection.description = node_obj['data']['attributes']['description']
+    collection.tag = node_obj['data']['attributes']['tags']
+    collection.date_created = [node_obj['data']['attributes']['date_created']]
+    collection.date_modified = node_obj['data']['attributes']['date_modified']
+    collection.related_url < node_obj['data']['links']['html']
+    collection.related_url < external['data']['attributes']['url'] if !external.nil?
+    collection.rights = [license_obj['data']['attributes']['name']] rescue []
+    
+    collection.apply_depositor_metadata(current_user.user_key)
+
   end
 
   def walk_nodes node_obj, project_name, current_path
