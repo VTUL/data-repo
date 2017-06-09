@@ -56,13 +56,27 @@ class OsfAPIController < OsfAuthController
     end
 
     item = GenericFile.new
-    item.title = node_obj['data']['attributes']['title']
+    item.title << node_obj['data']['attributes']['title']
     item.tag = node_obj['data']['attributes']['tags'].empty? ? ['OSF'] : node_obj['data']['attributes']['tags']
-    item.creator < current_user.user_tag
-    item.rights .rights = [license_obj['data']['attributes']['name']] rescue ['Attribution 3.0 United States']
-    item.resource_type < 'Other data'
-    item.related_url < node_obj['data']['links']['html']
+    item.creator << current_user.email
+    item.rights = [license_obj['data']['attributes']['name']] rescue ['Attribution 3.0 United States']
+    item.resource_type << 'Other data'
+    item.related_url << node_obj['data']['links']['html']
+    item.apply_depositor_metadata current_user
 
+    tmp_file = Tempfile.new('osf_zip', :encoding => 'ascii-8bit')
+    file_obj = f = File.open(archive_full_path , 'rb')
+    tmp_file << file_obj.read
+    file_mime_type = MIME::Types.type_for(archive_full_path).first.content_type
+    headers = "Content-Disposition: form-data; name=\"files[]\"; filename=\"#{project_name}.zip\"\r\nContent-Type: #{file_mime_type}\r\n"
+    uploaded_file = ActionDispatch::Http::UploadedFile.new({
+      :tempfile => tmp_file,
+      :filename => "#{project_name}.zip",
+      :type => file_mime_type,
+      :head => headers
+    })
+    item.add_file(uploaded_file, path: archive_full_path, original_name: "#{project_name}.zip", mime_type: file_mime_type) 
+    item.save
 
     collection = Collection.new
     collection.title = node_obj['data']['attributes']['title']
@@ -70,11 +84,14 @@ class OsfAPIController < OsfAuthController
     collection.tag = node_obj['data']['attributes']['tags']
     collection.date_created = [node_obj['data']['attributes']['date_created']]
     collection.date_modified = node_obj['data']['attributes']['date_modified']
-    collection.related_url < node_obj['data']['links']['html']
-    collection.related_url < external['data']['attributes']['url'] if !external.nil?
+    collection.related_url << node_obj['data']['links']['html']
+    collection.related_url << external['data']['attributes']['url'] if !external.nil?
     collection.rights = [license_obj['data']['attributes']['name']] rescue []
     
     collection.apply_depositor_metadata(current_user.user_key)
+    collection.members << item
+
+
 
   end
 
