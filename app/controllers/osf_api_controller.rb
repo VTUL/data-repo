@@ -1,5 +1,4 @@
 class OsfAPIController < OsfAuthController
-  #include Sufia::CollectionsControllerBehavior
   require 'fileutils'
   require 'vtech_data/zip_file_generator'
 
@@ -64,9 +63,11 @@ class OsfAPIController < OsfAuthController
     item.related_url << node_obj['data']['links']['html']
     item.apply_depositor_metadata current_user
 
-    tmp_file = Tempfile.new('osf_zip', :encoding => 'ascii-8bit')
+    #tmp_file = Tempfile.new('osf_zip', :encoding => 'ascii-8bit')
+    tmp_file = Tempfile.new('osf_zip')
     file_obj = f = File.open(archive_full_path , 'rb')
-    tmp_file << file_obj.read
+    #tmp_file << file_obj.read.
+    tmp_file << file_obj.read.force_encoding('UTF-8')
     file_mime_type = MIME::Types.type_for(archive_full_path).first.content_type
     headers = "Content-Disposition: form-data; name=\"files[]\"; filename=\"#{project_name}.zip\"\r\nContent-Type: #{file_mime_type}\r\n"
     uploaded_file = ActionDispatch::Http::UploadedFile.new({
@@ -75,7 +76,7 @@ class OsfAPIController < OsfAuthController
       :type => file_mime_type,
       :head => headers
     })
-    item.add_file(uploaded_file, path: archive_full_path, original_name: "#{project_name}.zip", mime_type: file_mime_type) 
+    item.add_file(uploaded_file, path: 'content', original_name: "#{project_name}.zip", mime_type: file_mime_type) 
     item.save
 
     collection = Collection.new
@@ -177,7 +178,8 @@ class OsfAPIController < OsfAuthController
 
   def get_file file_obj, directory, path
     file = osf_get(file_obj['links']['download'])
-    File.open(File.join(path, file_obj['attributes']['name']), 'w:ASCII-8BIT') { |new_file| new_file.write(file.body) }
+#    File.open(File.join(path, file_obj['attributes']['name']), 'w:ASCII-8BIT') { |new_file| new_file.write(file.body) }
+    File.open(File.join(path, file_obj['attributes']['name']),"w") { |new_file| new_file.write(file.body.force_encoding('UTF-8')) }
   end
 
   def make_dir path
