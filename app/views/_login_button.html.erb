@@ -1,0 +1,37 @@
+  <% if user_signed_in? %>
+      <div class="btn-group" id="user_utility_links">
+        <%= render partial: 'users/notify_link' %>
+        <%= link_to sufia.dashboard_index_path, class: "btn btn-default", id: "dashboard_link" do %>
+          <span class="glyphicon glyphicon-dashboard"></span>
+          <span class="sr-only">Select to access</span>
+          <span class="hidden-xs">&nbsp;<%= current_user.name %></span>
+          <span class="sr-only"> dashboard</span>
+        <% end %>
+        <button type="button" class="btn btn-default navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#"><span class="sr-only">select for additional menu options</span><span class="caret" ></span></a>
+        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+          <% if can? :create, GenericFile %>
+            <li><%= link_to raw('<span class="glyphicon glyphicon-upload"></span> upload'), sufia.new_generic_file_path, id: 'upload_nav_link' %></li>
+          <% end %>
+          <li><%= link_to raw('<span class="glyphicon glyphicon-user"></span> my profile'), sufia.profile_path(current_user), id: 'profile_nav_link' %></li>
+          <%= render partial: 'users/user_util_links_extra' %>
+          <li class="divider"></li>
+          <li><%= link_to raw('<span class="glyphicon glyphicon-log-out"></span> log out'), destroy_user_session_path, id: 'logout_nav_link' %></li>
+        </ul>
+      </div><!-- /.btn-group -->
+<% else %>
+      <div class="btn-toolbar login_button <%= left ? "pull-left" : "pull-right" %>">
+        <%= link_to raw('<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login'), user_omniauth_authorize_url(:cas, protocol: :https), class: "btn-group btn large btn-default", title: "Login" %>
+        <button type="button" class="btn-group btn btn-default navbar-toggle collapsed pull-right" data-toggle="collapse" data-target="#main-navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+  <% end %>

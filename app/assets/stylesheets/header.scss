@@ -2,7 +2,8 @@
 
 #masthead {
   background: $hokie-grey;
-  min-height: 100px;
+  min-height: 62px;
+  border-bottom: 5px solid $hokie-orange;
 
   .institution_name {
     font-family: 'Lato', Verdana, Arial, Helvetica;
@@ -13,11 +14,9 @@
   }
 
   #logo {
-  	margin-top: 15px;
+    margin-top: 6px;
     padding-top: 10px;
     padding-bottom: 10px;
-
-    border-right: solid #ffffff;
   }
 
   .navbar-default {
@@ -32,26 +31,40 @@
     border-color: $hokie-orange;
     .icon-bar {background-color: white;}
   }
+  .univ-lib-header {
+    color: white;
+    text-align: right;
+  }
+  .masthead-search-wrapper {
+    margin-top: -10px;
+  }
+}
 
+#masthead_controls.container-fluid {
+  padding-bottom: 0;
 }
 
 #masthead_controls .navbar-default .navbar-nav > .active > a,
 #masthead_controls .navbar-default .navbar-nav > .active > a:hover,
 #masthead_controls .navbar-default .navbar-nav > .active > a:focus {
   border-bottom: none;
-  background-color: $hokie-grey;
+  background: none;
   color: $hokie-orange;
   font-size: 16px;
   font-weight: bold;
 }
 
 #masthead_controls {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: white;
-  border-bottom: none;
+  border: none;
   padding-bottom: 16px;
-  background-color: $hokie-grey;
+  background-color: white;
+  color: black;
+
+   .row {
+     .col-xs-12 {
+       padding-left: 0;
+     }
+   }
 
    #search-submit-header {
     background-color: $hokie-orange;
@@ -62,31 +75,39 @@
     	background-color: $hokie-orange;
     }
   }
-
+  #main-navbar {
+    padding-left: 0px;
+  }
   .navbar {
-    background-color: $hokie-grey;
     margin-bottom: 0;
     li {
-      border-right: 2px solid $hokie-grey;
-      margin: 0 10px 0 10px;
+      border: none;
+      margin: 0 0 0 10px;
     }
     li:first-child {
-      border-left: 2px solid $hokie-grey;
+      border-left: none;
+      margin-left: 0;
+      a {
+        padding-left: 0;
+      }
+    }
+    a {
+      display: inline-block;
     }
     a:link, a:visited {
-      background-color: $hokie-grey;
-      padding-left: 20px;
-      padding-right: 20px;
-      color: white;
+      background-color: white;
+      color: black;
       font-size: 16px;
       font-weight: bold;
     }
     a:hover {
+      background-color: white;
       color: $hokie-off-orange
     }
   }
   .navbar-default {
     border: none;
+    background-color: white;
     padding-top: 1px;
   }
 }

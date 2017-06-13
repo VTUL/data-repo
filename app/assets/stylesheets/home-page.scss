@@ -10,7 +10,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     border-top: none;
-    border-bottom: 20px solid #F3F3F3;
+    border-bottom: none;
 }
 
 .home_marketing_text {
@@ -34,85 +34,145 @@
     background-color: transparent;
 }
 
+.logo-title-login-row {
+  position: relative;
+  display: block;
+  margin-top: 20px;
+  height: 100px;
+  .institution_name, img {
+    height: 100%
+  }
+}
+.logo-row-login-wrapper {
+  width: 320px;
+  height: 100%;
+  .navbar-default {
+    background: none;
+    border: none;
+  }
+  .btn {
+    background-color: $hokie-gold;
+  }
+  .btn.large {
+    padding: 16px 28px;
+    font-size: 1.5em;
+  }
+  #user_utility_links {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+  }
+  .login_button {
+    position: relative;
+    margin-top: 0;
+    top: 50%;    
+    transform: translateY(-50%);
+  }
+}
+
 #grad1 {
     height: 40px;
     background: linear-gradient(#f3f3f3, #ffffff);
 }
 
 #home_content {
-    padding: 0px 0px 10px 0px;
-    background: $background;
+  margin-top: 25px;
+  padding: 0px 0px 10px 0px;
+  background: $background;
+  font-size: 18px;
 
-    .nav-tabs {
-        background-color: $hokie-grey;
-        border-bottom: 2px solid $hokie-orange;
-        padding: 5px 0 0 5px;
+  .welcome-header {
+    font-size: 1.7em;
+    font-weight: bold;
+  }
+  .purpose {
+    font-size: 1.4em;
+    font-weight: bold;
+  }
 
-        li {
-            margin-bottom: -2px;
+  #home-content-left-column, #home-content-right-column {
+    padding: 0; 
+    margin: 40px 8%;
+
+    .home-right-col-block {
+      position: relative;
+      display: block;
+      width: 100%;
+      .home-right-col-block-heading {
+        position: relative;
+        display: block;
+        height: 40px;
+        h4 {
+          padding: 10px 0 10px 15px;
+          color: white;
         }
-
-        li a:link {
+      }
+      #publish-heading {
+        background-color: #396e8e;
+      }
+      #curation-services-heading {
+        background-color: #4f7427;
+      }
+      .home-right-col-block-image-wrapper {
+        position: relative;
+        display: block;
+        img {
+          width: 100%;
+        }
+      }
+      .home-right-col-block-info {
+        position: relative;
+        display: block;
+        padding: 20px;
+        background-color: #e4e4e4;
+        .home-right-col-block-link-wrapper {
+          position: relative;
+          display: block;
+          width: 70%;
+          height: 40px;
+          margin: 15px auto;   
+          background-color: #7e7e7e;
+          border-radius: 5px;
+          a, a:visited {
+            display: block;
+            margin: 0 auto;
+            font-size: 1em;;
+            text-align: center;
             color: white;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            line-height: 25px;
+          }
         }
-
-        li a:hover {
-            background-color: $hokie-orange;
-            border-color: $hokie-orange;
-        }
-
-        li.active a {
-            color: black;
-            border-bottom: 2px solid white;
-        }
-
-        li.active a:hover {
-            background-color: white;
-            border-color: white;
-        }
-    }
-
-    .home-column-left {
-        background-color: white;
-        padding-right: 0px;
-        @media only screen and (min-width: 768px) {border-right: 50px solid $background;};
-
-        .tab-content {
-            margin-left: -15px;
-            padding-right: 0px;
-        }
-    }
-
-    .home-column-right {
-        background-color: white;
-
-        .home-panel {
-            h2 {
-                padding: 0.19em;
-                margin-top: 0px;
-                background-color: $hokie-grey;
-                border-bottom: 2px solid $hokie-orange;
-                color: white;
+        #publish-link-list {
+          list-style-image: image-url("li_image.png");
+          -webkit-padding-start: 15px;
+          li.publish-link-item {
+            margin-top: 10px;
+            a, a:hover, a:visited {
+              color: #396e8e;
             }
-
-            .tag-toggle-list {
-                float: right;
-                margin: -3.6em 0.5em 0 0;
-            }
+          }  
         }
+      }
     }
-
-    #homeTabs {
-        margin-left: -15px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1368px) {
+  #home_content {
+    #home-content-right-column {
+      .home-right-col-block {
+        .home-right-col-block-info {
+          .home-right-col-block-link-wrapper {
+            width: 95%;
+            height: 60px;
+          }
+        }
+      }
     }
-
-    .home-column-left {
-        min-height: 250px;
-    }
-
-    .home-column-right {
-        min-height: 250px;
-    }
+  }
 }
 
 .home-info {
