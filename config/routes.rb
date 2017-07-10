@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'collections/ldap_search', to: 'collections#ldap_search'
   get 'dashboard/publishables', to: 'publishables#index', as: 'dashboard_publishables'
   get 'help', to: 'pages#show', id: 'help_page'
+  get 'policies', to: 'pages#show', id: 'policies_page', as: 'policies'
   get 'collections/:id/add-files', to: 'collections#add_files', as: 'collections_add_files'
 
   blacklight_for :catalog
