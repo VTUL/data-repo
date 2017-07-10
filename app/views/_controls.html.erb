@@ -5,11 +5,13 @@
         <nav class="navbar navbar-default" role="navigation">
           <ul class="nav navbar-nav">
               <% if current_user %>
-              <li <%= 'class=active' if request.url.include? 'dashboard' %>><a href="/dashboard/" >DASHBOARD</a></li>
+              <li <%= 'class=active' if request.url.include? 'dashboard' %>><%= link_to 'Dashboard', '/dashboard/' %></li>
               <% end %>
-              <li <%= 'class=active' if current_page?(sufia.about_path) %>><a href="/about/" >ABOUT</a></li>
-              <li><a href="http://guides.lib.vt.edu/vtechdata/help" >HELP</a></li>
-              <li <%= 'class=active' if current_page?(sufia.contact_path) %>><a href="<%= sufia.contact_form_index_path %>" >CONTACT</a></li>
+              <li <%= 'class=active' if current_page?(sufia.about_path) %>><%= link_to 'About', sufia.about_path %></li>
+              <li <%= 'class=active' if current_page?(user_guides_path) %>><%= link_to 'User Guide', user_guides_path %></li>
+              <li <%= 'class=active' if current_page?(help_page_path) %>><%= link_to 'Help', help_page_path %></li>
+              <li <%= 'class=active' if current_page?(policies_path) %>><%= link_to 'Policies', policies_path %></li>
+
           </ul><!-- /.nav -->
         </nav><!-- /.navbar -->
       </div>

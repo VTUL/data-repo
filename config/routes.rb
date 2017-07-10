@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   get "collections/import_metadata", to: 'collections#import_metadata', as: 'import_collection'
   get 'collections/ldap_search', to: 'collections#ldap_search'
   get 'dashboard/publishables', to: 'publishables#index', as: 'dashboard_publishables'
-  get 'help', to: 'pages#show', id: 'help_page'
+  get 'help', to: 'contact_form#new', as: 'help_page'
+  get 'policies', to: 'pages#show', id: 'policies_page', as: 'policies'
+  get 'user_guides', to: 'pages#show', id: 'user_guides_page', as: 'user_guides'
   get 'collections/:id/add-files', to: 'collections#add_files', as: 'collections_add_files'
 
   blacklight_for :catalog
