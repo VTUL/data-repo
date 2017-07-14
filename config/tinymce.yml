@@ -1,7 +1,39 @@
 menubar: false
-toolbar1: styleselect | bold italic | link image | undo redo
-toolbar2: table | fullscreen | uploadimage
+toolbar1: undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link anchor image table
+toolbar2: print preview media | forecolor backcolor emoticons | codesample fullscreen
 plugins:
   - table
   - fullscreen
   - uploadimage
+  - link
+  - advlist 
+  - autolink 
+  - lists 
+  - image 
+  - charmap 
+  - print 
+  - preview 
+  - hr 
+  - anchor 
+  - pagebreak
+  - searchreplace 
+  - wordcount 
+  - visualblocks 
+  - visualchars 
+  - code 
+  - fullscreen
+  - insertdatetime 
+  - media 
+  - nonbreaking 
+  - save 
+  - table 
+  - contextmenu 
+  - directionality
+  - emoticons 
+  - template 
+  - paste 
+  - textcolor 
+  - colorpicker 
+  - textpattern 
+  - imagetools 
+  - codesample 
