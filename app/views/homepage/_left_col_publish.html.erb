@@ -1,0 +1,26 @@
+<div id="publish" class="home-right-col-block">
+  <div id="publish-heading" class="home-right-col-block-heading">
+    <h4>Publish</h4>
+  </div>
+  <div id="publish-image-wrapper" class="home-right-col-block-image-wrapper">
+    <%= image_tag 'publish_image.jpg' %>
+  </div>
+  <div id="publish-info" class="home-right-col-block-info">
+    <p>Publish your data to make it openly accessible and discoverable</p>
+    <div id="login-link-wrapper" class="home-right-col-block-link-wrapper">
+      <%= link_to "Login to upload", user_omniauth_authorize_url(:cas, protocol: :https) %>
+    </div>
+    <% if route_exists('/policies') %>
+      <div id="publish-link-list-wrapper">
+        <ul id="publish-link-list">
+          <li class="publish-link-item">
+            <%= link_to "Access Policy", "/policies#access_policy" %>
+          </li>
+          <li class="publish-link-item">
+            <%= link_to "Publish Policy", "/policies#publish_policy" %>
+          </li>
+        </ul>
+      </div><!-- end publish-link-list-wrapper -->
+    <% end %>
+  </div>
+</div><!-- end #publish -->

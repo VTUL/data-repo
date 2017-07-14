@@ -2,21 +2,25 @@
 
 #search-form-header {
   .btn-primary:hover, .btn-primary:focus {
-    background-color: $hokie-orange !important;
+    background-color: $hokie-gold !important;
     color: white;
   }
 }
 
+#search-submit-header {
+  height: 34px;
+}
+
 .add, .btn-primary {
-	  background-color: $hokie-orange;
-	  border-color: $hokie-orange;
-	  color: white;
+	  background-color: $hokie-gold;
+	  border-color: $hokie-gold;
+	  color: black;
 }
 
 .add:hover, .add:focus,
 .btn-primary:hover, .btn-primary:focus {
-	  background-color: $hokie-orange;
-	  border-color: $hokie-orange;
+	  background-color: $hokie-gold;
+	  border-color: $hokie-gold;
 	  color: white;
 }
 

@@ -1,6 +1,6 @@
 <div id="masthead_controls" class="container-fluid">
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-8 no-horiz-pad">
       <div class="collapse navbar-collapse" id="main-navbar">
         <nav class="navbar navbar-default" role="navigation">
           <ul class="nav navbar-nav">
@@ -11,7 +11,6 @@
               <li <%= 'class=active' if current_page?(user_guides_path) %>><%= link_to 'User Guide', user_guides_path %></li>
               <li <%= 'class=active' if current_page?(help_page_path) %>><%= link_to 'Help', help_page_path %></li>
               <li <%= 'class=active' if current_page?(policies_path) %>><%= link_to 'Policies', policies_path %></li>
-
           </ul><!-- /.nav -->
         </nav><!-- /.navbar -->
       </div>

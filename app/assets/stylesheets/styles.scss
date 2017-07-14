@@ -17,6 +17,15 @@
   	color: white;
   	text-decoration: underline;
   }
+  .spaced {
+    margin-top: 10px;
+  }
+  .logo {
+    margin-top: 25px;
+    img {
+      width: 100%;
+    }
+  }
 }
 
 .doi-table thead th {

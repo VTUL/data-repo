@@ -1,14 +1,21 @@
 <div id="footer" class="container-fluid">
   <div class="row">
 
-  <div class="col-xs-5">
-  	<p><%= t('sufia.footer.copyright_html') %></p>
+  <div class="col-xs-7 col-centered text-centered spaced">
+    <small><a href="http://spec.lib.vt.edu/">Special Collections</a> | <a href="http://www.lib.vt.edu/artarch/">Art + Architecture</a> | <a href="http://www.lib.vt.edu/vetmed/">Veterinary Medicine</a> | <a href="http://www.lib.vt.edu/nvc/">Northern Virginia Center Resource Center</a> | <a href="http://m.lib.vt.edu/">Mobile Library Website</a></small>
   </div>
-  <div class="col-xs-7">
-    <small class="pull-right"><a href="http://spec.lib.vt.edu/">Special Collections</a> | <a href="http://www.lib.vt.edu/artarch/">Art + Architecture</a> | <a href="http://www.lib.vt.edu/vetmed/">Veterinary Medicine</a> | <a href="http://www.lib.vt.edu/nvc/">Northern Virginia Center Resource Center</a> | <a href="http://m.lib.vt.edu/">Mobile Library Website</a></small>
+  <div class="col-xs-7 col-centered text-centered spaced">
+    <small>VTechData follows Virginia Tech's <%= link_to "Privacy Policy", "http://www.policies.vt.edu/7030.pdf" %></small>
   </div>
-  <div class="col-xs-7">
-    <small class="pull-right">VTechData follows Virginia Tech's <%= link_to "Privacy Policy", "http://www.policies.vt.edu/7030.pdf" %></small>
+
+  <div class="col-xs-2 col-centered text-centered spaced logo">
+    <%= link_to("/") do %>
+      <%= image_tag "vt-logo" %>
+    <% end %>
+  </div>
+
+  <div class="col-xs-7 col-centered text-centered spaced">
+    <p><%= t('sufia.footer.copyright_html') %></p>
   </div>
   </div><!-- /footer -->
   </div><!-- /.row -->

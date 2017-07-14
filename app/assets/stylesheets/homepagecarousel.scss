@@ -1,11 +1,13 @@
+@import 'global';
+
 .carousel {
   height: 400px;
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
-  z-index: 10;
+  /*z-index: 10;*/
+  left: 0;
 }
-
 /* Declare heights because of positioning of img element */
 .carousel .item {
   height: 400px;
@@ -45,4 +47,27 @@
   background-color: white;
   border-radius: 15px;
   height: 15px;
+}
+.control-wrapper {
+  height: 400px;
+  margin-top: -400px;
+}
+.carousel-control {
+  background: none !important;
+}
+.home_marketing_text_col {
+  height: 400px;
+  background-color: $hokie-maroon;
+}
+.home_marketing_text {
+  position: relative;
+  display: block;
+  margin-top: 40px;
+  padding: 0;
+  background: none;
+  color: white;
+  text-align: left;
+  h3 {
+    line-height: 1.5em;
+  }
 }
