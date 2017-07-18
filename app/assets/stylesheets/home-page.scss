@@ -44,7 +44,7 @@
   }
 }
 .logo-row-login-wrapper {
-  width: 320px;
+  width: 305px;
   height: 100%;
   .navbar-default {
     background: none;
@@ -68,6 +68,9 @@
     margin-top: 0;
     top: 50%;    
     transform: translateY(-50%);
+  }
+  .cas-text {
+    text-align: center;
   }
 }
 
