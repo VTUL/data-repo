@@ -26,12 +26,13 @@
       </div><!-- /.btn-group -->
 <% else %>
       <div class="btn-toolbar login_button <%= left ? "pull-left" : "pull-right" %>">
-        <%= link_to raw('<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login'), user_omniauth_authorize_url(:cas, protocol: :https), class: "btn-group btn large btn-default", title: "Login" %>
+        <%= link_to raw('<span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Login to upload'), user_omniauth_authorize_url(:cas, protocol: :https), class: "btn-group btn large btn-default", title: "Login" %>
         <button type="button" class="btn-group btn btn-default navbar-toggle collapsed pull-right" data-toggle="collapse" data-target="#main-navbar">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
+        <p class="cas-text">(CAS authentication)</p>
       </div>
   <% end %>

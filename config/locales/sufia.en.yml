@@ -17,7 +17,7 @@ en:
       form:
         q:
           label:          "Search VTechData"
-          placeholder:    "Search VTechData..."
+          placeholder:    "Search for data in VTechData..."
         option:
           all:
             label_short:  "All"
