@@ -8,14 +8,14 @@
       <% end %>
     </div>
     <%= render partial: "dashboard/_index_partials/heading_arrow" %>
+    <div class="col-xs-6 col-sm-3 heading-tile <%="active" if current_dashboard_tab?(:describe) %>">
+      <%= link_to sufia.dashboard_files_path  do %>
+          <%= image_tag('describe.png') %><br>
+          <%= t("sufia.dashboard.view_files") %>
+      <% end %>
+    </div>
+    <%= render partial: "dashboard/_index_partials/heading_arrow" %>
   <% end %>
-  <div class="col-xs-6 col-sm-3 heading-tile <%="active" if current_dashboard_tab?(:describe) %>">
-    <%= link_to sufia.dashboard_files_path  do %>
-        <%= image_tag('describe.png') %><br>
-        <%= t("sufia.dashboard.view_files") %>
-    <% end %>
-  </div>
-  <%= render partial: "dashboard/_index_partials/heading_arrow" %>
   <% if can?(:create, Collection) %>
     <div class="col-xs-6 col-sm-3 heading-tile <%="active" if current_dashboard_tab?(:organize) %>">
       <%= link_to sufia.dashboard_collections_path, id: "hydra-collection-add" do %>
@@ -24,11 +24,11 @@
       <% end %>
     </div>
     <%= render partial: "dashboard/_index_partials/heading_arrow" %>
-  <% end  %>
-  <div class="col-xs-6 col-sm-3 heading-tile <%="active" if current_dashboard_tab?(:publish) %>">
-    <%= link_to dashboard_publishables_path, id: "hydra-collection-view" do %>
-        <%= image_tag('publish.png') %><br>
-        <%= t("sufia.dashboard.publish") %>
-    <% end %>
-  </div>
+    <div class="col-xs-6 col-sm-3 heading-tile <%="active" if current_dashboard_tab?(:publish) %>">
+      <%= link_to dashboard_publishables_path, id: "hydra-collection-view" do %>
+          <%= image_tag('publish.png') %><br>
+          <%= t("sufia.dashboard.publish") %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
