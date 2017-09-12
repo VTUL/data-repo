@@ -748,6 +748,7 @@ DEPENDENCIES
   rails-helper
   rsolr (~> 1.0.6)
   rspec-rails
+  rubyzip
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   simplecov
@@ -762,4 +763,4 @@ DEPENDENCIES
   xray-rails
 
 BUNDLED WITH
-   1.13.6
+   1.15.4

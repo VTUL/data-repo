@@ -10,6 +10,8 @@
 
     <%= render partial: "dashboard/_index_partials/user_info" %>
 
+    <%= render(partial: "dashboard/_index_partials/metadata_download") if current_user.admin? %>
+
 <% end %>
 
 <%= render partial: "dashboard/_index_partials/contents" %>
