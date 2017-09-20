@@ -1,13 +1,13 @@
 class DashboardController < ApplicationController
   include Sufia::DashboardControllerBehavior
-  require 'vtul/csv_generator'
+  require 'vtech_data/download_generator'
 
   def admin_metadata_download
     time_stamp = DateTime.now.strftime('%Q')
-    csv_generator = CsvGenerator.new(time_stamp)
+    csv_generator = DownloadGenerator.new(time_stamp)
     csv_generator.make_archive
-    csv_generator.generate_all('Collection')
-    csv_generator.generate_all('GenericFile')
+    csv_generator.generate_all_metadata('Collection')
+    csv_generator.generate_all_metadata('GenericFile')
     zip_file = csv_generator.zip
     while !File.file? zip_file
       sleep(0.1)
