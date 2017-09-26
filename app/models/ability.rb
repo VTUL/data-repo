@@ -24,11 +24,6 @@ class Ability
       g_f.collections.any? { |c| c.identifier.any? {|id| id.start_with?(ezid_shoulder)}}
     end unless admin_user?
 
-    if admin_user?
-      can [:create, :show, :add_user, :remove_user, :index], Role
-      can [:index, :pending, :mint_doi, :view_doi, :mint_all], DoiRequest
-    end
     can :manage, :all if admin_user?
   end
-
 end
