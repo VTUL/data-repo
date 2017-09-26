@@ -72,6 +72,8 @@ GEM
       tzinfo (~> 1.1)
     acts_as_follower (0.2.1)
     addressable (2.3.8)
+    archive (0.0.6)
+      ffi (~> 1.9.3)
     arel (6.0.3)
     autoparse (0.3.3)
       addressable (>= 2.3.1)
@@ -720,6 +722,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  archive
   byebug
   capybara
   clamav
@@ -748,7 +751,6 @@ DEPENDENCIES
   rails-helper
   rsolr (~> 1.0.6)
   rspec-rails
-  rubyzip
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   simplecov

@@ -1,8 +1,9 @@
 class CollectionsController < ApplicationController
   include Hydra::Catalog
   include Sufia::CollectionsControllerBehavior
+  require 'vtech_data/download_generator'
 
-  skip_load_and_authorize_resource :only => [:datacite_search, :crossref_search, :import_metadata, :ldap_search, :add_files]
+  skip_load_and_authorize_resource :only => [:datacite_search, :crossref_search, :import_metadata, :ldap_search, :add_files, :dataset_download]
 
   def presenter_class
     MyCollectionPresenter
@@ -137,5 +138,17 @@ class CollectionsController < ApplicationController
     (@response, @files) = search_results({ q: '', rows: 10000 }, search_params_logic)
     @collection = Collection.find(params[:id])
     authorize! :edit, @collection
+  end
+
+  def dataset_download
+    time_stamp = DateTime.now.strftime('%Q')
+    download_generator = DownloadGenerator.new(time_stamp)
+    download_generator.make_archive
+    download_generator.generate_dataset_download(params[:id], request.base_url)
+    zip_file = download_generator.zip
+    while !File.file? zip_file
+      sleep(0.1)
+    end
+    send_file zip_file
   end
 end
