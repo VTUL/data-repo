@@ -1,17 +1,17 @@
 <h2 class="sr-only">Actions</h2>
 <div class="collection-controls">
-  <div class="btn-group collection-control-row" role="group" aria-label="...">
     <% if can? :edit, @collection %>
+      <div class="btn-group collection-control-row" role="group" aria-label="...">
         <%= link_to collections.edit_collection_path, class: "btn btn-default", title: "Edit this Dataset" do %>
           <span class="glyphicon glyphicon-edit"></span> Edit
         <% end %>
         <%= link_to  collections_add_files_path(@collection), class: "btn btn-default", title: "Edit this Dataset" do %>
           <span class="glyphicon glyphicon-file"></span> Files
         <% end %>
+        <%= link_to collections_download_path(@collection), class: "btn btn-default", title: "Export this Dataset" do %>
+          <span class="glyphicon glyphicon-download"></span> Export dataset
+        <% end %>
+      </div>
     <% end %>
-    <%= link_to collections_download_path(@collection), class: "btn btn-default", title: "Export this Dataset" do %>
-      <span class="glyphicon glyphicon-download"></span> Export dataset
-    <% end %>
-  </div>
 </div>
 
