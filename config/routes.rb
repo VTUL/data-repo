@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'policies', to: 'pages#show', id: 'policies_page', as: 'policies'
   get 'user_guides', to: 'pages#show', id: 'user_guides_page', as: 'user_guides'
   get 'collections/:id/add-files', to: 'collections#add_files', as: 'collections_add_files'
-  get 'collections/:id/dataset-download', to: 'collections#dataset_download', as: 'collections_download'
+  get 'collections/:id/dataset-download(/:admin)', to: 'collections#dataset_download', as: 'collections_download'
   get 'dashboard/admin_metadata_download', to: 'dashboard#admin_metadata_download', as: 'admin_metadata_download'
 
   blacklight_for :catalog
