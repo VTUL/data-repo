@@ -22,7 +22,7 @@
           <td><%= doi_request.created_at %></td>          
           <td><%= status_tag(doi_request) %></td>
           <td><%= doi_request.ezid_doi %></td>
-          <td><%= mint_or_view_doi_button(doi_request) %></td>
+          <td><%= admin_dataset_download(doi_request) %> <%= mint_or_view_doi_button(doi_request) %></td>
         </tr>
       <% end %>
     </tbody>

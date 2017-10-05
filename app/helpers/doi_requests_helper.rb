@@ -43,5 +43,14 @@ module DoiRequestsHelper
       link_to t('doi.mint'), mint_doi_doi_request_path(doi_request), method: :patch, class: "btn btn-default pull-left margin-right-sm"
     end
   end
+
+  def admin_dataset_download doi_request
+    collection = Collection.find(doi_request["asset_id"])
+    if(collection)
+      return link_to "Download dataset", collections_download_path(collection), class: "btn btn-default pull-left margin-right-sm"
+    else
+      return ""
+    end
+  end
 end
 
