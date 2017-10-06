@@ -34,14 +34,14 @@ class DownloadGenerator
     write_csv(file_path, my_class, items)
   end
 
-  def generate_dataset_download dataset_id, base_url
+  def generate_dataset_download dataset_id, admin_download
     collection_file_path = File.join(self.class.csv_dir, archive_name, "dataset_#{dataset_id}.csv")
-    write_csv(collection_file_path, Collection, [dataset_id])  
+    write_csv(collection_file_path, Collection, [dataset_id], admin_download)
     collection_item_ids = Collection.find(dataset_id).member_ids
     if !collection_item_ids.blank?
       items_file_path = File.join(self.class.csv_dir, archive_name, "dataset_#{dataset_id}_items.csv")
-      write_csv(items_file_path, GenericFile, collection_item_ids)
-      add_files(collection_item_ids, base_url)
+      write_csv(items_file_path, GenericFile, collection_item_ids, admin_download)
+      add_files(collection_item_ids)
     end
   end
 
@@ -63,7 +63,7 @@ class DownloadGenerator
       ActiveFedora::SolrService.query(query)
     end
 
-    def add_files item_ids, base_url
+    def add_files item_ids
       item_ids.each do |item_id|
         generic_file = GenericFile.find(item_id)
         if generic_file.filename
@@ -78,12 +78,22 @@ class DownloadGenerator
       end      
     end
 
-    def write_csv file_path, item_class, item_ids
+    def write_csv file_path, item_class, item_ids, admin_download
       CSV.open(file_path,'wb') do |csv|
-        csv << item_class.new.csv_headers
+        if admin_download
+          headers = item_class.new.admin_csv_headers
+        else
+          headers = item_class.new.csv_headers
+        end
+        csv << headers
         item_ids.each do |item_id|
           record = item_class.find(item_id)
-          csv << record.csv_values
+          if admin_download
+            values = record.admin_csv_values
+          else
+            values = record.csv_values
+          end
+          csv << values
         end
       end
     end

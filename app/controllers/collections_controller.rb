@@ -144,7 +144,8 @@ class CollectionsController < ApplicationController
     time_stamp = DateTime.now.strftime('%Q')
     download_generator = DownloadGenerator.new(time_stamp)
     download_generator.make_archive
-    download_generator.generate_dataset_download(params[:id], request.base_url)
+    admin_download = (!params[:admin].blank? && params[:admin] == "admin")
+    download_generator.generate_dataset_download(params[:id], admin_download)
     zip_file = download_generator.zip
     while !File.file? zip_file
       sleep(0.1)
