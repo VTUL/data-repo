@@ -1,22 +1,20 @@
-<div id="masthead" class="container-fluid">
-  <div class="row">
-    <div class="col-xs-11 col-centered">
-      <div class="col-xs-2 no-horiz-pad">
-        <%= render partial: '/logo' %>
-      </div><!-- /.col-xs-5 -->
-      <div class="col-xs-3 pull-right no-horiz-pad">
-        <%= link_to("https://www.lib.vt.edu") do %>
-          <h2 class="univ-lib-header">UNIVERSITY LIBRARIES</h2>
-        <% end %>
+<div id="masthead" class="container-fluid vt_rebrand">
+  <div class="row util-nav-menu">
+    <%= render partial: '/vt_toplinks' %>
+  </div>
+
+  <div class="container">
+    <div class="row logo-row">
+      <div class="full-height">
+        <div class="col-xs-5 no-horiz-pad logo-col">
+          <%= render partial: '/logo' %>
+        </div><!-- /.col-xs-5 -->
+        <%= render partial: '/vt_search_form' %>
       </div>
-      <% if !current_page?(root_url) %>
-        <div class="col-xs-6  pull-right"> 
-          <div class="masthead-search-wrapper col-centered">
-            <%= render partial: '/catalog/search_form' %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div><!-- /.row -->
+    </div><!-- /.row -->
+  </div>
+
+  <%= render partial: '/vt_main_nav' %>
+
 </div> <!-- /masthead -->
 

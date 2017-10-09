@@ -1,22 +1,153 @@
-<div id="footer" class="container-fluid">
-  <div class="row">
+<div id="footer">
+  <div id="vt_footer_wrapper" class="vt_rebrand">
+    <div class="vt-footer-container container">
+      <div class="row">
+        <div class="col-sm-3 left_col">
+          <a href="http://www.vt.edu" class="vt_home_link" title="Virginia Tech Home">
+            <%= image_tag 'logo-maroon.svg' %>
+          </a>
+          <ul class="left_col_list">
+            <li><a href="http://www.vt.edu/contacts/index.html" target="_blank">Contact Virginia Tech</a></li>
+            <li><a href="http://www.vt.edu/about/privacy.html" target="_blank">Privacy</a></li>
+            <li><a href="http://www.vt.edu/about/acceptable-use.html" target="_blank">Acceptable Use</a></li>
+          </ul>
 
-  <div class="col-xs-7 col-centered text-centered spaced">
-    <small><a href="http://spec.lib.vt.edu/">Special Collections</a> | <a href="http://www.lib.vt.edu/artarch/">Art + Architecture</a> | <a href="http://www.lib.vt.edu/vetmed/">Veterinary Medicine</a> | <a href="http://www.lib.vt.edu/nvc/">Northern Virginia Center Resource Center</a> | <a href="http://m.lib.vt.edu/">Mobile Library Website</a></small>
-  </div>
-  <div class="col-xs-7 col-centered text-centered spaced">
-    <small>VTechData follows Virginia Tech's <%= link_to "Privacy Policy", "http://www.policies.vt.edu/7030.pdf" %></small>
-  </div>
+        </div>
+        <div class="col-sm-9 right_col">
+          <div class="vt-multicolumn">
+            <div class="row">
+              <div class="col-md-3 col-sm-6">
+                <div class="vt-col vt-col-1">
+                  <div class="parbase section text">
+                    <div class="vt-text">
+                      <ul>
+                        <li>
+                          <a href="http://www.vtnews.vt.edu/">News</a>
+                        </li>
+                        <li>
+                          <a href="http://www.calendar.vt.edu/">Calendar</a>
+                        </li>
+                        <li>
+                          <a href="http://www.givingto.vt.edu/">Giving</a>
+                        </li>
+                        <li>
+                          <a href="http://www.lib.vt.edu/">Libraries</a>
+                        </li>
+                        <li>
+                          <a href="http://www.maps.vt.edu/">Maps &amp; Locations</a>
+                        </li>
+                        <li>
+                          <a href="http://www.vt.edu/az_index.html">A to Z Index</a>
+                        </li>
+                        <li>
+                          <a href="http://www.directory.unirel.vt.edu/">Directory</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="vt-col vt-col-2">
+                  <div class="parbase section text">
+                    <div class="vt-text">
+                      <ul>
+                        <li>
+                          <a href="http://www.admissions.vt.edu">Prospective Students</a>
+                        </li>
+                        <li>
+                          <a href="http://www.vt.edu/student_life.html">Current Students</a>
+                        </li>
+                        <li>
+                          <a href="http://www.graduateschool.vt.edu/">Graduate Students</a>
+                        </li>
+                        <li>
+                          <a href="http://www.vt.edu/faculty_staff.html">Faculty &amp; Staff</a>
+                        </li>
+                        <li>
+                          <a href="http://www.vt.edu/family.html">Parents &amp; Family</a>
+                        </li>
+                        <li>
+                          <a href="http://www.vt.edu/business.html">Business &amp; Industry</a>
+                        </li>
+                        <li>
+                          <a href="http://www.vt.edu/alumni.html">Alumni</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
 
-  <div class="col-xs-2 col-centered text-centered spaced logo">
-    <%= link_to("/") do %>
-      <%= image_tag "vt-logo.png" %>
-    <% end %>
-  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="vt-col vt-col-3">
+                  <div class="parbase section text">
+                    <div class="vt-text">
+                      <ul>
+                        <li>
+                          <a href="http://www.bookstore.vt.edu/">Bookstore</a>
+                        </li>
+                        <li>
+                          <a href="http://www.vt.edu/about/equal-opportunity.html">Equal Opportunity</a>
+                        </li>
+                        <li>
+                          <a href="http://www.vt.edu/about/accessibility.html">Accessibility</a>
+                        </li>
+                        <li>
+                          <a href="http://www.weremember.vt.edu/index.html">We Remember</a>
+                        </li>
+                        <li>
+                          <a href="http://www.inclusive.vt.edu/">InclusiveVT</a>
+                        </li>
+                        <li>
+                          <a href="http://www.stopabuse.vt.edu/">Stop Abuse</a>
+                        </li>
+                        <li>
+                          <a href="https://www.vt.edu/commencement.html">Commencement</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
 
-  <div class="col-xs-7 col-centered text-centered spaced">
-    <p><%= t('sufia.footer.copyright_html') %></p>
-  </div>
-  </div><!-- /footer -->
-  </div><!-- /.row -->
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6">
+                <div class="vt-col vt-col-4">
+                  <div class="parbase section text">
+                    <div class="vt-text">
+                      <ul>
+                        <li>
+                          <a href="https://banweb.banner.vt.edu/ssb/prod/twbkwbis.P_WWWLogin">Hokie SPA</a>
+                        </li>
+                        <li>
+                          <a href="https://canvas.vt.edu/">Canvas</a>
+                        </li>
+                        <li>
+                          <a href="http://my.vt.edu/">MyVT</a>
+                        </li>
+                        <li>
+                          <a href="http://www.jobs.vt.edu/">Jobs at VT</a>
+                        </li>
+                        <li>
+                          <a href="http://www.policies.vt.edu/index.php">University Policies</a>
+                        </li>
+                        <li>
+                          <a href="http://www.vt.edu/status.html">University Status</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end .row -->
+    </div><!-- /.vt-footer-container -->
+    <div id="footer-copyright">
+      <p>&copy; 2017 Virginia Polytechnic Institute and State University</p>
+    </div><!-- /#footer-copyright -->
+  </div> <!-- /vt_footer_wrapper -->
 </div><!-- /footer -->

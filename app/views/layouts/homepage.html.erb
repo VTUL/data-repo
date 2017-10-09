@@ -6,11 +6,16 @@
 
 <body> 
 <div  id="wrapper"> 
-  <div class="container-fluid">
+  <div class="container-fluid outer_container">
     <div id="page-positioner">
       <%= render partial: '/masthead' %>
       <div id="center-wrapper" class="col-xs-11 col-centered">
         <%= render partial: '/logo_title_row' %>
+
+        <div class="masthead-search-wrapper col-xs-6 col-centered">
+          <%= render partial: '/catalog/search_form' %>
+        </div>
+
         <%= render partial: '/controls' %>
         <%= render partial: '/flash_msg' %>
         <div id="content-wrapper"> 

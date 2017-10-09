@@ -6,3 +6,4 @@
 //= require datarepo/doi_requests
 //= require datarepo/carousel
 //= require datarepo/popover_toggle
+//= require datarepo/menu_handler

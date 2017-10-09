@@ -1,0 +1,1285 @@
+@charset "UTF-8";
+
+@import "vt-brand-center.scss";
+
+
+/************************************** BEGIN MEDIA-BUILDING CORE */
+
+body {
+    padding-top: 0;
+}
+
+/*HEADER*/
+
+/* turn off divider and dept name */
+.department-name * {
+    display: none;
+}
+
+.util-nav-menu {
+    position: relative;
+    max-height: 35px;
+    width: 100%;
+    min-height: 35px;
+    background-color: black;
+    margin-left: 0;
+}
+
+.nav-utilities {
+    padding: 8px 20px 0 0;
+}
+
+.home-vt-toplinks {
+    color: rgba(255, 255, 255, 1.0);
+    z-index: 9999;
+    margin: 0;
+    padding: 0;
+    min-height: 35px;
+    float: right;
+}
+
+.home-vt-toplinks li {
+    display: inline-block;
+}
+
+.home-vt-toplinks a {
+    text-transform: none;
+    color: rgba(255, 255, 255, 1.0);
+}
+
+.home-vt-toplinks .toplink-pipe {
+    color: rgba(255, 255, 255, 1.0);
+}
+
+.vt-general img.vt-we-remember-ribbon,
+.vt-bio img.vt-we-remember-ribbon,
+.vt-article img.vt-we-remember-ribbon,
+.vt-building img.vt-we-remember-ribbon {
+	display: none;
+}
+
+.nav-utilities ul li a, .nav-utilities ul li {
+    color: #efefef;
+    font-size: 11px;
+    font-weight: 400;
+}
+
+.nav-utilities ul li {
+    float: left;
+    padding-left: 5px;
+    list-style: none;
+}
+
+/*Building content type styles*/
+
+address {
+	font-size: 18px;
+	font-weight: 300;
+}
+
+.vt-building-history {
+	padding-top: 10px;
+}
+
+.vt-building-history-title {
+	margin-bottom: 15px;
+}
+
+.vt-building-data {
+	padding-bottom: 20px;
+}
+
+/************************************** END MEDIA-BUILDING CORE */
+
+/************************************** BEGIN HOMEPAGE-STYLES */
+
+
+.vt-edu-homepage .parbase {
+    margin: 0;
+}
+
+.vt-edu-homepage .flypanels-content>.container > div {
+    background-image: none;
+    padding-bottom: 0 !important;
+}
+
+/*info bar*/
+.black-bar {
+    background-color: rgba(245, 245, 246, 0.8);
+    width: 100%;
+    padding-top: 6px;
+    padding-left: 20px;
+    padding-right: 20px;
+    overflow: hidden;
+}
+
+.vt-info-bar {
+    height: 35px;
+}
+
+.vt-info-bar ul {
+    margin: 0;
+    padding: 0;
+}
+
+.vt-info-bar ul li a,
+.vt-info-bar ul li {
+    color: rgba(139, 31, 65, 1.0);
+}
+
+.vt-info-bar ul li {
+    display: inline-block;
+    float: left;
+    padding-top: 5px;
+    padding-left: 5px;
+    list-style: none;
+}
+
+.info-for-links li,
+.info-for-links li a {
+    font-size: 11px;
+    font-weight: 400;
+}
+
+.info-for-links .toplink-pipe {
+    color: rgba(198, 70, 0, 1.0);
+}
+
+ul.social-icons {
+    max-height: 35px;
+    float: right;
+}
+
+ul.social-icons li {
+    padding-top: 0;
+}
+
+ul.social-icons li .fa {
+    padding-bottom: 10px;
+    padding-left: 7px;
+    padding-top: 0px;
+    margin-top: 0px;
+    font-size: 20px;
+}
+
+
+/*reduces size of social media icons at medium and small sizes.*/
+@media (max-width: 991px) {
+    ul.social-icons {
+        float: left;
+    }
+
+    ul.social-icons li .fa {
+        padding-bottom: 10px;
+        padding-left: 2px;
+        padding-top: 3px;
+        margin-top: 0px;
+        font-size: 16px;
+    }
+}
+
+.vt-edu-homepage .featured-content-container .vt-carousel {
+    margin-top: 40px !important;
+}
+
+.vt-edu-homepage.vt-home.norightcol .secondary-content-container::before {
+    right: 25%;
+}
+
+.vt-multicolumn.off-center-2-columns .vt-list-columns > ul > li > ul > li.col-sm-4.col-md-4.last.item.item-count-3 > ul > li,
+.vt-multicolumn.standard-2-columns .col-sm-6:nth-child(2) {
+    padding-right: 0;
+}
+
+/* #vt_no_rb > div > div > div > div:nth-child(1) > div > div > div:nth-child(4) { */
+.news-and-events > div > div:nth-child(4) {
+    margin-top: 40px;
+}
+
+/*divider line between news content and events content*/
+.divider-line-container {
+    text-align: center;
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.divider-line {
+    background-image: url(30-10dash-6D6A75.png);
+    background-position: left top;
+    background-repeat: repeat-x;
+    width: 100%;
+    height: 1px;
+}
+
+.news-and-events {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+/*list of more news in right column*/
+.news-and-events span.vt-list-date-formatted {
+    float: left;
+    width: 100%;
+}
+
+/*changes order of display for feed to match the list above
+.news-and-events span.vt_feed_iDate {
+    display: table-header-group;
+}
+
+.news-and-events li a.vt_feed_iTitle {
+    display: table-footer-group;
+}
+
+*/
+
+/*removes defualt 40px space under parbase*/
+.news-and-events .list,
+.news-and-events .vtmulticolumn {
+    margin-bottom: 0px;
+}
+
+.news-and-events .vt-c-list-item-orange ul > li > ul > li > ul > li {
+    padding-left: 25px;
+}
+
+.news-and-events .vt-c-list-item-orange .vt-list-date-formatted {
+    font-family: 'gineso-condensed', sans-serif;
+    color: rgba(209, 75, 39, 1.0);
+}
+
+.news-and-events .vt-feedreader {
+    padding-left: 10px;
+}
+
+.news-and-events .vt-more ul {
+    padding: 0 0 15px 30px;
+}
+
+.news-and-events .vt-more ul li {
+    color: rgba(139, 31, 65, 1.0);
+    font-size: 18px;
+}
+/*left aligns links under photos */
+.home-content .list ul, ul.vt_feed_items {
+    padding-left: 0px;
+}
+
+.home-content .list li, .vt_feed_items li {
+    font-size: 18px;
+    list-style-type: none;
+}
+.home-content .list li a {
+    line-height: normal;
+}
+
+h2.vt_feed_cTitle {
+    padding-top: 0px;
+    margin-top: 0px;
+}
+
+.vt_feed_iTime{
+    display: none;
+}
+/*
+.home-content-area-3 {
+    background-color: #557082;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 90px;
+}
+
+.home-content-area-4 {
+    background-color: #EDEADA;
+    width: 100%;
+    padding-bottom: 10px;
+}
+*/
+
+.secondary-image img {
+    width: 100%;
+}
+
+.secondary-image {
+    max-height: 700px;
+}
+
+.vt-recentPosts-container {
+    background-image: url('grid_3_ti_bg.jpg');
+    background-repeat: repeat-x;
+    background-attachment: scroll;
+    background-position: center top;
+    padding: 10px 30px;
+}
+
+.vt-home-recent-posts > h3 > a > i {
+    font-family: 'gineso-condensed', sans-serif;
+}
+
+.recent-posts-icon {
+    color: #ffffff;
+    font-size: 40px;
+    text-align: left;
+    width: 100%;
+    padding-top: 20px;
+}
+
+.recent-posts-icon span {
+    float: left;
+}
+
+.recent-posts-icon h3 {
+    margin-top: 5px;
+}
+
+.learn-at-virginia-tech h3 {
+    margin-bottom: 35px;
+}
+
+.vt-we-remember-ribbon {
+    width: 15px;
+    height: 22px;
+}
+
+.news-and-events ul.vt_feed_items li:before {
+    content: none;
+}
+
+.news-and-events ul.vt_feed_items a {
+    font-weight: 300;
+}
+
+.vt-learn-at-row {
+    background-color: rgba(255, 255, 255, 1.0);
+    padding: 50px 30px 0 30px;
+}
+
+.vt-learn-at-grey {
+    background-color: rgba(109, 106, 117, 0.5);
+    border-top: 1px solid rgba(0, 0, 0, 1.0);
+    padding: 0;
+}
+
+.vt-learn-at {
+    position: relative;
+    background-color: rgba(255, 255, 255, 1.0);
+    border-left: 1px solid rgba(0, 0, 0, 1.0);
+    border-right: 1px solid rgba(0, 0, 0, 1.0);
+    width: 1170px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 30px 30px 30px;
+}
+
+.vt-learn-at > .vt-vtcontainer-content::before,
+.vt-learn-at > .vt-vtcontainer-content::after {
+    position: absolute;
+    content: '';
+    width: 20px;
+    height: 20px;
+    border: 1px solid rgba(0, 0, 0, 1.0);
+    z-index: 10;
+}
+
+.vt-learn-at > .vt-vtcontainer-content::before {
+    top: -10px;
+    left: -10px;
+}
+
+.vt-learn-at > .vt-vtcontainer-content::after {
+    bottom: -10px;
+    right: -10px;
+}
+
+.vt-learn-at h2 {
+    position: relative;
+    top: -20px;
+    margin-top: 0;
+    margin-left: -30px;
+    padding-left: 30px;
+    background: rgba(255, 255, 255, 1.0);
+    width: 35%;
+    color: rgba(139, 31, 65, 1.0);
+}
+
+.vt-learn-at .vt-col .vt-text {
+    padding-bottom: 30px;
+}
+
+.vt-learn-at .vt-col .vt-text h3 a {
+    font-family: "Acherus", sans-serif;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 1.0);
+}
+
+/* vtnews-recent-posts */
+.vtnews-c-recent-posts{
+    border-bottom: 1px solid #cecece;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.vtnews-c-recent-posts > div > div:first-child {
+    width: 33.333%;
+}
+
+.vtnews-c-recent-posts > div > div:last-child {
+    width: 66.6667%;
+}
+
+.vtnews-c-recent-posts-title:before {
+    display: inline-block;
+    margin-right: 15px;
+    padding-top: 10px;
+    float: left;
+    font-size: 25px;
+    content: "\f0e5";
+    font-family: FontAwesome;
+}
+
+.vtnews-c-recent-posts-more {
+        border-bottom:1px solid #CECECE;
+}
+
+.media-grad li.media-list-item {
+    border: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+
+.vtnews-c-recent-posts p.timePosted,
+.vtnews-c-recent-posts p.interact {
+    display: none;
+}
+
+.vtnews-c-recent-posts .user a {
+    color: black;
+    font-weight: 400;
+}
+
+.vtnews-c-recent-posts .user span[data-scribe = 'element:name'] {
+    display: none;
+}
+
+.vtnews-c-recent-posts .user img {
+    display: none;
+}
+
+.vtnews-c-recent-twitter1:before,
+.vtnews-c-recent-twitter2:before {
+    content: '\f081';
+    font-family: FontAwesome;
+    font-size: 28px;
+    color: #cccccc;
+    width: 40px;
+    float: left;
+    margin-top: 10px;
+}
+
+.vtnews-c-recent-twitter1,
+.vtnews-c-recent-twitter2 {
+    padding-top: 0;
+    margin-top: 0;
+}
+
+/* vtnews-recent-posts-hashtags */
+
+.vtnews-c-recent-posts-hashtags {
+    border-top: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.vtnews-c-recent-posts-hashtags h3:before {
+    content: '\f02c';
+    font-family: FontAwesome;
+    font-size: 28px;
+    color: #cccccc;
+    width: 40px;
+    float: left;
+    margin-top: 0px;
+}
+
+.vtnews-c-recent-posts-hashtags ul,
+.vtnews-c-recent-posts-hashtags ul li {
+    list-style: none;
+}
+
+.vtnews-c-recent-posts-hashtags ul li {
+    display: inline-block;
+}
+
+/************************************** END HOMEPAGE-STYLES */
+
+/************************************** BEGIN BRAND CENTER STYLES */
+
+.vt-brand-sidenav .parbase {
+	margin-bottom: 20px;
+}
+
+.vt-brand-links .vt-list-columns > ul {
+	padding: 0;
+}
+
+.vt-brand-links .vt-list-columns > ul > li {
+	margin: 0 !important;
+}
+
+.vt-brand-links .item {
+	display: block;
+	margin: 0 !important;
+	padding: 0;
+}
+
+.vt-brand-links .item > .row {
+	margin-right: 0;
+}
+
+.vt-brand-links .item > .row > li {
+	display: table;
+	padding: 10px 15px 10px 0;
+	margin: 0 15px !important;
+	width: 100%;
+	color: rgba(109, 106, 117, 1.0);
+    background-color: transparent;
+    border-bottom: 2px solid rgba(153, 153, 153, 1.0);
+}
+
+.vt-brand-links .last.item > .row > li {
+    border-bottom: none;
+}
+
+.vt-brand-links .item .vt-list-title {
+	font-family: "gineso-condensed", sans-serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+/************************************** BEGIN TYPE PAGE STYLES */
+
+.vt-brandcenter-type .type-example .parbase,
+.vt-brandcenter-type .type-example .parbase p {
+	margin-bottom: 0;
+}
+
+.vt-brandcenter-type .type-example .vt-vtcontainer-content > .parbase:nth-of-type(3) {
+	display: block;
+	position: relative;
+	top: -20px;
+}
+
+.vt-brandcenter-type .type-example .vt-col .vt-multicolumn .vt-col > div.parbase:last-of-type {
+	display: block;
+	position: relative;
+	top: -18px;
+}
+
+.vt-brandcenter-type .acherus-title p {
+	font-family: "Acherus", sans-serif;
+	font-size: 64px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1.2em;
+}
+
+.vt-brandcenter-type .font-acherus * {
+	font-family: "Acherus", sans-serif;
+}
+
+.vt-brandcenter-type .font-acherus div[class*='acherus'] * {
+	font-family: "Acherus", sans-serif;
+	font-size: 32px;
+	margin-bottom: 0;
+}
+
+.vt-brandcenter-type .crimsontext-title p {
+	font-family: "crimsontext", serif;
+	font-size: 64px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1.2em;
+}
+
+.vt-brandcenter-type .font-crimsontext div[class*='crimsontext'] * {
+	font-family: "crimsontext", serif;
+	font-size: 32px;
+	margin-bottom: 0;
+}
+
+.vt-brandcenter-type .gineso-title p {
+	font-family: "gineso-condensed", sans-serif;
+	font-size: 64px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1.2em;
+}
+
+.vt-brandcenter-type .font-gineso div[class*='gineso'] * {
+	font-family: "gineso-condensed", sans-serif;
+	font-size: 32px;
+	margin-bottom: 0;
+}
+
+.vt-brandcenter-type div[class$="-thin"] * {
+	font-weight: 200;
+	font-style: normal;
+	margin-bottom: 0;
+}
+
+.vt-brandcenter-type div[class$="-thinItalic"] * {
+	font-weight: 200;
+	font-style: italic;
+	margin-bottom: 0;
+}
+
+.vt-brandcenter-type div[class$="-light"] * {
+	font-weight: 300;
+	font-style: normal;
+	margin-bottom: 0;
+}
+
+.vt-brandcenter-type div[class$="-lightItalic"] * {
+	font-weight: 300;
+	font-style: italic;
+	margin-bottom: 0;
+}
+
+div[class$="-regular"] * {
+	font-weight: 400;
+	font-style: normal;
+	margin-bottom: 0;
+}
+
+.vt-brandcenter-type div[class$="-regularItalic"] * {
+	font-weight: 400;
+	font-style: italic;
+	margin-bottom: 0;
+}
+
+.vt-brandcenter-type div[class$="-medium"] * {
+	font-weight: 500;
+	font-style: normal;
+	margin-bottom: 0;
+}
+
+.vt-brandcenter-type div[class$="-mediumItalic"] * {
+	font-weight: 500;
+	font-style: italic;
+	margin-bottom: 0;
+}
+
+.vt-brandcenter-type .font-crinsontext div[class$="-semibold"] * {
+	font-weight: 500;
+	font-style: normal;
+	margin-bottom: 0;
+}
+
+.vt-brandcenter-type .font-crinsontext div[class$="-semiboldItalic"] * {
+	font-weight: 500;
+	font-style: italic;
+	margin-bottom: 0;
+}
+
+.vt-brandcenter-type .font-gineso div[class$="-demiBold"] * {
+	font-weight: 600;
+	font-style: normal;
+	margin-bottom: 0;
+}
+
+.vt-brandcenter-type .font-gineso div[class$="-demiBoldItalic"] * {
+	font-weight: 600;
+	font-style: italic;
+	margin-bottom: 0;
+}
+
+.vt-brandcenter-type div[class$="-bold"] * {
+	font-weight: 600;
+	font-style: normal;
+	margin-bottom: 0;
+}
+
+div[class$="-boldItalic"] * {
+	font-weight: 600;
+	font-style: italic;
+	margin-bottom: 0;
+}
+
+.vt-brandcenter-type .font-gineso div[class$="-bold"] * {
+	font-weight: 700;
+	font-style: normal;
+	margin-bottom: 0;
+}
+
+.vt-brandcenter-type .font-gineso div[class$="-boldItalic"] * {
+	font-weight: 700;
+	font-style: italic;
+	margin-bottom: 0;
+}
+
+.vt-brandcenter-type div[class$="-extraBold"] * {
+	font-weight: 700;
+	font-style: normal;
+	margin-bottom: 0;
+}
+
+.vt-brandcenter-type div[class$="-extraBoldItalic"] * {
+	font-weight: 700;
+	font-style: italic;
+	margin-bottom: 0;
+}
+
+.vt-brandcenter-type div[class$="-black"] * {
+	font-weight: 900;
+	font-style: normal;
+	margin-bottom: 0;
+}
+
+.vt-brandcenter-type div[class$="-blackItalic"] * {
+	font-weight: 900;
+	font-style: italic;
+	margin-bottom: 0;
+}
+
+.vt-brandcenter-type .leading {
+	position: relative;
+}
+
+.vt-brandcenter-type .leading .parbase,
+.vt-brandcenter-type .leading p,
+.vt-brandcenter-type .tracking .parbase,
+.vt-brandcenter-type .tracking p {
+	margin: 0;
+	padding: 0;
+}
+
+.vt-brandcenter-type .leading-1,
+.vt-brandcenter-type .leading-2 {
+	position: relative;
+}
+
+.vt-brandcenter-type .leading-1 p,
+.vt-brandcenter-type .leading-2 p {
+	position: relative;
+	font-family: "Acherus", sans-serif;
+	font-weight: 300;
+	font-style: normal;
+	font-size: 30px;
+	line-height: 34px;
+	z-index: 5;
+}
+
+.vt-brandcenter-type .leading-1::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: -6px;
+	height: 11px;
+	background-color: rgba(215, 210, 203, 0.3);
+    border: 2px solid rgba(215, 210, 203, 1.0);
+	z-index: 1;
+}
+
+.vt-brandcenter-type .leading-info {
+	position: relative;
+	margin-top: 15px;
+}
+
+.vt-brandcenter-type .leading-info p,
+.vt-brandcenter-type .tracking-info p {
+	position: relative;
+	font-family: "Acherus", sans-serif;
+	font-weight: 300;
+	font-style: normal;
+	font-size: 14px;
+	line-height: 22px;
+	background-color: rgba(255, 255, 255, 1.0);
+	width: 40%;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	z-index: 2;
+}
+
+.vt-brandcenter-type .leading-info::before,
+.vt-brandcenter-type .tracking-info::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 12px;
+	border-top: 1px solid rgba(0, 0, 0, 1.0);
+	z-index: 1;
+}
+
+.vt-brandcenter-type .tracking {
+	position: relative;
+	width: 52%;
+	background-color: rgba(215, 210, 203, 0.3);
+	border: 2px solid rgba(215, 210, 203, 1.0);
+	padding: 0 15px;
+}
+
+.vt-brandcenter-type .tracking-text p {
+	font-family: "Acherus", sans-serif;
+	font-weight: 300;
+	font-style: normal;
+	font-size: 24px;
+	line-height: 28px;
+}
+
+.vt-brandcenter-type .tracking-info {
+	position: relative;
+	top: -30px;
+	width: 52%;
+}
+
+.vt-brandcenter-type .type-example-description * {
+	font-size: 12px;
+	color: rgba(198, 70, 0, 1.0);
+}
+
+.vt-brandcenter-type .type-example-description p {
+	position: relative;
+	display: block;
+}
+
+.vt-brandcenter-type .type-example-description p:first-of-type {
+	width: 100%;
+    line-height: 1em;
+    margin: 0;
+    top: 0;
+    border-top: none;
+    border-left: 1px solid rgba(198, 70, 0, 1.0);
+    border-right: 1px solid rgba(198, 70, 0, 1.0);
+    border-bottom: 1px solid rgba(198, 70, 0, 1.0);
+}
+
+.vt-brandcenter-type .type-example-description p:last-of-type {
+	padding-top: 15px;
+	padding-left: 15px;
+	line-height: 1.0;
+}
+
+.vt-brandcenter-type .type-sample-setting-1 .headline h1 {
+	font-size: 53px;
+	line-height: 60px;
+	margin: 0;
+	padding-left: 10px;
+	letter-spacing: 0.18em;
+}
+
+.vt-brandcenter-type .type-sample-setting-1 .subhead h2 {
+	margin: 8px 0 0 0;
+	padding-left: 10px;
+	font-size: 30px;
+	line-height: 35px;
+}
+
+.vt-brandcenter-type .type-sample-setting-1 .lead h3 {
+	padding-left: 10px;
+	text-transform: uppercase;
+	font-size: 17px;
+	line-height: 26px;
+	letter-spacing: 0.175em;
+}
+
+.vt-brandcenter-type .type-sample-setting-1 .body p {
+	margin: 15px 0 0 0;
+	padding-left: 10px;
+	font-size: 13px;
+	line-height: 19px;
+}
+
+.vt-brandcenter-type .type-sample-setting-1 .callout p {
+	margin: 20px 0 0 0;
+	padding-left: 10px;
+	font-size: 9px;
+	line-height: 13px;
+}
+
+.vt-brandcenter-type .type-sample-setting-2 .headline > h1 {
+	padding-left: 10px;
+	font-size: 45px;
+	line-height: 50px;
+	margin: 10px 0 0 0;
+}
+
+.vt-brandcenter-type .type-sample-setting-2 .tall .type-example-description > p:first-of-type {
+	line-height: 1em;
+    top: 0;
+}
+
+.vt-brandcenter-type .type-sample-setting-2 .tall .type-example-description > p:last-of-type {
+	padding-top: 20px;
+}
+
+.vt-brandcenter-type .type-sample-setting-2 .subhead h2 {
+	margin: 8px 0 0 0;
+	padding-left: 10px;
+	font-size: 24px;
+	line-height: 32px;
+}
+
+.vt-brandcenter-type .type-sample-setting-2 .lead h3 {
+	font-family: "crimsontext", serif;
+	font-weight: 400;
+	font-style: normal;
+	padding-left: 10px;
+	font-size: 21px;
+	line-height: 26px;
+	letter-spacing: 0.01em;
+}
+
+.vt-brandcenter-type .type-sample-setting-2 .body p {
+	font-family: "crimsontext", serif;
+	font-weight: 400;
+	font-style: normal;
+	margin: 15px 0 0 0;
+	padding-left: 10px;
+	font-size: 15px;
+	line-height: 21px;
+}
+
+.vt-brandcenter-type .type-sample-setting-2 .callout p {
+	margin: 20px 0 0 0;
+	padding-left: 10px;
+	font-size: 9px;
+	line-height: 13px;
+}
+
+.vt-brandcenter-type .type-sample-setting-2 .type-example-description p:last-of-type {
+	padding-top: 20px;
+	padding-left: 15px;
+	line-height: 1.0;
+}
+
+.vt-brandcenter-type .type-sample-setting-3 .headline > h1 {
+	text-transform: uppercase;
+	padding-left: 10px;
+	font-size: 51px;
+	line-height: 48px;
+	letter-spacing: 0.1em;
+	margin: 10px 0 0 0;
+}
+
+.vt-brandcenter-type .type-sample-setting-3 .subhead h2 {
+	margin: 8px 0 0 0;
+	padding-left: 10px;
+	font-size: 30px;
+	line-height: 32px;
+}
+
+.vt-brandcenter-type .type-sample-setting-3 .lead h3 {
+	text-transform: uppercase;
+	padding-left: 10px;
+	font-size: 17px;
+	line-height: 24px;
+	letter-spacing: 0.125em;
+}
+
+.vt-brandcenter-type .type-sample-setting-3 .body p {
+	font-family: "gineso-condensed", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	margin: 15px 0 0 0;
+	padding-left: 10px;
+	font-size: 15px;
+	line-height: 20px;
+	letter-spacing: -0.01em;
+}
+
+.vt-brandcenter-type .type-sample-setting-3 .tall .type-example-description > p:first-of-type {
+	line-height: 1em;
+    top: 0;
+}
+
+.vt-brandcenter-type .type-sample-setting-3 .tall .type-example-description > p:last-of-type {
+	padding-top: 20px;
+}
+
+.vt-brandcenter-type .type-sample-setting-3 .callout p {
+	margin: 20px 0 0 0;
+	padding-left: 10px;
+	font-size: 11px;
+	line-height: 13px;
+}
+
+
+.vt-2col-8-4 .col-md-8,
+.vt-2col-8-4 .col-md-4 {
+	padding: 0;
+}
+
+.vt-2col-8-4 .col-md-4 .parbase {
+	position: relative;
+}
+
+/************************************** END TYPE PAGE STYLES */
+
+/************************************** BEGIN BACKGROUND COLORS */
+
+.vt-brandcenter-color .chicago-maroon-bg {
+	background-color: rgba(139, 31, 65, 1.0);
+}
+
+.vt-brandcenter-color .burnt-orange-bg {
+	background-color: rgba(255, 102, 0, 1.0);
+}
+
+.vt-brandcenter-color .white-bg {
+	background-color: rgba(255, 255, 255, 1.0);
+}
+
+.vt-brandcenter-color .hokie-stone-bg {
+	background-color: rgba(109, 106, 117, 1.0);
+}
+
+.vt-brandcenter-color .pylon-purple-bg {
+	background-color: rgba(128, 32, 100, 1.0);
+}
+
+.vt-brandcenter-color .boundless-pink-bg {
+	background-color: rgba(214, 26, 94, 1.0);
+}
+
+.vt-brandcenter-color .virginia-sunset-bg {
+	background-color: rgba(247, 144, 30, 1.0);
+}
+
+.vt-brandcenter-color .triumphant-yellow-bg {
+	background-color: rgba(228, 253, 61, 1.0);
+}
+
+.vt-brandcenter-color .sustainable-teal-bg {
+	background-color: rgba(63, 120, 125, 1.0);
+}
+
+.vt-brandcenter-color .vibrant-turquoise-bg {
+	background-color: rgba(40, 190, 196, 1.0);
+}
+
+.vt-brandcenter-color .landgrant-grey-bg {
+	background-color: rgba(215, 210, 203, 1.0);
+}
+
+.vt-brandcenter-color .skipper-smoke-bg {
+	background-color: rgba(250, 244, 243, 1.0);
+}
+
+.vt-brandcenter-color .burnt-orange-web-bg {
+	background-color: rgba(198, 70, 0, 1.0);
+}
+
+.vt-brandcenter-color .cadet-blue-bg {
+	background-color: rgba(0, 66, 122, 1.0);
+}
+
+/************************************** END BACKGROUND COLORS */
+
+/************************************** BEGIN BOX STYLES */
+
+.vt-brandcenter-color .color-example-light,
+.vt-brandcenter-color .color-example-dark {
+	width: 100%;
+    padding: 1em 2em;
+}
+
+.vt-brandcenter-color .color-example-light-small,
+.vt-brandcenter-color .color-example-dark-small {
+	width: 100%;
+    padding: 0.5em 1em;
+}
+
+.vt-brandcenter-color .color-example-dark,
+.vt-brandcenter-color .color-example-dark-small {
+	color: rgba(255, 255, 255, 1.0);
+}
+
+.vt-brandcenter-color .color-example-light,
+.vt-brandcenter-color .color-example-light-small {
+	color: rgba(0, 0, 0, 1.0);
+}
+
+.vt-brandcenter-color .color-example-dark .color-title,
+.vt-brandcenter-color .color-example-light .color-title {
+	font-family: "gineso-condensed", sans-serif;
+	font-size: 30px;
+}
+
+.vt-brandcenter-color .color-example-dark-small .color-title-small,
+.vt-brandcenter-color .color-example-light-small .color-title-small {
+	font-family: "gineso-condensed", sans-serif;
+	font-size: 20px;
+}
+
+.vt-brandcenter-color .color-example-light .line {
+	display: block;
+	line-height: 0.25;
+	width: 100%;
+	border-bottom: 1px solid rgba(0, 0, 0, 1.0);
+}
+
+.vt-brandcenter-color .color-example-dark .line {
+	display: block;
+	line-height: 0.25;
+	width: 100%;
+	border-bottom: 1px solid rgba(255, 255, 255, 1.0);
+}
+
+
+@media screen and (max-width: 991px) {
+    .vt-brandcenter-color .color-title-small br,
+    .vt-brandcenter-color .color-title-dark br {
+        display: none;
+     }
+}
+
+@media screen and (max-width: 767px) {
+    .vt-brandcenter-color .vt-multicolumn > .row > div:first-of-type .color-example-light,
+    .vt-brandcenter-color .vt-multicolumn > .row > div:first-of-type .color-example-dark {
+        margin-bottom: 30px;
+     }
+}
+
+/************************************** END BOX STYLES */
+
+/************************************** BEGIN BUTTON STYLES */
+
+.vt-brandcenter-color .vt-color-check,
+.vt-web-logos input[type="button"] {
+	background-color: rgba(255, 255, 255, 1.0);
+	border: 2px solid rgba(109, 106, 117, 1.0);
+}
+
+/************************************** END BUTTON STYLES */
+
+.vt-c-image-small img {
+    padding: 50px 35px 50px 50px;
+}
+
+.vt-c-image-small2 img {
+    padding: 50px;
+}
+
+.vt-maroon-bg {
+    background-color: rgba(139, 31, 65, 1.0);
+}
+
+/************************************** END BRAND CENTER STYLES */
+
+
+
+
+/************************************** BEGIN LARGE */
+@media screen and (min-width: 1200px) {
+    .vt-multicolumn.off-center-2-columns .col-sm-6:first-child{
+        width: 75%;
+    }
+
+    .vt-multicolumn.off-center-2-columns .col-sm-6:nth-child(2){
+        width: 25%;
+    }
+
+    .vt-multicolumn.standard-2-columns .col-sm-6:first-child{
+        width: 50%;
+    }
+
+    .vt-multicolumn.standard-2-columns .col-sm-6:nth-child(2){
+        width: 50%;
+    }
+}
+/************************************** END LARGE */
+
+
+/************************************** BEGIN MEDIUM */
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+
+    .vt-learn-at {
+        width: 970px;
+    }
+
+    .vt-multicolumn.off-center-2-columns .col-sm-6:first-child{
+        width: 75%;
+    }
+
+    .vt-multicolumn.off-center-2-columns .col-sm-6:nth-child(2){
+        width: 25%;
+    }
+
+    .vt-multicolumn.standard-2-columns .col-sm-6:first-child{
+        width: 50%;
+    }
+
+    .vt-multicolumn.standard-2-columns .col-sm-6:nth-child(2){
+        width: 50%;
+    }
+}
+
+/************************************** END MEDIUM */
+
+
+/************************************** BEGIN SMALL */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .home-vt-toplinks {
+        float: none;
+        padding-left: 20px;
+    }
+
+    .vt-learn-at {
+        width: 750px;
+    }
+
+    .vt-multicolumn.off-center-2-columns .col-sm-6:first-child{
+        width: 75%;
+    }
+
+    .vt-multicolumn.off-center-2-columns .col-sm-6:nth-child(2){
+        width: 25%;
+    }
+
+    .vt-multicolumn.standard-2-columns .col-sm-6:first-child{
+        width: 50%;
+    }
+
+    .vt-multicolumn.standard-2-columns .col-sm-6:nth-child(2){
+        width: 50%;
+    }
+}
+
+/************************************** END SMALL */
+
+/************************************** BEGIN XSMALL */
+
+@media screen and (max-width: 767px) {
+    .util-nav-menu {
+        display: none !important;
+    }
+
+    .vt-edu-homepage.vt-home.norightcol .secondary-content-container::before {
+        right: 0;
+    }
+
+    .vt-learn-at-grey {
+        border: none;
+    }
+
+    .vt-learn-at {
+        border: none;
+        width: 100%;
+    }
+
+    .vt-learn-at h2 {
+        width: 100%;
+    }
+
+    .vt-learn-at > .vt-vtcontainer-content::before,
+    .vt-learn-at > .vt-vtcontainer-content::after {
+        content: none;
+    }
+
+    .vt-list .vt-list-date-formatted {
+        order: 0;
+    }
+}
+
+/************************************** END XSMALL */
