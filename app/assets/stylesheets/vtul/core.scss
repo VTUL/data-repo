@@ -1,0 +1,78 @@
+.vt_skip {
+        position: absolute;
+        top: auto;
+        left:-10000px;
+        overflow: hidden;
+        width: 1px;
+        height: 1px;
+    z-index: 11000;
+}
+
+/*accessibility*/
+.vt_skip_nav a{
+        position:absolute;
+        top:auto;
+        left:-10000px;
+        overflow:hidden;
+        width:1px;
+        height:1px;
+
+}
+
+.vt_skip_nav a:focus,
+.vt_skip_nav a:active {
+        position:absolute;
+        z-index: 999;
+        left:0px;
+        top:0px;
+        padding: 5px;
+        background-color:#FFF;
+        color: #F60;
+        width: auto;
+        height: auto;
+        -webkit-transition: top .1s ease-in, background .5s linear;
+    transition: top .1s ease-in, background .5s linear;
+}
+
+.moss-search-block {
+        position: relative;
+        height: 87px;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+        z-index: 10000000s;
+}
+
+.moss-search-box {
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 5px;
+}
+
+form#vt_header_search_form{
+        width: 100%;
+        height: 30px;
+        border: none;
+}
+
+.moss-search-button {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: #FE5B00 none repeat scroll 0% 0%;
+    /* line-height: 12px; */
+     line-height: 1.8;
+    vertical-align: top;
+    border: none;
+    margin: 0px;
+    position: relative;
+        top: -30px;
+        float: right;
+}
