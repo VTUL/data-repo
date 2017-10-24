@@ -65,10 +65,15 @@ class OsfAPIController < OsfAuthController
     item.apply_depositor_metadata current_user
 
     file_obj = f = File.open(archive_full_path , 'rb')
-    file_mime_type = MIME::Types.type_for(archive_full_path).first.content_type
-    
+
+    characterization_xml = Hydra::FileCharacterization.characterize(file_obj, project_name + ".zip", :fits) do |config|
+                             config[:fits] = Hydra::Derivatives.fits_path
+                           end
+
+    characterization_obj = Nokogiri::XML.parse(characterization_xml).root
+    raise characterization_obj.inspect
+
     item.content.content = file_obj
-    item.mime_type = file_mime_type
     item.save
 
     collection = Collection.new
