@@ -66,15 +66,18 @@ class OsfAPIController < OsfAuthController
 
     file_obj = f = File.open(archive_full_path , 'rb')
 
-    characterization_xml = Hydra::FileCharacterization.characterize(file_obj, project_name + ".zip", :fits) do |config|
-                             config[:fits] = Hydra::Derivatives.fits_path
-                           end
+#    characterization_xml = Hydra::FileCharacterization.characterize(file_obj, project_name + ".zip", :fits) do |config|
+#                             config[:fits] = Hydra::Derivatives.fits_path
+#                           end
 
-    characterization_obj = Nokogiri::XML.parse(characterization_xml).root
-    raise characterization_obj.inspect
+#    characterization_obj = Nokogiri::XML.parse(characterization_xml).root
+#    raise characterization_obj.inspect
 
     item.content.content = file_obj
     item.save
+
+    actor = Sufia::GenericFile::Actor.new(item, current_user)
+    actor.push_characterize_job
 
     collection = Collection.new
     collection.title = node_obj['data']['attributes']['title']
