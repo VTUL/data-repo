@@ -61,10 +61,11 @@ class OsfAPIController < OsfAuthController
     item.rights = [license_obj['data']['attributes']['name']] rescue ['Attribution 3.0 United States']
     item.resource_type << 'Other data'
     item.related_url << node_obj['data']['links']['html']
-    item.filename = [project_name + ".zip"]
+    item.filename = [project_name + '.zip']
+    item.label = project_name + '.zip'
     item.apply_depositor_metadata current_user
 
-    file_obj = f = File.open(archive_full_path , 'rb')
+    file_obj = f = File.open(archive_full_path , 'r')
 
 #    characterization_xml = Hydra::FileCharacterization.characterize(file_obj, project_name + ".zip", :fits) do |config|
 #                             config[:fits] = Hydra::Derivatives.fits_path
@@ -74,6 +75,7 @@ class OsfAPIController < OsfAuthController
 #    raise characterization_obj.inspect
 
     item.content.content = file_obj
+    item.mime_type = 'application/zip'
     item.save
 
     actor = Sufia::GenericFile::Actor.new(item, current_user)
