@@ -67,12 +67,12 @@ class OsfAPIController < OsfAuthController
 
     file_obj = f = File.open(archive_full_path , 'r')
 
-#    characterization_xml = Hydra::FileCharacterization.characterize(file_obj, project_name + ".zip", :fits) do |config|
-#                             config[:fits] = Hydra::Derivatives.fits_path
-#                           end
+    characterization_xml = Hydra::FileCharacterization.characterize(file_obj, project_name + ".zip", :fits) do |config|
+                             config[:fits] = Hydra::Derivatives.fits_path
+                           end
 
-#    characterization_obj = Nokogiri::XML.parse(characterization_xml).root
-#    raise characterization_obj.inspect
+    characterization_obj = Nokogiri::XML.parse(characterization_xml).root
+    raise characterization_terms.inspect
 
     item.content.content = file_obj
     item.mime_type = 'application/zip'
@@ -97,6 +97,23 @@ class OsfAPIController < OsfAuthController
 
 
   end
+
+  def characterization_terms
+    h = {}
+    FitsDatastream.terminology.terms.each_pair do |_k, v|
+      next unless v.respond_to? :proxied_term
+      term = v.proxied_term
+      begin
+        value = send(term.name)
+        h[term.name] = value unless value.empty?
+      rescue NoMethodError
+        next
+      end
+    end
+    h
+  end
+
+
 
   def walk_nodes node_obj, project_name, current_path
     make_dir current_path
