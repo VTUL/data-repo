@@ -1,0 +1,18 @@
+.masthead-search-wrapper {
+  #search-field-header {
+    border-radius: 0;
+    border: 1px dashed #c64600;
+    background: #faf4f3;
+    color: black;
+  }
+  #search-field-header:focus {
+    box-shadow: none;
+  }
+  .input-group-btn:last-child > .btn.dropdown-toggle {
+    margin-left: 1px;
+    border-radius: 0;
+    border: 1px dashed #c64600;
+    background: #faf4f3;
+    color: black;
+  }
+}

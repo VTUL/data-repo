@@ -50,3 +50,6 @@ config/application.yml
 
 # Ignore photos for carousel, owned/managed by UniRel.
 /app/assets/images/carousel
+
+# Ignore font files, also managed by UniRel.
+/app/assets/fonts
