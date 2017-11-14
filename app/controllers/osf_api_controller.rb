@@ -72,15 +72,18 @@ class OsfAPIController < OsfAuthController
                            end
 
     characterization_obj = Nokogiri::XML(characterization_xml)
-    raise characterization_obj.children.children.inspect
-
-    item.content.content = file_obj
+    
+    item.last_modified = [characterization_obj.search("/*/*[2]/*[1]").inner_text]
+    item.file_size = [characterization_obj.search("/*/*[2]/*[4]").inner_text]
+    item.original_checksum = [characterization_obj.search("/*/*[2]/*[5]").inner_text]
+    item.format_label = ["ZIP Format"]
     item.mime_type = 'application/zip'
+
+
     item.save
 
-#    actor = Sufia::GenericFile::Actor.new(item, current_user)
-#    actor.push_characterize_job
-    item.characterize
+    ingest_job = IngestLocalFileJob.new(item.id, tmp_path, project_name + '.zip', current_user.user_key)
+    ingest_job.run
 
     collection = Collection.new
     collection.title = node_obj['data']['attributes']['title']
