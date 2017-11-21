@@ -31,7 +31,7 @@ class DownloadGenerator
     @my_class = class_name.constantize
     items = get_all_items_for_model.map{ |item| item["id"] }
     file_path = File.join(self.class.csv_dir, archive_name, "#{timestamp}_#{model_name.downcase}.csv")
-    write_csv(file_path, my_class, items)
+    write_csv(file_path, my_class, items, true)
   end
 
   def generate_dataset_download dataset_id, admin_download
