@@ -38,6 +38,7 @@
   position: relative;
   display: block;
   margin-top: 20px;
+  margin-bottom: 50px;
   height: 175px;
   .institution_name {
     padding: 20px;
@@ -97,6 +98,10 @@
   }
 }
 
+.welcome-header {
+  font-size: 2.0em;
+}
+
 #grad1 {
     height: 40px;
     background: linear-gradient(#f3f3f3, #ffffff);
@@ -108,10 +113,6 @@
   background: none;
   font-size: 18px;
 
-  .welcome-header {
-    font-size: 1.7em;
-    font-weight: bold;
-  }
   .purpose {
     font-size: 1.4em;
     font-weight: bold;
