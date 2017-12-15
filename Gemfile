@@ -60,7 +60,7 @@ end
 
 #Sufia's gems
 gem 'sufia', '6.6.1'
-gem 'kaminari', github: 'jcoyne/kaminari', branch: 'sufia'
+gem 'kaminari', git: 'https://github.com/jcoyne/kaminari.git', branch: 'sufia'
 
 gem 'rsolr', '~> 1.0.6'
 gem 'devise'
