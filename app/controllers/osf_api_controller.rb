@@ -1,32 +1,15 @@
 class OsfAPIController < OsfAuthController
   require 'fileutils'
   require 'vtech_data/zip_file_generator'
+  require 'vtech_data/osf_import_tools'
 
   helper_method :detail_route
   before_action :check_logged_in, only: [:list, :detail]
   before_action :get_oauth_token
 
   def list
-    me_obj = osf_get_object('https://api.osf.io/v2/users/me/')
-    nodes_link = me_obj['data']['relationships']['nodes']['links']['related']['href']
-    nodes_obj = osf_get_object(nodes_link)
-    @projects = nodes_obj['data'].map{ | project |
-      if project['attributes']['category'] == 'project'
-        contributors_link = project['relationships']['contributors']['links']['related']['href']
-        contributors_obj = osf_get_object(contributors_link)
-      	{ 
-          'id' => project['id'], 
-          'links' => project['links'], 
-          'attributes' => project['attributes'], 
-          'contributors' => contributors_obj['data'].map{| contributor | {
-            'name' => contributor['embeds']['users']['data']['attributes']['full_name'],
-            'creator' => contributor['attributes']['index'] == 0 ? true : false
-          }}
-        }
-      else
-        nil
-      end
-    }
+    osf_import_tools = OsfImportTools.new(@oauth_token)
+    @projects = osf_import_tools.get_user_projects
   end
 
   def detail

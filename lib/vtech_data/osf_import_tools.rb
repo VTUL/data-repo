@@ -2,8 +2,12 @@ class OsfImportTools
   require 'fileutils'
   require 'vtech_data/zip_file_generator'
 
+  def initialize(oauth_token)
+    @token = oauth_token
+  end
+
   def get_user_projects
-    begin
+#    begin
       me_obj = osf_get_object('https://api.osf.io/v2/users/me/')
       nodes_link = me_obj['data']['relationships']['nodes']['links']['related']['href']
       nodes_obj = osf_get_object(nodes_link)
@@ -24,9 +28,9 @@ class OsfImportTools
           nil
         end
       }
-    rescue
-      ret_val = { errors: true } 
-    end
+#    rescue
+#      ret_val = { errors: true } 
+#    end
     return ret_val
   end
 
@@ -39,13 +43,14 @@ class OsfImportTools
     begin
       ret_val = JSON.parse(response.body)
     rescue
-      Logger.log "error parsing response"
+      Rails.logger.warn "error parsing response"
     end
+    return ret_val
   end
 
   def osf_get url
     begin
-      response = @oauth_token.get(url)
+      response = @token.get(url)
     rescue
       puts "it broke"
     end
