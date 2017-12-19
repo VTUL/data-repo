@@ -7,7 +7,7 @@ class OsfImportTools
   end
 
   def get_user_projects
-#    begin
+    begin
       me_obj = osf_get_object('https://api.osf.io/v2/users/me/')
       nodes_link = me_obj['data']['relationships']['nodes']['links']['related']['href']
       nodes_obj = osf_get_object(nodes_link)
@@ -28,13 +28,23 @@ class OsfImportTools
           nil
         end
       }
-#    rescue
-#      ret_val = { errors: true } 
-#    end
+    rescue
+      ret_val = { errors: true } 
+    end
     return ret_val
   end
 
-
+  def get_project_details proj_url
+    proj_obj = osf_get_object(proj_url)
+    project = proj_obj['data']
+    contributors_link = project['relationships']['contributors']['links']['related']['href']
+    contributors_obj = osf_get_object(contributors_link)
+    project['contributors'] = contributors_obj['data'].map{| contributor | {
+        'name' => contributor['embeds']['users']['data']['attributes']['full_name'],
+        'creator' => contributor['attributes']['index'] == 0 ? true : false
+      }}
+    return project
+  end
 
 
   def osf_get_object url
