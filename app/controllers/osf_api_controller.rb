@@ -17,6 +17,10 @@ class OsfAPIController < OsfAuthController
     @project = osf_import_tools.get_project_details(node_url_from_id(params["project_id"]))
   end
 
+  def import
+    raise params["project_id"].inspect
+  end
+
 
   def detail_route project_id
     "/osf_api/detail/#{project_id}"
