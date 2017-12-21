@@ -5,3 +5,5 @@
 
 # Blacklight.secret_key = '92188d94fcaa0d8558b6e39d71a07e17a51ac952aced31d1a116d8aab4cd5f1cf862fde4bd0242865a7be1b7a32d3e2b2d232602969d9d2a6bd132edfe445833'
 
+# Increase Blacklight config max results per page
+Blacklight::Configuration.default_values[:max_per_page] = 10000
