@@ -4,6 +4,8 @@ class OsfAPIController < OsfAuthController
   require 'vtech_data/osf_import_tools'
 
   helper_method :detail_route
+  helper_method :import_route
+
   before_action :check_logged_in, only: [:list, :detail]
   before_action :get_oauth_token
 
@@ -18,12 +20,18 @@ class OsfAPIController < OsfAuthController
   end
 
   def import
-    raise params["project_id"].inspect
+    osf_import_tools = OsfImportTools.new(@oauth_token)
+    @project = osf_import_tools.get_project_details(node_url_from_id(params["project_id"]))
+    raise @project.inspect
   end
 
 
   def detail_route project_id
     "/osf_api/detail/#{project_id}"
+  end
+
+  def import_route project_id
+    "/osf_api/import/#{project_id}"
   end
 
   def get_oauth_token

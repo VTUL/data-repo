@@ -9,5 +9,7 @@
   </div>
   <div class="permissions">My permissions: <%= @project['attributes']['current_user_permissions'].join(", ") %></div>
   <div class="visibility">Visibility: <%= @project['attributes']['public'] ? "Public" : "Private" %></div>
-  <div class="links"><%= link_to "View in OSF site", @project['links']['html'] %></div>
+  <div class="links">
+    <span><%= link_to "Import Project", import_route(@project['id']) %></span> | <span><%= link_to "View in OSF site", @project['links']['html'] %></span>
+  </div>
 </div>

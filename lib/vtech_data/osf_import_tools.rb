@@ -34,6 +34,139 @@ class OsfImportTools
     return ret_val
   end
 
+  def import project_id
+    node_obj = osf_get_object(node_url_from_id(project_id))
+    project_name = node_obj['data']['attributes']['title'].downcase.gsub(" ", "_")
+
+    tmp_path = File.join(Rails.root.to_s, 'tmp')
+    root_path = File.join(tmp_path, project_name)
+
+    walk_nodes node_obj, project_name, root_path   
+    archive_full_path = zip_project tmp_path, root_path, project_name
+    remove_tmp_files project_name
+
+    begin
+      license_link = node_obj['data']['relationships']['license']['links']['related']['href']
+      license_obj = osf_get_object(license_link)
+    rescue
+      logger.error("Error fetching project license details. Is license present on project?")
+    end
+
+    begin
+      external_link = File.join(node_obj['data']['links']['html'], 'addons', 'forward')
+      external = osf_get_object(external_link)
+    rescue
+      logger.error("Error fetching external link. Probably doesn't exist for this project")
+    end
+
+    item = GenericFile.new
+    item.title << node_obj['data']['attributes']['title']
+    item.tag = node_obj['data']['attributes']['tags'].empty? ? ['OSF'] : node_obj['data']['attributes']['tags']
+    item.creator << current_user.email
+    item.rights = [license_obj['data']['attributes']['name']] rescue ['Attribution 3.0 United States']
+    item.resource_type << 'Other data'
+    item.related_url << node_obj['data']['links']['html']
+    item.filename = [project_name + '.zip']
+    item.label = project_name + '.zip'
+    item.apply_depositor_metadata current_user
+
+    item.save
+
+    ingest_job = IngestLocalFileJob.new(item.id, tmp_path, project_name + '.zip', current_user.user_key)
+    ingest_job.run
+
+    item.characterize
+
+    collection = Collection.new
+    collection.title = node_obj['data']['attributes']['title']
+    collection.description = node_obj['data']['attributes']['description']
+    collection.tag = node_obj['data']['attributes']['tags']
+    collection.date_created = [node_obj['data']['attributes']['date_created']]
+    collection.date_modified = node_obj['data']['attributes']['date_modified']
+    collection.related_url << node_obj['data']['links']['html']
+    collection.related_url << external['data']['attributes']['url'] if !external.nil?
+    collection.rights = [license_obj['data']['attributes']['name']] rescue []
+    
+    collection.apply_depositor_metadata(current_user.user_key)
+    collection.members << item
+    collection.save
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  end
+
+  def walk_nodes node_obj, project_name, current_path
+    make_dir current_path
+
+    files_link = node_obj['data']['relationships']['files']['links']['related']['href']
+    files_obj = osf_get_object(files_link)
+    files_obj['data'].each do | source |
+      source_name = source['attributes']['name']
+      source_path = File.join(current_path, source_name)
+      import source['relationships']['files']['links']['related']['href'], source_path
+    end
+    
+    children_array = get_children node_obj
+    if children_array.respond_to?('each')
+      children_array.each do | child_link |
+        child_obj = osf_get_object(child_link)
+        child_name = child_obj['data']['attributes']['title'].downcase.gsub(" ", "_")
+        child_path = File.join(current_path, child_name)
+        walk_nodes child_obj, project_name, child_path
+      end
+    end
+  end
+
+  def get_children node_obj
+    children_link = node_obj['data']['relationships']['children']['links']['related']['href']
+    children_obj = osf_get_object(children_link)
+    children_obj['data'].map{ | child | child['links']['self'] }
+  end
+
+  def zip_project tmp, path, name
+    archive = File.join(tmp,name)+'.zip'
+    FileUtils.rm archive, :force=>true
+    zf = ZipFileGenerator.new(path, archive)
+    zf.write
+    return archive
+  end
+
+  def remove_tmp_files dir_name
+    upload_dir = File.join(Rails.root.to_s, 'tmp')
+    archive_name = File.join(upload_dir, "#{dir_name}.zip")
+    while !File.file? archive_name do
+      sleep 0.01
+    end
+    if File.file? archive_name
+      tmp_dir = File.join(upload_dir, dir_name)
+      FileUtils.rm_rf(tmp_dir)
+    end
+  end 
+
+
+
+
   def get_project_details proj_url
     proj_obj = osf_get_object(proj_url)
     project = proj_obj['data']
@@ -67,5 +200,9 @@ class OsfImportTools
     response rescue nil
   end
 
+
+  def node_url_from_id node_id
+    File.join(Rails.application.config.osf_api_base_url, "nodes", node_id, "/")  
+  end
 
 end
