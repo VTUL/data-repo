@@ -34,7 +34,7 @@ class OsfImportTools
     return ret_val
   end
 
-  def import project_id
+  def import_project project_id
     node_obj = osf_get_object(node_url_from_id(project_id))
     project_name = node_obj['data']['attributes']['title'].downcase.gsub(" ", "_")
 
@@ -91,29 +91,6 @@ class OsfImportTools
     collection.members << item
     collection.save
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   end
 
   def walk_nodes node_obj, project_name, current_path
@@ -135,6 +112,34 @@ class OsfImportTools
         child_path = File.join(current_path, child_name)
         walk_nodes child_obj, project_name, child_path
       end
+    end
+  end
+
+  def make_dir path
+    begin
+      FileUtils.mkdir(path)
+    rescue
+      puts "Error creating directory. Maybe it already exists"
+    end
+  end
+
+  def import directory_object, path
+    files_obj = osf_get_object(directory_object)
+    if files_obj['links']['meta']['total'] > 0
+      make_dir path
+    
+      files_obj['data'].each do | node |
+        kind = node['attributes']['kind']
+        if kind == 'file'
+          get_file node, directory_object, path
+        elsif kind == 'folder'
+          sub_directory = node['relationships']['files']['links']['related']['href']
+          sub_path = File.join(path, node['attributes']['name'])
+          make_dir sub_path
+          import sub_directory, sub_path
+        end
+      end
+
     end
   end
 
@@ -182,8 +187,6 @@ class OsfImportTools
 
   def osf_get_object url
     response = osf_get url
-    ret_val = nil
-    begin
       ret_val = JSON.parse(response.body)
     rescue
       Rails.logger.warn "error parsing response"

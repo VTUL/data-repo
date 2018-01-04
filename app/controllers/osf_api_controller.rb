@@ -22,7 +22,7 @@ class OsfAPIController < OsfAuthController
   def import
     osf_import_tools = OsfImportTools.new(@oauth_token)
     @project = osf_import_tools.get_project_details(node_url_from_id(params["project_id"]))
-    raise @project.inspect
+    osf_import_tools.import_project @project['id']
   end
 
 
