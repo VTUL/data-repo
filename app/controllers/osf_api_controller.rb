@@ -20,9 +20,8 @@ class OsfAPIController < OsfAuthController
   end
 
   def import
-    osf_import_tools = OsfImportTools.new(@oauth_token, current_user)
-    @project = osf_import_tools.get_project_details(node_url_from_id(params["project_id"]))
-    osf_import_tools.import_project @project['id']
+   Sufia.queue.push(OsfImportJob.new(@oauth_token, params["project_id"], current_user))
+   redirect_to dashboard_index_path
   end
 
 
