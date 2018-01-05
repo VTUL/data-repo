@@ -85,7 +85,7 @@ class OsfImportTools
     collection.date_created = [node_obj['data']['attributes']['date_created']]
     collection.date_modified = node_obj['data']['attributes']['date_modified']
     collection.related_url << node_obj['data']['links']['html']
-    collection.related_url << external['data']['attributes']['url'] if (!external.nil? && !external['errors'])
+    collection.related_url << external['data']['attributes']['url'] if (!external.nil? && !external[:errors])
     collection.rights = [license_obj['data']['attributes']['name']] rescue []
     
     collection.apply_depositor_metadata(@current_user.user_key)
