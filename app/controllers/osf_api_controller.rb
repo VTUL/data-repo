@@ -10,17 +10,17 @@ class OsfAPIController < OsfAuthController
   before_action :get_oauth_token
 
   def list
-    osf_import_tools = OsfImportTools.new(@oauth_token)
+    osf_import_tools = OsfImportTools.new(@oauth_token, current_user)
     @projects = osf_import_tools.get_user_projects
   end
 
   def detail
-    osf_import_tools = OsfImportTools.new(@oauth_token)
+    osf_import_tools = OsfImportTools.new(@oauth_token, current_user)
     @project = osf_import_tools.get_project_details(node_url_from_id(params["project_id"]))
   end
 
   def import
-    osf_import_tools = OsfImportTools.new(@oauth_token)
+    osf_import_tools = OsfImportTools.new(@oauth_token, current_user)
     @project = osf_import_tools.get_project_details(node_url_from_id(params["project_id"]))
     osf_import_tools.import_project @project['id']
   end

@@ -2,8 +2,9 @@ class OsfImportTools
   require 'fileutils'
   require 'vtech_data/zip_file_generator'
 
-  def initialize(oauth_token)
+  def initialize(oauth_token, user)
     @token = oauth_token
+    @current_user = user
   end
 
   def get_user_projects
@@ -62,17 +63,17 @@ class OsfImportTools
     item = GenericFile.new
     item.title << node_obj['data']['attributes']['title']
     item.tag = node_obj['data']['attributes']['tags'].empty? ? ['OSF'] : node_obj['data']['attributes']['tags']
-    item.creator << current_user.email
+    item.creator << @current_user.email
     item.rights = [license_obj['data']['attributes']['name']] rescue ['Attribution 3.0 United States']
     item.resource_type << 'Other data'
     item.related_url << node_obj['data']['links']['html']
     item.filename = [project_name + '.zip']
     item.label = project_name + '.zip'
-    item.apply_depositor_metadata current_user
+    item.apply_depositor_metadata @current_user
 
     item.save
 
-    ingest_job = IngestLocalFileJob.new(item.id, tmp_path, project_name + '.zip', current_user.user_key)
+    ingest_job = IngestLocalFileJob.new(item.id, tmp_path, project_name + '.zip', @current_user.user_key)
     ingest_job.run
 
     item.characterize
@@ -84,10 +85,10 @@ class OsfImportTools
     collection.date_created = [node_obj['data']['attributes']['date_created']]
     collection.date_modified = node_obj['data']['attributes']['date_modified']
     collection.related_url << node_obj['data']['links']['html']
-    collection.related_url << external['data']['attributes']['url'] if !external.nil?
+    collection.related_url << external['data']['attributes']['url'] if (!external.nil? && !external['errors'])
     collection.rights = [license_obj['data']['attributes']['name']] rescue []
     
-    collection.apply_depositor_metadata(current_user.user_key)
+    collection.apply_depositor_metadata(@current_user.user_key)
     collection.members << item
     collection.save
 
@@ -143,6 +144,11 @@ class OsfImportTools
     end
   end
 
+  def get_file file_obj, directory, path
+    file = osf_get(file_obj['links']['download'])
+    File.open(File.join(path, file_obj['attributes']['name']),"w") { |new_file| new_file.write(file.body.force_encoding('UTF-8')) }
+  end
+
   def get_children node_obj
     children_link = node_obj['data']['relationships']['children']['links']['related']['href']
     children_obj = osf_get_object(children_link)
@@ -184,11 +190,12 @@ class OsfImportTools
     return project
   end
 
-
   def osf_get_object url
     response = osf_get url
-      ret_val = JSON.parse(response.body)
+    begin
+    ret_val = JSON.parse(response.body)
     rescue
+      ret_val = {errors: true}
       Rails.logger.warn "error parsing response"
     end
     return ret_val
