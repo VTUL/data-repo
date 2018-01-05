@@ -2,6 +2,7 @@ class OsfAPIController < OsfAuthController
   require 'fileutils'
   require 'vtech_data/zip_file_generator'
   require 'vtech_data/osf_import_tools'
+  require "#{Rails.root}/app/jobs/osf_import_job"
 
   helper_method :detail_route
   helper_method :import_route
@@ -21,7 +22,7 @@ class OsfAPIController < OsfAuthController
 
   def import
    Sufia.queue.push(OsfImportJob.new(@oauth_token, params["project_id"], current_user))
-   redirect_to dashboard_index_path
+   redirect_to '/dashboard'
   end
 
 
