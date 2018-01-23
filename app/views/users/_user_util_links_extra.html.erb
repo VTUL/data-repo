@@ -9,3 +9,7 @@
 <% if can? :index, Role %>
   <li><%= link_to("Manage User Roles", role_management.roles_path) %></li>
 <% end %>
+<% if current_user.admin? %>
+  <li><%= link_to("Depositors Export", depositor_list_path) %></li>
+<% end %>
+
