@@ -45,8 +45,8 @@ module DoiRequestsHelper
   end
 
   def admin_dataset_download doi_request
-    collection = Collection.find(doi_request["asset_id"])
-    if(collection)
+    collection = Collection.find(doi_request["asset_id"]) rescue nil
+    if(!collection.nil?)
       return link_to "Download dataset", collections_download_path(collection, 'admin'), class: "btn btn-default pull-left margin-right-sm"
     else
       return ""
