@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get 'collections/:id/add-files', to: 'collections#add_files', as: 'collections_add_files'
   get 'collections/:id/dataset-download(/:admin)', to: 'collections#dataset_download', as: 'collections_download'
   get 'dashboard/admin_metadata_download', to: 'dashboard#admin_metadata_download', as: 'admin_metadata_download'
+  
+  get 'users/depositors', to: 'users#depositor_list_export', as: 'depositor_list'
 
   blacklight_for :catalog
 
