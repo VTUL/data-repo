@@ -7,16 +7,16 @@
 /*jslint nomen: true */
 /*global $ */
 
-
-//5 GB  max file size
-var max_file_size = 5120000000;
+var gb_multiplier = 1024 * 1024 * 1024;
+//2 GB  max file size
+var max_file_size = 2 * gb_multiplier;
 // String does not match the size so the actual limit is not publicized
-var max_file_size_str = "200 MB";
-//10.5 GB max total upload size
-var max_total_file_size = 10500000000;
+var max_file_size_str = "1 GB";
+//2 GB max total upload size
+var max_total_file_size = 2 * gb_multiplier;
 var max_file_count = 100;
 // String does not match the size so the actual limit is not publicized
-var max_total_file_size_str = "500 MB";
+var max_total_file_size_str = "1 GB";
 var first_file_after_max = '';
 var filestoupload =0;
 
