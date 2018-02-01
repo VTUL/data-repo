@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   include Sufia::UsersControllerBehavior
-  prepend_before_action :find_user, except: [:depositor_list_export]
+  prepend_before_action :find_user, except: [:index, :search, :notifications_number, :depositor_list_export]
   before_action :authenticate_user!
   before_action :require_admin, only: [:depositor_list_export]
   before_action :admin_and_user_only, only: [:show]
