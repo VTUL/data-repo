@@ -2,6 +2,17 @@ module Sufia
   class Collection < ActiveFedora::Base
     include Sufia::CollectionBehavior
 
+    before_destroy :delete_doi_requests
+
+    def delete_doi_requests
+      requests = DoiRequest.where(asset_id: self.id)
+      if !requests.empty?
+        requests.each do |request|
+          request.destroy
+        end
+      end
+    end
+
     def csv_headers
       ['id', 'title', 'creator', 'contributor', 'abstract', 'keyword', 'rights', 'publisher', 'date_created', 'subject', 'language', 'identifier', 'location', 'related_url', 'funding_info', 'items']
     end
