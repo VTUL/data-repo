@@ -28,13 +28,14 @@ class UsersController < ApplicationController
       attributes = %w{email name filename file_id datasets dataset_ids}
       CSV.generate(headers: true) do |csv|
         csv << attributes
-        GenericFile.all.each do |file|
+        GenericFile.find_each do |file|
           email = file.depositor
           name = User.find_by(email: email).name
           filename = !file.filename.empty? ? file.filename : file.label
           file_id = file.id
-          datasets = file.collections.map{ |c| c.title }.join("||")
-          dataset_ids = file.collections.map{ |c| c.id }.join("||")
+          collections = file.collections
+          datasets = collections.map{ |c| c.title }.join("||")
+          dataset_ids = collections.map{ |c| c.id }.join("||")
           csv << [email, name, filename, file_id, datasets, dataset_ids]
         end
       end
