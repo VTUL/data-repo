@@ -66,15 +66,14 @@ class DownloadGenerator
     def add_files item_ids
       item_ids.each do |item_id|
         generic_file = GenericFile.find(item_id)
-        if generic_file.filename
-          item_target_path = File.join(archive_full_path, generic_file.filename)
-          # If a file already exists with this filename then put this one in a sub-directory named after the item id
-          if File.file? item_target_path
-            FileUtils::mkdir_p(File.join(archive_full_path, item_id))
-            item_target_path =  File.join(archive_full_path, item_id, generic_file.filename)
-          end
-          File.open(item_target_path, 'wb') { |file| file.write(generic_file.content.content) }
+        filename = !generic_file.filename.empty? ? generic_file.filename : generic_file.label
+        item_target_path = File.join(archive_full_path, filename)
+        # If a file already exists with this filename then put this one in a sub-directory named after the item id
+        if File.file? item_target_path
+          FileUtils::mkdir_p(File.join(archive_full_path, item_id))
+          item_target_path =  File.join(archive_full_path, item_id, filename)
         end
+        File.open(item_target_path, 'wb') { |file| file.write(generic_file.content.content) }
       end      
     end
 
