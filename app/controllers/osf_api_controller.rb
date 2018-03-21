@@ -21,7 +21,9 @@ class OsfAPIController < OsfAuthController
   end
 
   def import
-   Sufia.queue.push(OsfImportJob.new(@oauth_token, params["project_id"], current_user))
+   osf_job = OsfImportJob.new(@oauth_token, params["project_id"], current_user)
+   osf_job.run
+   #Sufia.queue.push(OsfImportJob.new(@oauth_token, params["project_id"], current_user))
    redirect_to '/dashboard'
   end
 

@@ -42,6 +42,7 @@ en:
       select_files: "Select files..."
       start_upload: "Start upload"
       cancel_upload:  "Cancel upload"
+      osf_import: "Import from OSF"
       my_computer:
         sr_tab_label: "Access Files from"
         tab_label: "My Computer"

@@ -4,6 +4,9 @@
 <%# using partials rather than inlining, so implementers can add or change stuff on this page without much duplication %>
 <ul class="nav nav-tabs" role="tablist" title="Data Source Selectors" id="upload_tabs">
   <li class="active" id="computer_tab" title="<%= t('sufia.upload.my_computer.sr_tab_label')+' '+ t('sufia.upload.my_computer.tab_label') %>"><a role="tab" href="#local" data-toggle="tab"><i class="glyphicon glyphicon-folder-open" aria-hidden="true"></i> <%= t('sufia.upload.my_computer.tab_label')%></a></li>
+
+  <li id="osf_tab" title="<%= t('sufia.upload.osf_import')+' '+ t('sufia.upload.osf_import') %>"><a role="tab" href="#osf" data-toggle="tab"><i class="glyphicon glyphicon-download-alt" aria-hidden="true"></i> <%= t('sufia.upload.osf_import')%></a></li>
+
   <% if Sufia.config.browse_everything %>
     <li id="browse_everything_tab" title="<%= t('sufia.upload.browse_everything.sr_tab_label')+' '+ t('sufia.upload.browse_everything.tab_label') %>" aria-activedescendant="browse_everything_link"><a role="tab" href="#browse_everything" data-toggle="tab" id="browse_everything_link" ><i class="glyphicon glyphicon-cloud-download" aria-hidden="true"></i> <%= t('sufia.upload.browse_everything.tab_label')%></a></li>
   <% end %>
@@ -16,6 +19,11 @@
   <div class="tab-pane active" id="local" aria-labelledby="computer_tab" role="tabpanel">
     <span class="sr-only"><%= t("sufia.upload.my_computer.sr_instructions") %></span>
     <%= render partial: 'multiple_upload' %>
+  </div>
+
+  <div class="tab-pane" id="osf" aria-labelledby="osf_tab" role="tabpanel">
+    <span class="sr-only"><%= t("sufia.upload.osf_import") %></span>
+    <h1>blah blah blah</h1>
   </div>
 
   <% if Sufia.config.browse_everything %>
