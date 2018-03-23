@@ -9,7 +9,6 @@ before_action :get_client
       :redirect_uri => callback_url,
       :scope => 'osf.full_read',
       :response_type => 'code',
-      :access_type => 'offline',
       :state => 'iuasdhf734t9hiwlf7'
     )
     redirect_to auth_url
@@ -44,8 +43,7 @@ before_action :get_client
   end
 
   def oauth_token
-    @oauth_token = OAuth2::AccessToken.from_hash(get_client, JSON.parse(session['oauth_token']))
-    @oauth_token = @oauth_token.refresh! if @oauth_token.expired?
+    @oauth_token ||= OAuth2::AccessToken.from_hash(get_client, JSON.parse(session['oauth_token']))
   end
 
 end
