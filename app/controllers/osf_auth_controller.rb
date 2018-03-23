@@ -9,6 +9,7 @@ before_action :get_client
       :redirect_uri => callback_url,
       :scope => 'osf.full_read',
       :response_type => 'code',
+      :access_type => 'offline',
       :state => 'iuasdhf734t9hiwlf7'
     )
     redirect_to auth_url
@@ -20,9 +21,9 @@ before_action :get_client
   def callback
     code = params['code']
     if !code.blank?
-      oauth_token = @client.auth_code.get_token(code, :redirect_uri => callback_url)
-      if !oauth_token.blank?
-        session['oauth_token'] = oauth_token.to_json
+      token = @client.auth_code.get_token(code, :redirect_uri => callback_url)
+      if !token.blank?
+        session['oauth_token'] = token.to_json
         redirect_to api_list_url 
       end
     end
@@ -44,6 +45,7 @@ before_action :get_client
 
   def oauth_token
     @oauth_token = OAuth2::AccessToken.from_hash(get_client, JSON.parse(session['oauth_token']))
+    @oauth_token = @oauth_token.refresh! if @oauth_token.expired?
   end
 
 end

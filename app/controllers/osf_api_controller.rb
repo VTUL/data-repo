@@ -7,7 +7,7 @@ class OsfAPIController < OsfAuthController
   helper_method :detail_route
   helper_method :import_route
 
-  before_action :check_logged_in, only: [:list, :detail]
+  before_action :check_logged_in, only: [:list, :detail, :import]
   before_action :get_oauth_token
 
   def list
