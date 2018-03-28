@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-class GenericFilesController < ApplicationController
+class GenericFilesController < OsfAuthController
   include Sufia::Controller
   include Sufia::FilesControllerBehavior
 
@@ -7,12 +7,17 @@ class GenericFilesController < ApplicationController
 
   self.edit_form_class = DatarepoFileEditForm
 
+  def new
+    super
+    @osf_logged_in = logged_in?
+  end
+
   def edit
-		super
-		unless current_user.admin?                                                                         
-			self.edit_form_class.terms -= [:provenance]                                                  
-			@provenance_display = "records/show_fields/provenance"
-		end 
+    super
+    unless current_user.admin?                                                                         
+      self.edit_form_class.terms -= [:provenance]                                                  
+      @provenance_display = "records/show_fields/provenance"
+    end 
   end
 
   # routed to /files/:id (PUT)

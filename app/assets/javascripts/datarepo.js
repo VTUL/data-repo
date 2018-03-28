@@ -7,3 +7,4 @@
 //= require datarepo/carousel
 //= require datarepo/popover_toggle
 //= require datarepo/menu_handler
+//= require datarepo/dashboard_tab_handler

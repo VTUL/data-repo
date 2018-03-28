@@ -32,5 +32,13 @@
   </div><!-- /.container -->
 </div><!-- /#wrapper -->
 <%= render 'shared/ajax_modal' %>
+<% if current_page?(sufia.new_generic_file_path) %>
+<script>
+  Blacklight.onLoad(function() {
+    TabHandler.run();
+    window.onhashchange = TabHandler.run;
+  });
+</script>
+<% end %>
 </body>
 </html>

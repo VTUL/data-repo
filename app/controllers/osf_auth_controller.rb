@@ -1,16 +1,11 @@
 class OsfAuthController < ApplicationController
-before_action :get_client
+  before_action :get_client
+  helper_method :auth_url
 
   def index
   end
 
   def auth
-    auth_url = @client.auth_code.authorize_url(
-      :redirect_uri => callback_url,
-      :scope => 'osf.full_read',
-      :response_type => 'code',
-      :state => 'iuasdhf734t9hiwlf7'
-    )
     redirect_to auth_url
   end
 
@@ -44,6 +39,19 @@ before_action :get_client
 
   def oauth_token
     @oauth_token ||= OAuth2::AccessToken.from_hash(get_client, JSON.parse(session['oauth_token']))
+  end
+
+  def logged_in?
+    !session['oauth_token'].nil? && !oauth_token.expired?
+  end
+
+  def auth_url
+    @auth_url ||= @client.auth_code.authorize_url(
+      :redirect_uri => callback_url,
+      :scope => 'osf.full_read',
+      :response_type => 'code',
+      :state => 'iuasdhf734t9hiwlf7'
+    )
   end
 
 end
