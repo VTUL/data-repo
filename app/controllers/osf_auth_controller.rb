@@ -54,5 +54,16 @@ class OsfAuthController < ApplicationController
     )
   end
 
+  def check_logged_in
+    redirect_to oauth_auth_url unless logged_in?
+  end
+
+  def detail_route project_id
+    "/osf_api/detail/#{project_id}"
+  end
+
+  def import_route project_id
+    "/osf_api/import/#{project_id}"
+  end
 end
 

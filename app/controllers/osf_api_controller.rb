@@ -27,27 +27,12 @@ class OsfAPIController < OsfAuthController
    redirect_to '/dashboard'
   end
 
-
-  def detail_route project_id
-    "/osf_api/detail/#{project_id}"
-  end
-
-  def import_route project_id
-    "/osf_api/import/#{project_id}"
-  end
-
   def get_oauth_token
     @oauth_token = oauth_token
   end
 
   def node_url_from_id node_id
     File.join(Rails.application.config.osf_api_base_url, "nodes", node_id, "/")  
-  end
-
-  def check_logged_in
-    if !session['oauth_token'] || oauth_token.expired?
-      redirect_to oauth_auth_url
-    end
   end
 
 end
