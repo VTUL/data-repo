@@ -2,6 +2,7 @@
 class GenericFilesController < OsfAuthController
   include Sufia::Controller
   include Sufia::FilesControllerBehavior
+  require 'vtech_data/osf_import_tools'
 
   self. presenter_class = DatarepoGenericFilePresenter
 

@@ -7,13 +7,7 @@ class OsfAPIController < OsfAuthController
   helper_method :detail_route
   helper_method :import_route
 
-  before_action :check_logged_in, only: [:list, :detail, :import]
-  #before_action :get_oauth_token
-
-  def list
-    osf_import_tools = OsfImportTools.new(oauth_token, current_user)
-    @projects = osf_import_tools.get_user_projects
-  end
+  before_action :check_logged_in, only: [:detail, :import]
 
   def detail
     osf_import_tools = OsfImportTools.new(oauth_token, current_user)

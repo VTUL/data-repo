@@ -1,6 +1,8 @@
 class OsfAuthController < ApplicationController
   before_action :get_client
   helper_method :auth_url
+  helper_method :detail_route
+  helper_method :import_route
 
   def index
   end
@@ -18,7 +20,7 @@ class OsfAuthController < ApplicationController
       token = @client.auth_code.get_token(code, :redirect_uri => callback_url)
       if !token.blank?
         session['oauth_token'] = token.to_json
-        redirect_to api_list_url 
+        redirect_to '/files/new#osf' 
       end
     end
   end

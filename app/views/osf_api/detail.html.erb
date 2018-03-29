@@ -1,3 +1,4 @@
+<%= link_to "<span class='glyphicon glyphicon-arrow-left'></span> Back to OSF Projects List".html_safe, "/files/new#osf", class: 'back_to_list_link' %>
 <div class="osf-project">
   <h3><%= @project['attributes']['title'].html_safe %></h3>
   <div class="date">Created: <%= DateTime.parse(@project['attributes']['date_created']).strftime("%b %d %Y %k:%M:%N") %></div> 

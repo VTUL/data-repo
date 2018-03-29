@@ -24,7 +24,7 @@
   <div class="tab-pane" id="osf" aria-labelledby="osf_tab" role="tabpanel">
     <span class="sr-only"><%= t("sufia.upload.osf_import") %></span>
     <% if @osf_logged_in %>
-      <%= render 'osf_api/list' %>
+      <%= render partial: 'osf_api/list' %>
     <% else %>
       <%= render partial: 'generic_files/osf_login_link' %>
     <% end %>
