@@ -50,14 +50,14 @@ class OsfImportTools
       license_link = node_obj['data']['relationships']['license']['links']['related']['href']
       license_obj = osf_get_object(license_link)
     rescue
-      logger.error("Error fetching project license details. Is license present on project?")
+      Rails.logger.error("Error fetching project license details. Is license present on project?")
     end
 
     begin
       external_link = File.join(node_obj['data']['links']['html'], 'addons', 'forward')
       external = osf_get_object(external_link)
     rescue
-      logger.error("Error fetching external link. Probably doesn't exist for this project")
+      Rails.logger.error("Error fetching external link. Probably doesn't exist for this project")
     end
 
     item = GenericFile.new
@@ -91,6 +91,13 @@ class OsfImportTools
     collection.apply_depositor_metadata(@current_user.user_key)
     collection.members << item
     collection.save
+
+    if(!item.id.nil? && !collection.id.nil?)
+      success = true
+      
+    else
+      success = false
+    end
 
   end
 
