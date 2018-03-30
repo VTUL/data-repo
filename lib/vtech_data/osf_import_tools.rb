@@ -93,12 +93,11 @@ class OsfImportTools
     collection.save
 
     if(!item.id.nil? && !collection.id.nil?)
-      success = true
-      
+      success = true      
     else
       success = false
     end
-
+    OsfNotificationMailer.notification_email(status, collection, @current_user).deliver_later
   end
 
   def walk_nodes node_obj, project_name, current_path
