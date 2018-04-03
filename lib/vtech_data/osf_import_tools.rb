@@ -103,6 +103,8 @@ class OsfImportTools
   def walk_nodes node_obj, project_name, current_path
     make_dir current_path
 
+    make_node_metadata_file node_obj, current_path
+
     files_link = node_obj['data']['relationships']['files']['links']['related']['href']
     files_obj = osf_get_object(files_link)
     files_obj['data'].each do | source |
@@ -120,6 +122,15 @@ class OsfImportTools
         walk_nodes child_obj, project_name, child_path
       end
     end
+  end
+
+  def make_node_metadata_file node_obj, path
+    metadata_obj = Hash.new
+    node_obj['data']['relationships'].keys
+    metadata_obj['attributes'] = node_obj['data']['attributes']
+    relationships = Hash.new
+    citation_link = node_obj['data']['relationships']['citation']['links']['related']['href']
+    relationships['citation'] = osf_get_object(citation_link)
   end
 
   def make_dir path
