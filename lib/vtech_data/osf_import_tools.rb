@@ -97,7 +97,7 @@ class OsfImportTools
     else
       success = false
     end
-    OsfNotificationMailer.notification_email(success, collection, @current_user).deliver_later
+    OsfNotificationMailer.notification_email(success, collection.id, @current_user).deliver_later
   end
 
   def walk_nodes node_obj, project_name, current_path

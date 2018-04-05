@@ -2,16 +2,16 @@ class OsfNotificationMailer < ApplicationMailer
   default from: Sufia.config.from_email
   layout 'osf_mailer'
 
-  def notification_email(status, collection, user)
+  def notification_email(status, collection_id, user)
     if user
       @url = "http://data.lib.vt.edu"
       @user_name = user.name || user.email
       if status
-        @message = get_success_message collection.id
+        @message = get_success_message collection_id
       else
         @message = get_failed_message
       end
-      mail(to: @user.email, subject: 'VTechData OSF Import Notification')
+      mail(to: user.email, subject: 'VTechData OSF Import Notification')
     else
       Rails.logger.error "Can not find logged in user to send OSF notification message"
     end
