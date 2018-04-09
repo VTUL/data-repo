@@ -73,7 +73,9 @@ class DownloadGenerator
           FileUtils::mkdir_p(File.join(archive_full_path, generic_file.id))
           item_target_path =  File.join(archive_full_path, generic_file.id, filename)
         end
-        File.open(item_target_path, 'wb') { |file| file.write(generic_file.content.content) }
+        File.open(item_target_path, 'wb') do |output|
+          output.write(generic_file.content.content)
+        end
       end      
     end
 
