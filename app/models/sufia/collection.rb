@@ -31,8 +31,9 @@ module Sufia
 
     def admin_csv_values
       ret_array = []
+      solr_record = self.to_solr
       admin_solr_headers.each do | key |
-        value = !self.to_solr[key].blank? ? self.to_solr[key] : ""
+        value = !solr_record[key].blank? ? solr_record[key] : ""
         ret_array << (value.respond_to?("each") ? value.join("||") : value)
       end
       admin_fedora_headers.each do | key |
