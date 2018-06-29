@@ -8,8 +8,12 @@
         <%= link_to  collections_add_files_path(@collection), class: "btn btn-default", title: "Edit this Dataset" do %>
           <span class="glyphicon glyphicon-file"></span> Files
         <% end %>
-        <%= link_to collections_download_path(@collection), class: "btn btn-default", title: "Export this Dataset" do %>
-          <span class="glyphicon glyphicon-download"></span> Export dataset
+        <% if @can_export %>
+          <%= link_to collections_download_path(@collection), class: "btn btn-default", title: "Export this Dataset" do %>
+            <span class="glyphicon glyphicon-download"></span> Export dataset
+          <% end %>
+        <% else %>
+          <div style="clear:both">The size of this dataset is too large to export or is unknown.</div>
         <% end %>
       </div>
     <% end %>

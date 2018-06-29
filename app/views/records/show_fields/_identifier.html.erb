@@ -1,6 +1,6 @@
 <% record.identifier.each do |id| %>
   <% if id.match(/^doi/) && id != t('doi.pending_doi') %>
-    <%= link_to id, "http://ezid.cdlib.org/id/#{id}" %>
+    <%= link_to id, "https://search.datacite.org/works/#{id}" %>
   <% else %>
     <%= id %>
   <% end %><br />

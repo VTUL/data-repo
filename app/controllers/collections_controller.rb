@@ -13,6 +13,24 @@ class CollectionsController < ApplicationController
     MyCollectionEditForm
   end
 
+  def show
+    super
+    max_dataset_for_export = 3 * 1024 * 1024 * 1024
+    @dataset_size = 0
+    @can_export = true
+    if @collection.members.respond_to?('each')
+      @collection.members.each do |gf|
+        if gf.file_size.blank?
+          @can_export = false
+          break
+        end
+        file_size = gf.file_size.first.to_i
+        @dataset_size += file_size
+      end
+    end
+    @can_export = (@can_export && @dataset_size < max_dataset_for_export)
+  end
+
   def after_create
       respond_to do |format|
         ActiveFedora::SolrService.instance.conn.commit
