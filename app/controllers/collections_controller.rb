@@ -28,7 +28,7 @@ class CollectionsController < ApplicationController
         @dataset_size += file_size
       end
     end
-    @can_export = (@can_export && @dataset_size < max_dataset_for_export)
+    @can_export = (@can_export && @dataset_size <= max_dataset_for_export)
   end
 
   def after_create
