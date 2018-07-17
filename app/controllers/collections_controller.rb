@@ -19,12 +19,12 @@ class CollectionsController < ApplicationController
     @dataset_size = 0
     @can_export = true
     if @collection.members.respond_to?('each')
-      @collection.members.each do |gf|
-        if gf.file_size.blank?
+      @collection.members.each do |generic_file|
+        if generic_file.file_size.blank?
           @can_export = false
           break
         end
-        file_size = gf.file_size.first.to_i
+        file_size = generic_file.file_size.first.to_i
         @dataset_size += file_size
       end
     end
