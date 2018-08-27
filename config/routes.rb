@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'dashboard/admin_metadata_download', to: 'dashboard#admin_metadata_download', as: 'admin_metadata_download'
   
   get 'users/depositors', to: 'users#depositor_list_export', as: 'depositor_list'
+  get 'users/analytics', to: 'users#user_analytics_export', as: 'user_analytics'
 
   blacklight_for :catalog
 
