@@ -18,7 +18,7 @@ AnalyticsHelper = {
     // Items
     $('.itemdownload').click(function(){
       var itemID = $(event.target).attr('href').replace('/downloads/', '');
-      _this.trackDownload('Items', itemID);
+      _this.trackDownload('Item', itemID);
     });
 
     $('a#file_download').click(function(){
@@ -30,11 +30,14 @@ AnalyticsHelper = {
       }
       var itemID = $(target_link).attr('href').replace('/downloads/', '');
       console.log(itemID);
-      _this.trackDownload('Items', itemID);
+      _this.trackDownload('Item', itemID);
     });
 
     // Datasets
-
+    $('a#dataset_export_button').click(function(){
+      var itemID = $(event.target).attr('collection_id');
+      _this.trackDownload('Dataset', itemID);
+    });
   },
 
   trackDownload: function(model, id) {
