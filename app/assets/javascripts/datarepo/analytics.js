@@ -14,11 +14,32 @@ AnalyticsHelper = {
   
   setListeners: function() {
     var _this = this;
+
+    // Items
     $('.itemdownload').click(function(){
-      _this.getTracker();
       var itemID = $(event.target).attr('href').replace('/downloads/', '');
-      _this.pageTracker._trackEvent('Items','Download', itemID);
+      _this.trackDownload('Items', itemID);
     });
+
+    $('a#file_download').click(function(){
+      if($(event.target).attr('id') == 'file_download') {
+      	var target_link = event.target;
+      }
+      else {
+        var target_link = $(event.target).parents('a#file_download');
+      }
+      var itemID = $(target_link).attr('href').replace('/downloads/', '');
+      console.log(itemID);
+      _this.trackDownload('Items', itemID);
+    });
+
+    // Datasets
+
+  },
+
+  trackDownload: function(model, id) {
+    this.getTracker();
+    this.pageTracker._trackEvent(model,'Download', id);
   }
 }
 Blacklight.onLoad(function() {
