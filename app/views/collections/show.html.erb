@@ -14,6 +14,9 @@
         <h1><%= @presenter.title %></h1>
         <p class="collection_description"><%= @presenter.description %></p>
       </header>
+      <% if !@citation.nil? %>
+      <p><b>Citation:</b> <%= @citation %>
+      <% end %>
       <% unless has_collection_search_parameters? %>
       <%= render 'collections/show_descriptions' %>
       <% end %>

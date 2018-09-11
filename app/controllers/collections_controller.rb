@@ -29,6 +29,7 @@ class CollectionsController < ApplicationController
       end
     end
     @can_export = (@can_export && @dataset_size <= max_dataset_for_export)
+    @citation = build_citation @collection
   end
 
   def after_create
@@ -169,5 +170,26 @@ class CollectionsController < ApplicationController
       sleep(0.1)
     end
     send_file zip_file
+  end
+
+  def build_citation collection
+    return nil unless (!collection.identifier.blank? && collection.identifier.first.include?("doi:"))
+    datacite_api_base = "https://api.datacite.org/application/vnd.schemaorg.ld+json/"
+    datacite_id = collection.identifier.first.gsub("doi:", "")
+    datacite_api_url = File.join(datacite_api_base, datacite_id)    
+    begin
+      response = HTTParty.get(datacite_api_url)   
+      datacite_record = JSON.parse(response.body)
+    rescue
+      logger.error "Error fetching datacite record for collection"
+    end
+    return nil unless  !datacite_record.nil?
+    creator = "#{datacite_record['author']['familyName']}, #{datacite_record['author']['givenName'][0]}."
+    date_published = "(#{datacite_record['datePublished']})."
+    title = "#{datacite_record['name']} [Data set]."
+    publisher = "#{datacite_record['publisher']['name']}."
+    doi = datacite_record['@id']
+    
+    citation = "#{creator} #{date_published} #{title} #{publisher} #{doi}"
   end
 end
