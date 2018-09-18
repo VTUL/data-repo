@@ -176,14 +176,14 @@ class CollectionsController < ApplicationController
     return nil unless (!collection.identifier.blank? && collection.identifier.first.include?("doi:"))
     datacite_api_base = "https://api.datacite.org/application/vnd.schemaorg.ld+json/"
     datacite_id = collection.identifier.first.gsub("doi:", "")
-    datacite_api_url = File.join(datacite_api_base, datacite_id)    
+    datacite_api_url = URI.parse(URI.encode(File.join(datacite_api_base, datacite_id).strip))
     begin
       response = HTTParty.get(datacite_api_url)   
       datacite_record = JSON.parse(response.body)
     rescue
       logger.error "Error fetching datacite record for collection"
     end
-    return nil unless  !datacite_record.nil?
+    return nil unless response['errors'].nil? && !datacite_record.nil?
     creator = "#{datacite_record['author']['familyName']}, #{datacite_record['author']['givenName'][0]}."
     date_published = "(#{datacite_record['datePublished']})."
     title = "#{datacite_record['name']} [Data set]."
