@@ -32,6 +32,11 @@ class CollectionsController < ApplicationController
     @citation = build_citation @collection
   end
 
+  def new
+    super
+    flash[:notice] = nil
+  end
+
   def after_create
       respond_to do |format|
         ActiveFedora::SolrService.instance.conn.commit
