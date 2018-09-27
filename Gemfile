@@ -76,3 +76,6 @@ gem 'jquery-ui-rails', '~> 5.0.5'
 gem 'gelf'
 gem 'lograge'
 gem 'archive'
+
+# Workarounds
+gem 'resque', git: 'https://github.com/VTUL/resque.git', branch: 'eager_load_fix'
