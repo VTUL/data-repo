@@ -165,6 +165,8 @@ class CollectionsController < ApplicationController
   end
 
   def dataset_download
+    @collection = Collection.find(params[:id])
+    filename = "#{@collection.title[0...20].downcase.gsub(" ", "_")}.zip"
     time_stamp = DateTime.now.strftime('%Q')
     download_generator = DownloadGenerator.new(time_stamp)
     download_generator.make_archive
@@ -174,7 +176,7 @@ class CollectionsController < ApplicationController
     while !File.file? zip_file
       sleep(0.1)
     end
-    send_file zip_file
+    send_file zip_file, filename: filename
   end
 
   def build_citation collection
