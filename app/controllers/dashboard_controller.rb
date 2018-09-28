@@ -1,18 +1,9 @@
 class DashboardController < ApplicationController
   include Sufia::DashboardControllerBehavior
-  require 'vtech_data/download_generator'
 
   def admin_metadata_download
-    time_stamp = DateTime.now.strftime('%Q')
-    csv_generator = DownloadGenerator.new(time_stamp)
-    csv_generator.make_archive
-    csv_generator.generate_all_metadata('Collection')
-    csv_generator.generate_all_metadata('GenericFile')
-    zip_file = csv_generator.zip
-    while !File.file? zip_file
-      sleep(0.1)
-    end
-    send_file zip_file
+    Sufia.queue.push(AdminMetadataExportJob.new(request.base_url, current_user))
+    redirect_to sufia.dashboard_index_path, notice: 'Your export is running in the background. You should receive an email when it is complete.'    
   end
 
 end

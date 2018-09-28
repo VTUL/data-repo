@@ -8,6 +8,7 @@
         <%= link_to  collections_add_files_path(@collection), class: "btn btn-default", title: "Edit this Dataset" do %>
           <span class="glyphicon glyphicon-file"></span> Files
         <% end %>
+        <div>The maximum export dataset file size is limited to 3GB.</div>
         <% if @can_export %>
           <%= link_to collections_download_path(@collection), id: "dataset_export_button", collection_id: @collection.id , class: "btn btn-default", title: "Export this Dataset" do %>
             <span class="glyphicon glyphicon-download"></span> Export dataset
@@ -16,7 +17,6 @@
           <div style="clear:both">The size of this dataset is too large to export or is unknown.</div>
         <% end %>
       </div>
-      <div style="clear:both">The maximum export dataset file size is limited to 3GB.</div>
     <% end %>
     <% if can? :delete, @collection %>
       <p>

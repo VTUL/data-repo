@@ -1,7 +1,14 @@
 <div class="panel panel-default">
   <div class="panel-body">
-    <div class="col-xs-6 col-sm-12 col-md-6 user-info">
-      <%= link_to "Admin metadata download", admin_metadata_download_path %>
+    <div class="col-xs-12 user-info export-link">
+      <%= link_to "Admin metadata export", admin_metadata_download_path, class: "btn btn-default" %>
+    </div>
+    <div class="col-xs-12 user-info export-link">
+      <%= link_to "User analytics export", user_analytics_path, class: "btn btn-default" %>
+    </div>
+    <div class="col-xs-12">
+      <hr />
+      <%= link_to "Exports page", exports_list_path %>
     </div>
   </div>
 </div>

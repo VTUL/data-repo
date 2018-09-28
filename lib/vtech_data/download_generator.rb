@@ -10,7 +10,7 @@ class DownloadGenerator
   end
 
   def self.csv_dir
-    File.join(Rails.root, 'tmp', 'downloads')
+    File.join(Rails.root, 'tmp', 'exports')
   end
 
   def self.clear_csv_dir
@@ -22,7 +22,6 @@ class DownloadGenerator
   end
 
   def make_archive
-    self.class.clear_csv_dir
     FileUtils::mkdir_p(archive_full_path)
   end
 
@@ -53,7 +52,13 @@ class DownloadGenerator
     archive = Archive::Compress.new(zip_file, :type => :zip)
     archive.compress(files_to_archive)
 
+    Dir.chdir Rails.root
+
     return zip_file
+  end
+
+  def remove_tmp_folder
+    FileUtils.rm_rf(File.join(Rails.root.to_s, 'tmp', 'exports', archive_name))
   end
 
   private
@@ -87,14 +92,17 @@ class DownloadGenerator
           headers = item_class.new.csv_headers
         end
         csv << headers
-        records.each do |record|
-          if admin_download
-            values = record.admin_csv_values
-          else
-            values = record.csv_values
+        records.each_slice(100){|slice|
+          slice.each do |record|
+            if admin_download
+              values = record.admin_csv_values
+            else
+              values = record.csv_values
+            end
+            csv << values
           end
-          csv << values
-        end
+          GC.start
+        }
       end
     end
 

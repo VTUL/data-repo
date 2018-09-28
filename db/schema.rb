@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160218201736) do
+ActiveRecord::Schema.define(version: 20180821171818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,6 +89,14 @@ ActiveRecord::Schema.define(version: 20160218201736) do
 
   add_index "domain_terms_local_authorities", ["domain_term_id", "local_authority_id"], name: "dtla_by_ids2", using: :btree
   add_index "domain_terms_local_authorities", ["local_authority_id", "domain_term_id"], name: "dtla_by_ids1", using: :btree
+
+  create_table "exports", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "filename"
+    t.string   "download_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "featured_works", force: :cascade do |t|
     t.integer  "order",           default: 5

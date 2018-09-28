@@ -1,0 +1,13 @@
+<h1>Exports</h1>
+<table class="table table-zebra-striped">
+  <% @exports.each do |export| %>
+    <% if File.file? File.join(Rails.root.to_s, 'tmp', 'exports', export.filename) %>
+      <tr>
+        <td><%= export.id %></td>
+        <td><%= User.find(export.user_id).email rescue "" %></td>
+        <td><%= export.filename %></td>
+        <td><%= link_to "Download", File.join(request.base_url, 'exports', export.download_id) %></td>
+      <tr>
+    <% end %>
+  <% end %>
+</table>
