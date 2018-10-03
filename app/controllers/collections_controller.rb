@@ -195,8 +195,9 @@ class CollectionsController < ApplicationController
       creator = "#{datacite_record['author']['familyName']}, #{datacite_record['author']['givenName'][0]}."
     rescue
       puts "error retrieving name"
+      creator = format_name(datacite_record['author']['name'])
     end
-    creator = format_name(datacite_record['author']['name'])
+
     begin
       date_published = "(#{datacite_record['datePublished']})."
       title = "#{datacite_record['name']} [Data set]."
