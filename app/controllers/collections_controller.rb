@@ -191,12 +191,37 @@ class CollectionsController < ApplicationController
       logger.error "Error fetching datacite record for collection"
     end
     return nil unless response['errors'].nil? && !datacite_record.nil?
-    creator = "#{datacite_record['author']['familyName']}, #{datacite_record['author']['givenName'][0]}."
-    date_published = "(#{datacite_record['datePublished']})."
-    title = "#{datacite_record['name']} [Data set]."
-    publisher = "#{datacite_record['publisher']['name']}."
-    doi = datacite_record['@id']
-    
-    citation = "#{creator} #{date_published} #{title} #{publisher} #{doi}"
+    begin
+      creator = "#{datacite_record['author']['familyName']}, #{datacite_record['author']['givenName'][0]}."
+    rescue
+      puts "error retrieving name"
+      creator = format_name(datacite_record['author']['name'])
+    end
+
+    begin
+      date_published = "(#{datacite_record['datePublished']})."
+      title = "#{datacite_record['name']} [Data set]."
+      publisher = "#{datacite_record['publisher']['name']}."
+      doi = datacite_record['@id']
+    rescue
+      puts "error generating citation"
+    end
+    if creator && date_published && title && publisher && doi
+      citation = "#{creator} #{date_published} #{title} #{publisher} #{doi}"
+    end
+    return citation
+  end
+
+  def format_name name
+    begin
+      creator_array = name.split(" ")
+      last = creator_array.last
+      rest_array = creator_array - [last]
+      creator = "#{last}, #{rest_array.join(" ")}"
+    rescue
+      puts "error formatting name"
+    end
+    creator || ""
   end
 end
+
