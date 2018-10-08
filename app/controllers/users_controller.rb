@@ -5,6 +5,12 @@ class UsersController < ApplicationController
   before_action :require_admin, only: [:depositor_list_export, :user_analytics_export]
   before_action :admin_and_user_only, only: [:show]
 
+  def update
+    super
+    @user.display_name = nil if user_params["display_name"].empty?
+    @user.save
+  end
+
   def depositor_list_export
     Sufia.queue.push(DepositorExportJob.new(current_user, request.base_url))
     redirect_to sufia.dashboard_index_path, notice: 'Your export is running in the background. You should receive an email when it is complete.'
