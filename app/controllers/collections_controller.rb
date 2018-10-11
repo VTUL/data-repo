@@ -181,7 +181,7 @@ class CollectionsController < ApplicationController
 
   def build_citation collection
     return nil unless (!collection.identifier.blank? && collection.identifier.first.include?("doi:"))
-    datacite_api_base = "https://api.datacite.org/application/vnd.schemaorg.ld+json/"
+    datacite_api_base = "https://api.datacite.org/works/"
     datacite_id = collection.identifier.first.gsub("doi:", "")
     datacite_api_url = URI.parse(URI.encode(File.join(datacite_api_base, datacite_id).strip))
     begin
@@ -192,36 +192,20 @@ class CollectionsController < ApplicationController
     end
     return nil unless response['errors'].nil? && !datacite_record.nil?
     begin
-      creator = "#{datacite_record['author']['familyName']}, #{datacite_record['author']['givenName'][0]}."
-    rescue
-      puts "error retrieving name"
-      creator = format_name(datacite_record['author']['name'])
-    end
-
-    begin
-      date_published = "(#{datacite_record['datePublished']})."
-      title = "#{datacite_record['name']} [Data set]."
-      publisher = "#{datacite_record['publisher']['name']}."
-      doi = datacite_record['@id']
+      datacite_attributes = datacite_record['data']['attributes']
+      creators = datacite_attributes['author'].map{ |author| author['literal'] }.join(", ")
+      date_published = "(#{datacite_attributes['published']})."
+      title = "#{datacite_attributes['title']} [Data set]."
+      publisher = "University Libraries, Virginia Tech"
+      doi = datacite_attributes['identifier']
     rescue
       puts "error generating citation"
     end
-    if creator && date_published && title && publisher && doi
-      citation = "#{creator} #{date_published} #{title} #{publisher} #{doi}"
+    if creators && date_published && title && publisher && doi
+      citation = "#{creators} #{date_published} #{title} #{publisher} #{doi}"
     end
     return citation
   end
 
-  def format_name name
-    begin
-      creator_array = name.split(" ")
-      last = creator_array.last
-      rest_array = creator_array - [last]
-      creator = "#{last}, #{rest_array.join(" ")}"
-    rescue
-      puts "error formatting name"
-    end
-    creator || ""
-  end
 end
 
