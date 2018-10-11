@@ -51,6 +51,7 @@ end
 Capybara.default_driver = :rack_test
 Capybara.javascript_driver = :poltergeist
 Capybara.default_max_wait_time = $in_travis ? 30 : 15
+Capybara.server = :webrick
 
 RSpec.configure do |config|
   config.include Warden::Test::Helpers

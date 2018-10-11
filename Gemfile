@@ -50,6 +50,7 @@ group :development, :test do
   gem 'phantomjs', '2.1.1', require: 'phantomjs/poltergeist'
   gem "simplecov", require: false
   gem 'coveralls', require: false
+  gem 'rubocop', require: false
 end
 
 # Our dev/prod gems

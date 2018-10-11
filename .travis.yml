@@ -3,7 +3,7 @@ bundler_args: --without development production
 cache: bundler
 sudo: false
 rvm:
-  - 2.2
+  - 2.3
 jdk:
   - oraclejdk8
 env:
@@ -13,8 +13,14 @@ services:
   - redis-server
 before_script:
   - cp ./config/secrets.yml.sample ./config/secrets.yml
+  - RAILS_ENV=test bundle exec rubocop -R --fail-level error --display-only-fail-level-offenses
   - RAILS_ENV=test bundle exec rake db:setup
   - RAILS_ENV=test bundle exec rake datarepo:add_roles
   - RAILS_ENV=test bundle exec rake jetty:clean
   - RAILS_ENV=test bundle exec rake sufia:jetty:config
   - RAILS_ENV=test bundle exec rake jetty:start
+addons:
+  apt:
+    packages:
+    - zlib1g-dev
+    - libarchive-dev
