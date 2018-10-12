@@ -191,17 +191,17 @@ class CollectionsController < ApplicationController
       logger.error "Error fetching datacite record for collection"
     end
     return nil unless response['errors'].nil? && !datacite_record.nil?
-#    begin
+
+    begin
       datacite_attributes = datacite_record['data']['attributes']
       creators = datacite_attributes['author'].map{ |author| format_name(author['literal']) }.join(", ")
-      raise creators.inspect
       date_published = "(#{datacite_attributes['published']})."
       title = "#{datacite_attributes['title']} [Data set]."
       publisher = "University Libraries, Virginia Tech"
       doi = datacite_attributes['identifier']
-#    rescue
-#      puts "error generating citation"
-#    end
+    rescue
+      puts "error generating citation"
+    end
     if creators && date_published && title && publisher && doi
       citation = "#{creators} #{date_published} #{title} #{publisher} #{doi}"
     end
@@ -209,7 +209,15 @@ class CollectionsController < ApplicationController
   end
 
   def format_name name
-    name
+    begin
+      creator_array = name.split(" ")
+      last = creator_array.last
+      rest_array = creator_array - [last]
+      creator = "#{last} #{rest_array.map{|name| name[0]}.join(" ")}"
+    rescue
+      puts "error formatting name"
+    end
+    creator || ""
   end
 end
 
