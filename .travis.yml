@@ -19,6 +19,11 @@ before_script:
   - RAILS_ENV=test bundle exec rake jetty:clean
   - RAILS_ENV=test bundle exec rake sufia:jetty:config
   - RAILS_ENV=test bundle exec rake jetty:start
+deploy:
+  provider: script
+  script: curl -fsSL -X POST -o /dev/null -u $AWX_USER:$AWX_PASS $AWX_TEMPLATE_URL
+  on:
+    branch: pprd
 addons:
   apt:
     packages:
