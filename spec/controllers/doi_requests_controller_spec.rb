@@ -50,7 +50,7 @@ RSpec.describe DoiRequestsController, type: :controller do
     let(:collection) {FactoryGirl.create(:collection, :with_default_user)}
 
     before(:example) do
-      sign_in user
+      sign_in admin
     end
 
     it "creates a Doi Request" do
@@ -107,7 +107,9 @@ RSpec.describe DoiRequestsController, type: :controller do
 
     context "for admin users" do
       before {sign_in admin}
+      let (:ezid_doi) { FactoryGirl.create(:identifier) }
       it "should show the doi request" do
+        allow(Ezid::Identifier).to receive(:find).and_return(:ezid_doi)
         get :view_doi, id: minted_doi
         expect(response).to be_successful
         expect(assigns[:doi_request]).to eq minted_doi
@@ -128,7 +130,7 @@ RSpec.describe DoiRequestsController, type: :controller do
     let(:doi_job) { double('assign doi job') }
 
     it "should assign jobs for minting dois" do
-      allow(AssignDoiJob).to receive(:new).with(pending_doi.id).and_return(doi_job)
+      allow(AssignDoiJob).to receive(:new).with(pending_doi.id, "http://test.host").and_return(doi_job)
       expect(Sufia.queue).to receive(:push).with(doi_job).once
       get :mint_all, doi_requests_checkbox: pending_dois
     end

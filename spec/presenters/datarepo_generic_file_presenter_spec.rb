@@ -4,8 +4,8 @@ describe DatarepoGenericFilePresenter do
   describe ".terms" do
     it "returns a list" do
       expect(described_class.terms).to match_array([:resource_type, :title,
-                                           :creator, :contributor, :description, :tag, :rights, :publisher,
-                                           :date_created, :subject, :language, :identifier, :based_near,
+                                           :creator, :contributor, :description, :tag, :rights,
+                                           :date_created, :subject, :language, :based_near,
                                            :related_url, :provenance])
     end
   end

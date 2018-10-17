@@ -18,7 +18,7 @@ RSpec.describe "Uploading files from the web form", type: :feature, js: true do
     check "terms_of_service"
     attach_file "files[]", "spec/fixtures/vt-logo.png", visible: false
     click_button "main_upload_start"
-    expect(page).to have_content "Apply Metadata"
+    expect(page).to have_content "Describe Item(s)"
     fill_in "Keyword", with: "test"
     click_button "Save"
     expect(page).to have_content "My Files"

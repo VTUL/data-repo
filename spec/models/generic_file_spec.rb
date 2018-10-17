@@ -23,7 +23,6 @@ describe GenericFile, :type => :model do
       expect(subject).to respond_to(:description)
       expect(subject).to respond_to(:tag)
       expect(subject).to respond_to(:rights)
-      expect(subject).to respond_to(:publisher)
       expect(subject).to respond_to(:date_created)
       expect(subject).to respond_to(:subject)
       expect(subject).to respond_to(:language)

@@ -2,6 +2,7 @@ require 'spec_helper'
 
 RSpec.describe "Browse Dashboard", type: :feature, js: true do
   let(:user) { FactoryGirl.create(:user) }
+  let(:admin) { FactoryGirl.create(:admin) }
 
   describe "Create collection without DOI" do
     before :each do
@@ -28,6 +29,13 @@ RSpec.describe "Browse Dashboard", type: :feature, js: true do
       expect(page).to have_content("Dataset was successfully created.")
       expect(page).to have_content("Test Title")
       expect(page).to have_content("abc: def")
+    end
+  end
+
+  describe "Create collection with DOI" do
+    before :each do
+      OmniAuth.config.add_mock(:cas, { uid: admin.uid })
+      visit new_user_session_path
     end
 
     it "allows user to create a new collection with direct DOI and identifier" do
@@ -57,7 +65,9 @@ RSpec.describe "Browse Dashboard", type: :feature, js: true do
       click_link "Create Dataset"
       choose "doi_status_assigned"
       fill_in "Datacite Metadata Search:", with: "test"
-      click_button "Search"
+      within "#datacite_search_form" do
+        click_button "Search"
+      end
       # need to sleep BEFORE clicking Import Metadata
       # otherwise click succeeds but effect does not take place
       sleep 10

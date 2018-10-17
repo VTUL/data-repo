@@ -9,9 +9,9 @@ describe BatchEditsController, type: :controller do
 
   describe "edit" do
     before do
-      @one = GenericFile.new(creator: ["Fred"], provenance: ['foo'])
+      @one = GenericFile.new(creator: ["Fred"], description: ['foo'])
       @one.apply_depositor_metadata('mjg36')
-      @two = GenericFile.new(creator: ["Wilma"], provenance: ['foo'])
+      @two = GenericFile.new(creator: ["Wilma"], description: ['foo'])
       @two.apply_depositor_metadata('mjg36')
       @one.save!
       @two.save!
@@ -23,21 +23,22 @@ describe BatchEditsController, type: :controller do
     it "is successful" do
       get :edit
       expect(response).to be_successful
-      expect(assigns[:terms]).to eq [:creator, :contributor, :description, :tag, :rights, :publisher, :date_created, 
-                                     :subject, :language, :identifier, :based_near, :related_url, :provenance]
-      expect(assigns[:generic_file]).to have_attributes("creator": ["Fred", "Wilma"], "provenance": ["foo"])
+      # only allow publisher, provenance, identifier edits if admin
+      expect(assigns[:terms]).to eq [:creator, :contributor, :description, :tag, :rights, :date_created, 
+                                     :subject, :language, :based_near, :related_url]
+      expect(assigns[:generic_file]).to have_attributes("creator": ["Fred", "Wilma"], "description": ["foo"])
     end
   end
 
   describe "update" do
     let!(:one) do
-      GenericFile.create(creator: ["Fred"], provenance: ['foo']) do |file|
+      GenericFile.create(creator: ["Fred"], description: ['foo']) do |file|
         file.apply_depositor_metadata('mjg36')
       end
     end
 
     let!(:two) do
-      GenericFile.create(creator: ["Fred"], provenance: ['foo']) do |file|
+      GenericFile.create(creator: ["Fred"], description: ['foo']) do |file|
         file.apply_depositor_metadata('mjg36')
       end
     end
@@ -51,10 +52,10 @@ describe BatchEditsController, type: :controller do
     let(:mycontroller) { "my/files" }
 
     it "updates the records" do
-      put :update, update_type: "update", generic_file: { provenance: ["zzz"] }
+      put :update, update_type: "update", generic_file: { creator: ["zzz"] }
       expect(response).to be_redirect
-      expect(GenericFile.find(one.id).provenance).to eq ["zzz"]
-      expect(GenericFile.find(two.id).provenance).to eq ["zzz"]
+      expect(GenericFile.find(one.id).creator).to eq ["zzz"]
+      expect(GenericFile.find(two.id).creator).to eq ["zzz"]
     end
   end
 end

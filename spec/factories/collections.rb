@@ -19,13 +19,7 @@ FactoryGirl.define do
       after(:create) do |collection|
         doi_request = DoiRequest.create(asset_id: collection.id, asset_type: 'Collection')
 
-        minted_doi = Ezid::Identifier.mint(
-          datacite_creator: (collection.creator.empty? ? "" : collection.creator.first),
-          datacite_resourcetype: "Dataset",
-          datacite_title: collection.title,
-          datacite_publisher: (collection.publisher.empty? ? "" : collection.publisher.first),
-          datacite_publicationyear: (collection.date_created.empty? ? "" : collection.date_created.first)
-         )
+        minted_doi = FactoryGirl.create(:identifier) 
         collection[:identifier].each_with_index {
           |id, idx| id == "doi:pending" ? collection[:identifier][idx] = minted_doi.id : id
         }

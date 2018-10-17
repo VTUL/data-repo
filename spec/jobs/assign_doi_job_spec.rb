@@ -6,7 +6,13 @@ RSpec.describe AssignDoiJob, type: :job do
     DoiRequest.find_by_asset_id(c.id)
   end
 
-  subject { described_class.new(doi_request.id) }
+  let (:minted_doi) { FactoryGirl.create(:identifier) }
+
+  before do
+    allow(Ezid::Identifier).to receive(:mint).and_return(minted_doi) 
+  end
+
+  subject { described_class.new(doi_request.id, "http://test.host") }
   
   it "mints doi for the collection" do
     subject.run

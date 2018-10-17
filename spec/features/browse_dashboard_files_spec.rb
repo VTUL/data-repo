@@ -14,7 +14,7 @@ RSpec.describe "Browse Dashboard", type: :feature do
 
     it "searches your files by default" do
       visit "/dashboard"
-      fill_in "q", with: "PDF"
+      fill_in "search-field-header", with: "PDF"
       click_button "search-submit-header"
       expect(page).to have_content("Fake PDF Title")
     end
@@ -71,7 +71,7 @@ RSpec.describe "Browse Dashboard", type: :feature do
         end
 
         # allows you to search your own files and remove constraints
-        fill_in "q", with: "PDF"
+        fill_in "search-field-header", with: "PDF"
         click_button "search-submit-header"
         expect(page).to have_content("Fake PDF Title")
         within(".constraints-container") do
@@ -95,7 +95,7 @@ RSpec.describe "Browse Dashboard", type: :feature do
         # TODO: this would make a good view test.
         visit "/dashboard/files"
 
-        fill_in "q", with: "Wav"
+        fill_in "search-field-header", with: "Wav"
         click_button "search-submit-header"
         click_button "Select an action"
         click_link "Edit File"

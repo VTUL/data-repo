@@ -32,7 +32,7 @@ RSpec.describe "doi_requests/view_doi" do
 
   it "renders the doi_requests view page" do
     assign(:doi_request, doi_request)
-    assign(:ezid_doi, Ezid::Identifier.find(doi_request.ezid_doi))
+    assign(:ezid_doi, FactoryGirl.create(:identifier))
     render
     expect(view).to render_template(:view_doi)
   end
