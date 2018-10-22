@@ -17,18 +17,18 @@
       </thead>
       <tbody>
 
-      <% @results.each_with_index do |result, idx| %>
+      <% @results['data'].each_with_index do |result, idx| %>
         <tr>
           <% if idx == 0 %>
             <td><%= radio_button_tag 'result', result, true %></td>
           <% else %>
             <td><%= radio_button_tag 'result', result %></td>
           <% end %>
-          <td><%= result["doi"] %></td>
-          <td><%= result["creator"] %> </td>
-          <td><%= result["publisher"] %></td>
-          <td><%= result["publicationYear"] %></td>
-          <td><%= result["title"] %></td>
+          <td><%= result['attributes']["doi"] %></td>
+          <td><%= result['attributes']['author'].map{|author| author['literal']}.join(', ') %> </td>
+          <td>University Libraries, Virginia Tech</td>
+          <td><%= result['attributes']['published'] %></td>
+          <td><%= result['attributes']['title'] %></td>
         </tr>
       <% end %>
       </tbody>
