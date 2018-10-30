@@ -4,13 +4,19 @@ var title = result.attributes.title;
 $("#collection_title").val(title);
 $("#collection_title").attr("readonly", "readonly");
 var creator_array = result.attributes.author;
-$(".collection_creator ul li:nth-child(1) input").val(creator_array[0].literal);
+$(".collection_creator ul li:nth-child(1) input").val(creator_array[0].literal != null ? creator_array[0].literal : (creator_array[0].given + " " + creator_array[0].family));
 $(".collection_creator ul li:nth-child(1) input").attr("readonly", "readonly");
 $(".collection_creator ul li:nth-child(1) span").hide();
 for (var i = 1; i < creator_array.length; i++) {
+  try {
+    var name = creator_array[i].literal != null ? creator_array[i].literal : (creator_array[i].given + " " + creator_array[i].family);
+  }
+  catch(error) {
+    console.error(error)
+  }
   $(".collection_creator ul").append('<li class="field-wrapper input-group input-append">' 
     + '<input  class="string multi_value optional form-control collection_creator form-control multi-text-field" name="collection[creator][]" value="'
-    + creator_array[i].literal + '" id="collection_creator" '
+    + (name || "") + '" id="collection_creator" '
     + 'aria-labelledby="collection_creator_label" type="text" readonly="readonly"/></li>');    
 }
 $(".collection_date_created ul li:nth-child(1) input").val(result.attributes.published);
