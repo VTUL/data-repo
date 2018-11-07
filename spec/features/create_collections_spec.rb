@@ -14,7 +14,6 @@ RSpec.describe "Browse Dashboard", type: :feature, js: true do
       visit "/dashboard"
       click_link "Organize"
       click_link "Create Dataset"
-      choose "doi_status_unassigned"
       fill_in "Title", with: "Test Title"
       fill_in "Creator", with: "john.doe@example.com"
       fill_in "Contributor", with: "jane.doe@example.com"
@@ -44,6 +43,7 @@ RSpec.describe "Browse Dashboard", type: :feature, js: true do
       click_link "Create Dataset"
       choose "doi_status_assigned"
       click_button "Directly Fill Form"
+      sleep 10
       fill_in "collection_title", with: "Test Title"
       fill_in "Creator", with: "john.doe@example.com"
       fill_in "Contributor", with: "jane.doe@example.com"
@@ -59,7 +59,7 @@ RSpec.describe "Browse Dashboard", type: :feature, js: true do
       expect(page).to have_content("Test Title")
     end
 
-    it "allows user to create a new collection with datacite search" do
+    it "allows user to find collection with datacite search to be imported" do
       visit "/dashboard"
       click_link "Organize"
       click_link "Create Dataset"
@@ -71,15 +71,7 @@ RSpec.describe "Browse Dashboard", type: :feature, js: true do
       # need to sleep BEFORE clicking Import Metadata
       # otherwise click succeeds but effect does not take place
       sleep 10
-      click_button "Import Metadata"
-      begin
-        click_button "Create Dataset"
-      rescue Capybara::Poltergeist::JavascriptError => error
-        puts "\nCaught JS error:"
-        puts error.message
-        #puts error.backtrace.inspect
-      end
-      expect(page).to have_content "Dataset was successfully created."
+      expect(page).to have_content "10.7294/w4td9v7t"
     end
 
     it "allows user to create a new collection with crossref search" do

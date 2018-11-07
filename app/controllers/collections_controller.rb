@@ -118,18 +118,18 @@ class CollectionsController < ApplicationController
   end
 
   def datacite_search
-    uri = URI('http://search.datacite.org/api?')
-    uri.query = URI.encode_www_form(params)
-    res = Net::HTTP.get(uri)
-    parsed = JSON.parse(res)
-    if parsed["responseHeader"]["status"] != 0
+    uri = URI("https://api.datacite.org/works?query=#{params['q']}&data-center-id=viva.vt")
+    res = HTTParty.get(uri)
+    parsed = JSON.parse(res.body)
+    if res.headers["status"] != '200 OK' 
       @datacite_error = "Datacite server problem. You can fill in on your own."
       render :action => 'datacite_search_error'
-    elsif parsed["response"]["numFound"] == 0
+    elsif parsed["meta"]["total"] == 0
       @datacite_error = "No metadata found! You can fill in on your own."
       render :action => 'datacite_search_error'
     else
-      @results = parsed["response"]["docs"]
+      @results = parsed
+      render :action => 'datacite_search'
     end
   end
 
@@ -138,7 +138,7 @@ class CollectionsController < ApplicationController
   end
 
   def import_metadata
-    @result = params[:result].gsub('=>', ':')
+    @result = params[:result].gsub("=>", ":").gsub("nil", "null")
   end
 
   def ldap_search
