@@ -1,6 +1,31 @@
 require 'net/ldap'
 
 namespace :datarepo do
+  desc 'Create test data'
+  task test_data: :environment do
+    me = User.find_by(email: "whunter@vt.edu")
+    for i in 1..10 do
+      c = Collection.new
+      c.title = "dataset #{i}"
+      c.apply_depositor_metadata(me.user_key)
+
+      for n in 1..10 do
+        gf = GenericFile.new
+        gf.title << "File #{n} in Collection #{i}"
+        gf.tag << "Item"
+        gf.creator << me.email
+        gf.rights = ['Attribution 3.0 United States']
+        gf.resource_type << "Generic File"
+        gf.filename = ["file_#{n}.txt"]
+        gf.label = "file_#{n}"
+        gf.apply_depositor_metadata me 
+        gf.save
+        c.members << gf
+      end
+      c.save
+    end
+  end
+
   desc 'Create default roles.'
   task add_roles: :environment do
     ['admin', 'collection_admin', 'collection_user'].each do |role_name|
