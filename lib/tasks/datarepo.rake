@@ -4,12 +4,14 @@ namespace :datarepo do
   desc 'Create test data'
   task test_data: :environment do
     me = User.find_by(email: "whunter@vt.edu")
-    for i in 1..10 do
+    for i in 1..50 do
       c = Collection.new
       c.title = "dataset #{i}"
+      c.resource_type = ["Dataset"]
+      puts c.title
       c.apply_depositor_metadata(me.user_key)
 
-      for n in 1..10 do
+      for n in 1..20 do
         gf = GenericFile.new
         gf.title << "File #{n} in Collection #{i}"
         gf.tag << "Item"
@@ -21,7 +23,9 @@ namespace :datarepo do
         gf.apply_depositor_metadata me 
         gf.save
         c.members << gf
+        puts gf.filename
       end
+      puts "==========================================="
       c.save
     end
   end
