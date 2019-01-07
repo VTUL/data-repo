@@ -28,7 +28,7 @@ class DownloadGenerator
   def generate_all_metadata class_name
     @model_name = class_name
     @my_class = class_name.constantize
-    items = get_all_items_for_model(my_class)
+    items = get_all_items_for_model(class_name, my_class)
     file_path = File.join(self.class.csv_dir, archive_name, "#{timestamp}_#{model_name.downcase}.csv")
     write_csv(file_path, my_class, items, true)
   end
@@ -63,10 +63,12 @@ class DownloadGenerator
 
   private
 
-    def get_all_items_for_model item_class
-      item_class.all
-      #query = ActiveFedora::SolrQueryBuilder.construct_query_for_rel(has_model: model_name)
-      #ActiveFedora::SolrService.query(query)
+    def get_all_items_for_model class_name, item_class
+      builder = ExportSearchBuilder.new([:collections_by_file_id], repository).with(hasCollectionMember_ssim: 'Abraham Lincoln')
+      response = repository.search(builder)
+      raise class_name.inspect
+#      item_class.all
+       
     end
 
     def add_files items
