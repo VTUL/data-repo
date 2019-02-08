@@ -26,4 +26,8 @@ class SolrDocument
   def provenance
     Array(self[Solrizer.solr_name("provenance")])
   end
+
+  def citation
+   Array(self[Solrizer.solr_name("citation")])
+  end
 end

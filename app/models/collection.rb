@@ -4,4 +4,8 @@ class Collection < Sufia::Collection
     index.as :stored_searchable, :facetable
   end
 
+  property :citation, predicate: ::RDF::DC.bibliographicCitation, multiple: false do |index|
+    index.as :stored_searchable
+  end
+
 end
