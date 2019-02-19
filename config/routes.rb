@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'exports-list', to: 'exports#index', as: 'exports_list'
   get 'collections/datacite_search', to: 'collections#datacite_search'
   post 'collections/crossref_search', to: 'collections#crossref_search'
-  get "collections/import_metadata", to: 'collections#import_metadata', as: 'import_collection'
+  post "collections/import_metadata", to: 'collections#import_metadata', as: 'import_collection'
   get 'collections/ldap_search', to: 'collections#ldap_search'
   get 'dashboard/publishables', to: 'publishables#index', as: 'dashboard_publishables'
   get 'help', to: 'contact_form#new', as: 'help_page'

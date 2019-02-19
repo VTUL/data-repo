@@ -1,0 +1,67 @@
+<% depositor = f.object.depositor || batch.generic_files.first.depositor %>
+<% public_perm = f.object.permissions.map { |perm| perm.access if perm.agent_name == "public"}.compact.first %>
+<% public_perm = true if params[:controller] == 'batch' %>
+<% registered_perm = f.object.permissions.map { |perm| perm.access if perm.agent_name == "registered"}.compact.first %>
+
+<h2><% if params[:controller] == 'batch' %>Bulk <% end %>Permissions <% if params[:controller] == 'batch' %>
+      <small>(applied to all files just uploaded)</small><% end %>
+</h2>
+
+<div class="alert alert-info hidden" id="save_perm_note">Permissions are <strong>not</strong> saved until the &quot;Save&quot; button is pressed at the bottom of the page.</div>
+<div class="alert alert-warning hidden" id="permissions_error">
+  <a class="close" data-dismiss="alert" href="#">
+    <span class="sr-only">Close this alert</span>
+    <span aria-hidden="true">×</span>
+  </a>
+<span id="permissions_error_text"></span></div>
+
+<div class="well">
+
+  <h3>Visibility - <small>who should have the ability to read and download</small>
+    <span id="visibility_tooltip" class="h5"><%= visibility_help %></span>
+  </h3>
+  <div class="radio">
+    <label>
+      <input type="radio" id="visibility_open" name="visibility" value="<%=Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC %>" <% if !public_perm.blank? %> checked="true"<% end %>/> <span class="label label-success">Open Access</span> Visible to the world.
+    </label>
+    <label>
+      <input type="radio" id="visibility_psu" name="visibility" value="<%=Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_AUTHENTICATED %>" <% if !registered_perm.blank? %> checked="true"<% end %> /><span class="label label-info"><%=t('sufia.institution_name') %></span> Visible to all <%=t('sufia.institution_name') %> users.
+    </label>
+    <label>
+      <input type="radio" id="visibility_restricted" name="visibility" value="<%=Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PRIVATE %>"<% if registered_perm.blank? and public_perm.blank?%> checked="true"<% end %> /> <span class="label label-danger">Private</span> Visible to users/groups specified below, if any.
+    </label>
+  </div>
+
+</div><!-- /.well -->
+
+<table class="table table-bordered">
+  <tr>
+    <th width="60%">Person/Group</th>
+    <th width="40%">Access Level</th>
+  </tr>
+  <tr id="file_permissions">
+    <td>
+      <%= label_tag :owner_access, class: "control-label" do %>
+        Depositor (<span id="file_owner" data-depositor="<%= depositor %>"><%= link_to_profile depositor %></span>)
+      <% end %>
+    </td>
+    <td>
+      <%= Sufia.config.owner_permission_levels.keys[0] %>
+    </td>
+  </tr>
+  <%= f.fields_for :permissions do |permission_fields| %>
+    <%# skip the public, penn state (aka registered), and depositor perms as they are displayed first at the top %>
+    <% next if ['public', 'registered', depositor].include? permission_fields.object.agent_name.downcase %>
+    <tr>
+      <td><%= permission_fields.label :agent_name, class: "control-label" do %>
+        <%= user_display_name_and_key(permission_fields.object.agent_name) %>
+      <% end %></td>
+      <td>
+        <div class="col-sm-8">
+          <%= permission_fields.select :access, Sufia.config.permission_levels, {}, class: 'form-control select_perm' %>
+        </div>
+        <button class="btn close remove_perm" data-index="<%= permission_fields.index %>">X</button>
+      </td>
+    </tr>
+  <% end %>
+</table>

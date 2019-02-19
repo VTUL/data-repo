@@ -27,7 +27,7 @@ describe Ability, type: :model do
     end
   end
   let! (:my_collection_with_doi) do
-    Collection.new(title: "collection with doi", identifier: ["doi:10.5072/FK2AB1C234"]).tap do |c|
+    Collection.new(title: "collection with doi", identifier: ["doi:10.7294/W4AB1C234"]).tap do |c|
       c.apply_depositor_metadata(user)
       c.member_ids = [my_file_with_doi.id]
       c.save!

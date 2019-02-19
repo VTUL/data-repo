@@ -1,7 +1,7 @@
 <% if @results.nil? || @results.empty? %>
   <h2><%= @datacite_error %></h2>
 <% else %>
-  <%= form_tag('import_metadata', method: :get, remote: true) do %>
+  <%= form_tag('import_metadata', method: :post, remote: true) do %>
     <div class="table-responsive">
     <table class="table table-striped table-hover">
       <caption>Choose one from below:</caption>
@@ -17,18 +17,18 @@
       </thead>
       <tbody>
 
-      <% @results.each_with_index do |result, idx| %>
+      <% @results['data'].each_with_index do |result, idx| %>
         <tr>
           <% if idx == 0 %>
             <td><%= radio_button_tag 'result', result, true %></td>
           <% else %>
             <td><%= radio_button_tag 'result', result %></td>
           <% end %>
-          <td><%= result["doi"] %></td>
-          <td><%= result["creator"] %> </td>
-          <td><%= result["publisher"] %></td>
-          <td><%= result["publicationYear"] %></td>
-          <td><%= result["title"] %></td>
+          <td><%= result['attributes']["doi"] %></td>
+          <td><%= result['attributes']['author'].map{|author| !author['literal'].nil? ? author['literal'] : "#{author['given']} #{author['family']}"}.join(', ') %> </td>
+          <td>University Libraries, Virginia Tech</td>
+          <td><%= result['attributes']['published'] %></td>
+          <td><%= result['attributes']['title'] %></td>
         </tr>
       <% end %>
       </tbody>
