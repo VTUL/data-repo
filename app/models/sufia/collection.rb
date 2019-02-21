@@ -29,9 +29,8 @@ module Sufia
       ["id", "depositor", "part_of", "contributor", "creator", "title", "description", "publisher", "date_created", "date_uploaded", "date_modified", "subject", "language", "rights", "resource_type", "identifier", "based_near", "tag", "related_url", "funder", "member_ids"]
     end
 
-    def admin_csv_values
+    def admin_csv_values solr_record
       ret_array = []
-      solr_record = self.to_solr
       admin_solr_headers.each do | key |
         value = !solr_record[key].blank? ? solr_record[key] : ""
         ret_array << (value.respond_to?("each") ? value.join("||") : value)
@@ -43,24 +42,25 @@ module Sufia
       ret_array
     end
 
-    def csv_values
+    def csv_values record
+      record_obj = record['object_profile_ssm']
       ret_array = []
-      ret_array << self.id
-      ret_array << self.title
-      ret_array << self.creator.join('||')
-      ret_array << self.contributor.join('||')
-      ret_array << self.description
-      ret_array << self.tag.join('||')
-      ret_array << self.rights.join('||')
-      ret_array << self.publisher.join('||')
-      ret_array << self.date_created.join('||')
-      ret_array << self.subject.join('||')
-      ret_array << self.language.join('||')
-      ret_array << self.identifier.join('||')
-      ret_array << self.based_near.join('||')
-      ret_array << self.related_url.join('||')
-      ret_array << self.funder.join('||')
-      ret_array << self.member_ids.join('||')
+      ret_array << record_obj['id']
+      ret_array << record_obj['title']
+      ret_array << record_obj['creator'].join('||')
+      ret_array << record_obj['contributor'].join('||')
+      ret_array << record_obj['description']
+      ret_array << record_obj['tag'].join('||')
+      ret_array << record_obj['rights'].join('||')
+      ret_array << record_obj['publisher'].join('||')
+      ret_array << record_obj['date_created'].join('||')
+      ret_array << record_obj['subject'].join('||')
+      ret_array << record_obj['language'].join('||')
+      ret_array << record_obj['identifier'].join('||')
+      ret_array << record_obj['based_near'].join('||')
+      ret_array << record_obj['related_url'].join('||')
+      ret_array << record_obj['funder'].join('||')
+      ret_array << record_obj['member_ids'].join('||')
     end
 
   end

@@ -14,7 +14,7 @@ class ExportSearchBuilder < Blacklight::SearchBuilder
     solr_parameters[:fq] ||= []
     solr_parameters[:fq] << "{!field f=has_model_ssim v=Collection}"
     solr_parameters[:fq] << "{!field f=hasCollectionMember_ssim v=8k71nh08w}"
-    solr_parameters[:rows] = 1000
+    solr_parameters[:rows] = 1000000
   end
 
   def all_generic_files(solr_parameters)

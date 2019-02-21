@@ -22,9 +22,8 @@ class GenericFile < ActiveFedora::Base
     ["id", "mime_type", "format_label", "file_size", "last_modified", "filename", "original_checksum", "rights_basis", "copyright_basis", "copyright_note", "well_formed", "valid", "status_message", "file_title", "file_author", "page_count", "file_language", "word_count", "character_count", "paragraph_count", "line_count", "table_count", "graphics_count", "byte_order", "compression", "color_space", "profile_name", "profile_version", "orientation", "color_map", "image_producer", "capture_device", "scanning_software", "exif_version", "gps_timestamp", "latitude", "longitude", "character_set", "markup_basis", "markup_language", "bit_depth", "channels", "data_format", "offset", "frame_rate", "label", "depositor", "arkivo_checksum", "relative_path", "import_url", "part_of", "resource_type", "title", "creator", "contributor", "description", "tag", "rights", "date_created", "date_uploaded", "date_modified", "subject", "language", "identifier", "based_near", "related_url", "bibliographic_citation", "source", "proxy_depositor", "on_behalf_of", "provenance", "batch_id"]
   end
 
-  def admin_csv_values
+  def admin_csv_values solr_record
     ret_array = []
-    solr_record = self.to_solr
     admin_solr_headers.each do | key |
       value = !solr_record[key].blank? ? solr_record[key] : ""
       ret_array << (value.respond_to?("each") ? value.join("||") : value)

@@ -64,11 +64,16 @@ class DownloadGenerator
   private
 
     def get_all_items_for_model class_name, item_class
-      builder = ExportSearchBuilder.new([:collections_by_file_id], repository).with(hasCollectionMember_ssim: 'Abraham Lincoln')
+      repository = CatalogController.new.repository
+      case class_name
+      when "Collection"
+        search = :all_collections
+      when "GenericFile"
+	search = :all_generic_files
+      end
+      builder = ExportSearchBuilder.new([search], repository)
       response = repository.search(builder)
-      raise class_name.inspect
-#      item_class.all
-       
+      response.documents
     end
 
     def add_files items
@@ -88,23 +93,21 @@ class DownloadGenerator
 
     def write_csv file_path, item_class, records, admin_download
       CSV.open(file_path,'wb') do |csv|
+	model = item_class.new      
         if admin_download
-          headers = item_class.new.admin_csv_headers
+	  headers = model.admin_csv_headers
         else
-          headers = item_class.new.csv_headers
+	  headers = model.csv_headers
         end
-        csv << headers
-        records.each_slice(100){|slice|
-          slice.each do |record|
-            if admin_download
-              values = record.admin_csv_values
-            else
-              values = record.csv_values
-            end
-            csv << values
+	csv << headers
+        records.each do |record|
+          if admin_download
+            values = model.admin_csv_values record
+          else
+            values = model.csv_values record
           end
-          GC.start
-        }
+          csv << values
+        end
       end
     end
 
