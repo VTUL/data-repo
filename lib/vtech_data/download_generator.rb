@@ -71,7 +71,7 @@ class DownloadGenerator
 
     def add_files items
       items.each do |generic_file|
-        filename = !generic_file.filename.empty? ? generic_file.filename : generic_file.label
+	filename = !generic_file.filename.empty? ? generic_file.filename.first : generic_file.label
         item_target_path = File.join(archive_full_path, filename)
         # If a file already exists with this filename then put this one in a sub-directory named after the item id
         if File.file? item_target_path
