@@ -17,11 +17,11 @@ class Ability
     # end
     ezid_shoulder = Rails.application.secrets['doi']['default_shoulder']
     cannot [:update, :destroy], ::Collection do |c|
-      c.identifier.any?
+      c.identifier.any? { |identifier| !identifier.blank? }
     end unless admin_user?
 
     cannot [:update, :destroy], ::GenericFile do |g_f|
-      g_f.collections.any? { |c| c.identifier.any? }
+      g_f.collections.any? { |c| c.identifier.any? { |identifier| !identifier.blank? } }
     end unless admin_user?
 
     can :manage, :all if admin_user?
