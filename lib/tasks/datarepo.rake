@@ -1,6 +1,15 @@
 require 'net/ldap'
 
 namespace :datarepo do
+  desc 'Check if files have been modified post publish'
+  task :validate_published, [:input_csv] => [:environment] do |task, args|
+    require 'vtech_data/published_validator'
+
+    validator = PublishedValidator.new
+    validator.run(File.join(args[:input_csv]))
+
+  end
+
   desc 'Create default roles.'
   task add_roles: :environment do
     ['admin', 'collection_admin', 'collection_user'].each do |role_name|
