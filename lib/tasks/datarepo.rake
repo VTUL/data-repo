@@ -28,7 +28,7 @@ namespace :datarepo do
 
     IO.foreach('user_list.txt') do |email|
       email = email.strip
-      filter = Net::LDAP::Filter.eq('mail', email)
+      filter = Net::LDAP::Filter.eq('mailPreferredAddress', email)
       results = ldap.search(base: treebase, filter: filter)
       if results.count == 1
         user = User.find_or_initialize_by({email: email})
