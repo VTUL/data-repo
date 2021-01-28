@@ -459,7 +459,7 @@ GEM
     posix-spawn (0.3.13)
     powerpack (0.1.2)
     public_suffix (3.0.3)
-    rack (1.6.11)
+    rack (1.6.13)
     rack-protection (1.5.5)
       rack
     rack-test (0.6.3)
