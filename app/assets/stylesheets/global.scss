@@ -27,3 +27,12 @@ $link-blue: #0000cc;
   padding-left: 0;
   padding-right: 0;
 }
+#transfer-notice {
+  padding: 10px;
+  font-size: 2.0rem;
+  color: white;
+  background-color: $hokie-maroon;
+  a, a:hover, a:visited {
+   color: white;
+  }
+}

@@ -37,4 +37,9 @@ class GenericFilesController < ApplicationController
     end
   end
 
+  def new
+    super
+    redirect_to sufia.dashboard_index_path, alert: "Sorry, you are not authorized to view that page" if (current_user.blank? || !current_user.admin?)
+  end
+
 end
