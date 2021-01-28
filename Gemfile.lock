@@ -390,7 +390,7 @@ GEM
     mimemagic (0.3.2)
     mini_magick (4.9.2)
     mini_mime (1.0.1)
-    mini_portile2 (2.3.0)
+    mini_portile2 (2.5.0)
     minitest (5.11.3)
     mono_logger (1.1.0)
     multi_json (1.13.1)
@@ -401,8 +401,9 @@ GEM
     net-http-persistent (2.9.4)
     net-ldap (0.16.1)
     noid (0.9.0)
-    nokogiri (1.8.5)
-      mini_portile2 (~> 2.3.0)
+    nokogiri (1.11.1)
+      mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
     nom-xml (1.0.0)
       activesupport (>= 3.2.18)
       i18n
@@ -459,6 +460,7 @@ GEM
     posix-spawn (0.3.13)
     powerpack (0.1.2)
     public_suffix (3.0.3)
+    racc (1.5.2)
     rack (1.6.11)
     rack-protection (1.5.5)
       rack
