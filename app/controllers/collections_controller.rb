@@ -34,7 +34,7 @@ class CollectionsController < ApplicationController
   def new
     super
     flash[:notice] = nil
-    redirect_to sufia.dashboard_index_path, alert: "Sorry, you are not authorized to view that page" if (current_user.blank? || !current_user.admin?)
+    redirect_to root_path, alert: "Sorry, you are not authorized to view that page" if (current_user.blank? || !current_user.admin?)
 
   end
 
@@ -77,6 +77,11 @@ class CollectionsController < ApplicationController
     else
       after_create_error
     end
+  end
+
+  def edit
+    super
+    redirect_to root_path, alert: "Sorry, you are not authorized to view that page" if (current_user.blank? || !current_user.admin?)
   end
 
   def update
