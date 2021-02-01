@@ -9,6 +9,7 @@ class GenericFilesController < ApplicationController
 
   def edit
 		super
+		redirect_to root_path, alert: "Sorry, you are not authorized to view that page" if (current_user.blank? || !current_user.admin?)
 		unless current_user.admin?                                                                         
 			self.edit_form_class.terms -= [:provenance]                                                  
 			@provenance_display = "records/show_fields/provenance"
@@ -35,6 +36,11 @@ class GenericFilesController < ApplicationController
       set_variables_for_edit_form
       render action: 'edit'
     end
+  end
+
+  def new
+    super
+    redirect_to root_path, alert: "Sorry, you are not authorized to view that page" if (current_user.blank? || !current_user.admin?)
   end
 
 end

@@ -16,11 +16,11 @@ class Ability
     #   can [:create], ActiveFedora::Base
     # end
     ezid_shoulder = Rails.application.secrets['doi']['default_shoulder']
-    cannot [:update, :destroy], ::Collection do |c|
+    cannot [:create, :update, :destroy], ::Collection do |c|
       c.identifier.any? { |identifier| !identifier.blank? }
     end unless admin_user?
 
-    cannot [:update, :destroy], ::GenericFile do |g_f|
+    cannot [:create, :update, :destroy], ::GenericFile do |g_f|
       g_f.collections.any? { |c| c.identifier.any? { |identifier| !identifier.blank? } }
     end unless admin_user?
 
